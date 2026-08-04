@@ -11,8 +11,18 @@ const ASSETS = [
 
 const TIMEFRAME_LENGTHS = { "1M": 240, "1W": 240, "1D": 260, "4H": 260, "1H": 260 };
 const TF_LABELS = { "1M": "Trend di fondo", "1W": "Conferma primaria", "1D": "Struttura operativa", "4H": "Timing", "1H": "Ingresso" };
+
+const MARKET_DATA_PROVIDER = {
+  name: "Simulazione OHLC",
+  mode: "simulation",
+  async getCandles(asset, timeframe, seedOffset = 0) {
+    return generateCandles(asset, timeframe, seedOffset);
+  }
+};
+
 let analyses = [];
 let refreshSeed = 0;
+let lastUpdate = null;
 
 function seededRandom(seed) {
   let value = seed % 2147483647;
@@ -62,9 +72,12 @@ function operationalPlan(result) {
   const stop = trendDirection > 0 ? entry - atr * 1.2 : entry + atr * 1.2;
   const target = trendDirection > 0 ? entry + atr * 2.4 : entry - atr * 2.4;
   const rr = atr > 0 ? Math.abs(target - entry) / Math.abs(entry - stop) : 0;
+  const distancePoints = current - entry;
+  const distancePercent = entry ? (distancePoints / entry) * 100 : 0;
 
   let action = "ATTENDI";
   let actionReason = "Nessun vantaggio operativo sufficiente.";
+
   if (result.direction === "LONG") {
     const closeEnough = Math.abs(current - entry) <= atr * 0.45;
     action = closeEnough ? "VALUTA LONG" : "ATTENDI RITRACCIAMENTO";
@@ -79,7 +92,11 @@ function operationalPlan(result) {
       : "Trend ribassista, ma serve un ritorno verso la zona ideale.";
   }
 
-  return { current, entry, stop, target, rr, action, actionReason };
+  return {
+    current, entry, stop, target, rr,
+    distancePoints, distancePercent,
+    action, actionReason
+  };
 }
 
 function weightedReasons(result) {
@@ -89,32 +106,35 @@ function weightedReasons(result) {
   for (const tf of window.TRADING_CONFIG.timeframes) {
     const detail = result.details[tf];
     if (!detail?.valid) continue;
-    const contribution = Math.round((detail.score / 100) * tfWeights[tf]);
     reasons.push({
       label: `${tf} · ${TF_LABELS[tf]}`,
-      value: contribution
+      value: Math.round((detail.score / 100) * tfWeights[tf])
     });
   }
 
   const d1 = result.details["1D"];
+
   if (d1?.movingAverages?.ma200 && d1?.current) {
     reasons.push({
       label: "Prezzo rispetto a EMA 200",
       value: d1.current > d1.movingAverages.ma200 ? 8 : -8
     });
   }
+
   if (d1?.rsi != null) {
     let value = 0;
     if (d1.rsi >= 55 && d1.rsi <= 72) value = 5;
     else if (d1.rsi <= 45 && d1.rsi >= 28) value = -5;
     reasons.push({ label: `RSI giornaliero ${d1.rsi.toFixed(1)}`, value });
   }
+
   if (d1?.nadaraya != null && d1?.current != null) {
     reasons.push({
       label: "Nadaraya giornaliero",
       value: d1.current > d1.nadaraya ? 7 : -7
     });
   }
+
   if (d1?.patterns?.length) {
     const bearish = d1.patterns.some(p => p.includes("top") || p === "head-and-shoulders");
     const bullish = d1.patterns.some(p => p.includes("bottom") || p.includes("inverse"));
@@ -127,15 +147,19 @@ function weightedReasons(result) {
   return reasons.sort((a, b) => Math.abs(b.value) - Math.abs(a.value));
 }
 
-function analyzeAll(seedOffset = 0) {
-  analyses = ASSETS.map(asset => {
+async function analyzeAll(seedOffset = 0) {
+  analyses = [];
+
+  for (const asset of ASSETS) {
     const data = {};
-    window.TRADING_CONFIG.timeframes.forEach(tf => {
-      data[tf] = generateCandles(asset, tf, seedOffset);
-    });
+    for (const tf of window.TRADING_CONFIG.timeframes) {
+      data[tf] = await MARKET_DATA_PROVIDER.getCandles(asset, tf, seedOffset);
+    }
     const result = window.TradingEngine.analyzeMarket(data);
-    return { asset, result, plan: operationalPlan(result) };
-  });
+    analyses.push({ asset, result, plan: operationalPlan(result) });
+  }
+
+  lastUpdate = new Date();
 }
 
 function badgeClass(direction) {
@@ -169,6 +193,10 @@ function number(value, digits = 2) {
   return value == null || Number.isNaN(value) ? "—" : Number(value).toFixed(digits);
 }
 
+function formatTime(date) {
+  return date ? date.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit", second: "2-digit" }) : "—";
+}
+
 function renderSummary() {
   document.querySelector("#assetCount").textContent = analyses.length;
   document.querySelector("#longCount").textContent = analyses.filter(x => x.result.direction === "LONG").length;
@@ -183,11 +211,16 @@ function renderSummary() {
   }
 
   const best = [...analyses].sort((a, b) => Math.abs(b.result.score) - Math.abs(a.result.score))[0];
+
   banner.innerHTML = `
     <div>
       <small>MIGLIORE CONFIGURAZIONE DELLA SIMULAZIONE</small>
       <strong>${best.asset.name} · ${best.result.direction}</strong>
       <div class="stars">${stars(best.result.confidence)}</div>
+      <div class="update-meta">
+        Aggiornato alle ${formatTime(lastUpdate)}
+        <span class="data-source-badge">${MARKET_DATA_PROVIDER.name}</span>
+      </div>
     </div>
     <div>
       <small>SCORE</small>
@@ -199,6 +232,7 @@ function renderSummary() {
 
 function renderCards() {
   const filter = document.querySelector("#directionFilter").value;
+
   const visible = analyses
     .filter(x => filter === "ALL" || x.result.direction === filter)
     .sort((a, b) => Math.abs(b.result.score) - Math.abs(a.result.score));
@@ -218,6 +252,21 @@ function renderCards() {
         <span class="stars">${stars(result.confidence)}</span>
       </div>
 
+      <div class="card-prices">
+        <div class="card-price">
+          <small>Prezzo attuale</small>
+          <strong>${number(plan.current, 2)}</strong>
+        </div>
+        <div class="card-price">
+          <small>Entrata ideale</small>
+          <strong>${number(plan.entry, 2)}</strong>
+        </div>
+        <div class="card-price">
+          <small>Target</small>
+          <strong>${number(plan.target, 2)}</strong>
+        </div>
+      </div>
+
       <div class="timeframes">
         ${window.TRADING_CONFIG.timeframes.map(tf => {
           const score = result.details[tf]?.score ?? 0;
@@ -231,7 +280,7 @@ function renderCards() {
 
       <div class="card-footer">
         <strong>${plan.action}</strong><br>
-        Zona 50%: ${number(plan.entry, 2)} · Target: ${number(plan.target, 2)}
+        Distanza entrata: ${number(plan.distancePoints, 2)} (${number(plan.distancePercent, 2)}%)
       </div>
     </article>
   `).join("");
@@ -262,17 +311,39 @@ function openDetails(symbol) {
       </div>
     </div>
 
-    <div class="action-box">
-      <h3>Decisione operativa: ${plan.action}</h3>
+    <section class="operation-panel">
+      <h3>OPERAZIONE · ${plan.action}</h3>
       <p>${plan.actionReason}</p>
-      <div class="action-grid">
-        <div class="action-metric"><small>Prezzo simulato</small><strong>${number(plan.current, 2)}</strong></div>
-        <div class="action-metric"><small>Entrata ideale 50%</small><strong>${number(plan.entry, 2)}</strong></div>
-        <div class="action-metric"><small>Stop tecnico</small><strong>${number(plan.stop, 2)}</strong></div>
-        <div class="action-metric"><small>Target</small><strong>${number(plan.target, 2)}</strong></div>
+
+      <div class="operation-grid">
+        <div class="operation-item">
+          <small>Prezzo attuale</small>
+          <strong>${number(plan.current, 2)}</strong>
+        </div>
+        <div class="operation-item">
+          <small>Entrata ideale 50%</small>
+          <strong>${number(plan.entry, 2)}</strong>
+        </div>
+        <div class="operation-item">
+          <small>Stop tecnico</small>
+          <strong>${number(plan.stop, 2)}</strong>
+        </div>
+        <div class="operation-item">
+          <small>Target</small>
+          <strong>${number(plan.target, 2)}</strong>
+        </div>
+        <div class="operation-item">
+          <small>Risk / Reward</small>
+          <strong>1 : ${number(plan.rr, 2)}</strong>
+        </div>
       </div>
-      <p>Rapporto rischio/rendimento stimato: <strong>${number(plan.rr, 2)}</strong></p>
-    </div>
+
+      <div class="distance-line">
+        Distanza dal punto d'ingresso:
+        <strong>${number(plan.distancePoints, 2)}</strong>
+        (${number(plan.distancePercent, 2)}%)
+      </div>
+    </section>
 
     <h3 style="margin-top:22px">Contributi allo score</h3>
     <table class="reason-table">
@@ -316,18 +387,28 @@ function openDetails(symbol) {
   document.querySelector("#detailDialog").showModal();
 }
 
-document.querySelector("#refreshBtn").addEventListener("click", () => {
+async function refreshDashboard() {
+  const button = document.querySelector("#refreshBtn");
+  button.disabled = true;
+  button.textContent = "Aggiornamento...";
+
   refreshSeed += 1;
-  analyzeAll(refreshSeed);
+  await analyzeAll(refreshSeed);
   renderSummary();
   renderCards();
-});
 
+  button.disabled = false;
+  button.textContent = "Aggiorna dati";
+}
+
+document.querySelector("#refreshBtn").addEventListener("click", refreshDashboard);
 document.querySelector("#directionFilter").addEventListener("change", renderCards);
 document.querySelector("#closeDialog").addEventListener("click", () => {
   document.querySelector("#detailDialog").close();
 });
 
-analyzeAll();
-renderSummary();
-renderCards();
+(async () => {
+  await analyzeAll();
+  renderSummary();
+  renderCards();
+})();

@@ -1,31 +1,35 @@
 # Market Compass
 
-Dashboard sperimentale per due moduli:
+Dashboard sperimentale per:
 
 - trading multi-timeframe con orizzonte 1–3 giorni;
 - selezione futura di grandi azioni con orizzonte 30–90 giorni.
 
-## Versione 0.0.4
+## Versione 0.0.5
 
-Migliorata la dashboard Trading:
+Aggiunte le informazioni operative direttamente nelle card:
 
-- score espresso in percentuale;
-- decisione LONG, SHORT o WAIT più visibile;
-- migliore configurazione evidenziata in alto;
-- valutazione a stelle;
-- stato leggibile per ogni timeframe;
+- prezzo attuale;
 - entrata ideale sul ritracciamento del 50%;
-- stop, target e rapporto rischio/rendimento;
-- spiegazione operativa: entrare, attendere ritracciamento o attendere rimbalzo;
-- tabella dei contributi positivi e negativi allo score.
+- target;
+- distanza dall'entrata in punti e percentuale;
+- decisione operativa;
+- stato dei timeframe.
+
+Nel popup sono ora presenti:
+
+- prezzo attuale;
+- entrata ideale;
+- stop;
+- target;
+- rapporto rischio/rendimento;
+- distanza dal punto di ingresso.
+
+Il codice usa un oggetto `MARKET_DATA_PROVIDER`, così la simulazione OHLC potrà essere sostituita successivamente da una fonte dati reale senza riscrivere dashboard e motore.
 
 ## Importante
 
-I dati sono ancora simulati e servono esclusivamente a verificare la logica e l'interfaccia. Non sono segnali operativi reali.
-
-## Pubblicazione
-
-GitHub Pages: branch `main`, cartella `/ (root)`.
+I valori sono ancora simulati. Non sono segnali operativi reali.
 
 ## Avvertenza
 
