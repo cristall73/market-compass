@@ -1,6 +1,6 @@
 # Market Compass
 
-## Versione 0.2.0 — classificazione operativa
+## Versione 0.2.1 — classificazione operativa
 
 Questa versione usa i dati reali già prodotti dal workflow GitHub Actions.
 
@@ -21,3 +21,8 @@ La percentuale mostrata è una **forza tecnica interna del modello**, non una pr
 ## Avvertenza
 
 Strumento sperimentale. Non costituisce consulenza finanziaria.
+
+
+## Aggiornamento sicuro
+
+Questo pacchetto non contiene `data/market-data.json`, quindi non sovrascrive i dati reali già creati dal workflow GitHub Actions.
