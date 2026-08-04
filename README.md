@@ -1,16 +1,22 @@
 # Market Compass
 
-## Versione 0.3.0 — decisione operativa
+## Versione 0.4.0 — ragionamento operativo spiegato
 
 Patch sicura: non contiene `data/market-data.json` e non sovrascrive i dati reali.
 
 ### Novità
 
-- separazione tra direzione tecnica e momento d’ingresso;
-- zona d’ingresso con tolleranza ATR;
-- decisioni: VALUTA ORA, ATTENDI CONFERMA, ATTENDI RITRACCIAMENTO/RIMBALZO, TROPPO ESTESO, SETUP INVALIDATO;
-- qualità dell’opportunità distinta dalla forza del trend;
-- stop, target e rapporto rischio/rendimento visibili nelle schede;
-- classifica ordinata in base alla reale operatività, non solo allo score direzionale.
+Cliccando su ogni asset, Market Compass ora spiega:
 
-La qualità dell’opportunità è un punteggio interno del modello, non una probabilità garantita di profitto.
+- come sono allineati i timeframe;
+- perché entrare subito oppure aspettare;
+- la zona precisa in cui attendere il ritracciamento o il rimbalzo;
+- quali conferme osservare sul timeframe 1H;
+- dove si trova lo stop;
+- quanti punti e quale percentuale rappresenta lo stop;
+- TP1, TP2 e TP3;
+- quanti punti e quale percentuale rappresenta il TP2;
+- il significato del rapporto rischio/rendimento;
+- gli elementi tecnici principali che sostengono il piano.
+
+I livelli sono calcoli tecnici sperimentali, non ordini automatici né risultati garantiti.

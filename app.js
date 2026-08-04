@@ -121,10 +121,15 @@ function operationalPlan(result) {
 
   // Livelli tecnici costruiti sul rischio ATR.
   const stopDistance = Math.max(atr * 1.25, Math.abs(current - entry) * 0.20);
-  const targetDistance = stopDistance * 2.20;
+  const tp1Distance = stopDistance * 1.00;
+  const tp2Distance = stopDistance * 2.20;
+  const tp3Distance = stopDistance * 3.20;
   const stop = entry - directionSign * stopDistance;
-  const target = entry + directionSign * targetDistance;
-  const rr = stopDistance > 0 ? targetDistance / stopDistance : 0;
+  const tp1 = entry + directionSign * tp1Distance;
+  const tp2 = entry + directionSign * tp2Distance;
+  const tp3 = entry + directionSign * tp3Distance;
+  const target = tp2;
+  const rr = stopDistance > 0 ? tp2Distance / stopDistance : 0;
 
   const distancePoints = current - entry;
   const distancePercent = entry ? (distancePoints / entry) * 100 : 0;
@@ -191,7 +196,14 @@ function operationalPlan(result) {
     entryHigh,
     stop,
     target,
+    tp1,
+    tp2,
+    tp3,
     rr,
+    riskPoints: stopDistance,
+    rewardPoints: tp2Distance,
+    riskPercent: entry ? (stopDistance / entry) * 100 : 0,
+    rewardPercent: entry ? (tp2Distance / entry) * 100 : 0,
     distancePoints,
     distancePercent,
     distanceAtr,
@@ -327,6 +339,99 @@ function formatTime(date) {
   return date ? date.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit", second: "2-digit" }) : "—";
 }
 
+function timeframeSentence(tf, detail) {
+  const direction = tfDirection(detail?.score ?? 0);
+  const label = TF_LABELS[tf].toLowerCase();
+  if (direction === "LONG") return `${tf}: ${label} rialzista`;
+  if (direction === "SHORT") return `${tf}: ${label} ribassista`;
+  return `${tf}: ${label} neutrale o in transizione`;
+}
+
+function buildNarrative(asset, result, plan) {
+  const d1 = result.details["1D"];
+  const h4 = result.details["4H"];
+  const h1 = result.details["1H"];
+  const isLong = result.direction === "LONG";
+  const isShort = result.direction === "SHORT";
+
+  const timeframeStory = window.TRADING_CONFIG.timeframes
+    .map(tf => timeframeSentence(tf, result.details[tf]))
+    .join(". ") + ".";
+
+  let overview;
+  if (result.direction === "WAIT") {
+    overview = `Su ${asset.name} i timeframe non danno ancora una direzione abbastanza coerente. La scelta prudente è non anticipare il mercato e attendere che almeno il Giornaliero, il 4H e l’1H si allineino.`;
+  } else {
+    overview = `Su ${asset.name} la direzione prevalente è ${result.direction}. La concordanza tra timeframe è del ${result.alignment}% e la forza tecnica interna è del ${result.confidence}%. ${timeframeStory}`;
+  }
+
+  let entryExplanation;
+  if (plan.actionCode === "READY") {
+    entryExplanation = `Il prezzo è già dentro la zona operativa ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)} e il timeframe 1H conferma la direzione. Il setup può essere valutato adesso, evitando comunque ingressi impulsivi durante candele molto estese.`;
+  } else if (plan.actionCode === "CONFIRM") {
+    entryExplanation = `Il prezzo è arrivato nella zona operativa ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}, ma manca ancora una conferma sull’1H. Conviene aspettare una chiusura 1H nella direzione del trend, una candela di reazione oppure il recupero del momentum.`;
+  } else if (plan.actionCode === "NEAR") {
+    const move = isLong ? "ritracciamento" : isShort ? "rimbalzo" : "movimento";
+    entryExplanation = `Il trend è valido, ma il prezzo è ancora fuori dalla zona migliore. È preferibile attendere un ${move} verso ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}: entrare prima ridurrebbe il rapporto rischio/rendimento.`;
+  } else if (plan.actionCode === "EXTENDED") {
+    entryExplanation = `Il prezzo è troppo lontano dall’area di ingresso. Inseguire il movimento ora significherebbe accettare uno stop più ampio e un rendimento potenziale inferiore. Meglio aspettare un ritorno verso ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}.`;
+  } else if (plan.actionCode === "INVALID") {
+    entryExplanation = `Il prezzo ha oltrepassato il livello che invalidava il setup. Non è più corretto usare questo piano: serve una nuova struttura prima di valutare un ingresso.`;
+  } else {
+    entryExplanation = `Non è presente un vantaggio operativo sufficiente. Meglio restare fuori finché direzione e timing non diventano più chiari.`;
+  }
+
+  const confirmationRules = [];
+  if (isLong) {
+    confirmationRules.push("chiusura 1H sopra il massimo della candela di reazione");
+    confirmationRules.push("RSI 1H sopra 50 o in recupero");
+    confirmationRules.push("assenza di una rottura netta sotto la zona d’ingresso");
+  } else if (isShort) {
+    confirmationRules.push("chiusura 1H sotto il minimo della candela di reazione");
+    confirmationRules.push("RSI 1H sotto 50 o in indebolimento");
+    confirmationRules.push("assenza di una rottura netta sopra la zona d’ingresso");
+  } else {
+    confirmationRules.push("allineamento di Giornaliero, 4H e 1H");
+    confirmationRules.push("rottura confermata di un supporto o di una resistenza");
+    confirmationRules.push("momentum coerente con la nuova direzione");
+  }
+
+  const stopExplanation = result.direction === "WAIT"
+    ? `Non viene suggerito uno stop operativo perché non esiste ancora un setup direzionale valido.`
+    : `Lo stop tecnico è a ${number(plan.stop, 2)}. Dalla zona centrale d’ingresso rappresenta circa ${number(plan.riskPoints, 2)} punti, pari al ${number(plan.riskPercent, 2)}%. Se viene colpito, il movimento atteso non si sta sviluppando come previsto e il setup va considerato invalidato.`;
+
+  const targetExplanation = result.direction === "WAIT"
+    ? `I target restano indicativi finché non emerge una direzione valida.`
+    : `TP1 è a ${number(plan.tp1, 2)}: equivale a circa 1R e può servire per proteggere l’operazione. TP2 è a ${number(plan.tp2, 2)}: rappresenta circa ${number(plan.rewardPoints, 2)} punti, cioè ${number(plan.rewardPercent, 2)}% dalla zona centrale d’ingresso, con un rapporto rischio/rendimento di 1:${number(plan.rr, 2)}. TP3 a ${number(plan.tp3, 2)} è un’estensione da considerare solo se il trend resta forte.`;
+
+  const indicatorNotes = [];
+  if (d1?.movingAverages?.ma200 && d1?.current) {
+    indicatorNotes.push(d1.current > d1.movingAverages.ma200
+      ? "il prezzo giornaliero è sopra EMA 200, quindi la struttura di lungo periodo resta favorevole"
+      : "il prezzo giornaliero è sotto EMA 200, quindi la struttura di lungo periodo resta debole");
+  }
+  if (d1?.nadaraya != null && d1?.current != null) {
+    indicatorNotes.push(d1.current > d1.nadaraya
+      ? "il prezzo è sopra Nadaraya sul Giornaliero"
+      : "il prezzo è sotto Nadaraya sul Giornaliero");
+  }
+  if (h4?.rsi != null) {
+    indicatorNotes.push(`RSI 4H a ${number(h4.rsi, 1)}`);
+  }
+  if (h1?.rsi != null) {
+    indicatorNotes.push(`RSI 1H a ${number(h1.rsi, 1)}`);
+  }
+
+  return {
+    overview,
+    entryExplanation,
+    confirmationRules,
+    stopExplanation,
+    targetExplanation,
+    indicatorNotes
+  };
+}
+
 function renderSummary() {
   document.querySelector("#assetCount").textContent = analyses.length;
   document.querySelector("#longCount").textContent = analyses.filter(x => x.result.direction === "LONG").length;
@@ -425,7 +530,8 @@ function renderCards() {
       <div class="card-footer">
         <strong>${plan.actionReason}</strong><br>
         R/R 1:${number(plan.rr, 2)} · Concordanza ${result.alignment}%<br>
-        Distanza entrata: ${number(plan.distancePoints, 2)} (${number(plan.distancePercent, 2)}%)
+        Distanza entrata: ${number(plan.distancePoints, 2)} (${number(plan.distancePercent, 2)}%)<br>
+        <span class="open-analysis">Apri la scheda per il ragionamento completo</span>
       </div>
     </article>
   `).join("");
@@ -479,8 +585,8 @@ function openDetails(symbol) {
           <strong>${number(plan.stop, 2)}</strong>
         </div>
         <div class="operation-item">
-          <small>Target</small>
-          <strong>${number(plan.target, 2)}</strong>
+          <small>TP1 / TP2 / TP3</small>
+          <strong>${number(plan.tp1, 2)} / ${number(plan.tp2, 2)} / ${number(plan.tp3, 2)}</strong>
         </div>
         <div class="operation-item">
           <small>Risk / Reward</small>
@@ -494,6 +600,50 @@ function openDetails(symbol) {
         (${number(plan.distancePercent, 2)}%)
       </div>
     </section>
+
+    ${(() => {
+      const narrative = buildNarrative(asset, result, plan);
+      return `
+        <section class="explanation-panel">
+          <h3>RAGIONAMENTO OPERATIVO</h3>
+
+          <div class="explanation-block">
+            <h4>1. Lettura del mercato</h4>
+            <p>${narrative.overview}</p>
+          </div>
+
+          <div class="explanation-block">
+            <h4>2. Quando entrare</h4>
+            <p>${narrative.entryExplanation}</p>
+          </div>
+
+          <div class="explanation-block">
+            <h4>3. Conferme da aspettare</h4>
+            <ul>
+              ${narrative.confirmationRules.map(rule => `<li>${rule}</li>`).join("")}
+            </ul>
+          </div>
+
+          <div class="explanation-grid">
+            <div class="explanation-block">
+              <h4>4. Significato dello stop</h4>
+              <p>${narrative.stopExplanation}</p>
+            </div>
+            <div class="explanation-block">
+              <h4>5. Significato dei target</h4>
+              <p>${narrative.targetExplanation}</p>
+            </div>
+          </div>
+
+          <div class="explanation-block">
+            <h4>6. Elementi tecnici principali</h4>
+            <ul>
+              ${narrative.indicatorNotes.map(note => `<li>${note}</li>`).join("")}
+            </ul>
+          </div>
+        </section>
+      `;
+    })()}
 
     <h3 style="margin-top:22px">Contributi allo score</h3>
     <table class="reason-table">
