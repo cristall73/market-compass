@@ -9,15 +9,10 @@ const ASSETS = [
   { name: "USD/JPY", symbol: "USDJPY", bias: -0.01, volatility: 0.70 }
 ];
 
-const TIMEFRAME_LENGTHS = {
-  "1M": 240,
-  "1W": 240,
-  "1D": 260,
-  "4H": 260,
-  "1H": 260
-};
-
+const TIMEFRAME_LENGTHS = { "1M": 240, "1W": 240, "1D": 260, "4H": 260, "1H": 260 };
+const TF_LABELS = { "1M": "Trend di fondo", "1W": "Conferma primaria", "1D": "Struttura operativa", "4H": "Timing", "1H": "Ingresso" };
 let analyses = [];
+let refreshSeed = 0;
 
 function seededRandom(seed) {
   let value = seed % 2147483647;
@@ -29,8 +24,8 @@ function hashString(text) {
   return [...text].reduce((acc, char) => ((acc << 5) - acc) + char.charCodeAt(0), 0);
 }
 
-function generateCandles(asset, timeframe, refreshSeed = 0) {
-  const seed = Math.abs(hashString(asset.symbol + timeframe)) + refreshSeed * 7919;
+function generateCandles(asset, timeframe, seedOffset = 0) {
+  const seed = Math.abs(hashString(asset.symbol + timeframe)) + seedOffset * 7919;
   const random = seededRandom(seed);
   const length = TIMEFRAME_LENGTHS[timeframe];
   const tfFactor = { "1M": 1.8, "1W": 1.35, "1D": 1, "4H": .75, "1H": .55 }[timeframe];
@@ -53,21 +48,104 @@ function generateCandles(asset, timeframe, refreshSeed = 0) {
   return candles;
 }
 
-function analyzeAll(refreshSeed = 0) {
+function operationalPlan(result) {
+  const d1 = result.details["1D"];
+  const h4 = result.details["4H"];
+  const h1 = result.details["1H"];
+  const current = h1?.current ?? h4?.current ?? d1?.current ?? 0;
+  const atr = h1?.atr ?? h4?.atr ?? d1?.atr ?? 0;
+  const swing = h1?.swing ?? h4?.swing ?? d1?.swing;
+  const midpoint = swing?.midpoint ?? current;
+
+  const trendDirection = result.score >= 0 ? 1 : -1;
+  const entry = midpoint;
+  const stop = trendDirection > 0 ? entry - atr * 1.2 : entry + atr * 1.2;
+  const target = trendDirection > 0 ? entry + atr * 2.4 : entry - atr * 2.4;
+  const rr = atr > 0 ? Math.abs(target - entry) / Math.abs(entry - stop) : 0;
+
+  let action = "ATTENDI";
+  let actionReason = "Nessun vantaggio operativo sufficiente.";
+  if (result.direction === "LONG") {
+    const closeEnough = Math.abs(current - entry) <= atr * 0.45;
+    action = closeEnough ? "VALUTA LONG" : "ATTENDI RITRACCIAMENTO";
+    actionReason = closeEnough
+      ? "Trend rialzista e prezzo vicino alla zona di ingresso."
+      : "Trend rialzista, ma il prezzo non è ancora nella zona ideale del 50%.";
+  } else if (result.direction === "SHORT") {
+    const closeEnough = Math.abs(current - entry) <= atr * 0.45;
+    action = closeEnough ? "VALUTA SHORT" : "ATTENDI RIMBALZO";
+    actionReason = closeEnough
+      ? "Trend ribassista e prezzo vicino alla zona di ingresso."
+      : "Trend ribassista, ma serve un ritorno verso la zona ideale.";
+  }
+
+  return { current, entry, stop, target, rr, action, actionReason };
+}
+
+function weightedReasons(result) {
+  const reasons = [];
+  const tfWeights = { "1M": 18, "1W": 22, "1D": 25, "4H": 20, "1H": 15 };
+
+  for (const tf of window.TRADING_CONFIG.timeframes) {
+    const detail = result.details[tf];
+    if (!detail?.valid) continue;
+    const contribution = Math.round((detail.score / 100) * tfWeights[tf]);
+    reasons.push({
+      label: `${tf} · ${TF_LABELS[tf]}`,
+      value: contribution
+    });
+  }
+
+  const d1 = result.details["1D"];
+  if (d1?.movingAverages?.ma200 && d1?.current) {
+    reasons.push({
+      label: "Prezzo rispetto a EMA 200",
+      value: d1.current > d1.movingAverages.ma200 ? 8 : -8
+    });
+  }
+  if (d1?.rsi != null) {
+    let value = 0;
+    if (d1.rsi >= 55 && d1.rsi <= 72) value = 5;
+    else if (d1.rsi <= 45 && d1.rsi >= 28) value = -5;
+    reasons.push({ label: `RSI giornaliero ${d1.rsi.toFixed(1)}`, value });
+  }
+  if (d1?.nadaraya != null && d1?.current != null) {
+    reasons.push({
+      label: "Nadaraya giornaliero",
+      value: d1.current > d1.nadaraya ? 7 : -7
+    });
+  }
+  if (d1?.patterns?.length) {
+    const bearish = d1.patterns.some(p => p.includes("top") || p === "head-and-shoulders");
+    const bullish = d1.patterns.some(p => p.includes("bottom") || p.includes("inverse"));
+    reasons.push({
+      label: `Pattern: ${d1.patterns.join(", ")}`,
+      value: bullish ? 10 : bearish ? -10 : 0
+    });
+  }
+
+  return reasons.sort((a, b) => Math.abs(b.value) - Math.abs(a.value));
+}
+
+function analyzeAll(seedOffset = 0) {
   analyses = ASSETS.map(asset => {
     const data = {};
     window.TRADING_CONFIG.timeframes.forEach(tf => {
-      data[tf] = generateCandles(asset, tf, refreshSeed);
+      data[tf] = generateCandles(asset, tf, seedOffset);
     });
-    return {
-      asset,
-      result: window.TradingEngine.analyzeMarket(data)
-    };
+    const result = window.TradingEngine.analyzeMarket(data);
+    return { asset, result, plan: operationalPlan(result) };
   });
 }
 
 function badgeClass(direction) {
   return direction.toLowerCase();
+}
+
+function scoreClass(score) {
+  if (score >= 35) return "score-positive";
+  if (score <= -35) return "score-negative";
+  return "score-neutral";
 }
 
 function tfClass(score) {
@@ -76,11 +154,47 @@ function tfClass(score) {
   return "";
 }
 
+function tfDirection(score) {
+  if (score >= 35) return "LONG";
+  if (score <= -35) return "SHORT";
+  return "WAIT";
+}
+
+function stars(confidence) {
+  const filled = Math.max(1, Math.min(5, Math.ceil(confidence / 20)));
+  return "★".repeat(filled) + "☆".repeat(5 - filled);
+}
+
+function number(value, digits = 2) {
+  return value == null || Number.isNaN(value) ? "—" : Number(value).toFixed(digits);
+}
+
 function renderSummary() {
   document.querySelector("#assetCount").textContent = analyses.length;
   document.querySelector("#longCount").textContent = analyses.filter(x => x.result.direction === "LONG").length;
   document.querySelector("#shortCount").textContent = analyses.filter(x => x.result.direction === "SHORT").length;
   document.querySelector("#waitCount").textContent = analyses.filter(x => x.result.direction === "WAIT").length;
+
+  let banner = document.querySelector(".opportunity-banner");
+  if (!banner) {
+    banner = document.createElement("section");
+    banner.className = "opportunity-banner";
+    document.querySelector("main").insertBefore(banner, document.querySelector(".notice"));
+  }
+
+  const best = [...analyses].sort((a, b) => Math.abs(b.result.score) - Math.abs(a.result.score))[0];
+  banner.innerHTML = `
+    <div>
+      <small>MIGLIORE CONFIGURAZIONE DELLA SIMULAZIONE</small>
+      <strong>${best.asset.name} · ${best.result.direction}</strong>
+      <div class="stars">${stars(best.result.confidence)}</div>
+    </div>
+    <div>
+      <small>SCORE</small>
+      <strong class="${scoreClass(best.result.score)}">${best.result.score}%</strong>
+      <div>${best.plan.action}</div>
+    </div>
+  `;
 }
 
 function renderCards() {
@@ -89,56 +203,50 @@ function renderCards() {
     .filter(x => filter === "ALL" || x.result.direction === filter)
     .sort((a, b) => Math.abs(b.result.score) - Math.abs(a.result.score));
 
-  document.querySelector("#marketGrid").innerHTML = visible.map(({ asset, result }) => {
-    const firstReason = result.details["1D"]?.reasons?.[0] || "Analisi disponibile";
-    return `
-      <article class="market-card" data-symbol="${asset.symbol}">
-        <div class="card-top">
-          <div>
-            <h3>${asset.name}</h3>
-            <div class="symbol">${asset.symbol}</div>
-          </div>
-          <div class="score">${result.score}</div>
+  document.querySelector("#marketGrid").innerHTML = visible.map(({ asset, result, plan }) => `
+    <article class="market-card" data-symbol="${asset.symbol}">
+      <div class="card-top">
+        <div>
+          <h3>${asset.name}</h3>
+          <div class="symbol">${asset.symbol}</div>
         </div>
+        <div class="score ${scoreClass(result.score)}">${result.score}%</div>
+      </div>
 
-        <div class="score-row">
-          <span class="badge ${badgeClass(result.direction)}">${result.direction}</span>
-          <span>Affidabilità ${result.confidence}%</span>
-        </div>
+      <div class="score-row">
+        <span class="badge ${badgeClass(result.direction)}">${result.direction}</span>
+        <span class="stars">${stars(result.confidence)}</span>
+      </div>
 
-        <div class="timeframes">
-          ${window.TRADING_CONFIG.timeframes.map(tf => {
-            const score = result.details[tf]?.score ?? 0;
-            return `
-              <div class="tf-chip ${tfClass(score)}">
-                <small>${tf}</small>
-                <strong>${score}</strong>
-              </div>`;
-          }).join("")}
-        </div>
+      <div class="timeframes">
+        ${window.TRADING_CONFIG.timeframes.map(tf => {
+          const score = result.details[tf]?.score ?? 0;
+          return `
+            <div class="tf-chip ${tfClass(score)}">
+              <small>${tf}</small>
+              <strong>${tfDirection(score)}</strong>
+            </div>`;
+        }).join("")}
+      </div>
 
-        <div class="card-footer">
-          ${firstReason} · ingresso preferito su ritracciamento del 50%
-        </div>
-      </article>`;
-  }).join("");
+      <div class="card-footer">
+        <strong>${plan.action}</strong><br>
+        Zona 50%: ${number(plan.entry, 2)} · Target: ${number(plan.target, 2)}
+      </div>
+    </article>
+  `).join("");
 
   document.querySelectorAll(".market-card").forEach(card => {
     card.addEventListener("click", () => openDetails(card.dataset.symbol));
   });
 }
 
-function number(value, digits = 2) {
-  return value === null || value === undefined || Number.isNaN(value)
-    ? "—"
-    : Number(value).toFixed(digits);
-}
-
 function openDetails(symbol) {
   const analysis = analyses.find(x => x.asset.symbol === symbol);
   if (!analysis) return;
 
-  const { asset, result } = analysis;
+  const { asset, result, plan } = analysis;
+  const reasons = weightedReasons(result);
 
   document.querySelector("#dialogContent").innerHTML = `
     <div class="detail-header">
@@ -146,20 +254,51 @@ function openDetails(symbol) {
         <p class="eyebrow">${asset.symbol}</p>
         <h2>${asset.name}</h2>
         <span class="badge ${badgeClass(result.direction)}">${result.direction}</span>
+        <div class="stars">${stars(result.confidence)}</div>
       </div>
       <div>
-        <div class="score">${result.score}</div>
+        <div class="score ${scoreClass(result.score)}">${result.score}%</div>
         <div class="symbol">Score aggregato</div>
       </div>
     </div>
 
+    <div class="action-box">
+      <h3>Decisione operativa: ${plan.action}</h3>
+      <p>${plan.actionReason}</p>
+      <div class="action-grid">
+        <div class="action-metric"><small>Prezzo simulato</small><strong>${number(plan.current, 2)}</strong></div>
+        <div class="action-metric"><small>Entrata ideale 50%</small><strong>${number(plan.entry, 2)}</strong></div>
+        <div class="action-metric"><small>Stop tecnico</small><strong>${number(plan.stop, 2)}</strong></div>
+        <div class="action-metric"><small>Target</small><strong>${number(plan.target, 2)}</strong></div>
+      </div>
+      <p>Rapporto rischio/rendimento stimato: <strong>${number(plan.rr, 2)}</strong></p>
+    </div>
+
+    <h3 style="margin-top:22px">Contributi allo score</h3>
+    <table class="reason-table">
+      <tbody>
+        ${reasons.map(reason => `
+          <tr>
+            <td>${reason.label}</td>
+            <td class="${reason.value >= 0 ? "reason-plus" : "reason-minus"}">
+              ${reason.value >= 0 ? "+" : ""}${reason.value}
+            </td>
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:22px">Analisi per timeframe</h3>
     <div class="detail-grid">
       ${window.TRADING_CONFIG.timeframes.map(tf => {
         const detail = result.details[tf];
+        const direction = tfDirection(detail?.score ?? 0);
         return `
           <section class="tf-card">
             <h3>${tf}</h3>
-            <div class="tf-score">${detail?.score ?? 0}</div>
+            <span class="tf-state ${direction.toLowerCase()}">${direction}</span>
+            <div class="symbol">${TF_LABELS[tf]}</div>
+            <div class="tf-score ${scoreClass(detail?.score ?? 0)}">${detail?.score ?? 0}%</div>
             <div class="metric"><span>RSI</span><strong>${number(detail?.rsi, 1)}</strong></div>
             <div class="metric"><span>Stocastico</span><strong>${number(detail?.stochastic, 1)}</strong></div>
             <div class="metric"><span>ATR</span><strong>${number(detail?.atr, 3)}</strong></div>
@@ -176,8 +315,6 @@ function openDetails(symbol) {
 
   document.querySelector("#detailDialog").showModal();
 }
-
-let refreshSeed = 0;
 
 document.querySelector("#refreshBtn").addEventListener("click", () => {
   refreshSeed += 1;

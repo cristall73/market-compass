@@ -5,28 +5,27 @@ Dashboard sperimentale per due moduli:
 - trading multi-timeframe con orizzonte 1–3 giorni;
 - selezione futura di grandi azioni con orizzonte 30–90 giorni.
 
-## Versione 0.0.3
+## Versione 0.0.4
 
-La dashboard Trading ora usa realmente `TradingEngine.analyzeMarket()`.
+Migliorata la dashboard Trading:
 
-Per ogni mercato vengono mostrati:
-
-- direzione LONG, SHORT o WAIT;
-- score aggregato;
-- affidabilità;
-- score separato per 1M, 1W, 1D, 4H e 1H;
-- RSI, Stocastico, ATR e Nadaraya;
-- EMA 200;
-- livello mediano del movimento recente, usato come riferimento per il ritracciamento del 50%;
-- motivazioni principali del segnale.
+- score espresso in percentuale;
+- decisione LONG, SHORT o WAIT più visibile;
+- migliore configurazione evidenziata in alto;
+- valutazione a stelle;
+- stato leggibile per ogni timeframe;
+- entrata ideale sul ritracciamento del 50%;
+- stop, target e rapporto rischio/rendimento;
+- spiegazione operativa: entrare, attendere ritracciamento o attendere rimbalzo;
+- tabella dei contributi positivi e negativi allo score.
 
 ## Importante
 
-In questa versione le serie OHLC sono simulate e servono esclusivamente a testare il motore e l'interfaccia. Non sono segnali operativi reali.
+I dati sono ancora simulati e servono esclusivamente a verificare la logica e l'interfaccia. Non sono segnali operativi reali.
 
 ## Pubblicazione
 
-Il repository può essere pubblicato gratuitamente con GitHub Pages usando il branch `main` e la cartella `/ (root)`.
+GitHub Pages: branch `main`, cartella `/ (root)`.
 
 ## Avvertenza
 
