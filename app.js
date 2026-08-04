@@ -1,199 +1,196 @@
-const opportunities = [
-  {
-    name: "NVIDIA", ticker: "NVDA", sector: "Semiconduttori", score: 88,
-    status: "Acquisto", entry: "171–176 $", target: "+13,2%", stop: "-6,5%",
-    horizon: "45–75 giorni", rr: "2,03", price: "174,20 $",
-    reasons: ["Trend Weekly rialzista", "Forza relativa elevata", "Crescita utili positiva"],
-    risks: ["Valutazione elevata", "Volatilità sopra la media"],
-    components: { Trend: 23, Momentum: 17, Fondamentali: 18, Catalizzatori: 13, Ingresso: 9, Rischio: 8 }
-  },
-  {
-    name: "ASML", ticker: "ASML", sector: "Semiconduttori", score: 84,
-    status: "Acquisto", entry: "690–708 €", target: "+11,8%", stop: "-5,9%",
-    horizon: "50–90 giorni", rr: "2,00", price: "701,40 €",
-    reasons: ["Supporto tecnico vicino", "Leadership tecnologica", "Momentum in recupero"],
-    risks: ["Ciclo semiconduttori", "Esposizione geopolitica"],
-    components: { Trend: 21, Momentum: 16, Fondamentali: 19, Catalizzatori: 12, Ingresso: 9, Rischio: 7 }
-  },
-  {
-    name: "Ferrari", ticker: "RACE", sector: "Lusso", score: 79,
-    status: "Watchlist", entry: "405–414 €", target: "+10,6%", stop: "-5,2%",
-    horizon: "40–80 giorni", rr: "2,04", price: "418,70 €",
-    reasons: ["Brand e margini solidi", "Trend primario intatto", "Serve un ritracciamento"],
-    risks: ["Prezzo sopra l'area ideale", "Multipli elevati"],
-    components: { Trend: 21, Momentum: 15, Fondamentali: 18, Catalizzatori: 10, Ingresso: 7, Rischio: 8 }
-  },
-  {
-    name: "Visa", ticker: "V", sector: "Finanza", score: 76,
-    status: "Mantieni", entry: "336–342 $", target: "+10,2%", stop: "-4,8%",
-    horizon: "55–90 giorni", rr: "2,12", price: "349,10 $",
-    reasons: ["Business resiliente", "Trend ordinato", "Volatilità contenuta"],
-    risks: ["Target meno esplosivo", "Ingresso non ottimale"],
-    components: { Trend: 20, Momentum: 14, Fondamentali: 18, Catalizzatori: 9, Ingresso: 7, Rischio: 8 }
-  },
-  {
-    name: "Rheinmetall", ticker: "RHM", sector: "Difesa", score: 82,
-    status: "Acquisto", entry: "1.720–1.770 €", target: "+14,1%", stop: "-7,0%",
-    horizon: "35–70 giorni", rr: "2,01", price: "1.755 €",
-    reasons: ["Trend settoriale forte", "Portafoglio ordini robusto", "Momentum positivo"],
-    risks: ["Volatilità elevata", "Titolo già molto apprezzato"],
-    components: { Trend: 23, Momentum: 18, Fondamentali: 15, Catalizzatori: 13, Ingresso: 7, Rischio: 6 }
+const ASSETS = [
+  { name: "Nasdaq 100", symbol: "USATEC", bias: 0.10, volatility: 1.35 },
+  { name: "DAX 40", symbol: "GER40", bias: 0.04, volatility: 1.10 },
+  { name: "S&P 500", symbol: "US500", bias: 0.07, volatility: 0.95 },
+  { name: "Gold", symbol: "XAUUSD", bias: 0.05, volatility: 0.90 },
+  { name: "Silver", symbol: "XAGUSD", bias: 0.02, volatility: 1.30 },
+  { name: "Petrolio WTI", symbol: "WTI", bias: -0.02, volatility: 1.20 },
+  { name: "EUR/USD", symbol: "EURUSD", bias: 0.01, volatility: 0.65 },
+  { name: "USD/JPY", symbol: "USDJPY", bias: -0.01, volatility: 0.70 }
+];
+
+const TIMEFRAME_LENGTHS = {
+  "1M": 240,
+  "1W": 240,
+  "1D": 260,
+  "4H": 260,
+  "1H": 260
+};
+
+let analyses = [];
+
+function seededRandom(seed) {
+  let value = seed % 2147483647;
+  if (value <= 0) value += 2147483646;
+  return () => (value = value * 16807 % 2147483647) / 2147483647;
+}
+
+function hashString(text) {
+  return [...text].reduce((acc, char) => ((acc << 5) - acc) + char.charCodeAt(0), 0);
+}
+
+function generateCandles(asset, timeframe, refreshSeed = 0) {
+  const seed = Math.abs(hashString(asset.symbol + timeframe)) + refreshSeed * 7919;
+  const random = seededRandom(seed);
+  const length = TIMEFRAME_LENGTHS[timeframe];
+  const tfFactor = { "1M": 1.8, "1W": 1.35, "1D": 1, "4H": .75, "1H": .55 }[timeframe];
+  let price = 100 + random() * 40;
+  const candles = [];
+
+  for (let i = 0; i < length; i++) {
+    const cycle = Math.sin(i / 16) * 0.18 + Math.sin(i / 41) * 0.12;
+    const drift = asset.bias * tfFactor + cycle;
+    const shock = (random() - .5) * asset.volatility * tfFactor;
+    const open = price;
+    const close = Math.max(1, open * (1 + (drift + shock) / 100));
+    const range = Math.abs(close - open) + open * (0.002 + random() * 0.006) * asset.volatility;
+    const high = Math.max(open, close) + range * random();
+    const low = Math.max(0.1, Math.min(open, close) - range * random());
+    candles.push({ open, high, low, close });
+    price = close;
   }
-];
 
-const tradingSignals = [
-  { asset: "Nasdaq 100", direction: "LONG", score: 81, setup: "Ritracciamento", horizon: "1–3 giorni", invalidation: "Sotto supporto H4" },
-  { asset: "DAX", direction: "WAIT", score: 58, setup: "Nessun vantaggio", horizon: "—", invalidation: "—" },
-  { asset: "Gold", direction: "LONG", score: 74, setup: "Breakout + retest", horizon: "1–2 giorni", invalidation: "Rientro sotto breakout" },
-  { asset: "EUR/USD", direction: "SHORT", score: 69, setup: "Pullback su resistenza", horizon: "1–3 giorni", invalidation: "Chiusura H4 sopra resistenza" }
-];
-
-const $ = selector => document.querySelector(selector);
-const $$ = selector => [...document.querySelectorAll(selector)];
-
-function badgeClass(status) {
-  if (status === "Acquisto") return "buy";
-  if (status === "Watchlist") return "watch";
-  return "hold";
+  return candles;
 }
 
-function populateFilters() {
-  const sectors = [...new Set(opportunities.map(item => item.sector))].sort();
-  $("#sectorFilter").innerHTML += sectors.map(s => `<option value="${s}">${s}</option>`).join("");
+function analyzeAll(refreshSeed = 0) {
+  analyses = ASSETS.map(asset => {
+    const data = {};
+    window.TRADING_CONFIG.timeframes.forEach(tf => {
+      data[tf] = generateCandles(asset, tf, refreshSeed);
+    });
+    return {
+      asset,
+      result: window.TradingEngine.analyzeMarket(data)
+    };
+  });
 }
 
-function renderOpportunities() {
-  const sector = $("#sectorFilter").value;
-  const status = $("#statusFilter").value;
-  const filtered = opportunities
-    .filter(x => sector === "all" || x.sector === sector)
-    .filter(x => status === "all" || x.status === status)
-    .sort((a, b) => b.score - a.score);
+function badgeClass(direction) {
+  return direction.toLowerCase();
+}
 
-  $("#opportunityGrid").innerHTML = filtered.map(item => `
-    <article class="card" data-ticker="${item.ticker}">
-      <div class="card-top">
-        <div>
-          <h3>${item.name}</h3>
-          <div class="ticker">${item.ticker} · ${item.sector}</div>
+function tfClass(score) {
+  if (score > 20) return "positive";
+  if (score < -20) return "negative";
+  return "";
+}
+
+function renderSummary() {
+  document.querySelector("#assetCount").textContent = analyses.length;
+  document.querySelector("#longCount").textContent = analyses.filter(x => x.result.direction === "LONG").length;
+  document.querySelector("#shortCount").textContent = analyses.filter(x => x.result.direction === "SHORT").length;
+  document.querySelector("#waitCount").textContent = analyses.filter(x => x.result.direction === "WAIT").length;
+}
+
+function renderCards() {
+  const filter = document.querySelector("#directionFilter").value;
+  const visible = analyses
+    .filter(x => filter === "ALL" || x.result.direction === filter)
+    .sort((a, b) => Math.abs(b.result.score) - Math.abs(a.result.score));
+
+  document.querySelector("#marketGrid").innerHTML = visible.map(({ asset, result }) => {
+    const firstReason = result.details["1D"]?.reasons?.[0] || "Analisi disponibile";
+    return `
+      <article class="market-card" data-symbol="${asset.symbol}">
+        <div class="card-top">
+          <div>
+            <h3>${asset.name}</h3>
+            <div class="symbol">${asset.symbol}</div>
+          </div>
+          <div class="score">${result.score}</div>
         </div>
-        <div class="score">${item.score}</div>
-      </div>
-      <p><span class="badge ${badgeClass(item.status)}">${item.status}</span></p>
-      <div class="metric-grid">
-        <div class="metric"><small>Prezzo</small><strong>${item.price}</strong></div>
-        <div class="metric"><small>Target</small><strong>${item.target}</strong></div>
-        <div class="metric"><small>Ingresso</small><strong>${item.entry}</strong></div>
-        <div class="metric"><small>Orizzonte</small><strong>${item.horizon}</strong></div>
-      </div>
-      <div class="reasons">${item.reasons.slice(0, 2).join(" · ")}</div>
-    </article>
-  `).join("");
 
-  $$(".card").forEach(card => card.addEventListener("click", () => openDetails(card.dataset.ticker)));
+        <div class="score-row">
+          <span class="badge ${badgeClass(result.direction)}">${result.direction}</span>
+          <span>Affidabilità ${result.confidence}%</span>
+        </div>
+
+        <div class="timeframes">
+          ${window.TRADING_CONFIG.timeframes.map(tf => {
+            const score = result.details[tf]?.score ?? 0;
+            return `
+              <div class="tf-chip ${tfClass(score)}">
+                <small>${tf}</small>
+                <strong>${score}</strong>
+              </div>`;
+          }).join("")}
+        </div>
+
+        <div class="card-footer">
+          ${firstReason} · ingresso preferito su ritracciamento del 50%
+        </div>
+      </article>`;
+  }).join("");
+
+  document.querySelectorAll(".market-card").forEach(card => {
+    card.addEventListener("click", () => openDetails(card.dataset.symbol));
+  });
 }
 
-function openDetails(ticker) {
-  const item = opportunities.find(x => x.ticker === ticker);
-  const componentMax = { Trend: 25, Momentum: 20, Fondamentali: 20, Catalizzatori: 15, Ingresso: 10, Rischio: 10 };
+function number(value, digits = 2) {
+  return value === null || value === undefined || Number.isNaN(value)
+    ? "—"
+    : Number(value).toFixed(digits);
+}
 
-  $("#dialogContent").innerHTML = `
-    <p class="eyebrow">${item.ticker} · ${item.sector}</p>
-    <h2>${item.name}</h2>
-    <p><span class="badge ${badgeClass(item.status)}">${item.status}</span> · Score ${item.score}/100</p>
+function openDetails(symbol) {
+  const analysis = analyses.find(x => x.asset.symbol === symbol);
+  if (!analysis) return;
 
-    <div class="detail-list">
-      <div class="detail-box"><small>Prezzo rilevato</small><h3>${item.price}</h3></div>
-      <div class="detail-box"><small>Area d'ingresso</small><h3>${item.entry}</h3></div>
-      <div class="detail-box"><small>Target indicativo</small><h3>${item.target}</h3></div>
-      <div class="detail-box"><small>Stop tecnico</small><h3>${item.stop}</h3></div>
-      <div class="detail-box"><small>Orizzonte</small><h3>${item.horizon}</h3></div>
-      <div class="detail-box"><small>Rapporto R/R</small><h3>${item.rr}</h3></div>
+  const { asset, result } = analysis;
+
+  document.querySelector("#dialogContent").innerHTML = `
+    <div class="detail-header">
+      <div>
+        <p class="eyebrow">${asset.symbol}</p>
+        <h2>${asset.name}</h2>
+        <span class="badge ${badgeClass(result.direction)}">${result.direction}</span>
+      </div>
+      <div>
+        <div class="score">${result.score}</div>
+        <div class="symbol">Score aggregato</div>
+      </div>
     </div>
 
-    <h3>Composizione score</h3>
-    ${Object.entries(item.components).map(([key, value]) => `
-      <div>
-        <div class="metric-row"><span>${key}</span><strong>${value}/${componentMax[key]}</strong></div>
-        <div class="progress"><span style="width:${(value/componentMax[key])*100}%"></span></div>
-      </div>
-    `).join("")}
-
-    <h3 style="margin-top:22px">Motivazioni</h3>
-    <ul>${item.reasons.map(x => `<li>${x}</li>`).join("")}</ul>
-    <h3>Rischi principali</h3>
-    <ul>${item.risks.map(x => `<li>${x}</li>`).join("")}</ul>
-    <button class="primary" id="saveSignalBtn">Salva nello storico</button>
+    <div class="detail-grid">
+      ${window.TRADING_CONFIG.timeframes.map(tf => {
+        const detail = result.details[tf];
+        return `
+          <section class="tf-card">
+            <h3>${tf}</h3>
+            <div class="tf-score">${detail?.score ?? 0}</div>
+            <div class="metric"><span>RSI</span><strong>${number(detail?.rsi, 1)}</strong></div>
+            <div class="metric"><span>Stocastico</span><strong>${number(detail?.stochastic, 1)}</strong></div>
+            <div class="metric"><span>ATR</span><strong>${number(detail?.atr, 3)}</strong></div>
+            <div class="metric"><span>Nadaraya</span><strong>${number(detail?.nadaraya, 2)}</strong></div>
+            <div class="metric"><span>50% swing</span><strong>${number(detail?.swing?.midpoint, 2)}</strong></div>
+            <div class="metric"><span>EMA 200</span><strong>${number(detail?.movingAverages?.ma200, 2)}</strong></div>
+            <ul class="reasons">
+              ${(detail?.reasons || []).map(reason => `<li>${reason}</li>`).join("")}
+            </ul>
+          </section>`;
+      }).join("")}
+    </div>
   `;
 
-  $("#detailDialog").showModal();
-  $("#saveSignalBtn").addEventListener("click", () => saveSignal(item));
+  document.querySelector("#detailDialog").showModal();
 }
 
-function saveSignal(item) {
-  const history = JSON.parse(localStorage.getItem("marketCompassHistory") || "[]");
-  history.unshift({
-    date: new Date().toLocaleString("it-IT"),
-    ticker: item.ticker,
-    name: item.name,
-    score: item.score,
-    status: item.status,
-    price: item.price,
-    target: item.target
-  });
-  localStorage.setItem("marketCompassHistory", JSON.stringify(history.slice(0, 100)));
-  renderHistory();
-  $("#detailDialog").close();
-}
+let refreshSeed = 0;
 
-function renderTrading() {
-  $("#tradingTable").innerHTML = `
-    <table>
-      <thead><tr><th>Asset</th><th>Direzione</th><th>Score</th><th>Setup</th><th>Orizzonte</th><th>Invalidazione</th></tr></thead>
-      <tbody>
-        ${tradingSignals.map(x => `
-          <tr><td>${x.asset}</td><td>${x.direction}</td><td>${x.score}/100</td><td>${x.setup}</td><td>${x.horizon}</td><td>${x.invalidation}</td></tr>
-        `).join("")}
-      </tbody>
-    </table>`;
-}
-
-function renderHistory() {
-  const history = JSON.parse(localStorage.getItem("marketCompassHistory") || "[]");
-  $("#historyTable").innerHTML = history.length ? `
-    <table>
-      <thead><tr><th>Data</th><th>Titolo</th><th>Score</th><th>Stato</th><th>Prezzo</th><th>Target</th></tr></thead>
-      <tbody>${history.map(x => `
-        <tr><td>${x.date}</td><td>${x.name} (${x.ticker})</td><td>${x.score}</td><td>${x.status}</td><td>${x.price}</td><td>${x.target}</td></tr>
-      `).join("")}</tbody>
-    </table>` : `<div class="notice">Nessun segnale salvato.</div>`;
-}
-
-function simulateRefresh() {
-  opportunities.forEach(item => {
-    const variation = Math.floor(Math.random() * 5) - 2;
-    item.score = Math.max(50, Math.min(95, item.score + variation));
-  });
-  renderOpportunities();
-}
-
-$$(".tab").forEach(tab => tab.addEventListener("click", () => {
-  $$(".tab").forEach(x => x.classList.remove("active"));
-  $$(".panel").forEach(x => x.classList.remove("active"));
-  tab.classList.add("active");
-  document.getElementById(tab.dataset.tab).classList.add("active");
-}));
-
-$("#sectorFilter").addEventListener("change", renderOpportunities);
-$("#statusFilter").addEventListener("change", renderOpportunities);
-$("#refreshBtn").addEventListener("click", simulateRefresh);
-$("#closeDialog").addEventListener("click", () => $("#detailDialog").close());
-$("#clearHistoryBtn").addEventListener("click", () => {
-  localStorage.removeItem("marketCompassHistory");
-  renderHistory();
+document.querySelector("#refreshBtn").addEventListener("click", () => {
+  refreshSeed += 1;
+  analyzeAll(refreshSeed);
+  renderSummary();
+  renderCards();
 });
 
-populateFilters();
-renderOpportunities();
-renderTrading();
-renderHistory();
+document.querySelector("#directionFilter").addEventListener("change", renderCards);
+document.querySelector("#closeDialog").addEventListener("click", () => {
+  document.querySelector("#detailDialog").close();
+});
+
+analyzeAll();
+renderSummary();
+renderCards();

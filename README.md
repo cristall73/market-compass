@@ -1,48 +1,33 @@
 # Market Compass
 
-Prima bozza statica del progetto per:
+Dashboard sperimentale per due moduli:
 
-- segnali di trading con orizzonte 1–3 giorni;
-- selezione di opportunità azionarie con orizzonte 30–90 giorni;
-- persistenza locale dello storico dei segnali.
+- trading multi-timeframe con orizzonte 1–3 giorni;
+- selezione futura di grandi azioni con orizzonte 30–90 giorni.
 
-## Avvio
+## Versione 0.0.3
 
-Apri `index.html` nel browser oppure pubblica il repository con GitHub Pages.
+La dashboard Trading ora usa realmente `TradingEngine.analyzeMarket()`.
 
-## GitHub Pages
+Per ogni mercato vengono mostrati:
 
-1. Vai in `Settings`.
-2. Apri `Pages`.
-3. In `Build and deployment`, scegli `Deploy from a branch`.
-4. Seleziona branch `main` e cartella `/ (root)`.
-5. Salva.
+- direzione LONG, SHORT o WAIT;
+- score aggregato;
+- affidabilità;
+- score separato per 1M, 1W, 1D, 4H e 1H;
+- RSI, Stocastico, ATR e Nadaraya;
+- EMA 200;
+- livello mediano del movimento recente, usato come riferimento per il ritracciamento del 50%;
+- motivazioni principali del segnale.
 
-## Stato attuale
+## Importante
 
-I dati sono dimostrativi e vengono definiti in `app.js`.  
-La prossima fase sarà collegare una fonte dati reale e separare:
+In questa versione le serie OHLC sono simulate e servono esclusivamente a testare il motore e l'interfaccia. Non sono segnali operativi reali.
 
-- calcolo dello score;
-- dati di mercato;
-- persistenza dei segnali;
-- interfaccia.
+## Pubblicazione
+
+Il repository può essere pubblicato gratuitamente con GitHub Pages usando il branch `main` e la cartella `/ (root)`.
 
 ## Avvertenza
 
 Prototipo sperimentale. Non costituisce consulenza finanziaria.
-
-
-## Versione 0.0.2 — Trading Engine
-
-Aggiunto un primo motore tecnico riutilizzabile con:
-
-- analisi multi-timeframe: 1M, 1W, 1D, 4H, 1H;
-- medie mobili esponenziali 200, 60, 50, 10 e 5;
-- ATR, RSI e Stocastico;
-- curva Nadaraya-Watson;
-- riconoscimento iniziale di doppi massimi/minimi e testa e spalle;
-- area di ingresso vicina al ritracciamento del 50%;
-- risultato LONG, SHORT o WAIT con score aggregato.
-
-Il motore riceve serie OHLC organizzate per timeframe. La fonte dati reale verrà collegata in una fase successiva senza modificare la logica centrale.
