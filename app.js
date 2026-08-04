@@ -13,10 +13,51 @@ const TIMEFRAME_LENGTHS = { "1M": 240, "1W": 240, "1D": 260, "4H": 260, "1H": 26
 const TF_LABELS = { "1M": "Trend di fondo", "1W": "Conferma primaria", "1D": "Struttura operativa", "4H": "Timing", "1H": "Ingresso" };
 
 const MARKET_DATA_PROVIDER = {
-  name: "Simulazione OHLC",
-  mode: "simulation",
-  async getCandles(asset, timeframe, seedOffset = 0) {
-    return generateCandles(asset, timeframe, seedOffset);
+  name: "Caricamento dati...",
+  mode: "real",
+  payload: null,
+  loadPromise: null,
+
+  async load() {
+    if (this.payload) return this.payload;
+    if (!this.loadPromise) {
+      this.loadPromise = fetch(`data/market-data.json?ts=${Date.now()}`, { cache: "no-store" })
+        .then(response => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .then(payload => {
+          if (!Array.isArray(payload.assets) || payload.assets.length === 0) {
+            throw new Error("Il file dati reali non è stato ancora generato");
+          }
+          this.payload = payload;
+          this.name = payload.provider || "Dati reali";
+          return payload;
+        });
+    }
+    return this.loadPromise;
+  },
+
+  async getCandles(asset, timeframe) {
+    const payload = await this.load();
+    const market = payload.assets.find(item => item.symbol === asset.symbol);
+    const candles = market?.timeframes?.[timeframe];
+
+    if (!Array.isArray(candles) || candles.length < 20) {
+      throw new Error(`Dati insufficienti per ${asset.symbol} ${timeframe}`);
+    }
+
+    return candles.map(candle => ({
+      open: Number(candle.open),
+      high: Number(candle.high),
+      low: Number(candle.low),
+      close: Number(candle.close),
+      time: candle.time
+    }));
+  },
+
+  getGeneratedAt() {
+    return this.payload?.generatedAt ? new Date(this.payload.generatedAt) : null;
   }
 };
 
@@ -147,19 +188,24 @@ function weightedReasons(result) {
   return reasons.sort((a, b) => Math.abs(b.value) - Math.abs(a.value));
 }
 
-async function analyzeAll(seedOffset = 0) {
+async function analyzeAll() {
   analyses = [];
+  await MARKET_DATA_PROVIDER.load();
 
   for (const asset of ASSETS) {
-    const data = {};
-    for (const tf of window.TRADING_CONFIG.timeframes) {
-      data[tf] = await MARKET_DATA_PROVIDER.getCandles(asset, tf, seedOffset);
+    try {
+      const data = {};
+      for (const tf of window.TRADING_CONFIG.timeframes) {
+        data[tf] = await MARKET_DATA_PROVIDER.getCandles(asset, tf);
+      }
+      const result = window.TradingEngine.analyzeMarket(data);
+      analyses.push({ asset, result, plan: operationalPlan(result) });
+    } catch (error) {
+      console.error(`Errore ${asset.symbol}:`, error);
     }
-    const result = window.TradingEngine.analyzeMarket(data);
-    analyses.push({ asset, result, plan: operationalPlan(result) });
   }
 
-  lastUpdate = new Date();
+  lastUpdate = MARKET_DATA_PROVIDER.getGeneratedAt() || new Date();
 }
 
 function badgeClass(direction) {
@@ -214,7 +260,7 @@ function renderSummary() {
 
   banner.innerHTML = `
     <div>
-      <small>MIGLIORE CONFIGURAZIONE DELLA SIMULAZIONE</small>
+      <small>MIGLIORE CONFIGURAZIONE REALE</small>
       <strong>${best.asset.name} · ${best.result.direction}</strong>
       <div class="stars">${stars(best.result.confidence)}</div>
       <div class="update-meta">
@@ -392,8 +438,9 @@ async function refreshDashboard() {
   button.disabled = true;
   button.textContent = "Aggiornamento...";
 
-  refreshSeed += 1;
-  await analyzeAll(refreshSeed);
+  MARKET_DATA_PROVIDER.payload = null;
+  MARKET_DATA_PROVIDER.loadPromise = null;
+  await analyzeAll();
   renderSummary();
   renderCards();
 
@@ -408,7 +455,17 @@ document.querySelector("#closeDialog").addEventListener("click", () => {
 });
 
 (async () => {
-  await analyzeAll();
-  renderSummary();
-  renderCards();
+  try {
+    await analyzeAll();
+    renderSummary();
+    renderCards();
+  } catch (error) {
+    console.error(error);
+    document.querySelector("#marketGrid").innerHTML = `
+      <div class="notice">
+        <strong>Dati reali non ancora disponibili.</strong><br>
+        Esegui una volta il workflow “Aggiorna dati di mercato” nella sezione Actions di GitHub.
+      </div>`;
+    document.querySelector("#refreshBtn").disabled = true;
+  }
 })();
