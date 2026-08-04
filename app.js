@@ -432,6 +432,125 @@ function buildNarrative(asset, result, plan) {
   };
 }
 
+
+function buildChecklist(result, plan) {
+  const h4 = result.details["4H"];
+  const h1 = result.details["1H"];
+  const isLong = result.direction === "LONG";
+  const isShort = result.direction === "SHORT";
+  const inZone = plan.current >= plan.entryLow && plan.current <= plan.entryHigh;
+
+  return [
+    {
+      label: `Prezzo nella zona ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}`,
+      done: inZone
+    },
+    {
+      label: isLong
+        ? "4H non più ribassista"
+        : isShort
+          ? "4H non più rialzista"
+          : "4H con direzione definita",
+      done: isLong
+        ? tfDirection(h4?.score ?? 0) !== "SHORT"
+        : isShort
+          ? tfDirection(h4?.score ?? 0) !== "LONG"
+          : tfDirection(h4?.score ?? 0) !== "WAIT"
+    },
+    {
+      label: isLong
+        ? "1H conferma LONG"
+        : isShort
+          ? "1H conferma SHORT"
+          : "1H conferma una direzione",
+      done: isLong
+        ? tfDirection(h1?.score ?? 0) === "LONG"
+        : isShort
+          ? tfDirection(h1?.score ?? 0) === "SHORT"
+          : tfDirection(h1?.score ?? 0) !== "WAIT"
+    },
+    {
+      label: isLong
+        ? "RSI 1H sopra 50 o in recupero"
+        : isShort
+          ? "RSI 1H sotto 50 o in indebolimento"
+          : "RSI 1H coerente con la direzione",
+      done: isLong
+        ? (h1?.rsi ?? 0) >= 50
+        : isShort
+          ? (h1?.rsi ?? 100) <= 50
+          : false
+    },
+    {
+      label: "Rapporto rischio/rendimento almeno 1:2",
+      done: plan.rr >= 2
+    }
+  ];
+}
+
+function buildReasoningLedger(result, plan) {
+  const rows = [];
+
+  for (const tf of window.TRADING_CONFIG.timeframes) {
+    const score = result.details[tf]?.score ?? 0;
+    rows.push({
+      label: `${tf} · ${TF_LABELS[tf]}`,
+      value: Math.round(score * 0.20),
+      note: tfDirection(score)
+    });
+  }
+
+  rows.push({
+    label: "Concordanza timeframe",
+    value: Math.round((result.alignment - 50) * 0.30),
+    note: `${result.alignment}%`
+  });
+
+  rows.push({
+    label: "Timing rispetto alla zona d’ingresso",
+    value: plan.actionCode === "READY" ? 15
+      : plan.actionCode === "CONFIRM" ? 8
+      : plan.actionCode === "NEAR" ? 3
+      : plan.actionCode === "EXTENDED" ? -12
+      : plan.actionCode === "INVALID" ? -20
+      : -5,
+    note: plan.action
+  });
+
+  rows.push({
+    label: "Rapporto rischio/rendimento",
+    value: plan.rr >= 2.5 ? 10 : plan.rr >= 2 ? 6 : plan.rr >= 1.5 ? 2 : -8,
+    note: `1:${number(plan.rr, 2)}`
+  });
+
+  return rows;
+}
+
+function buildInvalidationText(result, plan) {
+  if (result.direction === "LONG") {
+    return `Il piano LONG perde validità se il prezzo chiude sotto ${number(plan.stop, 2)} sul 4H. In quel caso il ritracciamento non sarebbe più considerato fisiologico e servirebbe una nuova struttura prima di cercare acquisti.`;
+  }
+  if (result.direction === "SHORT") {
+    return `Il piano SHORT perde validità se il prezzo chiude sopra ${number(plan.stop, 2)} sul 4H. In quel caso il rimbalzo avrebbe superato l’area di invalidazione e servirebbe una nuova struttura prima di cercare vendite.`;
+  }
+  return "Non esiste ancora un setup direzionale da invalidare. Prima deve formarsi una struttura coerente tra Giornaliero, 4H e 1H.";
+}
+
+function buildCoachAnswer(question, asset, result, plan) {
+  const narrative = buildNarrative(asset, result, plan);
+  const answers = {
+    enter: plan.actionCode === "READY"
+      ? `Il setup è valutabile adesso perché il prezzo è nella zona ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)} e i timeframe operativi sono concordi. Non significa entrare automaticamente: è meglio evitare una candela già troppo estesa e attendere una conferma 1H pulita.`
+      : `Non entrerei adesso. ${narrative.entryExplanation}`,
+    retracement: `Aspettare migliora il rapporto rischio/rendimento. Entrando vicino a ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}, lo stop può restare a ${number(plan.stop, 2)} e il TP2 a ${number(plan.tp2, 2)}, con un rapporto stimato di 1:${number(plan.rr, 2)}.`,
+    stop: narrative.stopExplanation,
+    target: narrative.targetExplanation,
+    change: buildInvalidationText(result, plan),
+    confidence: `La qualità interna dell’opportunità è ${plan.opportunityScore}%. La direzione tecnica ha forza ${result.confidence}% e la concordanza dei timeframe è ${result.alignment}%. Sono punteggi del modello, non una probabilità garantita di profitto.`
+  };
+  return answers[question] || narrative.overview;
+}
+
 function renderSummary() {
   document.querySelector("#assetCount").textContent = analyses.length;
   document.querySelector("#longCount").textContent = analyses.filter(x => x.result.direction === "LONG").length;
@@ -605,38 +724,84 @@ function openDetails(symbol) {
       const narrative = buildNarrative(asset, result, plan);
       return `
         <section class="explanation-panel">
-          <h3>RAGIONAMENTO OPERATIVO</h3>
-
-          <div class="explanation-block">
-            <h4>1. Lettura del mercato</h4>
-            <p>${narrative.overview}</p>
+          <div class="coach-title-row">
+            <div>
+              <h3>SPIEGAMI IL TRADE</h3>
+              <p>Il ragionamento che porta alla decisione, non solo i numeri.</p>
+            </div>
+            <span class="action-pill ${actionClass(plan.actionCode)}">${plan.action}</span>
           </div>
 
           <div class="explanation-block">
-            <h4>2. Quando entrare</h4>
+            <h4>1. Cosa sta facendo il mercato</h4>
+            <p>${narrative.overview}</p>
+          </div>
+
+          <div class="explanation-block emphasis">
+            <h4>2. Cosa fare adesso</h4>
             <p>${narrative.entryExplanation}</p>
           </div>
 
           <div class="explanation-block">
-            <h4>3. Conferme da aspettare</h4>
-            <ul>
-              ${narrative.confirmationRules.map(rule => `<li>${rule}</li>`).join("")}
-            </ul>
+            <h4>3. Checklist prima dell’ingresso</h4>
+            <div class="trade-checklist">
+              ${buildChecklist(result, plan).map(item => `
+                <div class="check-row ${item.done ? "done" : ""}">
+                  <span>${item.done ? "✓" : "○"}</span>
+                  <strong>${item.label}</strong>
+                </div>
+              `).join("")}
+            </div>
           </div>
 
           <div class="explanation-grid">
             <div class="explanation-block">
-              <h4>4. Significato dello stop</h4>
+              <h4>4. Perché lo stop è lì</h4>
               <p>${narrative.stopExplanation}</p>
             </div>
             <div class="explanation-block">
-              <h4>5. Significato dei target</h4>
+              <h4>5. Perché i target sono lì</h4>
               <p>${narrative.targetExplanation}</p>
             </div>
           </div>
 
+          <div class="explanation-block invalidation">
+            <h4>6. Cosa invalida il trade</h4>
+            <p>${buildInvalidationText(result, plan)}</p>
+          </div>
+
           <div class="explanation-block">
-            <h4>6. Elementi tecnici principali</h4>
+            <h4>7. Come il sistema è arrivato alla decisione</h4>
+            <div class="reasoning-ledger">
+              ${buildReasoningLedger(result, plan).map(row => `
+                <div class="ledger-row">
+                  <span>${row.label}</span>
+                  <small>${row.note}</small>
+                  <strong class="${row.value >= 0 ? "reason-plus" : "reason-minus"}">
+                    ${row.value >= 0 ? "+" : ""}${row.value}
+                  </strong>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <div class="explanation-block">
+            <h4>8. Domande rapide al Coach</h4>
+            <div class="coach-buttons">
+              <button type="button" data-coach="enter">Posso entrare adesso?</button>
+              <button type="button" data-coach="retracement">Perché aspettare?</button>
+              <button type="button" data-coach="stop">Perché questo stop?</button>
+              <button type="button" data-coach="target">Perché questi target?</button>
+              <button type="button" data-coach="change">Cosa ti farebbe cambiare idea?</button>
+              <button type="button" data-coach="confidence">Quanto è affidabile?</button>
+            </div>
+            <div id="coachAnswer" class="coach-answer">
+              Seleziona una domanda per leggere la risposta costruita sui dati reali dell’asset.
+            </div>
+          </div>
+
+          <div class="explanation-block">
+            <h4>9. Elementi tecnici principali</h4>
             <ul>
               ${narrative.indicatorNotes.map(note => `<li>${note}</li>`).join("")}
             </ul>
@@ -685,6 +850,13 @@ function openDetails(symbol) {
   `;
 
   document.querySelector("#detailDialog").showModal();
+
+  document.querySelectorAll("[data-coach]").forEach(button => {
+    button.addEventListener("click", () => {
+      document.querySelector("#coachAnswer").textContent =
+        buildCoachAnswer(button.dataset.coach, asset, result, plan);
+    });
+  });
 }
 
 async function refreshDashboard() {

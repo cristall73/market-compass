@@ -1,22 +1,21 @@
 # Market Compass
 
-## Versione 0.4.0 — ragionamento operativo spiegato
+## Versione 0.5.0 — Trading Coach
 
 Patch sicura: non contiene `data/market-data.json` e non sovrascrive i dati reali.
 
-### Novità
+### Dentro ogni asset ora trovi
 
-Cliccando su ogni asset, Market Compass ora spiega:
+- spiegazione del mercato in linguaggio naturale;
+- indicazione chiara di cosa fare adesso;
+- checklist dinamica prima dell’ingresso;
+- spiegazione dello stop;
+- spiegazione di TP1, TP2 e TP3;
+- condizione che invalida il setup;
+- registro numerico del ragionamento;
+- pulsanti con domande rapide al Trading Coach;
+- risposte costruite sui dati reali dell’asset.
 
-- come sono allineati i timeframe;
-- perché entrare subito oppure aspettare;
-- la zona precisa in cui attendere il ritracciamento o il rimbalzo;
-- quali conferme osservare sul timeframe 1H;
-- dove si trova lo stop;
-- quanti punti e quale percentuale rappresenta lo stop;
-- TP1, TP2 e TP3;
-- quanti punti e quale percentuale rappresenta il TP2;
-- il significato del rapporto rischio/rendimento;
-- gli elementi tecnici principali che sostengono il piano.
+Il Trading Coach è deterministico e gira direttamente nel browser: non richiede API, account o abbonamenti aggiuntivi.
 
-I livelli sono calcoli tecnici sperimentali, non ordini automatici né risultati garantiti.
+I punteggi e i livelli restano sperimentali e non garantiscono risultati.
