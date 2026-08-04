@@ -145,42 +145,42 @@ function operationalPlan(result) {
   const alreadyBeyondTarget = isLong ? current >= target : isShort ? current <= target : false;
   const wrongSideOfEntry = isLong ? current < stop : isShort ? current > stop : false;
 
-  let action = "NESSUN TRADE";
+  let action = "RIMANI FUORI";
   let actionCode = "NO_TRADE";
-  let actionReason = "Direzione tecnica non abbastanza chiara.";
+  let actionReason = "Il mercato non offre ancora un vantaggio abbastanza chiaro: restare fuori protegge il capitale.";
   let timingScore = 0;
 
   if (result.direction === "WAIT") {
     timingScore = Math.round(result.confidence * 0.35);
   } else if (wrongSideOfEntry) {
-    action = "SETUP INVALIDATO";
+    action = "PIANO ANNULLATO";
     actionCode = "INVALID";
-    actionReason = "Il prezzo ha già superato il livello di invalidazione tecnica.";
+    actionReason = "Il vecchio piano non è più valido: il prezzo ha superato il livello che lo annullava.";
     timingScore = 10;
   } else if (alreadyBeyondTarget) {
-    action = "NON INSEGUIRE";
+    action = "NON ENTRARE ADESSO";
     actionCode = "EXTENDED";
-    actionReason = "Il movimento ha già raggiunto o superato il target calcolato.";
+    actionReason = "Il movimento è già partito senza di noi e ha raggiunto gran parte dello spazio previsto.";
     timingScore = 20;
   } else if (inEntryZone && lowerTfConfirmed) {
-    action = isLong ? "VALUTA LONG ORA" : "VALUTA SHORT ORA";
+    action = isLong ? "VALUTA UN LONG ORA" : "VALUTA UNO SHORT ORA";
     actionCode = "READY";
-    actionReason = "Prezzo nella zona ideale e timeframe operativi concordi.";
+    actionReason = "Il prezzo è nella zona prevista e 4H e 1H confermano la direzione.";
     timingScore = 90;
   } else if (inEntryZone) {
-    action = "ATTENDI CONFERMA 1H";
+    action = "ASPETTA LA CONFERMA 1H";
     actionCode = "CONFIRM";
-    actionReason = "Prezzo nella zona ideale, ma manca la conferma del timeframe 1H.";
+    actionReason = "Il prezzo è nella zona prevista, ma serve ancora una conferma chiara sull’1H.";
     timingScore = 70;
   } else if (distanceAtr <= 1.25) {
-    action = isLong ? "ATTENDI RITRACCIAMENTO" : "ATTENDI RIMBALZO";
+    action = isLong ? "ASPETTA IL RITORNO IN ZONA" : "ASPETTA IL RIMBALZO IN ZONA";
     actionCode = "NEAR";
-    actionReason = "Direzione valida, prezzo ancora vicino alla zona operativa.";
+    actionReason = "La direzione è valida, ma conviene aspettare che il prezzo raggiunga la zona indicata.";
     timingScore = 55;
   } else {
-    action = "TROPPO ESTESO";
+    action = "NON ENTRARE ADESSO";
     actionCode = "EXTENDED";
-    actionReason = "Direzione valida, ma il prezzo è troppo distante dall'entrata ideale.";
+    actionReason = "Il trend è valido, ma entrare ora significherebbe arrivare tardi e accettare un rischio peggiore.";
     timingScore = 30;
   }
 
@@ -330,6 +330,47 @@ function actionClass(code) {
   if (code === "CONFIRM" || code === "NEAR") return "pending";
   if (code === "INVALID" || code === "EXTENDED") return "blocked";
   return "neutral";
+}
+
+function tenScale(value) {
+  return Math.max(0, Math.min(10, Math.round(Number(value || 0) / 10)));
+}
+
+function opportunityLabel(score) {
+  const value = tenScale(score);
+  if (value >= 9) return "Occasione eccellente";
+  if (value >= 7) return "Occasione buona";
+  if (value >= 5) return "Occasione discreta";
+  if (value >= 3) return "Occasione debole";
+  return "Nessun vantaggio";
+}
+
+function trendLabel(result) {
+  const value = tenScale(result.confidence);
+  if (result.direction === "WAIT") return `Trend non chiaro · ${value}/10`;
+  const side = result.direction === "LONG" ? "rialzista" : "ribassista";
+  if (value >= 8) return `Trend ${side} molto forte · ${value}/10`;
+  if (value >= 6) return `Trend ${side} forte · ${value}/10`;
+  if (value >= 4) return `Trend ${side} moderato · ${value}/10`;
+  return `Trend ${side} debole · ${value}/10`;
+}
+
+function plainActionExplanation(item) {
+  const { result, plan } = item;
+  if (plan.actionCode === "READY") return "Il prezzo è nella zona prevista e l’1H conferma: il trade può essere valutato.";
+  if (plan.actionCode === "CONFIRM") return "Il prezzo è arrivato in zona, ma manca ancora la conferma dell’1H.";
+  if (plan.actionCode === "NEAR") {
+    return result.direction === "SHORT"
+      ? "Aspetta un rimbalzo verso la zona indicata prima di valutare lo short."
+      : "Aspetta che il prezzo torni nella zona indicata prima di valutare il long.";
+  }
+  if (plan.actionCode === "EXTENDED") return "Il movimento è già partito: entrare ora significherebbe arrivare tardi.";
+  if (plan.actionCode === "INVALID") return "Il vecchio piano è annullato: serve una nuova struttura.";
+  return "Non c’è ancora un vantaggio operativo sufficiente: meglio restare fuori.";
+}
+
+function isSetupReady(item) {
+  return item.plan.actionCode === "READY";
 }
 
 function number(value, digits = 2) {
@@ -547,7 +588,7 @@ function buildCoachAnswer(question, asset, result, plan) {
     stop: narrative.stopExplanation,
     target: narrative.targetExplanation,
     change: buildInvalidationText(result, plan),
-    confidence: `La qualità interna dell’opportunità è ${plan.opportunityScore}%. La direzione tecnica ha forza ${result.confidence}% e la concordanza dei timeframe è ${result.alignment}%. Sono punteggi del modello, non una probabilità garantita di profitto.`
+    confidence: `L’occasione vale ${tenScale(plan.opportunityScore)}/10 (${opportunityLabel(plan.opportunityScore).toLowerCase()}). La forza del trend vale ${tenScale(result.confidence)}/10 e la concordanza dei timeframe ${tenScale(result.alignment)}/10. La scala va da 0 a 10: non indica la probabilità garantita di guadagno, ma quanto il setup rispetta le regole del modello.`
   };
   return answers[question] || narrative.overview;
 }
@@ -601,12 +642,12 @@ function buildScenarios(asset, result, plan) {
   return [
     {
       title: "Scenario A · Il prezzo continua senza ritracciare",
-      action: "NON INSEGUIRE",
+      action: "NON ENTRARE ADESSO",
       text: `Se ${asset.name} prosegue subito il ${favorableMove} senza tornare nella zona ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}, non apro il trade. Il movimento può continuare, ma l’ingresso sarebbe troppo lontano dallo stop tecnico.`
     },
     {
       title: "Scenario B · Il prezzo torna lentamente verso la zona",
-      action: "PREPARATI",
+      action: "INIZIA A MONITORARE",
       text: `Se il prezzo rientra verso ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)} senza accelerazioni contrarie, inizio a monitorare il 4H e l’1H. Non entro ancora: preparo il piano e aspetto la conferma.`
     },
     {
@@ -701,16 +742,25 @@ function renderSummary() {
     .sort((a, b) => rankingScore(b) - rankingScore(a))
     .slice(0, 3);
 
+  const ready = ranking.find(isSetupReady);
+  const lead = ready || ranking[0];
+
   banner.innerHTML = `
     <div>
-      <small>CLASSIFICA OPERATIVA REALE</small>
+      <small>${ready ? "SETUP PRONTO DA VALUTARE" : "NESSUN INGRESSO PRONTO ADESSO"}</small>
+      ${!ready ? `
+        <p class="ranking-explanation">
+          Nessun asset soddisfa ancora tutte le condizioni d’ingresso.
+          La classifica mostra quali mercati sono più vicini a diventare interessanti.
+        </p>` : ""}
       ${ranking.map((item, index) => `
-        <div style="display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.07)">
-          <strong style="font-size:1rem">${index + 1}. ${item.asset.name}</strong>
+        <div class="ranking-row">
+          <strong>${index + 1}. ${item.asset.name}</strong>
           <span class="badge ${badgeClass(item.result.direction)}">${item.result.direction}</span>
           <span class="action-pill ${actionClass(item.plan.actionCode)}">${item.plan.action}</span>
-          <span>${item.plan.opportunityScore}%</span>
+          <span class="rank-score">${tenScale(item.plan.opportunityScore)}/10</span>
         </div>
+        <div class="ranking-reason">${plainActionExplanation(item)}</div>
       `).join("")}
       <div class="update-meta">
         Aggiornato alle ${formatTime(lastUpdate)}
@@ -718,11 +768,12 @@ function renderSummary() {
       </div>
     </div>
     <div>
-      <small>MIGLIORE ASSET</small>
-      <strong>${ranking[0].asset.name}</strong>
-      <div class="stars">${stars(ranking[0].plan.opportunityScore)}</div>
-      <div class="action-pill ${actionClass(ranking[0].plan.actionCode)}">${ranking[0].plan.action}</div>
-      <div class="symbol">Qualità opportunità ${ranking[0].plan.opportunityScore}%</div>
+      <small>${ready ? "MIGLIORE SETUP PRONTO" : "PRIMO CANDIDATO DA MONITORARE"}</small>
+      <strong>${lead.asset.name}</strong>
+      <div class="action-pill ${actionClass(lead.plan.actionCode)}">${lead.plan.action}</div>
+      <div class="human-score">${tenScale(lead.plan.opportunityScore)}/10</div>
+      <div class="symbol">${opportunityLabel(lead.plan.opportunityScore)}</div>
+      <p class="lead-explanation">${plainActionExplanation(lead)}</p>
     </div>
   `;
 }
@@ -741,7 +792,7 @@ function renderCards() {
           <h3>${asset.name}</h3>
           <div class="symbol">${asset.symbol}</div>
         </div>
-        <div><div class="score ${scoreClass(result.score)}">${result.score}%</div><div class="symbol">${strengthLabel(result)}</div></div>
+        <div class="human-card-score"><strong>${tenScale(result.confidence)}/10</strong><span>${trendLabel(result)}</span></div>
       </div>
 
       <div class="score-row">
@@ -749,8 +800,8 @@ function renderCards() {
         <span class="action-pill ${actionClass(plan.actionCode)}">${plan.action}</span>
       </div>
       <div class="quality-row">
-        <span>Qualità opportunità</span>
-        <strong>${plan.opportunityScore}%</strong>
+        <span>${opportunityLabel(plan.opportunityScore)}</span>
+        <strong>${tenScale(plan.opportunityScore)}/10</strong>
       </div>
 
       <div class="card-prices">
@@ -780,8 +831,8 @@ function renderCards() {
       </div>
 
       <div class="card-footer">
-        <strong>${plan.actionReason}</strong><br>
-        R/R 1:${number(plan.rr, 2)} · Concordanza ${result.alignment}%<br>
+        <strong>${plainActionExplanation({ asset, result, plan })}</strong><br>
+        R/R 1:${number(plan.rr, 2)} · Concordanza timeframe ${tenScale(result.alignment)}/10<br>
         Distanza entrata: ${number(plan.distancePoints, 2)} (${number(plan.distancePercent, 2)}%)<br>
         <span class="open-analysis">Apri la scheda per il ragionamento completo</span>
       </div>
@@ -819,9 +870,9 @@ function openDetails(symbol) {
           </div>
         </div>
         <div class="coach-scorebox">
-          <small>Qualità opportunità</small>
-          <strong>${plan.opportunityScore}%</strong>
-          <span>Concordanza ${result.alignment}%</span>
+          <small>${opportunityLabel(plan.opportunityScore)}</small>
+          <strong>${tenScale(plan.opportunityScore)}/10</strong>
+          <span>${trendLabel(result)} · Concordanza ${tenScale(result.alignment)}/10</span>
         </div>
       </header>
 

@@ -919,7 +919,7 @@ footer { padding: 20px; text-align: center; border-top: 1px solid var(--line); }
 }
 
 
-/* v1.1.0 - linguaggio chiaro e scala 0-10 */
+/* v2.0.0 - linguaggio chiaro, scala 0-10 */
 .ranking-explanation,
 .lead-explanation {
   color: var(--muted);
@@ -929,7 +929,7 @@ footer { padding: 20px; text-align: center; border-top: 1px solid var(--line); }
 
 .ranking-row {
   display: grid;
-  grid-template-columns: minmax(130px, 1fr) auto minmax(180px, auto) 48px;
+  grid-template-columns: minmax(130px, 1fr) auto minmax(190px, auto) 48px;
   gap: 12px;
   align-items: center;
   padding: 8px 0 3px;
@@ -955,7 +955,7 @@ footer { padding: 20px; text-align: center; border-top: 1px solid var(--line); }
 
 .human-card-score {
   text-align: right;
-  max-width: 150px;
+  max-width: 160px;
 }
 
 .human-card-score strong {
@@ -975,12 +975,10 @@ footer { padding: 20px; text-align: center; border-top: 1px solid var(--line); }
   .ranking-row {
     grid-template-columns: 1fr auto;
   }
-
   .ranking-row .action-pill {
     grid-column: 1 / 2;
     justify-self: start;
   }
-
   .rank-score {
     grid-column: 2;
     grid-row: 2;

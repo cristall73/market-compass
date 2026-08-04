@@ -1,25 +1,34 @@
-# Market Compass
+# Market Compass — Trading Coach AI
 
-## Versione 1.1.0 — linguaggio chiaro
+## Versione 2.0.0 completa
 
-Patch sicura: non contiene `data/market-data.json`.
+Pacchetto unico e sincronizzato.
 
-### Modifiche
+Contiene:
+- `index.html`
+- `app.js`
+- `styles.css`
+- motore di analisi
+- configurazione trading
+- script Python di aggiornamento dati
+- workflow GitHub Actions
+- requirements
 
-- eliminate dalla schermata principale le percentuali ambigue;
-- nuova scala intuitiva da 0 a 10:
-  - 9–10: occasione eccellente;
-  - 7–8: occasione buona;
-  - 5–6: occasione discreta;
-  - 3–4: occasione debole;
-  - 0–2: nessun vantaggio;
-- “Non inseguire” e “Troppo esteso” diventano “Non entrare adesso”;
-- “Nessun trade” diventa “Rimani fuori”;
-- “Attendi ritracciamento” diventa “Aspetta il ritorno in zona”;
-- la classifica distingue tra:
-  - setup realmente pronto;
-  - primo candidato da monitorare;
-- quando nessun asset è pronto, il sito lo dichiara esplicitamente;
-- ogni riga della classifica spiega in una frase cosa fare.
+Non contiene `data/market-data.json`, per non cancellare i dati reali già presenti nel repository.
 
-Le percentuali tecniche interne restano disponibili solo nella sezione tecnica del popup.
+### Linguaggio chiaro
+- NON ENTRARE ADESSO
+- ASPETTA IL RITORNO IN ZONA
+- ASPETTA LA CONFERMA 1H
+- RIMANI FUORI
+- PIANO ANNULLATO
+
+### Scala
+La valutazione principale usa una scala da 0 a 10:
+- 9–10: eccellente
+- 7–8: buona
+- 5–6: discreta
+- 3–4: debole
+- 0–2: nessun vantaggio
+
+Le percentuali tecniche interne restano nella sezione avanzata.
