@@ -665,188 +665,159 @@ function openDetails(symbol) {
   if (!analysis) return;
 
   const { asset, result, plan } = analysis;
-  const reasons = weightedReasons(result);
+  const narrative = buildNarrative(asset, result, plan);
+  const checklist = buildChecklist(result, plan);
+  const ledger = buildReasoningLedger(result, plan);
+
+  const directionText =
+    result.direction === "LONG" ? "rialzista" :
+    result.direction === "SHORT" ? "ribassista" :
+    "incerta";
 
   document.querySelector("#dialogContent").innerHTML = `
-    <div class="detail-header">
-      <div>
-        <p class="eyebrow">${asset.symbol}</p>
-        <h2>${asset.name}</h2>
-        <span class="badge ${badgeClass(result.direction)}">${result.direction}</span>
-        <div class="stars">${stars(result.confidence)}</div>
-      </div>
-      <div>
-        <div><div class="score ${scoreClass(result.score)}">${result.score}%</div><div class="symbol">${strengthLabel(result)}</div></div>
-        <div class="symbol">${strengthLabel(result)} · Concordanza ${result.alignment}%</div>
-      </div>
-    </div>
-
-    <section class="operation-panel">
-      <h3>DECISIONE OPERATIVA</h3>
-      <div class="decision-line">
-        <span class="badge ${badgeClass(result.direction)}">${result.direction}</span>
-        <span class="action-pill ${actionClass(plan.actionCode)}">${plan.action}</span>
-        <strong>Qualità ${plan.opportunityScore}%</strong>
-      </div>
-      <p>${plan.actionReason}</p>
-
-      <div class="operation-grid">
-        <div class="operation-item">
-          <small>Prezzo attuale</small>
-          <strong>${number(plan.current, 2)}</strong>
-        </div>
-        <div class="operation-item">
-          <small>Zona entrata 50%</small>
-          <strong>${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}</strong>
-        </div>
-        <div class="operation-item">
-          <small>Stop tecnico</small>
-          <strong>${number(plan.stop, 2)}</strong>
-        </div>
-        <div class="operation-item">
-          <small>TP1 / TP2 / TP3</small>
-          <strong>${number(plan.tp1, 2)} / ${number(plan.tp2, 2)} / ${number(plan.tp3, 2)}</strong>
-        </div>
-        <div class="operation-item">
-          <small>Risk / Reward</small>
-          <strong>1 : ${number(plan.rr, 2)}</strong>
-        </div>
-      </div>
-
-      <div class="distance-line">
-        Distanza dal punto d'ingresso:
-        <strong>${number(plan.distancePoints, 2)}</strong>
-        (${number(plan.distancePercent, 2)}%)
-      </div>
-    </section>
-
-    ${(() => {
-      const narrative = buildNarrative(asset, result, plan);
-      return `
-        <section class="explanation-panel">
-          <div class="coach-title-row">
-            <div>
-              <h3>SPIEGAMI IL TRADE</h3>
-              <p>Il ragionamento che porta alla decisione, non solo i numeri.</p>
-            </div>
+    <article class="coach-report">
+      <header class="coach-report-header">
+        <div>
+          <p class="eyebrow">${asset.symbol}</p>
+          <h2>${asset.name}</h2>
+          <div class="coach-badges">
+            <span class="badge ${badgeClass(result.direction)}">${result.direction}</span>
             <span class="action-pill ${actionClass(plan.actionCode)}">${plan.action}</span>
           </div>
+        </div>
+        <div class="coach-scorebox">
+          <small>Qualità opportunità</small>
+          <strong>${plan.opportunityScore}%</strong>
+          <span>Concordanza ${result.alignment}%</span>
+        </div>
+      </header>
 
-          <div class="explanation-block">
-            <h4>1. Cosa sta facendo il mercato</h4>
-            <p>${narrative.overview}</p>
-          </div>
+      <section class="coach-hero">
+        <p class="coach-kicker">DECISIONE DEL COACH</p>
+        <h3>${plan.action}</h3>
+        <p>${narrative.entryExplanation}</p>
+      </section>
 
-          <div class="explanation-block emphasis">
-            <h4>2. Cosa fare adesso</h4>
-            <p>${narrative.entryExplanation}</p>
-          </div>
+      <section class="coach-story">
+        <h3>Perché il sistema vede un mercato ${directionText}</h3>
+        <p>${narrative.overview}</p>
+      </section>
 
-          <div class="explanation-block">
-            <h4>3. Checklist prima dell’ingresso</h4>
-            <div class="trade-checklist">
-              ${buildChecklist(result, plan).map(item => `
-                <div class="check-row ${item.done ? "done" : ""}">
-                  <span>${item.done ? "✓" : "○"}</span>
-                  <strong>${item.label}</strong>
-                </div>
-              `).join("")}
+      <section class="coach-plan-grid">
+        <div class="coach-plan-card">
+          <small>Prezzo attuale</small>
+          <strong>${number(plan.current, 2)}</strong>
+          <p>Il prezzo da confrontare con la zona operativa.</p>
+        </div>
+        <div class="coach-plan-card">
+          <small>Zona in cui aspettare</small>
+          <strong>${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}</strong>
+          <p>Area costruita sul ritracciamento del 50% con tolleranza ATR.</p>
+        </div>
+        <div class="coach-plan-card danger">
+          <small>Stop tecnico</small>
+          <strong>${number(plan.stop, 2)}</strong>
+          <p>${number(plan.riskPoints, 2)} punti di rischio, circa ${number(plan.riskPercent, 2)}%.</p>
+        </div>
+        <div class="coach-plan-card good">
+          <small>TP1 / TP2 / TP3</small>
+          <strong>${number(plan.tp1, 2)} / ${number(plan.tp2, 2)} / ${number(plan.tp3, 2)}</strong>
+          <p>TP2 offre circa ${number(plan.rewardPoints, 2)} punti, con R/R 1:${number(plan.rr, 2)}.</p>
+        </div>
+      </section>
+
+      <section class="coach-section">
+        <h3>Quando entrerei</h3>
+        <div class="trade-checklist">
+          ${checklist.map(item => `
+            <div class="check-row ${item.done ? "done" : ""}">
+              <span>${item.done ? "✓" : "○"}</span>
+              <strong>${item.label}</strong>
             </div>
-          </div>
+          `).join("")}
+        </div>
+        <p class="coach-note">
+          Il setup è considerato pronto soltanto quando il prezzo raggiunge la zona indicata
+          e il timeframe 1H conferma la direzione. Un semplice arrivo sul livello non basta.
+        </p>
+      </section>
 
-          <div class="explanation-grid">
-            <div class="explanation-block">
-              <h4>4. Perché lo stop è lì</h4>
-              <p>${narrative.stopExplanation}</p>
+      <section class="coach-two-columns">
+        <div class="coach-section">
+          <h3>Perché lo stop è lì</h3>
+          <p>${narrative.stopExplanation}</p>
+        </div>
+        <div class="coach-section">
+          <h3>Perché i target sono lì</h3>
+          <p>${narrative.targetExplanation}</p>
+        </div>
+      </section>
+
+      <section class="coach-section invalidation">
+        <h3>Cosa mi farebbe cambiare idea</h3>
+        <p>${buildInvalidationText(result, plan)}</p>
+      </section>
+
+      <section class="coach-section">
+        <h3>Come sono arrivato alla decisione</h3>
+        <div class="reasoning-ledger">
+          ${ledger.map(row => `
+            <div class="ledger-row">
+              <span>${row.label}</span>
+              <small>${row.note}</small>
+              <strong class="${row.value >= 0 ? "reason-plus" : "reason-minus"}">
+                ${row.value >= 0 ? "+" : ""}${row.value}
+              </strong>
             </div>
-            <div class="explanation-block">
-              <h4>5. Perché i target sono lì</h4>
-              <p>${narrative.targetExplanation}</p>
-            </div>
-          </div>
+          `).join("")}
+        </div>
+      </section>
 
-          <div class="explanation-block invalidation">
-            <h4>6. Cosa invalida il trade</h4>
-            <p>${buildInvalidationText(result, plan)}</p>
-          </div>
+      <section class="coach-section">
+        <h3>Chiedi al Coach</h3>
+        <div class="coach-buttons">
+          <button type="button" data-coach="enter">Posso entrare adesso?</button>
+          <button type="button" data-coach="retracement">Perché aspettare?</button>
+          <button type="button" data-coach="stop">Perché questo stop?</button>
+          <button type="button" data-coach="target">Perché questi target?</button>
+          <button type="button" data-coach="change">Cosa invalida il setup?</button>
+          <button type="button" data-coach="confidence">Quanto è affidabile?</button>
+        </div>
+        <div id="coachAnswer" class="coach-answer">
+          Seleziona una domanda: la risposta verrà costruita sui dati reali di ${asset.name}.
+        </div>
+      </section>
 
-          <div class="explanation-block">
-            <h4>7. Come il sistema è arrivato alla decisione</h4>
-            <div class="reasoning-ledger">
-              ${buildReasoningLedger(result, plan).map(row => `
-                <div class="ledger-row">
-                  <span>${row.label}</span>
-                  <small>${row.note}</small>
-                  <strong class="${row.value >= 0 ? "reason-plus" : "reason-minus"}">
-                    ${row.value >= 0 ? "+" : ""}${row.value}
-                  </strong>
-                </div>
-              `).join("")}
-            </div>
-          </div>
+      <details class="technical-details">
+        <summary>Dati tecnici completi e indicatori</summary>
 
-          <div class="explanation-block">
-            <h4>8. Domande rapide al Coach</h4>
-            <div class="coach-buttons">
-              <button type="button" data-coach="enter">Posso entrare adesso?</button>
-              <button type="button" data-coach="retracement">Perché aspettare?</button>
-              <button type="button" data-coach="stop">Perché questo stop?</button>
-              <button type="button" data-coach="target">Perché questi target?</button>
-              <button type="button" data-coach="change">Cosa ti farebbe cambiare idea?</button>
-              <button type="button" data-coach="confidence">Quanto è affidabile?</button>
-            </div>
-            <div id="coachAnswer" class="coach-answer">
-              Seleziona una domanda per leggere la risposta costruita sui dati reali dell’asset.
-            </div>
-          </div>
+        <div class="technical-intro">
+          <strong>Forza tecnica ${result.confidence}%</strong>
+          <span>Score aggregato ${result.score}%</span>
+          <span>Concordanza ${result.alignment}%</span>
+        </div>
 
-          <div class="explanation-block">
-            <h4>9. Elementi tecnici principali</h4>
-            <ul>
-              ${narrative.indicatorNotes.map(note => `<li>${note}</li>`).join("")}
-            </ul>
-          </div>
-        </section>
-      `;
-    })()}
-
-    <h3 style="margin-top:22px">Contributi allo score</h3>
-    <table class="reason-table">
-      <tbody>
-        ${reasons.map(reason => `
-          <tr>
-            <td>${reason.label}</td>
-            <td class="${reason.value >= 0 ? "reason-plus" : "reason-minus"}">
-              ${reason.value >= 0 ? "+" : ""}${reason.value}
-            </td>
-          </tr>
-        `).join("")}
-      </tbody>
-    </table>
-
-    <h3 style="margin-top:22px">Analisi per timeframe</h3>
-    <div class="detail-grid">
-      ${window.TRADING_CONFIG.timeframes.map(tf => {
-        const detail = result.details[tf];
-        const direction = tfDirection(detail?.score ?? 0);
-        return `
-          <section class="tf-card">
-            <h3>${tf}</h3>
-            <span class="tf-state ${direction.toLowerCase()}">${direction}</span>
-            <div class="symbol">${TF_LABELS[tf]}</div>
-            <div class="tf-score ${scoreClass(detail?.score ?? 0)}">${detail?.score ?? 0}%</div>
-            <div class="metric"><span>RSI</span><strong>${number(detail?.rsi, 1)}</strong></div>
-            <div class="metric"><span>Stocastico</span><strong>${number(detail?.stochastic, 1)}</strong></div>
-            <div class="metric"><span>ATR</span><strong>${number(detail?.atr, 3)}</strong></div>
-            <div class="metric"><span>Nadaraya</span><strong>${number(detail?.nadaraya, 2)}</strong></div>
-            <div class="metric"><span>50% swing</span><strong>${number(detail?.swing?.midpoint, 2)}</strong></div>
-            <div class="metric"><span>EMA 200</span><strong>${number(detail?.movingAverages?.ma200, 2)}</strong></div>
-            <ul class="reasons">
-              ${(detail?.reasons || []).map(reason => `<li>${reason}</li>`).join("")}
-            </ul>
-          </section>`;
-      }).join("")}
-    </div>
+        <div class="detail-grid">
+          ${window.TRADING_CONFIG.timeframes.map(tf => {
+            const detail = result.details[tf];
+            const direction = tfDirection(detail?.score ?? 0);
+            return `
+              <section class="tf-card">
+                <h3>${tf}</h3>
+                <span class="tf-state ${direction.toLowerCase()}">${direction}</span>
+                <div class="symbol">${TF_LABELS[tf]}</div>
+                <div class="tf-score ${scoreClass(detail?.score ?? 0)}">${detail?.score ?? 0}%</div>
+                <div class="metric"><span>RSI</span><strong>${number(detail?.rsi, 1)}</strong></div>
+                <div class="metric"><span>Stocastico</span><strong>${number(detail?.stochastic, 1)}</strong></div>
+                <div class="metric"><span>ATR</span><strong>${number(detail?.atr, 3)}</strong></div>
+                <div class="metric"><span>Nadaraya</span><strong>${number(detail?.nadaraya, 2)}</strong></div>
+                <div class="metric"><span>50% swing</span><strong>${number(detail?.swing?.midpoint, 2)}</strong></div>
+                <div class="metric"><span>EMA 200</span><strong>${number(detail?.movingAverages?.ma200, 2)}</strong></div>
+              </section>`;
+          }).join("")}
+        </div>
+      </details>
+    </article>
   `;
 
   document.querySelector("#detailDialog").showModal();

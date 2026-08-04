@@ -1,21 +1,21 @@
 # Market Compass
 
-## Versione 0.5.0 — Trading Coach
+## Versione 0.6.0 — popup riscritto da zero
 
-Patch sicura: non contiene `data/market-data.json` e non sovrascrive i dati reali.
+Patch sicura: non contiene `data/market-data.json`.
 
-### Dentro ogni asset ora trovi
+Il dettaglio di ogni asset è stato completamente riscritto. Ora il popup mostra prima:
 
-- spiegazione del mercato in linguaggio naturale;
-- indicazione chiara di cosa fare adesso;
-- checklist dinamica prima dell’ingresso;
-- spiegazione dello stop;
-- spiegazione di TP1, TP2 e TP3;
-- condizione che invalida il setup;
-- registro numerico del ragionamento;
-- pulsanti con domande rapide al Trading Coach;
-- risposte costruite sui dati reali dell’asset.
+- decisione del Coach;
+- spiegazione in italiano;
+- zona in cui aspettare;
+- checklist per l’ingresso;
+- stop e relativo significato;
+- TP1, TP2 e TP3;
+- invalidazione del setup;
+- diario del ragionamento;
+- domande rapide al Coach.
 
-Il Trading Coach è deterministico e gira direttamente nel browser: non richiede API, account o abbonamenti aggiuntivi.
+RSI, Stocastico, ATR, Nadaraya ed EMA sono stati spostati in una sezione tecnica richiudibile, così non coprono più il ragionamento.
 
-I punteggi e i livelli restano sperimentali e non garantiscono risultati.
+La versione aggiunge anche parametri anti-cache ai file JavaScript e CSS, per evitare che il browser continui a mostrare il vecchio popup.
