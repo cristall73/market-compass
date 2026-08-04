@@ -103,40 +103,103 @@ function operationalPlan(result) {
   const d1 = result.details["1D"];
   const h4 = result.details["4H"];
   const h1 = result.details["1H"];
+
   const current = h1?.current ?? h4?.current ?? d1?.current ?? 0;
   const atr = h1?.atr ?? h4?.atr ?? d1?.atr ?? 0;
-  const swing = h1?.swing ?? h4?.swing ?? d1?.swing;
+  const swing = h4?.swing ?? h1?.swing ?? d1?.swing;
   const midpoint = swing?.midpoint ?? current;
 
-  const trendDirection = result.score >= 0 ? 1 : -1;
+  const isLong = result.direction === "LONG";
+  const isShort = result.direction === "SHORT";
+  const directionSign = isShort ? -1 : 1;
+
+  // Zona d'ingresso: ritracciamento del 50% con tolleranza ATR.
   const entry = midpoint;
-  const stop = trendDirection > 0 ? entry - atr * 1.2 : entry + atr * 1.2;
-  const target = trendDirection > 0 ? entry + atr * 2.4 : entry - atr * 2.4;
-  const rr = atr > 0 ? Math.abs(target - entry) / Math.abs(entry - stop) : 0;
+  const entryTolerance = atr * 0.30;
+  const entryLow = entry - entryTolerance;
+  const entryHigh = entry + entryTolerance;
+
+  // Livelli tecnici costruiti sul rischio ATR.
+  const stopDistance = Math.max(atr * 1.25, Math.abs(current - entry) * 0.20);
+  const targetDistance = stopDistance * 2.20;
+  const stop = entry - directionSign * stopDistance;
+  const target = entry + directionSign * targetDistance;
+  const rr = stopDistance > 0 ? targetDistance / stopDistance : 0;
+
   const distancePoints = current - entry;
   const distancePercent = entry ? (distancePoints / entry) * 100 : 0;
+  const distanceAtr = atr ? Math.abs(distancePoints) / atr : 0;
 
-  let action = "ATTENDI";
-  let actionReason = "Nessun vantaggio operativo sufficiente.";
+  const h4Direction = tfDirection(h4?.score ?? 0);
+  const h1Direction = tfDirection(h1?.score ?? 0);
+  const lowerTfConfirmed =
+    (isLong && h4Direction !== "SHORT" && h1Direction === "LONG") ||
+    (isShort && h4Direction !== "LONG" && h1Direction === "SHORT");
 
-  if (result.direction === "LONG") {
-    const closeEnough = Math.abs(current - entry) <= atr * 0.45;
-    action = closeEnough ? "VALUTA LONG" : "ATTENDI RITRACCIAMENTO";
-    actionReason = closeEnough
-      ? "Trend rialzista e prezzo vicino alla zona di ingresso."
-      : "Trend rialzista, ma il prezzo non è ancora nella zona ideale del 50%.";
-  } else if (result.direction === "SHORT") {
-    const closeEnough = Math.abs(current - entry) <= atr * 0.45;
-    action = closeEnough ? "VALUTA SHORT" : "ATTENDI RIMBALZO";
-    actionReason = closeEnough
-      ? "Trend ribassista e prezzo vicino alla zona di ingresso."
-      : "Trend ribassista, ma serve un ritorno verso la zona ideale.";
+  const inEntryZone = current >= entryLow && current <= entryHigh;
+  const alreadyBeyondTarget = isLong ? current >= target : isShort ? current <= target : false;
+  const wrongSideOfEntry = isLong ? current < stop : isShort ? current > stop : false;
+
+  let action = "NESSUN TRADE";
+  let actionCode = "NO_TRADE";
+  let actionReason = "Direzione tecnica non abbastanza chiara.";
+  let timingScore = 0;
+
+  if (result.direction === "WAIT") {
+    timingScore = Math.round(result.confidence * 0.35);
+  } else if (wrongSideOfEntry) {
+    action = "SETUP INVALIDATO";
+    actionCode = "INVALID";
+    actionReason = "Il prezzo ha già superato il livello di invalidazione tecnica.";
+    timingScore = 10;
+  } else if (alreadyBeyondTarget) {
+    action = "NON INSEGUIRE";
+    actionCode = "EXTENDED";
+    actionReason = "Il movimento ha già raggiunto o superato il target calcolato.";
+    timingScore = 20;
+  } else if (inEntryZone && lowerTfConfirmed) {
+    action = isLong ? "VALUTA LONG ORA" : "VALUTA SHORT ORA";
+    actionCode = "READY";
+    actionReason = "Prezzo nella zona ideale e timeframe operativi concordi.";
+    timingScore = 90;
+  } else if (inEntryZone) {
+    action = "ATTENDI CONFERMA 1H";
+    actionCode = "CONFIRM";
+    actionReason = "Prezzo nella zona ideale, ma manca la conferma del timeframe 1H.";
+    timingScore = 70;
+  } else if (distanceAtr <= 1.25) {
+    action = isLong ? "ATTENDI RITRACCIAMENTO" : "ATTENDI RIMBALZO";
+    actionCode = "NEAR";
+    actionReason = "Direzione valida, prezzo ancora vicino alla zona operativa.";
+    timingScore = 55;
+  } else {
+    action = "TROPPO ESTESO";
+    actionCode = "EXTENDED";
+    actionReason = "Direzione valida, ma il prezzo è troppo distante dall'entrata ideale.";
+    timingScore = 30;
   }
 
+  const opportunityScore = Math.min(
+    100,
+    Math.round(result.confidence * 0.65 + timingScore * 0.35)
+  );
+
   return {
-    current, entry, stop, target, rr,
-    distancePoints, distancePercent,
-    action, actionReason
+    current,
+    entry,
+    entryLow,
+    entryHigh,
+    stop,
+    target,
+    rr,
+    distancePoints,
+    distancePercent,
+    distanceAtr,
+    action,
+    actionCode,
+    actionReason,
+    opportunityScore,
+    lowerTfConfirmed
   };
 }
 
@@ -242,8 +305,18 @@ function strengthLabel(result) {
 }
 
 function rankingScore(item) {
-  const directionBonus = item.result.direction === "WAIT" ? 0 : 12;
-  return Math.abs(item.result.score) + item.result.alignment * 0.25 + directionBonus;
+  const actionableBonus = item.plan.actionCode === "READY" ? 22
+    : item.plan.actionCode === "CONFIRM" ? 14
+    : item.plan.actionCode === "NEAR" ? 8
+    : 0;
+  return item.plan.opportunityScore + actionableBonus;
+}
+
+function actionClass(code) {
+  if (code === "READY") return "ready";
+  if (code === "CONFIRM" || code === "NEAR") return "pending";
+  if (code === "INVALID" || code === "EXTENDED") return "blocked";
+  return "neutral";
 }
 
 function number(value, digits = 2) {
@@ -278,7 +351,8 @@ function renderSummary() {
         <div style="display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.07)">
           <strong style="font-size:1rem">${index + 1}. ${item.asset.name}</strong>
           <span class="badge ${badgeClass(item.result.direction)}">${item.result.direction}</span>
-          <span>${item.result.confidence}%</span>
+          <span class="action-pill ${actionClass(item.plan.actionCode)}">${item.plan.action}</span>
+          <span>${item.plan.opportunityScore}%</span>
         </div>
       `).join("")}
       <div class="update-meta">
@@ -289,8 +363,9 @@ function renderSummary() {
     <div>
       <small>MIGLIORE ASSET</small>
       <strong>${ranking[0].asset.name}</strong>
-      <div class="stars">${stars(ranking[0].result.confidence)}</div>
-      <div>${ranking[0].plan.action}</div>
+      <div class="stars">${stars(ranking[0].plan.opportunityScore)}</div>
+      <div class="action-pill ${actionClass(ranking[0].plan.actionCode)}">${ranking[0].plan.action}</div>
+      <div class="symbol">Qualità opportunità ${ranking[0].plan.opportunityScore}%</div>
     </div>
   `;
 }
@@ -314,7 +389,11 @@ function renderCards() {
 
       <div class="score-row">
         <span class="badge ${badgeClass(result.direction)}">${result.direction}</span>
-        <span class="stars">${stars(result.confidence)}</span>
+        <span class="action-pill ${actionClass(plan.actionCode)}">${plan.action}</span>
+      </div>
+      <div class="quality-row">
+        <span>Qualità opportunità</span>
+        <strong>${plan.opportunityScore}%</strong>
       </div>
 
       <div class="card-prices">
@@ -323,12 +402,12 @@ function renderCards() {
           <strong>${number(plan.current, 2)}</strong>
         </div>
         <div class="card-price">
-          <small>Entrata ideale</small>
-          <strong>${number(plan.entry, 2)}</strong>
+          <small>Zona entrata</small>
+          <strong>${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}</strong>
         </div>
         <div class="card-price">
-          <small>Target</small>
-          <strong>${number(plan.target, 2)}</strong>
+          <small>Stop / Target</small>
+          <strong>${number(plan.stop, 2)} / ${number(plan.target, 2)}</strong>
         </div>
       </div>
 
@@ -344,8 +423,8 @@ function renderCards() {
       </div>
 
       <div class="card-footer">
-        <strong>${plan.action}</strong><br>
-        Concordanza timeframe: ${result.alignment}%<br>
+        <strong>${plan.actionReason}</strong><br>
+        R/R 1:${number(plan.rr, 2)} · Concordanza ${result.alignment}%<br>
         Distanza entrata: ${number(plan.distancePoints, 2)} (${number(plan.distancePercent, 2)}%)
       </div>
     </article>
@@ -378,7 +457,12 @@ function openDetails(symbol) {
     </div>
 
     <section class="operation-panel">
-      <h3>OPERAZIONE · ${plan.action}</h3>
+      <h3>DECISIONE OPERATIVA</h3>
+      <div class="decision-line">
+        <span class="badge ${badgeClass(result.direction)}">${result.direction}</span>
+        <span class="action-pill ${actionClass(plan.actionCode)}">${plan.action}</span>
+        <strong>Qualità ${plan.opportunityScore}%</strong>
+      </div>
       <p>${plan.actionReason}</p>
 
       <div class="operation-grid">
@@ -387,8 +471,8 @@ function openDetails(symbol) {
           <strong>${number(plan.current, 2)}</strong>
         </div>
         <div class="operation-item">
-          <small>Entrata ideale 50%</small>
-          <strong>${number(plan.entry, 2)}</strong>
+          <small>Zona entrata 50%</small>
+          <strong>${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}</strong>
         </div>
         <div class="operation-item">
           <small>Stop tecnico</small>

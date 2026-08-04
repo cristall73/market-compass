@@ -1,28 +1,16 @@
 # Market Compass
 
-## Versione 0.2.1 — classificazione operativa
+## Versione 0.3.0 — decisione operativa
 
-Questa versione usa i dati reali già prodotti dal workflow GitHub Actions.
+Patch sicura: non contiene `data/market-data.json` e non sovrascrive i dati reali.
 
-### Modifiche principali
+### Novità
 
-- soglie LONG e SHORT meno rigide;
-- decisione finale basata sia sullo score sia sulla concordanza dei cinque timeframe;
-- distinzione tra direzione e forza del segnale;
-- percentuale di concordanza multi-timeframe;
-- classifica operativa dei tre mercati più interessanti;
-- prezzo attuale, ingresso ideale, target e timing restano visibili;
-- WAIT viene mantenuto solo quando direzione e timeframe non offrono sufficiente coerenza.
+- separazione tra direzione tecnica e momento d’ingresso;
+- zona d’ingresso con tolleranza ATR;
+- decisioni: VALUTA ORA, ATTENDI CONFERMA, ATTENDI RITRACCIAMENTO/RIMBALZO, TROPPO ESTESO, SETUP INVALIDATO;
+- qualità dell’opportunità distinta dalla forza del trend;
+- stop, target e rapporto rischio/rendimento visibili nelle schede;
+- classifica ordinata in base alla reale operatività, non solo allo score direzionale.
 
-### Interpretazione
-
-La percentuale mostrata è una **forza tecnica interna del modello**, non una probabilità statistica garantita di profitto.
-
-## Avvertenza
-
-Strumento sperimentale. Non costituisce consulenza finanziaria.
-
-
-## Aggiornamento sicuro
-
-Questo pacchetto non contiene `data/market-data.json`, quindi non sovrascrive i dati reali già creati dal workflow GitHub Actions.
+La qualità dell’opportunità è un punteggio interno del modello, non una probabilità garantita di profitto.
