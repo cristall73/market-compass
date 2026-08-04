@@ -225,14 +225,25 @@ function tfClass(score) {
 }
 
 function tfDirection(score) {
-  if (score >= 35) return "LONG";
-  if (score <= -35) return "SHORT";
+  if (score >= 25) return "LONG";
+  if (score <= -25) return "SHORT";
   return "WAIT";
 }
 
 function stars(confidence) {
   const filled = Math.max(1, Math.min(5, Math.ceil(confidence / 20)));
   return "★".repeat(filled) + "☆".repeat(5 - filled);
+}
+
+function strengthLabel(result) {
+  if (result.direction === "LONG") return `Forza LONG ${result.confidence}%`;
+  if (result.direction === "SHORT") return `Forza SHORT ${result.confidence}%`;
+  return `Segnale neutrale ${result.confidence}%`;
+}
+
+function rankingScore(item) {
+  const directionBonus = item.result.direction === "WAIT" ? 0 : 12;
+  return Math.abs(item.result.score) + item.result.alignment * 0.25 + directionBonus;
 }
 
 function number(value, digits = 2) {
@@ -256,22 +267,30 @@ function renderSummary() {
     document.querySelector("main").insertBefore(banner, document.querySelector(".notice"));
   }
 
-  const best = [...analyses].sort((a, b) => Math.abs(b.result.score) - Math.abs(a.result.score))[0];
+  const ranking = [...analyses]
+    .sort((a, b) => rankingScore(b) - rankingScore(a))
+    .slice(0, 3);
 
   banner.innerHTML = `
     <div>
-      <small>MIGLIORE CONFIGURAZIONE REALE</small>
-      <strong>${best.asset.name} · ${best.result.direction}</strong>
-      <div class="stars">${stars(best.result.confidence)}</div>
+      <small>CLASSIFICA OPERATIVA REALE</small>
+      ${ranking.map((item, index) => `
+        <div style="display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.07)">
+          <strong style="font-size:1rem">${index + 1}. ${item.asset.name}</strong>
+          <span class="badge ${badgeClass(item.result.direction)}">${item.result.direction}</span>
+          <span>${item.result.confidence}%</span>
+        </div>
+      `).join("")}
       <div class="update-meta">
         Aggiornato alle ${formatTime(lastUpdate)}
         <span class="data-source-badge">${MARKET_DATA_PROVIDER.name}</span>
       </div>
     </div>
     <div>
-      <small>SCORE</small>
-      <strong class="${scoreClass(best.result.score)}">${best.result.score}%</strong>
-      <div>${best.plan.action}</div>
+      <small>MIGLIORE ASSET</small>
+      <strong>${ranking[0].asset.name}</strong>
+      <div class="stars">${stars(ranking[0].result.confidence)}</div>
+      <div>${ranking[0].plan.action}</div>
     </div>
   `;
 }
@@ -290,7 +309,7 @@ function renderCards() {
           <h3>${asset.name}</h3>
           <div class="symbol">${asset.symbol}</div>
         </div>
-        <div class="score ${scoreClass(result.score)}">${result.score}%</div>
+        <div><div class="score ${scoreClass(result.score)}">${result.score}%</div><div class="symbol">${strengthLabel(result)}</div></div>
       </div>
 
       <div class="score-row">
@@ -326,6 +345,7 @@ function renderCards() {
 
       <div class="card-footer">
         <strong>${plan.action}</strong><br>
+        Concordanza timeframe: ${result.alignment}%<br>
         Distanza entrata: ${number(plan.distancePoints, 2)} (${number(plan.distancePercent, 2)}%)
       </div>
     </article>
@@ -352,8 +372,8 @@ function openDetails(symbol) {
         <div class="stars">${stars(result.confidence)}</div>
       </div>
       <div>
-        <div class="score ${scoreClass(result.score)}">${result.score}%</div>
-        <div class="symbol">Score aggregato</div>
+        <div><div class="score ${scoreClass(result.score)}">${result.score}%</div><div class="symbol">${strengthLabel(result)}</div></div>
+        <div class="symbol">${strengthLabel(result)} · Concordanza ${result.alignment}%</div>
       </div>
     </div>
 

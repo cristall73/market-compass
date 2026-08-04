@@ -29,8 +29,8 @@ window.TRADING_CONFIG = {
     retracementEntry: 20
   },
   thresholds: {
-    long: 68,
-    short: -68,
-    waitBand: 35
+    long: 30,
+    short: -30,
+    waitBand: 18
   }
 };

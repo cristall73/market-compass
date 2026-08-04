@@ -273,14 +273,45 @@
     }
 
     const score = totalWeight ? Math.round(weightedScore / totalWeight) : 0;
+
+    const timeframeDirections = config.timeframes.map(timeframe => {
+      const timeframeScore = details[timeframe]?.score ?? 0;
+      if (timeframeScore >= 25) return "LONG";
+      if (timeframeScore <= -25) return "SHORT";
+      return "WAIT";
+    });
+
+    const longCount = timeframeDirections.filter(value => value === "LONG").length;
+    const shortCount = timeframeDirections.filter(value => value === "SHORT").length;
+    const waitCount = timeframeDirections.filter(value => value === "WAIT").length;
+
     let direction = "WAIT";
-    if (score >= config.thresholds.long) direction = "LONG";
-    else if (score <= config.thresholds.short) direction = "SHORT";
+    if (
+      score >= config.thresholds.long ||
+      (score >= 20 && longCount >= 3 && longCount > shortCount)
+    ) {
+      direction = "LONG";
+    } else if (
+      score <= config.thresholds.short ||
+      (score <= -20 && shortCount >= 3 && shortCount > longCount)
+    ) {
+      direction = "SHORT";
+    }
+
+    const alignment = Math.round(
+      (Math.max(longCount, shortCount, waitCount) / config.timeframes.length) * 100
+    );
+    const strength = Math.min(
+      100,
+      Math.round(Math.abs(score) * 0.72 + alignment * 0.28)
+    );
 
     return {
       direction,
       score,
-      confidence: Math.min(100, Math.abs(score)),
+      confidence: strength,
+      alignment,
+      consensus: { long: longCount, short: shortCount, wait: waitCount },
       details,
       rules: {
         entryRetracement: "50%",
