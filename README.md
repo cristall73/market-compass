@@ -31,3 +31,18 @@ La prossima fase sarà collegare una fonte dati reale e separare:
 ## Avvertenza
 
 Prototipo sperimentale. Non costituisce consulenza finanziaria.
+
+
+## Versione 0.0.2 — Trading Engine
+
+Aggiunto un primo motore tecnico riutilizzabile con:
+
+- analisi multi-timeframe: 1M, 1W, 1D, 4H, 1H;
+- medie mobili esponenziali 200, 60, 50, 10 e 5;
+- ATR, RSI e Stocastico;
+- curva Nadaraya-Watson;
+- riconoscimento iniziale di doppi massimi/minimi e testa e spalle;
+- area di ingresso vicina al ritracciamento del 50%;
+- risultato LONG, SHORT o WAIT con score aggregato.
+
+Il motore riceve serie OHLC organizzate per timeframe. La fonte dati reale verrà collegata in una fase successiva senza modificare la logica centrale.
