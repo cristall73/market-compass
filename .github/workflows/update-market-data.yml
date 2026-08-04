@@ -1,0 +1,33 @@
+name: Update Market Data
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository checkout
+        uses: actions/checkout@v4
+
+      - name: Python setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install yfinance pandas numpy
+
+      - name: Update market data
+        run: |
+          python scripts/update_market_data.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add data/market-data.json
+          git diff --cached --quiet || git commit -m "Aggiornamento automatico dati"
+          git push
