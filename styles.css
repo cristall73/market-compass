@@ -817,3 +817,103 @@ footer { padding: 20px; text-align: center; border-top: 1px solid var(--line); }
     grid-template-columns: 1fr;
   }
 }
+
+
+/* v1.0.0 - Trading Coach AI */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.scenario-card {
+  padding: 15px;
+  border-radius: 11px;
+  background: #0a1525;
+  border: 1px solid var(--line);
+}
+
+.scenario-card small {
+  display: inline-block;
+  margin-bottom: 7px;
+  color: #91b5ff;
+  font-weight: 900;
+  letter-spacing: .04em;
+}
+
+.scenario-card h4 {
+  margin: 0 0 8px;
+  color: #e5efff;
+}
+
+.scenario-card p {
+  margin: 0;
+  color: #bdcbe0;
+  line-height: 1.6;
+}
+
+.journal-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.journal-title h3,
+.journal-title p {
+  margin: 0;
+}
+
+.journal-title p {
+  margin-top: 5px;
+  color: var(--muted);
+}
+
+.journal-title button {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.journal-list {
+  display: grid;
+  gap: 9px;
+}
+
+.journal-entry {
+  padding: 13px;
+  border-radius: 10px;
+  background: #091321;
+  border-left: 4px solid #4f8cff;
+}
+
+.journal-entry > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.journal-entry p {
+  margin: 9px 0 0;
+  color: #c5d3e7;
+  line-height: 1.55;
+}
+
+.empty-journal {
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .scenario-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .journal-title {
+    flex-direction: column;
+  }
+}

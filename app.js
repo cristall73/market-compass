@@ -281,6 +281,7 @@ async function analyzeAll() {
   }
 
   lastUpdate = MARKET_DATA_PROVIDER.getGeneratedAt() || new Date();
+  saveJournalSnapshot();
 }
 
 function badgeClass(direction) {
@@ -551,6 +552,138 @@ function buildCoachAnswer(question, asset, result, plan) {
   return answers[question] || narrative.overview;
 }
 
+
+function buildCoachMonologue(asset, result, plan) {
+  const direction =
+    result.direction === "LONG" ? "rialzista" :
+    result.direction === "SHORT" ? "ribassista" :
+    "incerta";
+
+  const distance = Math.abs(plan.distancePercent);
+  const distanceText = distance >= 0.01
+    ? `Il prezzo si trova circa il ${number(distance, 2)}% lontano dalla zona operativa.`
+    : "Il prezzo è praticamente dentro la zona operativa.";
+
+  if (result.direction === "WAIT") {
+    return `Su ${asset.name} non prenderei posizione. Il quadro è ancora ${direction}: i timeframe non sono abbastanza allineati e il vantaggio operativo è insufficiente. Aspetterei una direzione più chiara sul Giornaliero, una conferma sul 4H e infine il timing sull’1H. Finché questo non accade, restare fuori è una decisione operativa, non inattività.`;
+  }
+
+  if (plan.actionCode === "READY") {
+    return `Su ${asset.name} la direzione prevalente è ${direction}. Il prezzo è arrivato nella zona ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)} e l’1H conferma il movimento. Se fossi io, valuterei il trade adesso, ma solo dopo una chiusura 1H pulita e senza inseguire una candela già estesa. Lo stop resta a ${number(plan.stop, 2)} e il TP2 a ${number(plan.tp2, 2)}, con un rapporto rischio/rendimento di circa 1:${number(plan.rr, 2)}.`;
+  }
+
+  if (plan.actionCode === "CONFIRM") {
+    return `Su ${asset.name} il trend resta ${direction}, ma non entrerei ancora. Il prezzo è già nella zona ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}, però manca la conferma dell’1H. Aspetterei una candela di reazione, una chiusura nella direzione del trend o un recupero coerente del momentum. Entrare prima significherebbe anticipare il segnale.`;
+  }
+
+  if (plan.actionCode === "NEAR") {
+    return `Su ${asset.name} la direzione resta ${direction}, ma preferisco aspettare. ${distanceText} Entrare adesso ridurrebbe il margine fino allo stop e peggiorerebbe il rapporto rischio/rendimento. La zona che mi interessa è ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}. Se il prezzo ci arriva e l’1H torna coerente con il trend, il setup diventa molto più interessante.`;
+  }
+
+  if (plan.actionCode === "EXTENDED") {
+    return `Su ${asset.name} il trend può anche restare ${direction}, ma il prezzo è troppo esteso. ${distanceText} Comprare o vendere ora significherebbe inseguire il movimento dopo che ha già percorso gran parte dello spazio previsto. Aspetterei un ritorno verso ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}. Se il prezzo non ritraccia, preferisco perdere l’occasione piuttosto che accettare un ingresso con rischio sfavorevole.`;
+  }
+
+  if (plan.actionCode === "INVALID") {
+    return `Il vecchio piano su ${asset.name} non è più valido. Il prezzo ha superato il livello tecnico di invalidazione a ${number(plan.stop, 2)}. Non cercherei di “salvare” il setup: aspetterei una nuova struttura sul 4H e un nuovo punto di ingresso calcolato dal sistema.`;
+  }
+
+  return `Su ${asset.name} non vedo ancora un vantaggio operativo sufficiente. La direzione tecnica da sola non basta: servono anche un prezzo corretto, un livello di invalidazione chiaro e un rapporto rischio/rendimento favorevole.`;
+}
+
+function buildScenarios(asset, result, plan) {
+  const isLong = result.direction === "LONG";
+  const isShort = result.direction === "SHORT";
+  const directionWord = isLong ? "LONG" : isShort ? "SHORT" : "direzionale";
+  const favorableMove = isLong ? "rialzo" : isShort ? "ribasso" : "movimento";
+  const adverseBreak = isLong ? "sotto" : "sopra";
+
+  return [
+    {
+      title: "Scenario A · Il prezzo continua senza ritracciare",
+      action: "NON INSEGUIRE",
+      text: `Se ${asset.name} prosegue subito il ${favorableMove} senza tornare nella zona ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}, non apro il trade. Il movimento può continuare, ma l’ingresso sarebbe troppo lontano dallo stop tecnico.`
+    },
+    {
+      title: "Scenario B · Il prezzo torna lentamente verso la zona",
+      action: "PREPARATI",
+      text: `Se il prezzo rientra verso ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)} senza accelerazioni contrarie, inizio a monitorare il 4H e l’1H. Non entro ancora: preparo il piano e aspetto la conferma.`
+    },
+    {
+      title: "Scenario C · Arrivo in zona e conferma 1H",
+      action: `VALUTA ${directionWord}`,
+      text: `Se il prezzo entra nella zona operativa e l’1H conferma ${directionWord}, il setup diventa valutabile. L’entrata va confrontata con lo stop a ${number(plan.stop, 2)} e con il TP2 a ${number(plan.tp2, 2)}.`
+    },
+    {
+      title: "Scenario D · Rottura dell’invalidazione",
+      action: "PIANO ANNULLATO",
+      text: `Se il prezzo chiude ${adverseBreak} ${number(plan.stop, 2)} sul 4H, il piano viene cancellato. Non medio e non sposto lo stop: aspetto una nuova struttura.`
+    }
+  ];
+}
+
+function journalKey(symbol) {
+  return `marketCompassJournal:${symbol}`;
+}
+
+function loadJournal(symbol) {
+  try {
+    return JSON.parse(localStorage.getItem(journalKey(symbol)) || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function journalText(asset, result, plan) {
+  if (plan.actionCode === "READY") {
+    return `${asset.name}: prezzo in zona e conferma operativa presente. Setup ${result.direction} valutabile con stop ${number(plan.stop, 2)} e TP2 ${number(plan.tp2, 2)}.`;
+  }
+  if (plan.actionCode === "CONFIRM") {
+    return `${asset.name}: prezzo in zona, ma manca ancora la conferma 1H. Nessun ingresso anticipato.`;
+  }
+  if (plan.actionCode === "NEAR") {
+    return `${asset.name}: direzione ${result.direction}, attendo un ritorno verso ${number(plan.entryLow, 2)}–${number(plan.entryHigh, 2)}.`;
+  }
+  if (plan.actionCode === "EXTENDED") {
+    return `${asset.name}: movimento troppo esteso. Non inseguo; attendo un nuovo ritracciamento o rimbalzo.`;
+  }
+  if (plan.actionCode === "INVALID") {
+    return `${asset.name}: setup invalidato dal superamento di ${number(plan.stop, 2)}. Serve una nuova struttura.`;
+  }
+  return `${asset.name}: quadro ancora senza vantaggio operativo sufficiente. Resto fuori.`;
+}
+
+function saveJournalSnapshot() {
+  const generatedAt = MARKET_DATA_PROVIDER.payload?.generatedAt || new Date().toISOString();
+
+  analyses.forEach(({ asset, result, plan }) => {
+    const entries = loadJournal(asset.symbol);
+    if (entries.some(entry => entry.generatedAt === generatedAt)) return;
+
+    entries.unshift({
+      generatedAt,
+      createdAt: new Date().toISOString(),
+      direction: result.direction,
+      action: plan.action,
+      opportunityScore: plan.opportunityScore,
+      current: plan.current,
+      text: journalText(asset, result, plan)
+    });
+
+    localStorage.setItem(journalKey(asset.symbol), JSON.stringify(entries.slice(0, 12)));
+  });
+}
+
+function formatJournalDate(value) {
+  const date = new Date(value);
+  return date.toLocaleString("it-IT", {
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
 function renderSummary() {
   document.querySelector("#assetCount").textContent = analyses.length;
   document.querySelector("#longCount").textContent = analyses.filter(x => x.result.direction === "LONG").length;
@@ -693,9 +826,22 @@ function openDetails(symbol) {
       </header>
 
       <section class="coach-hero">
-        <p class="coach-kicker">DECISIONE DEL COACH</p>
+        <p class="coach-kicker">SE FOSSI IO, FAREI COSÌ</p>
         <h3>${plan.action}</h3>
-        <p>${narrative.entryExplanation}</p>
+        <p>${buildCoachMonologue(asset, result, plan)}</p>
+      </section>
+
+      <section class="coach-section coach-scenarios">
+        <h3>Come gestirei i prossimi movimenti</h3>
+        <div class="scenario-grid">
+          ${buildScenarios(asset, result, plan).map(scenario => `
+            <article class="scenario-card">
+              <small>${scenario.action}</small>
+              <h4>${scenario.title}</h4>
+              <p>${scenario.text}</p>
+            </article>
+          `).join("")}
+        </div>
       </section>
 
       <section class="coach-story">
@@ -788,6 +934,37 @@ function openDetails(symbol) {
         </div>
       </section>
 
+      <section class="coach-section coach-journal">
+        <div class="journal-title">
+          <div>
+            <h3>Diario del Coach</h3>
+            <p>Memoria locale delle ultime analisi generate per questo asset.</p>
+          </div>
+          <button type="button" id="clearJournalBtn">Cancella diario</button>
+        </div>
+        <div class="journal-list">
+          ${loadJournal(asset.symbol).length
+            ? loadJournal(asset.symbol).map(entry => `
+                <article class="journal-entry">
+                  <div>
+                    <strong>${formatJournalDate(entry.generatedAt)}</strong>
+                    <span class="badge ${badgeClass(entry.direction)}">${entry.direction}</span>
+                    <span class="action-pill ${actionClass(
+                      entry.action.includes("ORA") ? "READY" :
+                      entry.action.includes("CONFERMA") ? "CONFIRM" :
+                      entry.action.includes("RITRACCIAMENTO") || entry.action.includes("RIMBALZO") ? "NEAR" :
+                      entry.action.includes("INVALIDATO") ? "INVALID" :
+                      entry.action.includes("INSEGUIRE") || entry.action.includes("ESTESO") ? "EXTENDED" :
+                      "NO_TRADE"
+                    )}">${entry.action}</span>
+                  </div>
+                  <p>${entry.text}</p>
+                </article>
+              `).join("")
+            : `<p class="empty-journal">Il diario si popolerà dopo i prossimi aggiornamenti dei dati.</p>`}
+        </div>
+      </section>
+
       <details class="technical-details">
         <summary>Dati tecnici completi e indicatori</summary>
 
@@ -827,6 +1004,11 @@ function openDetails(symbol) {
       document.querySelector("#coachAnswer").textContent =
         buildCoachAnswer(button.dataset.coach, asset, result, plan);
     });
+  });
+
+  document.querySelector("#clearJournalBtn")?.addEventListener("click", () => {
+    localStorage.removeItem(journalKey(asset.symbol));
+    openDetails(asset.symbol);
   });
 }
 
