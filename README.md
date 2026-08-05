@@ -45,3 +45,13 @@ Se questi quattro percorsi esistono, la struttura è corretta.
 
 L'aggiornamento ora svolge anche lo screening azionario.
 Può quindi richiedere diversi minuti, non soltanto i 30 secondi del vecchio Trading Coach.
+
+
+## Versione 7.0.1 — Trading data path fix
+
+Corretto il percorso del file dati nel Trading Coach:
+
+- errato: `trading/data/market-data.json`
+- corretto: `data/market-data.json`, raggiunto dalla pagina tramite `../data/market-data.json`
+
+Investment Coach e workflow unificato restano invariati.

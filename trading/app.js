@@ -21,7 +21,7 @@ const MARKET_DATA_PROVIDER = {
   async load() {
     if (this.payload) return this.payload;
     if (!this.loadPromise) {
-      this.loadPromise = fetch(`data/market-data.json?ts=${Date.now()}`, { cache: "no-store" })
+      this.loadPromise = fetch(`../data/market-data.json?ts=${Date.now()}`, { cache: "no-store" })
         .then(response => {
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           return response.json();
