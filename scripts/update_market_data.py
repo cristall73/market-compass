@@ -11,7 +11,7 @@ import pandas as pd
 import yfinance as yf
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / "data" / "market-data.json"
+OUTPUT = ROOT / "trading" / "data" / "market-data.json"
 
 ASSETS = [
     {"name": "Nasdaq 100", "symbol": "USATEC", "yahoo": "^NDX"},

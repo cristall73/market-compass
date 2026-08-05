@@ -1,4 +1,4 @@
-# Market Compass v6.0.0 — Dual Coach
+# Market Compass v6.0.1 Stable — Dual Coach
 
 ## Struttura
 
@@ -45,3 +45,11 @@ Dopo l'upload:
 1. eseguire `Update Market Data`;
 2. eseguire `Update Investment Data`;
 3. attendere il deploy GitHub Pages.
+
+## Correzioni v6.0.1 Stable
+
+- corretto il percorso di scrittura del Trading Coach: `trading/data/market-data.json`;
+- gestione corretta dei JSON non ancora tracciati dal repository;
+- Investment Coach trasformato in motore a due stadi: download tecnico in blocco su oltre 120 azioni e approfondimento fondamentale/notizie solo sulle migliori 24;
+- workflow Investment con timeout, concorrenza e commit robusto;
+- verificati i percorsi relativi usati dalle due pagine GitHub Pages.
