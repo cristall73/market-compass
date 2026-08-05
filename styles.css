@@ -1016,3 +1016,30 @@ footer { padding: 20px; text-align: center; border-top: 1px solid var(--line); }
 .fib-list div { display:flex; justify-content:space-between; padding:9px; border-radius:7px; background:rgba(255,255,255,.035); }
 .heuristic-note { margin:0 14px 14px!important; padding:10px; border-radius:8px; background:rgba(239,179,78,.08); color:#d9c69e!important; font-size:.82rem; }
 @media(max-width:800px){ .sr-grid,.structure-columns,.smart-money-grid{grid-template-columns:1fr}.structure-heading{flex-direction:column}.confluence-badge{text-align:left} }
+
+
+/* v3.0.2 - punteggi espliciti */
+.human-card-score small {
+  display: block;
+  color: var(--muted);
+  font-size: .68rem;
+  margin-bottom: 2px;
+}
+
+.ranking-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 5px 0 2px;
+}
+
+.ranking-metrics span,
+.lead-metrics {
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.rank-score {
+  min-width: 92px;
+  text-align: right;
+}

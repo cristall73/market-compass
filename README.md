@@ -1,4 +1,4 @@
-# Market Compass v3.0.1 Professional
+# Market Compass v3.0.2 Professional
 
 Pacchetto completo. Non sovrascrive `data/market-data.json`.
 
@@ -22,3 +22,15 @@ Order Block e FVG sono euristiche sperimentali da verificare sul grafico.
 Corretto un errore nella creazione delle card: la struttura di supporti, resistenze e confluenze
 veniva calcolata correttamente ma non veniva passata al template delle card.
 Il browser interpretava l'errore come assenza di dati reali.
+
+
+## Correzione 3.0.2 — punteggi chiari
+
+Non c'era un errore nei calcoli: la card mostrava due voti diversi senza distinguerli bene.
+
+Ora vengono sempre indicati separatamente:
+- Forza trend;
+- Qualità ingresso;
+- Confluenza.
+
+La classifica usa la qualità dell'ingresso insieme alla priorità operativa e alla confluenza.

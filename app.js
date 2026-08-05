@@ -960,7 +960,12 @@ function renderSummary() {
           <strong>${index + 1}. ${item.asset.name}</strong>
           <span class="badge ${badgeClass(item.result.direction)}">${item.result.direction}</span>
           <span class="action-pill ${actionClass(item.plan.actionCode)}">${item.plan.action}</span>
-          <span class="rank-score">${tenScale(item.plan.opportunityScore)}/10</span>
+          <span class="rank-score">Ingresso ${tenScale(item.plan.opportunityScore)}/10</span>
+        </div>
+        <div class="ranking-metrics">
+          <span>Trend ${tenScale(item.result.confidence)}/10</span>
+          <span>Ingresso ${tenScale(item.plan.opportunityScore)}/10</span>
+          <span>Confluenza ${item.structure?.confluenceScore || 0}/10</span>
         </div>
         <div class="ranking-reason">${plainActionExplanation(item)}</div>
       `).join("")}
@@ -974,7 +979,11 @@ function renderSummary() {
       <strong>${lead.asset.name}</strong>
       <div class="action-pill ${actionClass(lead.plan.actionCode)}">${lead.plan.action}</div>
       <div class="human-score">${tenScale(lead.plan.opportunityScore)}/10</div>
-      <div class="symbol">${opportunityLabel(lead.plan.opportunityScore)}</div>
+      <div class="symbol">Qualità ingresso · ${opportunityLabel(lead.plan.opportunityScore)}</div>
+      <div class="lead-metrics">
+        Trend ${tenScale(lead.result.confidence)}/10 ·
+        Confluenza ${lead.structure?.confluenceScore || 0}/10
+      </div>
       <p class="lead-explanation">${plainActionExplanation(lead)}</p>
     </div>
   `;
@@ -994,7 +1003,11 @@ function renderCards() {
           <h3>${asset.name}</h3>
           <div class="symbol">${asset.symbol}</div>
         </div>
-        <div class="human-card-score"><strong>${tenScale(result.confidence)}/10</strong><span>${trendLabel(result)}</span></div>
+        <div class="human-card-score">
+          <small>Forza trend</small>
+          <strong>${tenScale(result.confidence)}/10</strong>
+          <span>${trendLabel(result)}</span>
+        </div>
       </div>
 
       <div class="score-row">
@@ -1002,11 +1015,11 @@ function renderCards() {
         <span class="action-pill ${actionClass(plan.actionCode)}">${plan.action}</span>
       </div>
       <div class="quality-row">
-        <span>${opportunityLabel(plan.opportunityScore)}</span>
+        <span>Qualità ingresso · ${opportunityLabel(plan.opportunityScore)}</span>
         <strong>${tenScale(plan.opportunityScore)}/10</strong>
       </div>
       <div class="quality-row confluence-mini">
-        <span>${confluenceLabel(structure.confluenceScore)}</span>
+        <span>Confluenza · ${confluenceLabel(structure.confluenceScore)}</span>
         <strong>${structure.confluenceScore}/10</strong>
       </div>
 
