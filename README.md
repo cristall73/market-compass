@@ -1,4 +1,4 @@
-# Market Compass v4.0.0 Professional
+# Market Compass v5.0.0 Professional
 
 Pacchetto completo. Non sovrascrive `data/market-data.json`.
 
@@ -52,3 +52,37 @@ La classifica usa la qualità dell'ingresso insieme alla priorità operativa e a
 - voto finale grande nel candidato principale;
 - voto finale presente anche su ogni card;
 - layout responsive per desktop, tablet e smartphone.
+
+
+## Versione 5.0.0 — completamento area Trading operativo
+
+### Semaforo accessibile
+Il sistema non usa soltanto i colori. Mostra sempre:
+- simbolo;
+- nome del colore;
+- istruzione testuale.
+
+Stati:
+- VERDE · PRONTO;
+- GIALLO · QUASI PRONTO / IN ATTESA;
+- ROSSO · TARDIVO / RIMANI FUORI / ANNULLATO.
+
+### Condizioni mancanti
+Ogni asset mostra:
+- quante condizioni sono soddisfatte;
+- quante ne mancano;
+- barra di avanzamento;
+- checklist con SODDISFATTA o MANCANTE.
+
+### Regola ingresso
+Il semaforo verde compare soltanto quando:
+- il motore assegna stato READY;
+- prezzo nella zona operativa;
+- conferma 4H/1H;
+- rapporto rischio/rendimento sufficiente;
+- setup finale almeno 6/10.
+
+### Affidabilità
+Non viene mostrata una falsa probabilità di successo.
+Il sito dichiara esplicitamente che il voto è tecnico e non statistico.
+La probabilità reale verrà aggiunta soltanto dopo un backtest con campione sufficiente.

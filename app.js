@@ -599,6 +599,100 @@ function setupVerdict(value) {
   return "Setup debole";
 }
 
+function operationalStatus(item) {
+  const code = item.plan.actionCode;
+  const finalScore = finalSetupScore(item);
+
+  if (code === "READY" && finalScore >= 6) {
+    return {
+      code: "GREEN",
+      colorName: "VERDE",
+      icon: "✓",
+      short: "PRONTO",
+      label: "SEMAFORO VERDE · INGRESSO VALUTABILE",
+      explanation: "Le condizioni tecniche principali risultano soddisfatte. Verifica il grafico e la size prima di eseguire."
+    };
+  }
+
+  if (code === "CONFIRM") {
+    return {
+      code: "YELLOW",
+      colorName: "GIALLO",
+      icon: "◐",
+      short: "QUASI PRONTO",
+      label: "SEMAFORO GIALLO · ASPETTA CONFERMA",
+      explanation: "Il prezzo è nella zona operativa, ma manca ancora una conferma affidabile sul timeframe 1H."
+    };
+  }
+
+  if (code === "NEAR") {
+    return {
+      code: "YELLOW",
+      colorName: "GIALLO",
+      icon: "◐",
+      short: "IN ATTESA",
+      label: "SEMAFORO GIALLO · ASPETTA LA ZONA",
+      explanation: "La direzione è interessante, ma il prezzo non ha ancora raggiunto l’area prevista per l’ingresso."
+    };
+  }
+
+  if (code === "INVALID") {
+    return {
+      code: "RED",
+      colorName: "ROSSO",
+      icon: "✕",
+      short: "ANNULLATO",
+      label: "SEMAFORO ROSSO · PIANO ANNULLATO",
+      explanation: "Il livello di invalidazione è stato superato: il vecchio piano non deve più essere utilizzato."
+    };
+  }
+
+  if (code === "EXTENDED") {
+    return {
+      code: "RED",
+      colorName: "ROSSO",
+      icon: "✕",
+      short: "TARDIVO",
+      label: "SEMAFORO ROSSO · NON INSEGUIRE",
+      explanation: "La direzione può essere corretta, ma il prezzo è già troppo lontano dalla zona favorevole."
+    };
+  }
+
+  return {
+    code: "RED",
+    colorName: "ROSSO",
+    icon: "✕",
+    short: "RIMANI FUORI",
+    label: "SEMAFORO ROSSO · NESSUN INGRESSO",
+    explanation: "Non esiste ancora un vantaggio operativo sufficiente per giustificare un ingresso."
+  };
+}
+
+function checklistState(result, plan) {
+  const items = buildChecklist(result, plan);
+  const completed = items.filter(item => item.done).length;
+  const missing = items.length - completed;
+
+  return {
+    items,
+    completed,
+    missing,
+    total: items.length,
+    percentage: Math.round((completed / Math.max(1, items.length)) * 100)
+  };
+}
+
+function missingConditionsText(result, plan) {
+  const state = checklistState(result, plan);
+  if (state.missing === 0) return "Tutte le condizioni operative sono soddisfatte.";
+  if (state.missing === 1) return "Manca 1 condizione prima dell’ingresso.";
+  return `Mancano ${state.missing} condizioni prima dell’ingresso.`;
+}
+
+function historicalReliabilityText() {
+  return "Affidabilità statistica non ancora calibrata: il voto misura la coerenza tecnica del setup, non la probabilità garantita di profitto.";
+}
+
 function number(value, digits = 2) {
   return value == null || Number.isNaN(value) ? "—" : Number(value).toFixed(digits);
 }
@@ -995,56 +1089,80 @@ function renderSummary() {
 
   const ranking = [...analyses]
     .sort((a, b) => {
+      const statusOrder = { GREEN: 3, YELLOW: 2, RED: 1 };
+      const statusDifference =
+        statusOrder[operationalStatus(b).code] -
+        statusOrder[operationalStatus(a).code];
+
+      if (statusDifference !== 0) return statusDifference;
+
       const finalDifference = finalSetupScore(b) - finalSetupScore(a);
       if (Math.abs(finalDifference) >= 0.1) return finalDifference;
+
       return rankingScore(b) - rankingScore(a);
     })
     .slice(0, 3);
 
-  const ready = ranking.find(isSetupReady);
+  const ready = ranking.find(item => operationalStatus(item).code === "GREEN");
   const lead = ready || ranking[0];
   const leadFinalScore = finalSetupScore(lead);
+  const leadStatus = operationalStatus(lead);
+  const leadChecklist = checklistState(lead.result, lead.plan);
 
   banner.innerHTML = `
     <div class="ranking-panel">
-      <small>${ready ? "SETUP PRONTO DA VALUTARE" : "NESSUN INGRESSO PRONTO ADESSO"}</small>
-      ${!ready ? `
-        <p class="ranking-explanation">
-          Nessun asset soddisfa ancora tutte le condizioni d’ingresso.
-          La classifica ordina i mercati usando il voto finale del setup.
-        </p>` : ""}
+      <small>${ready ? "INGRESSO PRONTO DA VERIFICARE" : "NESSUN INGRESSO PRONTO ADESSO"}</small>
+      <p class="ranking-explanation">
+        La classifica privilegia prima il semaforo operativo, poi il voto finale del setup.
+        Colore, simbolo e testo sono sempre mostrati insieme.
+      </p>
 
       <div class="ranking-table">
         <div class="ranking-table-head">
           <span>Asset</span>
+          <span>Semaforo</span>
           <span>Direzione</span>
           <span>Azione</span>
           <span>Trend</span>
           <span>Ingresso</span>
           <span>Confluenza</span>
-          <span>Rischio</span>
           <span>Setup</span>
         </div>
 
         ${ranking.map((item, index) => {
           const finalScore = finalSetupScore(item);
+          const status = operationalStatus(item);
+          const progress = checklistState(item.result, item.plan);
+
           return `
             <div class="ranking-table-row">
               <div class="ranking-asset">
                 <b>${index + 1}</b>
                 <strong>${item.asset.name}</strong>
               </div>
+
+              <div>
+                <span class="traffic-status traffic-${status.code.toLowerCase()}">
+                  <b aria-hidden="true">${status.icon}</b>
+                  <span>${status.colorName} · ${status.short}</span>
+                </span>
+              </div>
+
               <div><span class="badge ${badgeClass(item.result.direction)}">${item.result.direction}</span></div>
               <div><span class="action-pill ${actionClass(item.plan.actionCode)}">${item.plan.action}</span></div>
               <div class="metric-cell"><small>Trend</small><strong>${tenScale(item.result.confidence)}/10</strong></div>
               <div class="metric-cell"><small>Ingresso</small><strong>${tenScale(item.plan.opportunityScore)}/10</strong></div>
               <div class="metric-cell"><small>Confluenza</small><strong>${item.structure?.confluenceScore || 0}/10</strong></div>
-              <div class="metric-cell"><small>Rischio</small><strong>${riskScore(item.plan)}/10</strong></div>
               <div class="final-score-cell ${setupScoreClass(finalScore)}">
                 <small>Setup</small>
                 <strong>${number(finalScore, 1)}/10</strong>
               </div>
-              <p class="ranking-row-reason">${plainActionExplanation(item)}</p>
+
+              <div class="ranking-progress">
+                <span>${progress.completed}/${progress.total} condizioni</span>
+                <span>${missingConditionsText(item.result, item.plan)}</span>
+              </div>
+              <p class="ranking-row-reason">${status.explanation}</p>
             </div>
           `;
         }).join("")}
@@ -1057,10 +1175,19 @@ function renderSummary() {
     </div>
 
     <aside class="lead-panel">
-      <small>${ready ? "MIGLIORE SETUP PRONTO" : "PRIMO CANDIDATO DA MONITORARE"}</small>
+      <small>${ready ? "MIGLIORE INGRESSO PRONTO" : "PRIMO CANDIDATO DA MONITORARE"}</small>
       <div class="lead-title-row">
         <strong>${lead.asset.name}</strong>
-        <span class="action-pill ${actionClass(lead.plan.actionCode)}">${lead.plan.action}</span>
+        <span class="badge ${badgeClass(lead.result.direction)}">${lead.result.direction}</span>
+      </div>
+
+      <div class="lead-traffic traffic-${leadStatus.code.toLowerCase()}">
+        <b aria-hidden="true">${leadStatus.icon}</b>
+        <div>
+          <small>${leadStatus.colorName}</small>
+          <strong>${leadStatus.short}</strong>
+          <span>${leadStatus.label}</span>
+        </div>
       </div>
 
       <div class="lead-score ${setupScoreClass(leadFinalScore)}">
@@ -1078,7 +1205,16 @@ function renderSummary() {
         <span>Rischio <strong>${riskScore(lead.plan)}/10</strong></span>
       </div>
 
-      <p class="lead-explanation">${plainActionExplanation(lead)}</p>
+      <div class="lead-countdown">
+        <strong>${missingConditionsText(lead.result, lead.plan)}</strong>
+        <div class="progress-track" aria-label="${leadChecklist.completed} condizioni soddisfatte su ${leadChecklist.total}">
+          <span style="width:${leadChecklist.percentage}%"></span>
+        </div>
+        <small>${leadChecklist.completed}/${leadChecklist.total} condizioni soddisfatte</small>
+      </div>
+
+      <p class="lead-explanation">${leadStatus.explanation}</p>
+      <p class="reliability-note">${historicalReliabilityText()}</p>
     </aside>
   `;
 }
@@ -1108,6 +1244,30 @@ function renderCards() {
         <span class="badge ${badgeClass(result.direction)}">${result.direction}</span>
         <span class="action-pill ${actionClass(plan.actionCode)}">${plan.action}</span>
       </div>
+
+      ${(() => {
+        const item = { asset, result, plan, structure };
+        const status = operationalStatus(item);
+        const progress = checklistState(result, plan);
+        return `
+          <div class="card-traffic traffic-${status.code.toLowerCase()}">
+            <b aria-hidden="true">${status.icon}</b>
+            <div>
+              <strong>${status.colorName} · ${status.short}</strong>
+              <span>${status.label}</span>
+            </div>
+          </div>
+          <div class="card-countdown">
+            <div>
+              <strong>${missingConditionsText(result, plan)}</strong>
+              <span>${progress.completed}/${progress.total} condizioni soddisfatte</span>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <span style="width:${progress.percentage}%"></span>
+            </div>
+          </div>
+        `;
+      })()}
       <div class="quality-row">
         <span>Qualità ingresso · ${opportunityLabel(plan.opportunityScore)}</span>
         <strong>${tenScale(plan.opportunityScore)}/10</strong>
@@ -1156,7 +1316,7 @@ function renderCards() {
         R/R 1:${number(plan.rr, 2)} · Concordanza timeframe ${tenScale(result.alignment)}/10<br>
         Distanza entrata: ${number(plan.distancePoints, 2)} (${number(plan.distancePercent, 2)}%)<br>
         Supporto ${number(structure.nearestSupport?.price,2)} · Resistenza ${number(structure.nearestResistance?.price,2)}<br>
-        <span class="open-analysis">Apri la scheda per livelli e confluenze</span>
+        <span class="open-analysis">Apri il piano operativo completo</span>
       </div>
     </article>
   `).join("");
@@ -1202,6 +1362,27 @@ function openDetails(symbol) {
           </span>
         </div>
       </header>
+
+      ${(() => {
+        const item = { asset, result, plan, structure };
+        const status = operationalStatus(item);
+        const progress = checklistState(result, plan);
+        return `
+          <section class="popup-operational-status traffic-${status.code.toLowerCase()}">
+            <div class="popup-traffic-symbol" aria-hidden="true">${status.icon}</div>
+            <div>
+              <small>SEMAFORO OPERATIVO: ${status.colorName}</small>
+              <h3>${status.short}</h3>
+              <p>${status.label}</p>
+              <strong>${missingConditionsText(result, plan)}</strong>
+              <div class="progress-track">
+                <span style="width:${progress.percentage}%"></span>
+              </div>
+              <small>${progress.completed}/${progress.total} condizioni soddisfatte</small>
+            </div>
+          </section>
+        `;
+      })()}
 
       <section class="coach-hero">
         <p class="coach-kicker">SE FOSSI IO, FAREI COSÌ</p>
@@ -1313,11 +1494,19 @@ function openDetails(symbol) {
 
       <section class="coach-section">
         <h3>Quando entrerei</h3>
+        <div class="checklist-summary">
+          <strong>${missingConditionsText(result, plan)}</strong>
+          <span>${checklist.filter(item => item.done).length}/${checklist.length} condizioni soddisfatte</span>
+        </div>
+        <div class="progress-track checklist-progress">
+          <span style="width:${Math.round(checklist.filter(item => item.done).length / Math.max(1, checklist.length) * 100)}%"></span>
+        </div>
         <div class="trade-checklist">
           ${checklist.map(item => `
-            <div class="check-row ${item.done ? "done" : ""}">
-              <span>${item.done ? "✓" : "○"}</span>
+            <div class="check-row ${item.done ? "done" : "missing"}">
+              <span aria-hidden="true">${item.done ? "✓" : "!"}</span>
               <strong>${item.label}</strong>
+              <small>${item.done ? "SODDISFATTA" : "MANCANTE"}</small>
             </div>
           `).join("")}
         </div>
@@ -1325,6 +1514,11 @@ function openDetails(symbol) {
           Il setup è considerato pronto soltanto quando il prezzo raggiunge la zona indicata
           e il timeframe 1H conferma la direzione. Un semplice arrivo sul livello non basta.
         </p>
+        <div class="statistical-honesty">
+          <strong>Affidabilità statistica</strong>
+          <p>${historicalReliabilityText()}</p>
+          <span>La probabilità reale verrà mostrata soltanto dopo un backtest con un campione sufficiente di setup comparabili.</span>
+        </div>
       </section>
 
       <section class="coach-two-columns">
