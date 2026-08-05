@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Investment Coach AI</title>
+  <link rel="stylesheet" href="styles.css?v=600">
+</head>
+<body>
+  <nav class="module-nav">
+    <a href="../">Market Compass</a>
+    <a href="../trading/">Trading Coach</a>
+    <a class="active" href="./">Investment Coach</a>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <p>MARKET COMPASS · INVESTMENT COACH v1.0</p>
+      <h1>Investment Coach AI</h1>
+      <span>Large cap · orizzonte operativo 2-4 mesi · selezione delle migliori 4-5 opportunità</span>
+    </div>
+    <div class="hero-actions">
+      <div id="freshness" class="freshness">Caricamento dati…</div>
+      <button id="reportBtn" disabled>Scarica report</button>
+      <button id="refreshBtn">Aggiorna dati</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="stats">
+      <div><span>Azioni esaminate</span><strong id="screenedCount">0</strong></div>
+      <div><span>Candidate finali</span><strong id="candidateCount">0</strong></div>
+      <div><span>Semafori verdi</span><strong id="greenCount">0</strong></div>
+      <div><span>Semafori gialli</span><strong id="yellowCount">0</strong></div>
+    </section>
+
+    <section class="method">
+      <strong>METODO</strong>
+      <span>Prima qualità e trend di fondo, poi ritracciamento e conferma Daily. Il verde non nasce perché un titolo è semplicemente sceso.</span>
+    </section>
+
+    <section id="topArea" class="top-area">
+      <div class="loading">Analizzo l’universo large cap…</div>
+    </section>
+
+    <section class="section-heading">
+      <div>
+        <h2>Migliori opportunità</h2>
+        <p>Il motore analizza oltre 100 titoli ma mostra soltanto i candidati con il miglior equilibrio fra qualità, prezzo e catalizzatori.</p>
+      </div>
+      <select id="statusFilter">
+        <option value="ALL">Tutti</option>
+        <option value="GREEN">Verdi</option>
+        <option value="YELLOW">Gialli</option>
+        <option value="RED">Rossi</option>
+      </select>
+    </section>
+
+    <section id="cards" class="cards"></section>
+
+    <section class="limitations">
+      <h3>Cosa significa il punteggio</h3>
+      <p>Il punteggio sintetizza dati tecnici, fondamentali e notizie disponibili. Non rappresenta una probabilità garantita. Le notizie e i rischi geopolitici sono classificati con regole euristiche e devono essere verificati sulle fonti originali.</p>
+    </section>
+  </main>
+
+  <dialog id="detailDialog">
+    <button class="close" id="closeDialog">×</button>
+    <div id="detailContent"></div>
+  </dialog>
+
+  <script src="app.js?v=600"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Market Compass: dashboard tecnica multi-timeframe per trading e opportunità azionarie." />
+  <title>Market Compass</title>
+  <link rel="stylesheet" href="styles.css?v=521" />
+</head>
+<body>
+  <nav class="module-nav">
+    <a href="../">Market Compass</a>
+    <a class="active" href="./">Trading Coach</a>
+    <a href="../investing/">Investment Coach</a>
+  </nav>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">MARKET COMPASS · v5.2.1 SEMAFORI</p>
+      <h1>Trading Coach AI</h1>
+      <p class="subtitle">Analisi 1M → 1W → 1D → 4H → 1H con aggiornamento automatico, semafori progressivi e report condivisibile</p>
+    </div>
+    <div class="header-actions">
+      <div id="freshnessStatus" class="freshness-status freshness-loading" role="status" aria-live="polite">
+        <span class="freshness-symbol" aria-hidden="true">…</span>
+        <div>
+          <strong>Controllo aggiornamento</strong>
+          <small>Verifico l’età dei dati</small>
+        </div>
+      </div>
+      <button id="reportBtn" class="secondary report-button" type="button" disabled>
+        <span aria-hidden="true">⇩</span>
+        Scarica report
+      </button>
+      <button id="refreshBtn" class="primary">Aggiorna dati</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="summary-bar">
+      <div>
+        <span>Asset analizzati</span>
+        <strong id="assetCount">0</strong>
+      </div>
+      <div>
+        <span>Segnali LONG</span>
+        <strong id="longCount">0</strong>
+      </div>
+      <div>
+        <span>Segnali SHORT</span>
+        <strong id="shortCount">0</strong>
+      </div>
+      <div>
+        <span>WAIT</span>
+        <strong id="waitCount">0</strong>
+      </div>
+    </section>
+
+    <section class="notice">
+      Questa versione usa dati di mercato reali aggiornati automaticamente. I risultati restano analisi sperimentali e non costituiscono segnali garantiti.
+    </section>
+
+    <section class="toolbar">
+      <div>
+        <h2>Mercati principali</h2>
+        <p>Apri una scheda per vedere ogni timeframe, indicatori e motivazioni.</p>
+      </div>
+      <select id="directionFilter" aria-label="Filtra per direzione">
+        <option value="ALL">Tutti</option>
+        <option value="LONG">LONG</option>
+        <option value="SHORT">SHORT</option>
+        <option value="WAIT">WAIT</option>
+      </select>
+    </section>
+
+    <section id="marketGrid" class="market-grid"></section>
+  </main>
+
+  <dialog id="detailDialog">
+    <button id="closeDialog" class="dialog-close" aria-label="Chiudi">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <footer>
+    Prototipo sperimentale. Non costituisce consulenza finanziaria.
+  </footer>
+
+  <script src="data/tradingConfig.js?v=521"></script>
+  <script src="engine/tradingEngine.js?v=521"></script>
+  <script src="app.js?v=521"></script>
+</body>
+</html>

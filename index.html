@@ -1,86 +1,55 @@
 <!doctype html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Market Compass: dashboard tecnica multi-timeframe per trading e opportunità azionarie." />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Market Compass: Trading Coach AI e Investment Coach AI">
   <title>Market Compass</title>
-  <link rel="stylesheet" href="styles.css?v=521" />
+  <link rel="stylesheet" href="shared/landing.css?v=600">
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <p class="eyebrow">MARKET COMPASS · v5.2.1 SEMAFORI</p>
-      <h1>Trading Coach AI</h1>
-      <p class="subtitle">Analisi 1M → 1W → 1D → 4H → 1H con aggiornamento automatico, semafori progressivi e report condivisibile</p>
-    </div>
-    <div class="header-actions">
-      <div id="freshnessStatus" class="freshness-status freshness-loading" role="status" aria-live="polite">
-        <span class="freshness-symbol" aria-hidden="true">…</span>
+  <main class="landing">
+    <header class="brand">
+      <p>MARKET COMPASS · v6.0.0</p>
+      <h1>Scegli il tuo Coach</h1>
+      <span>Due motori separati per due orizzonti operativi diversi.</span>
+    </header>
+
+    <section class="coach-grid">
+      <a class="coach-card trading-card" href="trading/">
+        <div class="coach-icon" aria-hidden="true">↕</div>
         <div>
-          <strong>Controllo aggiornamento</strong>
-          <small>Verifico l’età dei dati</small>
+          <small>POCHE ORE → 2/3 GIORNI</small>
+          <h2>Trading Coach AI</h2>
+          <p>Indici, oro, forex e materie prime. Analisi multi-timeframe, semaforo operativo, livelli, stop, target e report condivisibile.</p>
+          <ul>
+            <li>1M · 1W · 1D · 4H · 1H</li>
+            <li>LONG · SHORT · WAIT</li>
+            <li>Ingresso, rischio e confluenza</li>
+          </ul>
+          <strong class="enter">Apri Trading Coach →</strong>
         </div>
-      </div>
-      <button id="reportBtn" class="secondary report-button" type="button" disabled>
-        <span aria-hidden="true">⇩</span>
-        Scarica report
-      </button>
-      <button id="refreshBtn" class="primary">Aggiorna dati</button>
-    </div>
-  </header>
+      </a>
 
-  <main>
-    <section class="summary-bar">
-      <div>
-        <span>Asset analizzati</span>
-        <strong id="assetCount">0</strong>
-      </div>
-      <div>
-        <span>Segnali LONG</span>
-        <strong id="longCount">0</strong>
-      </div>
-      <div>
-        <span>Segnali SHORT</span>
-        <strong id="shortCount">0</strong>
-      </div>
-      <div>
-        <span>WAIT</span>
-        <strong id="waitCount">0</strong>
-      </div>
+      <a class="coach-card investment-card" href="investing/">
+        <div class="coach-icon" aria-hidden="true">◒</div>
+        <div>
+          <small>2 → 4 MESI</small>
+          <h2>Investment Coach AI</h2>
+          <p>Selezione quotidiana delle migliori 4-5 opportunità tra oltre 100 large cap, dopo ritracciamenti tecnicamente sani.</p>
+          <ul>
+            <li>Qualità aziendale e fondamentali</li>
+            <li>Trend mensile, settimanale e Daily</li>
+            <li>Ritracciamento, catalizzatori e rischi</li>
+          </ul>
+          <strong class="enter">Apri Investment Coach →</strong>
+        </div>
+      </a>
     </section>
 
-    <section class="notice">
-      Questa versione usa dati di mercato reali aggiornati automaticamente. I risultati restano analisi sperimentali e non costituiscono segnali garantiti.
-    </section>
-
-    <section class="toolbar">
-      <div>
-        <h2>Mercati principali</h2>
-        <p>Apri una scheda per vedere ogni timeframe, indicatori e motivazioni.</p>
-      </div>
-      <select id="directionFilter" aria-label="Filtra per direzione">
-        <option value="ALL">Tutti</option>
-        <option value="LONG">LONG</option>
-        <option value="SHORT">SHORT</option>
-        <option value="WAIT">WAIT</option>
-      </select>
-    </section>
-
-    <section id="marketGrid" class="market-grid"></section>
+    <footer>
+      Strumento sperimentale di supporto decisionale. Non costituisce consulenza finanziaria.
+    </footer>
   </main>
-
-  <dialog id="detailDialog">
-    <button id="closeDialog" class="dialog-close" aria-label="Chiudi">×</button>
-    <div id="dialogContent"></div>
-  </dialog>
-
-  <footer>
-    Prototipo sperimentale. Non costituisce consulenza finanziaria.
-  </footer>
-
-  <script src="data/tradingConfig.js?v=521"></script>
-  <script src="engine/tradingEngine.js?v=521"></script>
-  <script src="app.js?v=521"></script>
 </body>
 </html>
