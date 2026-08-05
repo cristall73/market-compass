@@ -1,55 +1,47 @@
-# Market Compass v6.0.1 Stable — Dual Coach
+# Market Compass v7.0.0 — Unified Stable
 
-## Struttura
+Questa versione risolve definitivamente il problema dei workflow mancanti.
 
-- `/` — scelta del modulo
-- `/trading/` — Trading Coach AI, orizzonte poche ore / 2-3 giorni
-- `/investing/` — Investment Coach AI, orizzonte 2-4 mesi
+## Principio
 
-## Investment Coach
+Esiste un solo workflow:
 
-Il workflow analizza oltre 120 large cap e pubblica soltanto le migliori 5.
+`Update Market Data`
 
-Criteri:
-- qualità fondamentale;
-- trend mensile, settimanale e Daily;
-- ritracciamento adattivo alla volatilità;
-- valutazione;
-- notizie recenti da Yahoo Finance;
-- rischi settoriali/geopolitici euristici;
-- conferma Daily e rapporto rischio/rendimento.
+Quel workflow aggiorna un unico file:
 
-Ogni candidato include un report con:
-- motivazione della selezione;
-- fondamentali;
-- tecnica;
-- trimestrali;
-- diagnosi del ribasso;
-- catalizzatori;
-- rischi;
-- piano operativo;
-- scenari A/B/C;
-- condizioni necessarie per il verde.
+`data/market-data.json`
 
-## Limite importante
+Lo stesso file contiene:
 
-La parte qualitativa usa dati gratuiti e classificazioni euristiche. Non sostituisce:
-- comunicati ufficiali della società;
-- filing SEC/consob;
-- conference call;
-- fonti giornalistiche verificate.
+- dati del Trading Coach;
+- screening di oltre 120 large cap;
+- dati del nuovo Investment Coach;
+- migliori 5 candidate.
 
-## Primo avvio
+Quindi non serve più il workflow `Update Investment Data`.
 
-Dopo l'upload:
-1. eseguire `Update Market Data`;
-2. eseguire `Update Investment Data`;
-3. attendere il deploy GitHub Pages.
+## Dopo l'upload
 
-## Correzioni v6.0.1 Stable
+1. Vai in **Actions**.
+2. Apri **Update Market Data**.
+3. Premi **Run workflow**.
+4. Attendi il segno verde.
+5. Attendi il deploy GitHub Pages.
+6. Apri il sito con `?v=700`.
 
-- corretto il percorso di scrittura del Trading Coach: `trading/data/market-data.json`;
-- gestione corretta dei JSON non ancora tracciati dal repository;
-- Investment Coach trasformato in motore a due stadi: download tecnico in blocco su oltre 120 azioni e approfondimento fondamentale/notizie solo sulle migliori 24;
-- workflow Investment con timeout, concorrenza e commit robusto;
-- verificati i percorsi relativi usati dalle due pagine GitHub Pages.
+## Controllo rapido
+
+Nel repository devono esistere:
+
+- `data/market-data.json`
+- `scripts/update_market_data.py`
+- `trading/index.html`
+- `investing/index.html`
+
+Se questi quattro percorsi esistono, la struttura è corretta.
+
+## Nota sul tempo
+
+L'aggiornamento ora svolge anche lo screening azionario.
+Può quindi richiedere diversi minuti, non soltanto i 30 secondi del vecchio Trading Coach.

@@ -1,5 +1,5 @@
 
-const DATA_URL = "data/investment-data.json";
+const DATA_URL = "../data/market-data.json";
 let payload = null;
 let candidates = [];
 
@@ -145,9 +145,10 @@ async function load(){
   try{
     const response=await fetch(`${DATA_URL}?t=${Date.now()}`,{cache:"no-store"});
     if(!response.ok)throw new Error(`HTTP ${response.status}`);
-    payload=await response.json();
-    candidates=payload.candidates||[];
-    $("#screenedCount").textContent=payload.screenedCount||0;
+    const combinedPayload = await response.json();
+    payload = combinedPayload.investment || {};
+    candidates = payload.candidates || [];
+    $("#screenedCount").textContent = payload.screenedCount || 0;
     $("#candidateCount").textContent=candidates.length;
     $("#greenCount").textContent=candidates.filter(x=>x.status==="GREEN").length;
     $("#yellowCount").textContent=candidates.filter(x=>x.status==="YELLOW").length;
