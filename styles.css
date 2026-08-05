@@ -1830,3 +1830,27 @@ footer { padding: 20px; text-align: center; border-top: 1px solid var(--line); }
     box-sizing: border-box;
   }
 }
+
+
+/* v5.2.1 - Chiarezza stato dati e semafori progressivi */
+.freshness-status {
+  cursor: default;
+  user-select: none;
+}
+
+.freshness-status::after {
+  content: "SOLO INFO";
+  margin-left: auto;
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  color: var(--muted);
+  font-size: .56rem;
+  font-weight: 900;
+  letter-spacing: .04em;
+}
+
+.traffic-yellow > b,
+.traffic-yellow .popup-traffic-symbol {
+  color: #07111f;
+}

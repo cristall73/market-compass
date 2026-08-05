@@ -1,4 +1,4 @@
-# Market Compass v5.2.0 Professional
+# Market Compass v5.2.1 Professional
 
 Pacchetto completo. Non sovrascrive `data/market-data.json`.
 
@@ -116,3 +116,19 @@ Non sono usate librerie o servizi esterni: il report viene creato con Canvas API
 
 Nota: GitHub Actions può eseguire i workflow pianificati con alcuni minuti di ritardo.
 Il sito statico non può avviare direttamente un workflow privato senza credenziali.
+
+
+## Versione 5.2.1 - Semafori progressivi e report generico
+
+Modifiche:
+- il riquadro freschezza dati resta informativo e non è cliccabile;
+- compare la dicitura `SOLO INFO`;
+- il pulsante è ora `Scarica report`;
+- semaforo VERDE: zero condizioni mancanti e setup pronto;
+- semaforo GIALLO: una o due condizioni mancanti;
+- semaforo ROSSO: tre o più condizioni mancanti, setup annullato o nessun vantaggio;
+- il giallo distingue fra:
+  - quasi pronto;
+  - attesa conferma;
+  - attesa della zona;
+  - attesa di un ritracciamento.

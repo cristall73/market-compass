@@ -602,39 +602,8 @@ function setupVerdict(value) {
 function operationalStatus(item) {
   const code = item.plan.actionCode;
   const finalScore = finalSetupScore(item);
-
-  if (code === "READY" && finalScore >= 6) {
-    return {
-      code: "GREEN",
-      colorName: "VERDE",
-      icon: "✓",
-      short: "PRONTO",
-      label: "SEMAFORO VERDE · INGRESSO VALUTABILE",
-      explanation: "Le condizioni tecniche principali risultano soddisfatte. Verifica il grafico e la size prima di eseguire."
-    };
-  }
-
-  if (code === "CONFIRM") {
-    return {
-      code: "YELLOW",
-      colorName: "GIALLO",
-      icon: "◐",
-      short: "QUASI PRONTO",
-      label: "SEMAFORO GIALLO · ASPETTA CONFERMA",
-      explanation: "Il prezzo è nella zona operativa, ma manca ancora una conferma affidabile sul timeframe 1H."
-    };
-  }
-
-  if (code === "NEAR") {
-    return {
-      code: "YELLOW",
-      colorName: "GIALLO",
-      icon: "◐",
-      short: "IN ATTESA",
-      label: "SEMAFORO GIALLO · ASPETTA LA ZONA",
-      explanation: "La direzione è interessante, ma il prezzo non ha ancora raggiunto l’area prevista per l’ingresso."
-    };
-  }
+  const progress = checklistState(item.result, item.plan);
+  const missing = progress.missing;
 
   if (code === "INVALID") {
     return {
@@ -647,14 +616,54 @@ function operationalStatus(item) {
     };
   }
 
+  if (code === "READY" && missing === 0 && finalScore >= 6) {
+    return {
+      code: "GREEN",
+      colorName: "VERDE",
+      icon: "✓",
+      short: "PRONTO",
+      label: "SEMAFORO VERDE · INGRESSO VALUTABILE",
+      explanation: "Tutte le condizioni principali risultano soddisfatte. Verifica il grafico e la size prima di eseguire."
+    };
+  }
+
+  if (missing <= 2 && code !== "NO_TRADE") {
+    let short = "QUASI PRONTO";
+    let label = "SEMAFORO GIALLO · QUASI PRONTO";
+    let explanation = "Il setup è vicino alla completezza, ma manca ancora almeno una condizione prima dell’ingresso.";
+
+    if (code === "NEAR") {
+      short = "IN ATTESA";
+      label = "SEMAFORO GIALLO · ASPETTA LA ZONA";
+      explanation = "La direzione è interessante, ma il prezzo deve ancora raggiungere l’area prevista per l’ingresso.";
+    } else if (code === "CONFIRM") {
+      short = "ATTENDI CONFERMA";
+      label = "SEMAFORO GIALLO · ASPETTA CONFERMA";
+      explanation = "Il prezzo è nella zona operativa, ma manca ancora una conferma affidabile sul timeframe 1H.";
+    } else if (code === "EXTENDED") {
+      short = "ATTENDI RITRACCIO";
+      label = "SEMAFORO GIALLO · PREZZO TARDIVO";
+      explanation = "Il trend può essere corretto, ma il prezzo è troppo lontano dalla zona favorevole. Attendi un ritracciamento.";
+    }
+
+    return {
+      code: "YELLOW",
+      colorName: "GIALLO",
+      icon: "!",
+      short,
+      label,
+      explanation
+    };
+  }
+
   if (code === "EXTENDED") {
     return {
       code: "RED",
       colorName: "ROSSO",
       icon: "✕",
-      short: "TARDIVO",
+      short: "TROPPO LONTANO",
       label: "SEMAFORO ROSSO · NON INSEGUIRE",
-      explanation: "La direzione può essere corretta, ma il prezzo è già troppo lontano dalla zona favorevole."
+      explanation: "La direzione può essere corretta, ma il prezzo è ancora troppo lontano dalla zona favorevole e mancano troppe condizioni."
     };
   }
 
@@ -1687,7 +1696,7 @@ function freshnessState(date) {
       code: "fresh",
       symbol: "✓",
       title: "Dati aggiornati",
-      detail: relativeAgeLabel(age)
+      detail: `${relativeAgeLabel(age)} · stato informativo`
     };
   }
 
@@ -1696,7 +1705,7 @@ function freshnessState(date) {
       code: "aging",
       symbol: "!",
       title: "Dati non recentissimi",
-      detail: `${relativeAgeLabel(age)} · nuovo aggiornamento atteso`
+      detail: `${relativeAgeLabel(age)} · indicatore informativo`
     };
   }
 
