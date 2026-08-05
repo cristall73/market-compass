@@ -13,6 +13,12 @@ window.TRADING_CONFIG = {
     retracementPercent: 50,
     toleranceAtr: 0.35
   },
+  structure: {
+    minimumTouches: 2,
+    orderBlockImpulseAtr: 1.6,
+    fairValueGapMinimumAtr: 0.12,
+    confluenceToleranceAtr: 0.55
+  },
   weights: {
     timeframeTrend: {
       "1M": 18,

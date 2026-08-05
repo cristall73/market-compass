@@ -984,3 +984,35 @@ footer { padding: 20px; text-align: center; border-top: 1px solid var(--line); }
     grid-row: 2;
   }
 }
+
+
+/* v3.0.0 Professional */
+.confluence-mini { border-color: rgba(166,126,255,.3); }
+.confluence-scoreline { margin-top:4px; color:#cdbbff!important; }
+.professional-structure { border-color:rgba(166,126,255,.36); background:linear-gradient(145deg,rgba(166,126,255,.07),rgba(255,255,255,.025)); }
+.structure-heading { display:flex; justify-content:space-between; gap:16px; }
+.confluence-badge { min-width:150px; text-align:right; }
+.confluence-badge strong { display:block; font-size:1.8rem; color:#cdbbff; }
+.confluence-badge span,.sr-card small,.sr-card span,.structure-row small,.zone-row small,.zone-row span { color:var(--muted); }
+.structure-summary { margin-top:12px!important; padding-top:12px; border-top:1px solid rgba(255,255,255,.08); }
+.sr-grid,.structure-columns { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:14px 0; }
+.sr-card { padding:14px; border-radius:10px; background:#091523; }
+.sr-card.support { border:1px solid rgba(53,201,139,.32); }
+.sr-card.resistance { border:1px solid rgba(239,102,112,.32); }
+.sr-card strong { display:block; margin:5px 0; font-size:1.25rem; }
+.structure-list,.zone-list { display:grid; gap:7px; }
+.structure-row,.zone-row { padding:10px; border-radius:8px; background:rgba(255,255,255,.035); }
+.structure-row { display:flex; justify-content:space-between; gap:12px; }
+.structure-row small { display:block; }
+.zone-row { display:grid; grid-template-columns:1fr auto; }
+.zone-row small { grid-column:1/-1; }
+.supply-title { margin-top:16px; }
+.empty-structure { color:var(--muted); font-style:italic; }
+.smart-money-details { margin-top:15px; border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+.smart-money-details summary { padding:13px; cursor:pointer; font-weight:900; }
+.smart-money-details[open] summary { border-bottom:1px solid var(--line); }
+.smart-money-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding:14px; }
+.fib-list { display:grid; gap:7px; }
+.fib-list div { display:flex; justify-content:space-between; padding:9px; border-radius:7px; background:rgba(255,255,255,.035); }
+.heuristic-note { margin:0 14px 14px!important; padding:10px; border-radius:8px; background:rgba(239,179,78,.08); color:#d9c69e!important; font-size:.82rem; }
+@media(max-width:800px){ .sr-grid,.structure-columns,.smart-money-grid{grid-template-columns:1fr}.structure-heading{flex-direction:column}.confluence-badge{text-align:left} }

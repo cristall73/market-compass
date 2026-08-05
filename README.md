@@ -1,34 +1,17 @@
-# Market Compass — Trading Coach AI
+# Market Compass v3.0.0 Professional
 
-## Versione 2.0.0 completa
+Pacchetto completo. Non sovrascrive `data/market-data.json`.
 
-Pacchetto unico e sincronizzato.
+Nuove funzioni:
+- supporti e resistenze statiche multi-timeframe;
+- livelli raggruppati per più reazioni;
+- forza dei livelli;
+- zone di domanda e offerta;
+- Order Block e Fair Value Gap euristici;
+- Fibonacci Daily 38,2 / 50 / 61,8;
+- indice di confluenza 0–10;
+- classifica che premia anche la confluenza;
+- spiegazione dettagliata nel Trading Coach.
 
-Contiene:
-- `index.html`
-- `app.js`
-- `styles.css`
-- motore di analisi
-- configurazione trading
-- script Python di aggiornamento dati
-- workflow GitHub Actions
-- requirements
-
-Non contiene `data/market-data.json`, per non cancellare i dati reali già presenti nel repository.
-
-### Linguaggio chiaro
-- NON ENTRARE ADESSO
-- ASPETTA IL RITORNO IN ZONA
-- ASPETTA LA CONFERMA 1H
-- RIMANI FUORI
-- PIANO ANNULLATO
-
-### Scala
-La valutazione principale usa una scala da 0 a 10:
-- 9–10: eccellente
-- 7–8: buona
-- 5–6: discreta
-- 3–4: debole
-- 0–2: nessun vantaggio
-
-Le percentuali tecniche interne restano nella sezione avanzata.
+Tutti i calcoli partono dalle candele OHLC scaricate tramite Yahoo Finance/yfinance.
+Order Block e FVG sono euristiche sperimentali da verificare sul grafico.

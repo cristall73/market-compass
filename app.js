@@ -99,6 +99,176 @@ function generateCandles(asset, timeframe, seedOffset = 0) {
   return candles;
 }
 
+
+function localAtr(candles, period = 14) {
+  if (!candles?.length || candles.length < period + 1) return 0;
+  const values = candles.map((candle, index) => {
+    if (!index) return candle.high - candle.low;
+    const previous = candles[index - 1].close;
+    return Math.max(
+      candle.high - candle.low,
+      Math.abs(candle.high - previous),
+      Math.abs(candle.low - previous)
+    );
+  });
+  return values.slice(-period).reduce((sum, value) => sum + value, 0) / period;
+}
+
+function findPivots(candles, timeframe, lookback = 220) {
+  const source = (candles || []).slice(-lookback);
+  const points = [];
+  for (let i = 2; i < source.length - 2; i++) {
+    const candle = source[i];
+    const high = candle.high > source[i-1].high && candle.high > source[i-2].high
+      && candle.high >= source[i+1].high && candle.high >= source[i+2].high;
+    const low = candle.low < source[i-1].low && candle.low < source[i-2].low
+      && candle.low <= source[i+1].low && candle.low <= source[i+2].low;
+    if (high) points.push({ price: candle.high, kind: "resistance", timeframe, recency: i/source.length });
+    if (low) points.push({ price: candle.low, kind: "support", timeframe, recency: i/source.length });
+  }
+  return points;
+}
+
+function clusterLevels(points, tolerance) {
+  const groups = [];
+  [...points].sort((a,b) => a.price-b.price).forEach(point => {
+    let group = groups.find(item => Math.abs(item.price-point.price) <= tolerance);
+    if (!group) {
+      group = { price: point.price, points: [] };
+      groups.push(group);
+    }
+    group.points.push(point);
+    group.price = group.points.reduce((sum,item) => sum+item.price,0) / group.points.length;
+  });
+
+  const tfWeight = { "1M":4, "1W":3, "1D":2 };
+  return groups.map(group => {
+    const support = group.points.filter(x => x.kind === "support").length;
+    const resistance = group.points.filter(x => x.kind === "resistance").length;
+    const kind = support > resistance ? "support" : resistance > support ? "resistance" : "mixed";
+    const timeframes = [...new Set(group.points.map(x => x.timeframe))];
+    const touches = group.points.length;
+    const recency = Math.max(...group.points.map(x => x.recency));
+    const weight = Math.max(...timeframes.map(tf => tfWeight[tf] || 1));
+    return {
+      price: group.price,
+      kind,
+      timeframes,
+      touches,
+      strength: Math.min(10, Math.round(touches*1.25 + weight + recency*2))
+    };
+  }).filter(level => level.touches >= 2 || level.timeframes.includes("1M"));
+}
+
+function findOrderBlocks(candles, timeframe, atrValue) {
+  const source = (candles || []).slice(-100);
+  const blocks = [];
+  if (!atrValue) return blocks;
+  for (let i=1; i<source.length-3; i++) {
+    const base = source[i];
+    const end = source[i+3];
+    const up = end.close-base.close;
+    const down = base.close-end.close;
+    if (base.close < base.open && up > atrValue*1.6) {
+      blocks.push({ kind:"bullish", timeframe, low:base.low, high:Math.max(base.open,base.close), strength:Math.min(10,Math.round(5+up/atrValue)) });
+    }
+    if (base.close > base.open && down > atrValue*1.6) {
+      blocks.push({ kind:"bearish", timeframe, low:Math.min(base.open,base.close), high:base.high, strength:Math.min(10,Math.round(5+down/atrValue)) });
+    }
+  }
+  return blocks.slice(-4).reverse();
+}
+
+function findFvgs(candles, timeframe, atrValue) {
+  const source = (candles || []).slice(-120);
+  const gaps = [];
+  if (!atrValue) return gaps;
+  for (let i=2; i<source.length; i++) {
+    const a = source[i-2], c = source[i];
+    if (a.high < c.low && c.low-a.high >= atrValue*.12) gaps.push({kind:"bullish",timeframe,low:a.high,high:c.low,strength:5});
+    if (a.low > c.high && a.low-c.high >= atrValue*.12) gaps.push({kind:"bearish",timeframe,low:c.high,high:a.low,strength:5});
+  }
+  return gaps.slice(-5).reverse();
+}
+
+function findFibonacci(candles, lookback=90) {
+  const source = (candles || []).slice(-lookback);
+  if (source.length < 20) return null;
+  let hi=0, lo=0;
+  source.forEach((c,i) => { if(c.high>source[hi].high) hi=i; if(c.low<source[lo].low) lo=i; });
+  const high=source[hi].high, low=source[lo].low, range=high-low;
+  if (range<=0) return null;
+  const bullish = lo < hi;
+  const price = ratio => bullish ? high-range*ratio : low+range*ratio;
+  return { direction:bullish?"bullish":"bearish", high, low, levels:[.382,.5,.618].map(ratio=>({ratio,price:price(ratio)})) };
+}
+
+function zoneDistance(zone, price) {
+  if (price < zone.low) return zone.low-price;
+  if (price > zone.high) return price-zone.high;
+  return 0;
+}
+
+function analyzeStructure(data, result, plan) {
+  const current = plan.current;
+  const dAtr = localAtr(data["1D"]) || result.details["1D"]?.atr || 0;
+  const hAtr = localAtr(data["4H"]) || result.details["4H"]?.atr || dAtr;
+  const tolerance = Math.max(dAtr*.45,current*.0015);
+
+  const pivots = [
+    ...findPivots(data["1M"],"1M",120),
+    ...findPivots(data["1W"],"1W",220),
+    ...findPivots(data["1D"],"1D",260)
+  ];
+  const levels = clusterLevels(pivots,tolerance)
+    .filter(level => Math.abs(level.price-current) <= Math.max(dAtr*14,current*.2))
+    .sort((a,b)=>b.strength-a.strength);
+
+  const supports = levels.filter(x=>x.price<=current).sort((a,b)=>b.price-a.price).slice(0,5);
+  const resistances = levels.filter(x=>x.price>=current).sort((a,b)=>a.price-b.price).slice(0,5);
+  const demand = supports.slice(0,3).map(x=>({low:x.price-dAtr*.28,high:x.price+dAtr*.28,strength:x.strength,label:`${x.timeframes.join("+")} · ${x.touches} reazioni`}));
+  const supply = resistances.slice(0,3).map(x=>({low:x.price-dAtr*.28,high:x.price+dAtr*.28,strength:x.strength,label:`${x.timeframes.join("+")} · ${x.touches} reazioni`}));
+  const orderBlocks = [...findOrderBlocks(data["1D"],"1D",dAtr),...findOrderBlocks(data["4H"],"4H",hAtr)];
+  const fvgs = [...findFvgs(data["1D"],"1D",dAtr),...findFvgs(data["4H"],"4H",hAtr)];
+  const fibonacci = findFibonacci(data["1D"]);
+  const entryTolerance = Math.max(hAtr*.55,current*.0015);
+  const isLong=result.direction==="LONG", isShort=result.direction==="SHORT";
+  const confluences=[];
+
+  const addPoint=(label,price,weight,detail="")=>{
+    if(price!=null && Math.abs(price-plan.entry)<=entryTolerance) confluences.push({label,price,weight,detail});
+  };
+
+  levels.forEach(level=>{
+    const valid = isLong ? level.kind!=="resistance" : isShort ? level.kind!=="support" : true;
+    if(valid) addPoint(`${level.kind==="support"?"Supporto":level.kind==="resistance"?"Resistenza":"Livello"} ${level.timeframes.join("+")}`,level.price,1+level.strength*.12,`${level.touches} reazioni`);
+  });
+
+  const d1=result.details["1D"], h4=result.details["4H"];
+  addPoint("EMA 200 Daily",d1?.movingAverages?.ma200,1.3);
+  addPoint("EMA 50 Daily",d1?.movingAverages?.ma50,.8);
+  addPoint("Nadaraya Daily",d1?.nadaraya,1);
+  addPoint("EMA 200 4H",h4?.movingAverages?.ma200,.8);
+  (fibonacci?.levels||[]).forEach(x=>addPoint(`Fibonacci ${(x.ratio*100).toFixed(1)}%`,x.price,x.ratio===.618?1.3:1));
+
+  orderBlocks.forEach(zone=>{
+    const valid = isLong ? zone.kind==="bullish" : isShort ? zone.kind==="bearish" : true;
+    if(valid && zoneDistance(zone,plan.entry)<=entryTolerance) confluences.push({label:`Order Block ${zone.kind==="bullish"?"rialzista":"ribassista"} ${zone.timeframe}`,price:(zone.low+zone.high)/2,weight:1.2,detail:`${zone.low.toFixed(2)}–${zone.high.toFixed(2)}`});
+  });
+  fvgs.forEach(zone=>{
+    const valid = isLong ? zone.kind==="bullish" : isShort ? zone.kind==="bearish" : true;
+    if(valid && zoneDistance(zone,plan.entry)<=entryTolerance) confluences.push({label:`Fair Value Gap ${zone.kind==="bullish"?"rialzista":"ribassista"} ${zone.timeframe}`,price:(zone.low+zone.high)/2,weight:.8,detail:`${zone.low.toFixed(2)}–${zone.high.toFixed(2)}`});
+  });
+
+  return {
+    levels,supports,resistances,demand,supply,orderBlocks,fvgs,fibonacci,
+    nearestSupport:supports[0]||null,
+    nearestResistance:resistances[0]||null,
+    confluences:confluences.sort((a,b)=>b.weight-a.weight),
+    confluenceScore:Math.max(0,Math.min(10,Math.round(confluences.reduce((sum,x)=>sum+x.weight,0))))
+  };
+}
+
 function operationalPlan(result) {
   const d1 = result.details["1D"];
   const h4 = result.details["4H"];
@@ -274,7 +444,10 @@ async function analyzeAll() {
         data[tf] = await MARKET_DATA_PROVIDER.getCandles(asset, tf);
       }
       const result = window.TradingEngine.analyzeMarket(data);
-      analyses.push({ asset, result, plan: operationalPlan(result) });
+      const plan = operationalPlan(result);
+      const structure = analyzeStructure(data, result, plan);
+      plan.confluenceScore = structure.confluenceScore;
+      analyses.push({ asset, result, plan, structure, data });
     } catch (error) {
       console.error(`Errore ${asset.symbol}:`, error);
     }
@@ -322,7 +495,7 @@ function rankingScore(item) {
     : item.plan.actionCode === "CONFIRM" ? 14
     : item.plan.actionCode === "NEAR" ? 8
     : 0;
-  return item.plan.opportunityScore + actionableBonus;
+  return item.plan.opportunityScore + actionableBonus + (item.structure?.confluenceScore || 0) * 3;
 }
 
 function actionClass(code) {
@@ -697,7 +870,7 @@ function journalText(asset, result, plan) {
 function saveJournalSnapshot() {
   const generatedAt = MARKET_DATA_PROVIDER.payload?.generatedAt || new Date().toISOString();
 
-  analyses.forEach(({ asset, result, plan }) => {
+  analyses.forEach(({ asset, result, plan, structure }) => {
     const entries = loadJournal(asset.symbol);
     if (entries.some(entry => entry.generatedAt === generatedAt)) return;
 
@@ -723,6 +896,35 @@ function formatJournalDate(value) {
     hour: "2-digit",
     minute: "2-digit"
   });
+}
+
+
+function confluenceLabel(score) {
+  if(score>=8) return "Confluenza molto forte";
+  if(score>=6) return "Confluenza forte";
+  if(score>=4) return "Confluenza discreta";
+  if(score>=2) return "Confluenza debole";
+  return "Nessuna confluenza importante";
+}
+
+function structureExplanation(structure) {
+  const pieces=[];
+  if(structure.nearestSupport) pieces.push(`Supporto più vicino ${number(structure.nearestSupport.price,2)} (${structure.nearestSupport.timeframes.join("+")}, forza ${structure.nearestSupport.strength}/10).`);
+  if(structure.nearestResistance) pieces.push(`Resistenza più vicina ${number(structure.nearestResistance.price,2)} (${structure.nearestResistance.timeframes.join("+")}, forza ${structure.nearestResistance.strength}/10).`);
+  if(structure.confluences.length) pieces.push(`Nella zona operativa coincidono ${structure.confluences.slice(0,4).map(x=>x.label).join(", ")}.`);
+  else pieces.push("La zona operativa non è sostenuta da confluenze strutturali rilevanti.");
+  pieces.push(`Indice di confluenza ${structure.confluenceScore}/10.`);
+  return pieces.join(" ");
+}
+
+function zoneRows(zones,empty) {
+  if(!zones.length) return `<p class="empty-structure">${empty}</p>`;
+  return zones.slice(0,4).map(zone=>`
+    <div class="zone-row">
+      <strong>${number(zone.low,2)}–${number(zone.high,2)}</strong>
+      <span>Forza ${zone.strength}/10</span>
+      <small>${zone.label || `${zone.kind} · ${zone.timeframe}`}</small>
+    </div>`).join("");
 }
 
 function renderSummary() {
@@ -803,6 +1005,10 @@ function renderCards() {
         <span>${opportunityLabel(plan.opportunityScore)}</span>
         <strong>${tenScale(plan.opportunityScore)}/10</strong>
       </div>
+      <div class="quality-row confluence-mini">
+        <span>${confluenceLabel(structure.confluenceScore)}</span>
+        <strong>${structure.confluenceScore}/10</strong>
+      </div>
 
       <div class="card-prices">
         <div class="card-price">
@@ -834,7 +1040,8 @@ function renderCards() {
         <strong>${plainActionExplanation({ asset, result, plan })}</strong><br>
         R/R 1:${number(plan.rr, 2)} · Concordanza timeframe ${tenScale(result.alignment)}/10<br>
         Distanza entrata: ${number(plan.distancePoints, 2)} (${number(plan.distancePercent, 2)}%)<br>
-        <span class="open-analysis">Apri la scheda per il ragionamento completo</span>
+        Supporto ${number(structure.nearestSupport?.price,2)} · Resistenza ${number(structure.nearestResistance?.price,2)}<br>
+        <span class="open-analysis">Apri la scheda per livelli e confluenze</span>
       </div>
     </article>
   `).join("");
@@ -848,7 +1055,7 @@ function openDetails(symbol) {
   const analysis = analyses.find(x => x.asset.symbol === symbol);
   if (!analysis) return;
 
-  const { asset, result, plan } = analysis;
+  const { asset, result, plan, structure } = analysis;
   const narrative = buildNarrative(asset, result, plan);
   const checklist = buildChecklist(result, plan);
   const ledger = buildReasoningLedger(result, plan);
@@ -873,6 +1080,7 @@ function openDetails(symbol) {
           <small>${opportunityLabel(plan.opportunityScore)}</small>
           <strong>${tenScale(plan.opportunityScore)}/10</strong>
           <span>${trendLabel(result)} · Concordanza ${tenScale(result.alignment)}/10</span>
+          <span class="confluence-scoreline">Confluenza strutturale ${structure.confluenceScore}/10</span>
         </div>
       </header>
 
@@ -898,6 +1106,7 @@ function openDetails(symbol) {
       <section class="coach-story">
         <h3>Perché il sistema vede un mercato ${directionText}</h3>
         <p>${narrative.overview}</p>
+        <p class="structure-summary">${structureExplanation(structure)}</p>
       </section>
 
       <section class="coach-plan-grid">
@@ -921,6 +1130,66 @@ function openDetails(symbol) {
           <strong>${number(plan.tp1, 2)} / ${number(plan.tp2, 2)} / ${number(plan.tp3, 2)}</strong>
           <p>TP2 offre circa ${number(plan.rewardPoints, 2)} punti, con R/R 1:${number(plan.rr, 2)}.</p>
         </div>
+      </section>
+
+      <section class="coach-section professional-structure">
+        <div class="structure-heading">
+          <div>
+            <p class="coach-kicker">STRUTTURA PROFESSIONALE</p>
+            <h3>Supporti, resistenze e zona di confluenza</h3>
+          </div>
+          <div class="confluence-badge">
+            <strong>${structure.confluenceScore}/10</strong>
+            <span>${confluenceLabel(structure.confluenceScore)}</span>
+          </div>
+        </div>
+
+        <p class="structure-comment">${structureExplanation(structure)}</p>
+
+        <div class="sr-grid">
+          <div class="sr-card support">
+            <small>Supporto statico più vicino</small>
+            <strong>${number(structure.nearestSupport?.price,2)}</strong>
+            <span>${structure.nearestSupport ? `${structure.nearestSupport.timeframes.join("+")} · ${structure.nearestSupport.touches} reazioni` : "Non rilevato"}</span>
+          </div>
+          <div class="sr-card resistance">
+            <small>Resistenza statica più vicina</small>
+            <strong>${number(structure.nearestResistance?.price,2)}</strong>
+            <span>${structure.nearestResistance ? `${structure.nearestResistance.timeframes.join("+")} · ${structure.nearestResistance.touches} reazioni` : "Non rilevata"}</span>
+          </div>
+        </div>
+
+        <div class="structure-columns">
+          <div>
+            <h4>Confluenze presenti nella zona</h4>
+            <div class="structure-list">
+              ${structure.confluences.length ? structure.confluences.slice(0,8).map(item=>`
+                <div class="structure-row">
+                  <div><strong>${item.label}</strong><small>${item.detail||""}</small></div>
+                  <span>${number(item.price,2)}</span>
+                </div>`).join("") : `<p class="empty-structure">Nessuna confluenza importante nella zona.</p>`}
+            </div>
+          </div>
+          <div>
+            <h4>Zone di domanda</h4>
+            <div class="zone-list">${zoneRows(structure.demand,"Nessuna zona di domanda significativa.")}</div>
+            <h4 class="supply-title">Zone di offerta</h4>
+            <div class="zone-list">${zoneRows(structure.supply,"Nessuna zona di offerta significativa.")}</div>
+          </div>
+        </div>
+
+        <details class="smart-money-details">
+          <summary>Order Block, Fair Value Gap e Fibonacci</summary>
+          <div class="smart-money-grid">
+            <div><h4>Order Block</h4>${zoneRows(structure.orderBlocks.map(x=>({...x,label:`${x.kind==="bullish"?"Rialzista":"Ribassista"} · ${x.timeframe}`})),"Nessun Order Block recente.")}</div>
+            <div><h4>Fair Value Gap</h4>${zoneRows(structure.fvgs.map(x=>({...x,label:`${x.kind==="bullish"?"Rialzista":"Ribassista"} · ${x.timeframe}`})),"Nessun Fair Value Gap significativo.")}</div>
+            <div>
+              <h4>Fibonacci Daily</h4>
+              ${structure.fibonacci ? `<div class="fib-list">${structure.fibonacci.levels.map(x=>`<div><span>${(x.ratio*100).toFixed(1)}%</span><strong>${number(x.price,2)}</strong></div>`).join("")}</div>` : `<p class="empty-structure">Dati insufficienti.</p>`}
+            </div>
+          </div>
+          <p class="heuristic-note">Order Block e Fair Value Gap sono rilevati con regole euristiche sulle candele OHLC e vanno confermati sul grafico.</p>
+        </details>
       </section>
 
       <section class="coach-section">
