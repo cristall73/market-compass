@@ -1645,6 +1645,333 @@ function openDetails(symbol) {
   });
 }
 
+
+function reportDateLabel(date) {
+  const value = date instanceof Date && !Number.isNaN(date.getTime()) ? date : new Date();
+  return new Intl.DateTimeFormat("it-IT", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(value);
+}
+
+function safeReportFilename(date) {
+  const value = date instanceof Date && !Number.isNaN(date.getTime()) ? date : new Date();
+  const pad = numberValue => String(numberValue).padStart(2, "0");
+  return `market-compass-report-${value.getFullYear()}-${pad(value.getMonth() + 1)}-${pad(value.getDate())}-${pad(value.getHours())}${pad(value.getMinutes())}.png`;
+}
+
+function reportPalette(statusCode) {
+  if (statusCode === "GREEN") {
+    return { accent: "#35c98b", soft: "#12372e", text: "#b9f5dc" };
+  }
+  if (statusCode === "YELLOW") {
+    return { accent: "#efb34e", soft: "#3a2e18", text: "#ffe4ae" };
+  }
+  return { accent: "#ef6670", soft: "#3a1d25", text: "#ffc2c8" };
+}
+
+function roundedRectPath(context, x, y, width, height, radius) {
+  const r = Math.min(radius, width / 2, height / 2);
+  context.beginPath();
+  context.moveTo(x + r, y);
+  context.arcTo(x + width, y, x + width, y + height, r);
+  context.arcTo(x + width, y + height, x, y + height, r);
+  context.arcTo(x, y + height, x, y, r);
+  context.arcTo(x, y, x + width, y, r);
+  context.closePath();
+}
+
+function drawRoundedRect(context, x, y, width, height, radius, fill, stroke = null, lineWidth = 1) {
+  roundedRectPath(context, x, y, width, height, radius);
+  context.fillStyle = fill;
+  context.fill();
+  if (stroke) {
+    context.strokeStyle = stroke;
+    context.lineWidth = lineWidth;
+    context.stroke();
+  }
+}
+
+function wrapCanvasText(context, text, x, y, maxWidth, lineHeight, maxLines = 3) {
+  const words = String(text || "").split(/\s+/);
+  const lines = [];
+  let current = "";
+
+  for (const word of words) {
+    const test = current ? `${current} ${word}` : word;
+    if (context.measureText(test).width <= maxWidth) {
+      current = test;
+    } else {
+      if (current) lines.push(current);
+      current = word;
+      if (lines.length >= maxLines - 1) break;
+    }
+  }
+
+  if (current && lines.length < maxLines) lines.push(current);
+
+  const consumedWords = lines.join(" ").split(/\s+/).length;
+  if (consumedWords < words.length && lines.length) {
+    let last = lines[lines.length - 1];
+    while (context.measureText(`${last}…`).width > maxWidth && last.length > 1) {
+      last = last.slice(0, -1);
+    }
+    lines[lines.length - 1] = `${last}…`;
+  }
+
+  lines.forEach((line, index) => context.fillText(line, x, y + index * lineHeight));
+  return lines.length * lineHeight;
+}
+
+function drawReportMetric(context, x, y, label, value, width = 190) {
+  drawRoundedRect(context, x, y, width, 84, 14, "#101e31", "#253a55", 2);
+  context.fillStyle = "#8fb3df";
+  context.font = "600 21px Arial, sans-serif";
+  context.fillText(label, x + 16, y + 27);
+  context.fillStyle = "#f5f8ff";
+  context.font = "800 32px Arial, sans-serif";
+  context.fillText(value, x + 16, y + 65);
+}
+
+function drawReportStatus(context, x, y, status, width = 250) {
+  const palette = reportPalette(status.code);
+  drawRoundedRect(context, x, y, width, 54, 27, palette.soft, palette.accent, 2);
+  context.fillStyle = palette.accent;
+  context.beginPath();
+  context.arc(x + 27, y + 27, 14, 0, Math.PI * 2);
+  context.fill();
+  context.fillStyle = "#07111f";
+  context.font = "900 20px Arial, sans-serif";
+  context.textAlign = "center";
+  context.textBaseline = "middle";
+  context.fillText(status.icon, x + 27, y + 28);
+  context.textAlign = "left";
+  context.textBaseline = "alphabetic";
+  context.fillStyle = palette.text;
+  context.font = "800 20px Arial, sans-serif";
+  context.fillText(`${status.colorName} · ${status.short}`, x + 51, y + 34);
+}
+
+function generateTelegramReport() {
+  if (!analyses.length) {
+    window.alert("I dati non sono ancora pronti. Attendi il caricamento della dashboard.");
+    return;
+  }
+
+  const sorted = [...analyses].sort((a, b) => {
+    const statusOrder = { GREEN: 3, YELLOW: 2, RED: 1 };
+    const statusDifference =
+      statusOrder[operationalStatus(b).code] -
+      statusOrder[operationalStatus(a).code];
+
+    if (statusDifference !== 0) return statusDifference;
+    return finalSetupScore(b) - finalSetupScore(a);
+  });
+
+  const lead = sorted[0];
+  const leadStatus = operationalStatus(lead);
+  const generatedAt = lastUpdate || MARKET_DATA_PROVIDER.getGeneratedAt() || new Date();
+
+  const canvas = document.createElement("canvas");
+  canvas.width = 1600;
+  canvas.height = 2250;
+  const context = canvas.getContext("2d");
+
+  context.fillStyle = "#07111f";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+
+  const backgroundGradient = context.createLinearGradient(0, 0, 1600, 700);
+  backgroundGradient.addColorStop(0, "#0a1628");
+  backgroundGradient.addColorStop(1, "#07111f");
+  context.fillStyle = backgroundGradient;
+  context.fillRect(0, 0, canvas.width, 700);
+
+  // Header
+  context.fillStyle = "#4f8cff";
+  context.font = "800 24px Arial, sans-serif";
+  context.fillText("MARKET COMPASS", 70, 65);
+
+  context.fillStyle = "#f5f8ff";
+  context.font = "900 58px Arial, sans-serif";
+  context.fillText("Trading Coach AI", 70, 135);
+
+  context.fillStyle = "#9bb9df";
+  context.font = "500 24px Arial, sans-serif";
+  context.fillText("Report tecnico multi-timeframe - 1M · 1W · 1D · 4H · 1H", 70, 180);
+
+  context.textAlign = "right";
+  context.fillStyle = "#dce8f7";
+  context.font = "700 23px Arial, sans-serif";
+  context.fillText(reportDateLabel(generatedAt), 1530, 70);
+  context.fillStyle = "#7894b8";
+  context.font = "500 19px Arial, sans-serif";
+  context.fillText(MARKET_DATA_PROVIDER.name, 1530, 104);
+  context.textAlign = "left";
+
+  // Summary
+  drawReportMetric(context, 70, 225, "Asset analizzati", String(analyses.length), 330);
+  drawReportMetric(context, 420, 225, "LONG", String(analyses.filter(x => x.result.direction === "LONG").length), 330);
+  drawReportMetric(context, 770, 225, "SHORT", String(analyses.filter(x => x.result.direction === "SHORT").length), 330);
+  drawReportMetric(context, 1120, 225, "WAIT", String(analyses.filter(x => x.result.direction === "WAIT").length), 410);
+
+  // Lead candidate
+  const leadPalette = reportPalette(leadStatus.code);
+  drawRoundedRect(context, 70, 340, 1460, 300, 22, "#0d1b2e", leadPalette.accent, 3);
+
+  context.fillStyle = "#8fb3df";
+  context.font = "700 22px Arial, sans-serif";
+  context.fillText(
+    leadStatus.code === "GREEN" ? "MIGLIORE INGRESSO PRONTO" : "PRIMO CANDIDATO DA MONITORARE",
+    100,
+    385
+  );
+
+  context.fillStyle = "#f7f9ff";
+  context.font = "900 46px Arial, sans-serif";
+  context.fillText(lead.asset.name, 100, 445);
+
+  drawReportStatus(context, 100, 475, leadStatus, 340);
+
+  context.fillStyle = leadPalette.accent;
+  context.font = "900 68px Arial, sans-serif";
+  context.textAlign = "right";
+  context.fillText(`${number(finalSetupScore(lead), 1)}/10`, 1490, 450);
+  context.fillStyle = "#9bb1ce";
+  context.font = "700 21px Arial, sans-serif";
+  context.fillText("SETUP FINALE", 1490, 485);
+  context.textAlign = "left";
+
+  context.fillStyle = "#dce8f7";
+  context.font = "600 23px Arial, sans-serif";
+  const leadText = `${leadStatus.explanation} ${missingConditionsText(lead.result, lead.plan)}`;
+  wrapCanvasText(context, leadText, 100, 570, 1370, 32, 2);
+
+  // Table header
+  const tableTop = 690;
+  drawRoundedRect(context, 70, tableTop, 1460, 58, 12, "#13243a");
+  const columns = [
+    { x: 95, label: "ASSET" },
+    { x: 385, label: "SEMAFORO" },
+    { x: 700, label: "DIREZIONE" },
+    { x: 865, label: "TREND" },
+    { x: 1005, label: "INGRESSO" },
+    { x: 1165, label: "CONFL." },
+    { x: 1305, label: "SETUP" }
+  ];
+  context.fillStyle = "#8fb3df";
+  context.font = "800 19px Arial, sans-serif";
+  columns.forEach(column => context.fillText(column.label, column.x, tableTop + 37));
+
+  let rowY = tableTop + 75;
+  sorted.forEach((item, index) => {
+    const status = operationalStatus(item);
+    const palette = reportPalette(status.code);
+    const setup = finalSetupScore(item);
+    const rowHeight = 154;
+
+    drawRoundedRect(
+      context,
+      70,
+      rowY,
+      1460,
+      rowHeight,
+      14,
+      index % 2 === 0 ? "#0c192a" : "#0a1727",
+      "#1e324c",
+      1
+    );
+
+    context.fillStyle = "#24456e";
+    context.beginPath();
+    context.arc(105, rowY + 43, 22, 0, Math.PI * 2);
+    context.fill();
+    context.fillStyle = "#dceaff";
+    context.font = "800 20px Arial, sans-serif";
+    context.textAlign = "center";
+    context.textBaseline = "middle";
+    context.fillText(String(index + 1), 105, rowY + 44);
+    context.textAlign = "left";
+    context.textBaseline = "alphabetic";
+
+    context.fillStyle = "#f4f7ff";
+    context.font = "900 27px Arial, sans-serif";
+    context.fillText(item.asset.name, 145, rowY + 51);
+
+    context.fillStyle = "#7797bd";
+    context.font = "600 18px Arial, sans-serif";
+    context.fillText(item.asset.symbol, 145, rowY + 82);
+
+    drawReportStatus(context, 375, rowY + 20, status, 285);
+
+    context.fillStyle = item.result.direction === "LONG"
+      ? "#35c98b"
+      : item.result.direction === "SHORT"
+        ? "#ef6670"
+        : "#efb34e";
+    context.font = "900 23px Arial, sans-serif";
+    context.fillText(item.result.direction, 700, rowY + 52);
+
+    context.fillStyle = "#f4f7ff";
+    context.font = "900 27px Arial, sans-serif";
+    context.fillText(`${tenScale(item.result.confidence)}/10`, 865, rowY + 52);
+    context.fillText(`${tenScale(item.plan.opportunityScore)}/10`, 1005, rowY + 52);
+    context.fillText(`${item.structure?.confluenceScore || 0}/10`, 1165, rowY + 52);
+
+    context.fillStyle = palette.accent;
+    context.font = "900 31px Arial, sans-serif";
+    context.fillText(`${number(setup, 1)}/10`, 1305, rowY + 52);
+
+    context.fillStyle = "#b6c7dd";
+    context.font = "600 18px Arial, sans-serif";
+    wrapCanvasText(context, status.explanation, 145, rowY + 118, 1000, 25, 2);
+
+    context.fillStyle = "#8098b8";
+    context.font = "600 17px Arial, sans-serif";
+    context.textAlign = "right";
+    context.fillText(missingConditionsText(item.result, item.plan), 1490, rowY + 118);
+    context.textAlign = "left";
+
+    rowY += rowHeight + 12;
+  });
+
+  // Footer
+  const footerY = 2135;
+  context.fillStyle = "#1b3049";
+  context.fillRect(70, footerY, 1460, 2);
+
+  context.fillStyle = "#8aa2c1";
+  context.font = "600 18px Arial, sans-serif";
+  context.fillText(
+    "Analisi tecnica sperimentale. Il voto misura la coerenza del setup e non garantisce risultati futuri.",
+    70,
+    footerY + 42
+  );
+  context.fillText(
+    "Il report non contiene link al sito né dati personali.",
+    70,
+    footerY + 76
+  );
+
+  canvas.toBlob(blob => {
+    if (!blob) {
+      window.alert("Non è stato possibile creare il report.");
+      return;
+    }
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = safeReportFilename(generatedAt);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }, "image/png", 0.95);
+}
+
 async function refreshDashboard() {
   const button = document.querySelector("#refreshBtn");
   button.disabled = true;
@@ -1658,9 +1985,11 @@ async function refreshDashboard() {
 
   button.disabled = false;
   button.textContent = "Aggiorna dati";
+  document.querySelector("#reportBtn").disabled = analyses.length === 0;
 }
 
 document.querySelector("#refreshBtn").addEventListener("click", refreshDashboard);
+document.querySelector("#reportBtn").addEventListener("click", generateTelegramReport);
 document.querySelector("#directionFilter").addEventListener("change", renderCards);
 document.querySelector("#closeDialog").addEventListener("click", () => {
   document.querySelector("#detailDialog").close();
@@ -1671,6 +2000,7 @@ document.querySelector("#closeDialog").addEventListener("click", () => {
     await analyzeAll();
     renderSummary();
     renderCards();
+    document.querySelector("#reportBtn").disabled = analyses.length === 0;
   } catch (error) {
     console.error(error);
     document.querySelector("#marketGrid").innerHTML = `

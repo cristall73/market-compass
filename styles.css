@@ -1706,3 +1706,48 @@ footer { padding: 20px; text-align: center; border-top: 1px solid var(--line); }
     gap: 3px;
   }
 }
+
+
+/* v5.1.0 - Report Telegram */
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.report-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(79, 140, 255, .55);
+  background: rgba(79, 140, 255, .10);
+  color: #cfe0ff;
+}
+
+.report-button:hover:not(:disabled) {
+  background: rgba(79, 140, 255, .20);
+  border-color: #4f8cff;
+}
+
+.report-button:disabled {
+  cursor: not-allowed;
+  opacity: .45;
+}
+
+.report-button span {
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+@media (max-width: 760px) {
+  .header-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .header-actions button {
+    flex: 1 1 100%;
+  }
+}

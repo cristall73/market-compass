@@ -1,4 +1,4 @@
-# Market Compass v5.0.0 Professional
+# Market Compass v5.1.0 Professional
 
 Pacchetto completo. Non sovrascrive `data/market-data.json`.
 
@@ -86,3 +86,18 @@ Il semaforo verde compare soltanto quando:
 Non viene mostrata una falsa probabilità di successo.
 Il sito dichiara esplicitamente che il voto è tecnico e non statistico.
 La probabilità reale verrà aggiunta soltanto dopo un backtest con campione sufficiente.
+
+
+## Versione 5.1.0 - Report Telegram
+
+Aggiunto il pulsante `Scarica report Telegram`.
+
+Il report:
+- viene generato direttamente nel browser;
+- viene scaricato come immagine PNG;
+- non contiene il link del sito;
+- non contiene dati personali;
+- include data e ora, riepilogo, candidato principale, semaforo e classifica degli 8 asset;
+- è pensato per essere inoltrato su Telegram senza condividere la dashboard.
+
+Non sono usate librerie o servizi esterni: il report viene creato con Canvas API.
