@@ -1,4 +1,4 @@
-# Market Compass v5.1.0 Professional
+# Market Compass v5.2.0 Professional
 
 Pacchetto completo. Non sovrascrive `data/market-data.json`.
 
@@ -101,3 +101,18 @@ Il report:
 - è pensato per essere inoltrato su Telegram senza condividere la dashboard.
 
 Non sono usate librerie o servizi esterni: il report viene creato con Canvas API.
+
+
+## Versione 5.2.0 - Aggiornamento automatico e freschezza dati
+
+- GitHub Actions aggiorna `market-data.json` ogni 15 minuti.
+- Il sito controlla automaticamente il file ogni 15 minuti mentre rimane aperto.
+- Lo stato in alto mostra:
+  - Dati aggiornati: fino a 20 minuti;
+  - Dati non recentissimi: da 21 a 45 minuti;
+  - Dati vecchi: oltre 45 minuti.
+- Colore, simbolo e testo sono sempre presenti per accessibilità.
+- Il pulsante `Aggiorna dati` continua a rileggere manualmente il file disponibile.
+
+Nota: GitHub Actions può eseguire i workflow pianificati con alcuni minuti di ritardo.
+Il sito statico non può avviare direttamente un workflow privato senza credenziali.

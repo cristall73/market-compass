@@ -1751,3 +1751,82 @@ footer { padding: 20px; text-align: center; border-top: 1px solid var(--line); }
     flex: 1 1 100%;
   }
 }
+
+
+/* v5.2.0 - Stato freschezza dati */
+.freshness-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 205px;
+  padding: 8px 11px;
+  border: 1px solid;
+  border-radius: 10px;
+  background: rgba(255,255,255,.035);
+}
+
+.freshness-symbol {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  color: #07111f;
+  font-weight: 900;
+}
+
+.freshness-status strong,
+.freshness-status small {
+  display: block;
+}
+
+.freshness-status strong {
+  font-size: .75rem;
+}
+
+.freshness-status small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: .65rem;
+}
+
+.freshness-loading,
+.freshness-unknown {
+  border-color: rgba(151,168,194,.35);
+}
+.freshness-loading .freshness-symbol,
+.freshness-unknown .freshness-symbol {
+  background: #97a8c2;
+}
+
+.freshness-fresh {
+  border-color: rgba(53,201,139,.48);
+  background: rgba(53,201,139,.08);
+}
+.freshness-fresh .freshness-symbol {
+  background: #35c98b;
+}
+
+.freshness-aging {
+  border-color: rgba(239,179,78,.50);
+  background: rgba(239,179,78,.08);
+}
+.freshness-aging .freshness-symbol {
+  background: #efb34e;
+}
+
+.freshness-stale {
+  border-color: rgba(239,102,112,.50);
+  background: rgba(239,102,112,.08);
+}
+.freshness-stale .freshness-symbol {
+  background: #ef6670;
+}
+
+@media (max-width: 760px) {
+  .freshness-status {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

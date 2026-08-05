@@ -5,16 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Market Compass: dashboard tecnica multi-timeframe per trading e opportunità azionarie." />
   <title>Market Compass</title>
-  <link rel="stylesheet" href="styles.css?v=510" />
+  <link rel="stylesheet" href="styles.css?v=520" />
 </head>
 <body>
   <header class="topbar">
     <div>
-      <p class="eyebrow">MARKET COMPASS · v5.1.0 TRADING + REPORT</p>
+      <p class="eyebrow">MARKET COMPASS · v5.2.0 AUTO UPDATE</p>
       <h1>Trading Coach AI</h1>
-      <p class="subtitle">Analisi 1M → 1W → 1D → 4H → 1H con semaforo accessibile, piano operativo e report condivisibile per Telegram</p>
+      <p class="subtitle">Analisi 1M → 1W → 1D → 4H → 1H con aggiornamento automatico, controllo freschezza e report Telegram</p>
     </div>
     <div class="header-actions">
+      <div id="freshnessStatus" class="freshness-status freshness-loading" role="status" aria-live="polite">
+        <span class="freshness-symbol" aria-hidden="true">…</span>
+        <div>
+          <strong>Controllo aggiornamento</strong>
+          <small>Verifico l’età dei dati</small>
+        </div>
+      </div>
       <button id="reportBtn" class="secondary report-button" type="button" disabled>
         <span aria-hidden="true">⇩</span>
         Scarica report Telegram
@@ -72,8 +79,8 @@
     Prototipo sperimentale. Non costituisce consulenza finanziaria.
   </footer>
 
-  <script src="data/tradingConfig.js?v=510"></script>
-  <script src="engine/tradingEngine.js?v=510"></script>
-  <script src="app.js?v=510"></script>
+  <script src="data/tradingConfig.js?v=520"></script>
+  <script src="engine/tradingEngine.js?v=520"></script>
+  <script src="app.js?v=520"></script>
 </body>
 </html>

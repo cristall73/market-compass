@@ -1646,6 +1646,106 @@ function openDetails(symbol) {
 }
 
 
+
+const DATA_FRESHNESS = {
+  freshMinutes: 20,
+  staleMinutes: 45,
+  browserRefreshMinutes: 15
+};
+
+function minutesSince(date) {
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) return null;
+  return Math.max(0, Math.floor((Date.now() - date.getTime()) / 60000));
+}
+
+function relativeAgeLabel(minutes) {
+  if (minutes == null) return "ora non disponibile";
+  if (minutes < 1) return "meno di un minuto fa";
+  if (minutes === 1) return "1 minuto fa";
+  if (minutes < 60) return `${minutes} minuti fa`;
+  const hours = Math.floor(minutes / 60);
+  const remaining = minutes % 60;
+  if (hours === 1 && remaining === 0) return "1 ora fa";
+  if (remaining === 0) return `${hours} ore fa`;
+  return `${hours}h ${remaining}m fa`;
+}
+
+function freshnessState(date) {
+  const age = minutesSince(date);
+
+  if (age == null) {
+    return {
+      code: "unknown",
+      symbol: "?",
+      title: "Età dati sconosciuta",
+      detail: "Controlla il file di mercato"
+    };
+  }
+
+  if (age <= DATA_FRESHNESS.freshMinutes) {
+    return {
+      code: "fresh",
+      symbol: "✓",
+      title: "Dati aggiornati",
+      detail: relativeAgeLabel(age)
+    };
+  }
+
+  if (age <= DATA_FRESHNESS.staleMinutes) {
+    return {
+      code: "aging",
+      symbol: "!",
+      title: "Dati non recentissimi",
+      detail: `${relativeAgeLabel(age)} · nuovo aggiornamento atteso`
+    };
+  }
+
+  return {
+    code: "stale",
+    symbol: "✕",
+    title: "Dati vecchi",
+    detail: `${relativeAgeLabel(age)} · verifica GitHub Actions`
+  };
+}
+
+function renderFreshnessStatus() {
+  const element = document.querySelector("#freshnessStatus");
+  if (!element) return;
+
+  const generatedAt = lastUpdate || MARKET_DATA_PROVIDER.getGeneratedAt();
+  const state = freshnessState(generatedAt);
+
+  element.className = `freshness-status freshness-${state.code}`;
+  element.innerHTML = `
+    <span class="freshness-symbol" aria-hidden="true">${state.symbol}</span>
+    <div>
+      <strong>${state.title}</strong>
+      <small>${state.detail}</small>
+    </div>
+  `;
+}
+
+function scheduleBrowserDataRefresh() {
+  window.setInterval(async () => {
+    const before = lastUpdate?.getTime?.() || 0;
+    await MARKET_DATA_PROVIDER.refresh();
+
+    const providerDate = MARKET_DATA_PROVIDER.getGeneratedAt();
+    const after = providerDate?.getTime?.() || 0;
+
+    if (after > before) {
+      await analyzeAll();
+      renderSummary();
+      renderCards();
+      document.querySelector("#reportBtn").disabled = analyses.length === 0;
+    }
+
+    renderFreshnessStatus();
+  }, DATA_FRESHNESS.browserRefreshMinutes * 60 * 1000);
+
+  window.setInterval(renderFreshnessStatus, 60 * 1000);
+}
+
 function reportDateLabel(date) {
   const value = date instanceof Date && !Number.isNaN(date.getTime()) ? date : new Date();
   return new Intl.DateTimeFormat("it-IT", {
@@ -1986,6 +2086,7 @@ async function refreshDashboard() {
   button.disabled = false;
   button.textContent = "Aggiorna dati";
   document.querySelector("#reportBtn").disabled = analyses.length === 0;
+  renderFreshnessStatus();
 }
 
 document.querySelector("#refreshBtn").addEventListener("click", refreshDashboard);
@@ -2001,6 +2102,8 @@ document.querySelector("#closeDialog").addEventListener("click", () => {
     renderSummary();
     renderCards();
     document.querySelector("#reportBtn").disabled = analyses.length === 0;
+    renderFreshnessStatus();
+    scheduleBrowserDataRefresh();
   } catch (error) {
     console.error(error);
     document.querySelector("#marketGrid").innerHTML = `
