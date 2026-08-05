@@ -1,4 +1,4 @@
-# Market Compass v3.0.2 Professional
+# Market Compass v4.0.0 Professional
 
 Pacchetto completo. Non sovrascrive `data/market-data.json`.
 
@@ -34,3 +34,21 @@ Ora vengono sempre indicati separatamente:
 - Confluenza.
 
 La classifica usa la qualità dell'ingresso insieme alla priorità operativa e alla confluenza.
+
+
+## Versione 4.0.0 — Professional UI
+
+- classifica trasformata in tabella stabile e senza testi tagliati;
+- nessun valore va più a capo come “Ingres... 4/1”;
+- nuovo voto finale unico del setup;
+- il voto finale combina:
+  - 25% forza del trend;
+  - 40% qualità dell'ingresso;
+  - 20% confluenza;
+  - 15% gestione del rischio;
+  - bonus/malus legato allo stato operativo;
+- classifica ordinata principalmente per voto finale;
+- dettaglio separato di trend, ingresso, confluenza e rischio;
+- voto finale grande nel candidato principale;
+- voto finale presente anche su ogni card;
+- layout responsive per desktop, tablet e smartphone.

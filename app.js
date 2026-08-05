@@ -546,6 +546,59 @@ function isSetupReady(item) {
   return item.plan.actionCode === "READY";
 }
 
+function riskScore(plan) {
+  const rr = Number(plan.rr || 0);
+  const distanceAtr = Number(plan.distanceAtr || 0);
+
+  let score = 5;
+  if (rr >= 3) score += 2;
+  else if (rr >= 2) score += 1;
+  else if (rr < 1.5) score -= 2;
+
+  if (distanceAtr <= 0.5) score += 2;
+  else if (distanceAtr <= 1.25) score += 1;
+  else if (distanceAtr >= 2.5) score -= 2;
+  else if (distanceAtr >= 1.75) score -= 1;
+
+  return Math.max(0, Math.min(10, Math.round(score)));
+}
+
+function finalSetupScore(item) {
+  const trend = tenScale(item.result.confidence);
+  const entry = tenScale(item.plan.opportunityScore);
+  const confluence = item.structure?.confluenceScore || 0;
+  const risk = riskScore(item.plan);
+
+  let score =
+    trend * 0.25 +
+    entry * 0.40 +
+    confluence * 0.20 +
+    risk * 0.15;
+
+  if (item.plan.actionCode === "READY") score += 1.2;
+  if (item.plan.actionCode === "CONFIRM") score += 0.5;
+  if (item.plan.actionCode === "NEAR") score += 0.2;
+  if (item.plan.actionCode === "EXTENDED") score -= 1.0;
+  if (item.plan.actionCode === "INVALID") score -= 2.0;
+  if (item.plan.actionCode === "NO_TRADE") score -= 1.0;
+
+  return Math.max(0, Math.min(10, Math.round(score * 10) / 10));
+}
+
+function setupScoreClass(value) {
+  if (value >= 8) return "setup-excellent";
+  if (value >= 6) return "setup-good";
+  if (value >= 4) return "setup-medium";
+  return "setup-weak";
+}
+
+function setupVerdict(value) {
+  if (value >= 8) return "Setup molto interessante";
+  if (value >= 6) return "Setup buono";
+  if (value >= 4) return "Setup da monitorare";
+  return "Setup debole";
+}
+
 function number(value, digits = 2) {
   return value == null || Number.isNaN(value) ? "—" : Number(value).toFixed(digits);
 }
@@ -941,51 +994,92 @@ function renderSummary() {
   }
 
   const ranking = [...analyses]
-    .sort((a, b) => rankingScore(b) - rankingScore(a))
+    .sort((a, b) => {
+      const finalDifference = finalSetupScore(b) - finalSetupScore(a);
+      if (Math.abs(finalDifference) >= 0.1) return finalDifference;
+      return rankingScore(b) - rankingScore(a);
+    })
     .slice(0, 3);
 
   const ready = ranking.find(isSetupReady);
   const lead = ready || ranking[0];
+  const leadFinalScore = finalSetupScore(lead);
 
   banner.innerHTML = `
-    <div>
+    <div class="ranking-panel">
       <small>${ready ? "SETUP PRONTO DA VALUTARE" : "NESSUN INGRESSO PRONTO ADESSO"}</small>
       ${!ready ? `
         <p class="ranking-explanation">
           Nessun asset soddisfa ancora tutte le condizioni d’ingresso.
-          La classifica mostra quali mercati sono più vicini a diventare interessanti.
+          La classifica ordina i mercati usando il voto finale del setup.
         </p>` : ""}
-      ${ranking.map((item, index) => `
-        <div class="ranking-row">
-          <strong>${index + 1}. ${item.asset.name}</strong>
-          <span class="badge ${badgeClass(item.result.direction)}">${item.result.direction}</span>
-          <span class="action-pill ${actionClass(item.plan.actionCode)}">${item.plan.action}</span>
-          <span class="rank-score">Ingresso ${tenScale(item.plan.opportunityScore)}/10</span>
+
+      <div class="ranking-table">
+        <div class="ranking-table-head">
+          <span>Asset</span>
+          <span>Direzione</span>
+          <span>Azione</span>
+          <span>Trend</span>
+          <span>Ingresso</span>
+          <span>Confluenza</span>
+          <span>Rischio</span>
+          <span>Setup</span>
         </div>
-        <div class="ranking-metrics">
-          <span>Trend ${tenScale(item.result.confidence)}/10</span>
-          <span>Ingresso ${tenScale(item.plan.opportunityScore)}/10</span>
-          <span>Confluenza ${item.structure?.confluenceScore || 0}/10</span>
-        </div>
-        <div class="ranking-reason">${plainActionExplanation(item)}</div>
-      `).join("")}
+
+        ${ranking.map((item, index) => {
+          const finalScore = finalSetupScore(item);
+          return `
+            <div class="ranking-table-row">
+              <div class="ranking-asset">
+                <b>${index + 1}</b>
+                <strong>${item.asset.name}</strong>
+              </div>
+              <div><span class="badge ${badgeClass(item.result.direction)}">${item.result.direction}</span></div>
+              <div><span class="action-pill ${actionClass(item.plan.actionCode)}">${item.plan.action}</span></div>
+              <div class="metric-cell"><small>Trend</small><strong>${tenScale(item.result.confidence)}/10</strong></div>
+              <div class="metric-cell"><small>Ingresso</small><strong>${tenScale(item.plan.opportunityScore)}/10</strong></div>
+              <div class="metric-cell"><small>Confluenza</small><strong>${item.structure?.confluenceScore || 0}/10</strong></div>
+              <div class="metric-cell"><small>Rischio</small><strong>${riskScore(item.plan)}/10</strong></div>
+              <div class="final-score-cell ${setupScoreClass(finalScore)}">
+                <small>Setup</small>
+                <strong>${number(finalScore, 1)}/10</strong>
+              </div>
+              <p class="ranking-row-reason">${plainActionExplanation(item)}</p>
+            </div>
+          `;
+        }).join("")}
+      </div>
+
       <div class="update-meta">
         Aggiornato alle ${formatTime(lastUpdate)}
         <span class="data-source-badge">${MARKET_DATA_PROVIDER.name}</span>
       </div>
     </div>
-    <div>
+
+    <aside class="lead-panel">
       <small>${ready ? "MIGLIORE SETUP PRONTO" : "PRIMO CANDIDATO DA MONITORARE"}</small>
-      <strong>${lead.asset.name}</strong>
-      <div class="action-pill ${actionClass(lead.plan.actionCode)}">${lead.plan.action}</div>
-      <div class="human-score">${tenScale(lead.plan.opportunityScore)}/10</div>
-      <div class="symbol">Qualità ingresso · ${opportunityLabel(lead.plan.opportunityScore)}</div>
-      <div class="lead-metrics">
-        Trend ${tenScale(lead.result.confidence)}/10 ·
-        Confluenza ${lead.structure?.confluenceScore || 0}/10
+      <div class="lead-title-row">
+        <strong>${lead.asset.name}</strong>
+        <span class="action-pill ${actionClass(lead.plan.actionCode)}">${lead.plan.action}</span>
       </div>
+
+      <div class="lead-score ${setupScoreClass(leadFinalScore)}">
+        <span>SETUP FINALE</span>
+        <strong>${number(leadFinalScore, 1)}</strong>
+        <small>/10</small>
+      </div>
+
+      <div class="lead-score-label">${setupVerdict(leadFinalScore)}</div>
+
+      <div class="lead-breakdown">
+        <span>Trend <strong>${tenScale(lead.result.confidence)}/10</strong></span>
+        <span>Ingresso <strong>${tenScale(lead.plan.opportunityScore)}/10</strong></span>
+        <span>Confluenza <strong>${lead.structure?.confluenceScore || 0}/10</strong></span>
+        <span>Rischio <strong>${riskScore(lead.plan)}/10</strong></span>
+      </div>
+
       <p class="lead-explanation">${plainActionExplanation(lead)}</p>
-    </div>
+    </aside>
   `;
 }
 
@@ -1021,6 +1115,14 @@ function renderCards() {
       <div class="quality-row confluence-mini">
         <span>Confluenza · ${confluenceLabel(structure.confluenceScore)}</span>
         <strong>${structure.confluenceScore}/10</strong>
+      </div>
+      <div class="quality-row risk-mini">
+        <span>Gestione rischio</span>
+        <strong>${riskScore(plan)}/10</strong>
+      </div>
+      <div class="card-final-score ${setupScoreClass(finalSetupScore({ asset, result, plan, structure }))}">
+        <span>SETUP FINALE</span>
+        <strong>${number(finalSetupScore({ asset, result, plan, structure }), 1)}/10</strong>
       </div>
 
       <div class="card-prices">
@@ -1094,6 +1196,10 @@ function openDetails(symbol) {
           <strong>${tenScale(plan.opportunityScore)}/10</strong>
           <span>${trendLabel(result)} · Concordanza ${tenScale(result.alignment)}/10</span>
           <span class="confluence-scoreline">Confluenza strutturale ${structure.confluenceScore}/10</span>
+          <span class="confluence-scoreline">Rischio ${riskScore(plan)}/10</span>
+          <span class="popup-final-score ${setupScoreClass(finalSetupScore({ asset, result, plan, structure }))}">
+            Setup finale ${number(finalSetupScore({ asset, result, plan, structure }), 1)}/10
+          </span>
         </div>
       </header>
 
