@@ -987,7 +987,7 @@ function renderCards() {
     .filter(x => filter === "ALL" || x.result.direction === filter)
     .sort((a, b) => Math.abs(b.result.score) - Math.abs(a.result.score));
 
-  document.querySelector("#marketGrid").innerHTML = visible.map(({ asset, result, plan }) => `
+  document.querySelector("#marketGrid").innerHTML = visible.map(({ asset, result, plan, structure }) => `
     <article class="market-card" data-symbol="${asset.symbol}">
       <div class="card-top">
         <div>

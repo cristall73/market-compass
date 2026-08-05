@@ -1,4 +1,4 @@
-# Market Compass v3.0.0 Professional
+# Market Compass v3.0.1 Professional
 
 Pacchetto completo. Non sovrascrive `data/market-data.json`.
 
@@ -15,3 +15,10 @@ Nuove funzioni:
 
 Tutti i calcoli partono dalle candele OHLC scaricate tramite Yahoo Finance/yfinance.
 Order Block e FVG sono euristiche sperimentali da verificare sul grafico.
+
+
+## Correzione 3.0.1
+
+Corretto un errore nella creazione delle card: la struttura di supporti, resistenze e confluenze
+veniva calcolata correttamente ma non veniva passata al template delle card.
+Il browser interpretava l'errore come assenza di dati reali.
