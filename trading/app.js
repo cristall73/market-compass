@@ -1659,7 +1659,7 @@ function openDetails(symbol) {
 const DATA_FRESHNESS = {
   freshMinutes: 20,
   staleMinutes: 45,
-  browserRefreshMinutes: 15
+  browserRefreshMinutes: 5
 };
 
 function minutesSince(date) {
@@ -2083,8 +2083,10 @@ function generateTelegramReport() {
 
 async function refreshDashboard() {
   const button = document.querySelector("#refreshBtn");
-  button.disabled = true;
-  button.textContent = "Aggiornamento...";
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Aggiornamento...";
+  }
 
   MARKET_DATA_PROVIDER.payload = null;
   MARKET_DATA_PROVIDER.loadPromise = null;
@@ -2092,13 +2094,15 @@ async function refreshDashboard() {
   renderSummary();
   renderCards();
 
-  button.disabled = false;
-  button.textContent = "Aggiorna dati";
+  if (button) {
+    button.disabled = false;
+    button.textContent = "Aggiorna dati";
+  }
   document.querySelector("#reportBtn").disabled = analyses.length === 0;
   renderFreshnessStatus();
 }
 
-document.querySelector("#refreshBtn").addEventListener("click", refreshDashboard);
+document.querySelector("#refreshBtn")?.addEventListener("click", refreshDashboard);
 document.querySelector("#reportBtn").addEventListener("click", generateTelegramReport);
 document.querySelector("#directionFilter").addEventListener("change", renderCards);
 document.querySelector("#closeDialog").addEventListener("click", () => {

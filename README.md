@@ -55,3 +55,12 @@ Corretto il percorso del file dati nel Trading Coach:
 - corretto: `data/market-data.json`, raggiunto dalla pagina tramite `../data/market-data.json`
 
 Investment Coach e workflow unificato restano invariati.
+
+
+## Versione 7.0.2 — aggiornamento completamente automatico
+
+- GitHub Actions esegue `Update Market Data` ogni 2 ore, 24 ore su 24.
+- Il pulsante `Aggiorna dati` è stato rimosso da Trading e Investment.
+- Entrambe le pagine controllano automaticamente ogni 5 minuti se il file JSON è cambiato.
+- Quando GitHub pubblica dati nuovi, la dashboard si aggiorna senza intervento manuale.
+- Il pulsante `Scarica report` resta disponibile.

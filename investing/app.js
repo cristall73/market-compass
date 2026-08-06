@@ -178,8 +178,9 @@ function downloadReport(){
   link.click();
   setTimeout(()=>URL.revokeObjectURL(link.href),1000);
 }
-$("#refreshBtn").addEventListener("click",load);
+$("#refreshBtn")?.addEventListener("click", load);
 $("#reportBtn").addEventListener("click",downloadReport);
 $("#statusFilter").addEventListener("change",renderCards);
 $("#closeDialog").addEventListener("click",()=>$("#detailDialog").close());
 load();
+setInterval(load, 5 * 60 * 1000);
