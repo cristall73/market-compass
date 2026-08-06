@@ -64,3 +64,28 @@ Investment Coach e workflow unificato restano invariati.
 - Entrambe le pagine controllano automaticamente ogni 5 minuti se il file JSON è cambiato.
 - Quando GitHub pubblica dati nuovi, la dashboard si aggiorna senza intervento manuale.
 - Il pulsante `Scarica report` resta disponibile.
+
+
+## Versione 10.0.0 — Investment Memory & Validation Engine
+
+### Classifica lenta e rigida
+- 70% media storica degli ultimi 30 giorni;
+- 30% punteggio odierno;
+- nuova candidata confermata per almeno 3 giorni;
+- uscita ordinaria solo dopo 5 giorni sotto soglia;
+- uscita immediata solo per deterioramento strutturale;
+- margine minimo di 0,40 punti per sostituire la quinta;
+- margine minimo di 0,65 punti per scalzare una delle prime tre;
+- bonus fedeltà massimo di 0,35 punti.
+
+### Memoria
+`data/market-history.json` conserva fino a 120 fotografie giornaliere.
+Gli aggiornamenti ogni due ore aggiornano la fotografia del giorno, senza contare 12 volte la stessa giornata.
+
+### Validazione
+Dopo 20, 60 e 90 giorni il motore confronta il prezzo corrente con quello della selezione:
+- percentuale di casi positivi;
+- rendimento medio;
+- numero di campioni.
+
+Queste statistiche descrivono il passato e non garantiscono risultati futuri.

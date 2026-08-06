@@ -20,6 +20,51 @@ function freshness(){
   return minutes<60?`Dati aggiornati ${minutes} min fa`:`Dati aggiornati ${Math.floor(minutes/60)}h ${minutes%60}m fa`;
 }
 
+
+function renderChanges(){
+  const changes = payload?.changes || {};
+  const entered = changes.entered || [];
+  const exited = changes.exited || [];
+  const unchanged = changes.unchangedCount || 0;
+  const panel = $("#changePanel");
+  if(!panel) return;
+
+  panel.innerHTML = `
+    <div class="change-box">
+      <div><small>MEMORIA DELLA CLASSIFICA</small><h3>${payload.historyDays || 0} giorni osservati</h3></div>
+      <div class="change-metrics">
+        <span><b>${unchanged}</b> confermate</span>
+        <span class="entered"><b>${entered.length}</b> entrate</span>
+        <span class="exited"><b>${exited.length}</b> uscite</span>
+      </div>
+      <p>${entered.length ? `Entrano: ${entered.join(", ")}.` : "Nessuna nuova entrata."}
+      ${exited.length ? ` Escono: ${exited.join(", ")}.` : " Nessuna uscita."}</p>
+      <small>Una nuova azione deve confermarsi per ${payload.rules?.entryConfirmationDays || 3} giorni e superare la precedente con margine significativo.</small>
+    </div>`;
+}
+
+function renderValidation(){
+  const panel = $("#validationPanel");
+  if(!panel) return;
+  const summary = payload?.validationSummary || {};
+  const horizons = [20,60,90];
+  panel.innerHTML = `
+    <div class="validation-box">
+      <div><small>VALIDAZIONE DELLE VECCHIE SELEZIONI</small><h3>Risultati a 1, 2 e 3 mesi</h3></div>
+      <div class="validation-grid">
+        ${horizons.map(days=>{
+          const row=summary[String(days)]||{};
+          const months=days===20?"1 mese":days===60?"2 mesi":"3 mesi";
+          return `<div>
+            <span>${months}</span>
+            <strong>${row.samples || 0} casi</strong>
+            <small>${row.positivePct==null?"Storico insufficiente":`${fmt(row.positivePct,1)}% positivi · media ${fmt(row.averageReturnPct,1)}%`}</small>
+          </div>`;
+        }).join("")}
+      </div>
+    </div>`;
+}
+
 function renderTop(){
   const ranked=[...candidates].sort((a,b)=>b.finalScore-a.finalScore).slice(0,5);
   const lead=ranked[0];
@@ -64,6 +109,12 @@ function card(item){
       <div class="zone"><span>Zona ideale</span><strong>${fmt(item.entryZoneLow)}–${fmt(item.entryZoneHigh)}</strong></div>
       <div class="zone"><span>Invalidazione</span><strong>${fmt(item.invalidation)}</strong></div>
       <div class="zone"><span>Target medio</span><strong>${fmt(item.target2)}</strong></div>
+    </div>
+    <div class="memory-strip">
+      <span>${item.memory?.badge || "Nuovo candidato"}</span>
+      <span>Top5: ${item.memory?.consecutiveTop5Days || 0} gg</span>
+      <span>Stabilità ${fmt(item.memory?.stabilityScore,1)}/10</span>
+      <span>Fiducia ${fmt(item.memory?.confidencePct,0)}%</span>
     </div>
     <p class="why">${item.executiveSummary}</p>
     <strong class="open">Apri report dettagliato →</strong>
@@ -135,6 +186,24 @@ function openDetail(ticker){
         <p><strong>Scenario B — breakout senza ritracciamento:</strong> ${item.scenarios.B}</p>
         <p><strong>Scenario C — deterioramento:</strong> ${item.scenarios.C}</p>
       </section>
+      <section class="report-section full"><h3>Memoria e affidabilità della selezione</h3>${table([
+        ["Badge",item.memory?.badge||"Nuovo candidato"],
+        ["Prima comparsa",item.memory?.firstSeen||"Oggi"],
+        ["Giorni consecutivi in Top5",item.memory?.consecutiveTop5Days||0],
+        ["Presenze totali in Top5",item.memory?.totalTop5Days||0],
+        ["Punteggio odierno",fmt(item.rawScore,1)+"/10"],
+        ["Media storica",fmt(item.memory?.historicalAverage,1)+"/10"],
+        ["Punteggio stabile",fmt(item.stableScore,1)+"/10"],
+        ["Stabilità",fmt(item.memory?.stabilityScore,1)+"/10"],
+        ["Affidabilità",fmt(item.memory?.reliabilityPct,0)+"%"],
+        ["Fiducia del modello",fmt(item.memory?.confidencePct,0)+"%"],
+        ["Momentum 7 giorni",(item.memory?.momentum>=0?"+":"")+fmt(item.memory?.momentum,2)+" · "+(item.memory?.momentumLabel||"Stabile")]
+      ])}</section>
+      <section class="report-section full"><h3>Perché è entrata o è rimasta</h3>
+        <p>Il punteggio finale usa il 70% della media storica e il 30% dei dati odierni. 
+        La permanenza viene premiata con un bonus limitato; una singola seduta del ±2% non basta a sostituire il titolo.</p>
+        <p>${item.selectionReason}</p>
+      </section>
       <section class="report-section full"><h3>Cosa manca per il verde</h3>${list(item.conditionsForGreen)}</section>
     </div>
   </article>`;
@@ -154,7 +223,7 @@ async function load(){
     $("#yellowCount").textContent=candidates.filter(x=>x.status==="YELLOW").length;
     $("#freshness").textContent=freshness();
     $("#reportBtn").disabled=!candidates.length;
-    renderTop(); renderCards();
+    renderChanges(); renderValidation(); renderTop(); renderCards();
   }catch(error){
     $("#topArea").innerHTML=`<div class="loading">Dati Investment Coach non ancora disponibili. Esegui il workflow “Update Investment Data”.<br><small>${error.message}</small></div>`;
   }
