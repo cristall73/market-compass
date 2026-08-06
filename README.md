@@ -89,3 +89,27 @@ Dopo 20, 60 e 90 giorni il motore confronta il prezzo corrente con quello della 
 - numero di campioni.
 
 Queste statistiche descrivono il passato e non garantiscono risultati futuri.
+
+
+## Versione 10.1.0 — Final UI
+
+### Stelle e frase operativa
+Il sistema traduce punteggio stabile, qualità d'ingresso, fiducia e semaforo in una lettura immediata:
+
+- 5 stelle — `ENTREREI OGGI`
+- 4 stelle — `ACQUISTO VALUTABILE`
+- 3 stelle — `OTTIMA CANDIDATA`
+- 2 stelle — `ASPETTEREI CONFERMA`
+- 1 stella — `NON ENTREREI`
+
+Le stelle non sostituiscono stop, invalidazione e verifica delle fonti ufficiali.
+
+### Interpretazione del ritracciamento
+
+- `ANCORA POCO`
+- `QUASI IN ZONA`
+- `ZONA IDEALE`
+- `PROFONDO MA VALIDO`
+- `CALO DA VERIFICARE`
+
+La classificazione usa il ritracciamento richiesto dal singolo titolo, la volatilità storica, il trend Weekly e la qualità aziendale.

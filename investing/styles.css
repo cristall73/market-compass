@@ -33,3 +33,25 @@ dialog{width:min(1050px,96vw);max-height:94vh;padding:0;border:1px solid var(--l
   .validation-grid{width:100%;min-width:0}
 }
 @media(max-width:600px){.validation-grid{grid-template-columns:1fr}}
+
+
+/* v10.1 — Stelle di convinzione e lettura del ritracciamento */
+.conviction-stars{color:#f5c451;letter-spacing:.08em;font-size:1rem}
+.ranking-conviction{display:flex;flex-direction:column;gap:3px}
+.ranking-conviction strong{font-size:.68rem;color:#dce8f8}
+.pullback-short{font-size:.72rem;color:#bed0e6}
+.lead-conviction,.card-conviction,.report-conviction{display:flex;flex-direction:column;gap:4px;margin:12px 0;padding:12px;border:1px solid rgba(245,196,81,.32);border-radius:10px;background:rgba(245,196,81,.055)}
+.lead-conviction span,.card-conviction .conviction-stars,.report-conviction span{color:#f5c451;letter-spacing:.1em;font-size:1.22rem}
+.lead-conviction strong,.card-conviction strong,.report-conviction h3{color:#fff;margin:0}
+.lead-conviction small,.card-conviction small,.report-conviction p{color:var(--muted);margin:0}
+.pullback-reading{display:flex;flex-direction:column;gap:3px;margin:10px 0;padding:10px;border-radius:9px;border:1px solid}
+.pullback-reading small{color:var(--muted)}
+.pullback-reading.IDEAL{border-color:rgba(53,201,139,.5);background:rgba(53,201,139,.08)}
+.pullback-reading.WATCH,.pullback-reading.WAIT{border-color:rgba(239,179,78,.48);background:rgba(239,179,78,.07)}
+.pullback-reading.DEEP{border-color:rgba(79,140,255,.48);background:rgba(79,140,255,.07)}
+.pullback-reading.RISK{border-color:rgba(239,102,112,.52);background:rgba(239,102,112,.08)}
+.report-conviction{max-width:600px}
+@media(max-width:900px){
+  .ranking-conviction strong{font-size:.62rem}
+  .pullback-short{font-size:.64rem}
+}

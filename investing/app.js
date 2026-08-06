@@ -9,6 +9,65 @@ const fmt = (value, digits=2) => Number.isFinite(Number(value))
   : "—";
 
 function statusIcon(status){return status==="GREEN"?"✓":status==="YELLOW"?"!":"✕"}
+
+function conviction(item){
+  const score = Number(item?.stableScore ?? item?.finalScore ?? 0);
+  const confidence = Number(item?.memory?.confidencePct ?? 0);
+  const status = item?.status || "RED";
+  const entry = Number(item?.entryScore ?? 0);
+
+  let stars = 1;
+  let text = "Non entrerei";
+  let detail = "Condizioni insufficienti";
+
+  if(status === "GREEN" && score >= 8.3 && confidence >= 75 && entry >= 7.2){
+    stars = 5;
+    text = "ENTREREI OGGI";
+    detail = "Setup completo e prezzo favorevole";
+  }else if(status === "GREEN" && score >= 7.7 && entry >= 6.2){
+    stars = 4;
+    text = "ACQUISTO VALUTABILE";
+    detail = "Buona opportunità, ingresso da pianificare";
+  }else if((status === "GREEN" || status === "YELLOW") && score >= 7.0){
+    stars = 3;
+    text = "OTTIMA CANDIDATA";
+    detail = "La terrei in prima fila";
+  }else if(status === "YELLOW" || score >= 6.2){
+    stars = 2;
+    text = "ASPETTEREI CONFERMA";
+    detail = "Manca prezzo o conferma tecnica";
+  }
+
+  return {
+    stars,
+    starsText: "★".repeat(stars) + "☆".repeat(5-stars),
+    text,
+    detail
+  };
+}
+
+function pullbackAssessment(item){
+  const pullback = Number(item?.pullbackPct ?? 0);
+  const min = Number(item?.requiredPullbackMin ?? 10);
+  const max = Number(item?.requiredPullbackMax ?? 18);
+  const weekly = item?.technical?.weekly || "";
+  const quality = Number(item?.qualityScore ?? 0);
+
+  if(pullback < min * 0.55){
+    return {level:"WAIT", label:"ANCORA POCO", detail:"Il prezzo non ha ancora corretto abbastanza."};
+  }
+  if(pullback < min){
+    return {level:"WATCH", label:"QUASI IN ZONA", detail:"Il ritracciamento si sta avvicinando alla fascia utile."};
+  }
+  if(pullback <= max){
+    return {level:"IDEAL", label:"ZONA IDEALE", detail:"Correzione coerente con la volatilità storica."};
+  }
+  if(pullback <= max * 1.35 && weekly !== "Ribassista" && quality >= 6){
+    return {level:"DEEP", label:"PROFONDO MA VALIDO", detail:"Il calo è ampio, ma la struttura non risulta ancora compromessa."};
+  }
+  return {level:"RISK", label:"CALO DA VERIFICARE", detail:"Il ribasso può indicare un problema oltre la normale correzione."};
+}
+
 function statusLabel(item){
   if(item.status==="GREEN") return "VERDE · ACQUISTO VALUTABILE";
   if(item.status==="YELLOW") return item.pullbackPct >= item.requiredPullbackMin ? "GIALLO · ATTENDI CONFERMA" : "GIALLO · ATTENDI RITRACCIAMENTO";
@@ -75,8 +134,11 @@ function renderTop(){
         <div class="rank-row" data-ticker="${item.ticker}">
           <span class="rank-num">${index+1}</span>
           <div><strong>${item.name}</strong><small class="ticker">${item.ticker} · ${item.sector||"Settore n.d."}</small></div>
-          <span class="status ${item.status}">${statusIcon(item.status)} ${statusLabel(item)}</span>
-          <span>Ritr. ${fmt(item.pullbackPct,1)}%</span>
+          <div class="ranking-conviction">
+            <span class="conviction-stars">${conviction(item).starsText}</span>
+            <strong>${conviction(item).text}</strong>
+          </div>
+          <span class="pullback-short">${fmt(item.pullbackPct,1)}% · ${pullbackAssessment(item).label}</span>
           <span class="score">${fmt(item.finalScore,1)}/10</span>
         </div>`).join("")}
     </div>
@@ -84,7 +146,16 @@ function renderTop(){
       <small>PRIMA AZIONE DA MONITORARE</small>
       <h3>${lead.name}</h3>
       <span class="status ${lead.status}">${statusIcon(lead.status)} ${statusLabel(lead)}</span>
+      <div class="lead-conviction">
+        <span>${conviction(lead).starsText}</span>
+        <strong>${conviction(lead).text}</strong>
+        <small>${conviction(lead).detail}</small>
+      </div>
       <div class="big-score">${fmt(lead.finalScore,1)}<small>/10</small></div>
+      <div class="pullback-reading ${pullbackAssessment(lead).level}">
+        <strong>Ritracciamento ${fmt(lead.pullbackPct,1)}% · ${pullbackAssessment(lead).label}</strong>
+        <small>${pullbackAssessment(lead).detail}</small>
+      </div>
       <p>${lead.executiveSummary}</p>
       <strong>Zona: ${fmt(lead.entryZoneLow)}–${fmt(lead.entryZoneHigh)} ${lead.currency||""}</strong>
     </aside>`;
@@ -98,11 +169,20 @@ function card(item){
       <div class="card-score">${fmt(item.finalScore,1)}<small>/10</small></div>
     </div>
     <span class="status ${item.status}">${statusIcon(item.status)} ${statusLabel(item)}</span>
+    <div class="card-conviction">
+      <span class="conviction-stars">${conviction(item).starsText}</span>
+      <strong>${conviction(item).text}</strong>
+      <small>${conviction(item).detail}</small>
+    </div>
+    <div class="pullback-reading ${pullbackAssessment(item).level}">
+      <strong>Ritracciamento ${fmt(item.pullbackPct,1)}% · ${pullbackAssessment(item).label}</strong>
+      <small>${pullbackAssessment(item).detail}</small>
+    </div>
     <div class="metrics">
       <div class="metric"><span>Qualità azienda</span><strong>${fmt(item.qualityScore,1)}/10</strong></div>
       <div class="metric"><span>Trend 2-4 mesi</span><strong>${fmt(item.trendScore,1)}/10</strong></div>
       <div class="metric"><span>Ingresso</span><strong>${fmt(item.entryScore,1)}/10</strong></div>
-      <div class="metric"><span>Ritracciamento</span><strong>${fmt(item.pullbackPct,1)}%</strong></div>
+      <div class="metric"><span>Ritracciamento numerico</span><strong>${fmt(item.pullbackPct,1)}%</strong></div>
     </div>
     <div class="zones">
       <div class="zone"><span>Prezzo</span><strong>${fmt(item.currentPrice)} ${item.currency||""}</strong></div>
@@ -137,7 +217,16 @@ function openDetail(ticker){
     <small>${item.ticker} · ${item.sector||"—"} · Orizzonte 2-4 mesi</small>
     <h2>${item.name}</h2>
     <span class="status ${item.status}">${statusIcon(item.status)} ${statusLabel(item)}</span>
+    <div class="report-conviction">
+      <span>${conviction(item).starsText}</span>
+      <h3>${conviction(item).text}</h3>
+      <p>${conviction(item).detail}</p>
+    </div>
     <h3>Verdetto del Coach: ${fmt(item.finalScore,1)}/10</h3>
+    <div class="pullback-reading ${pullbackAssessment(item).level}">
+      <strong>Ritracciamento ${fmt(item.pullbackPct,1)}% · ${pullbackAssessment(item).label}</strong>
+      <small>${pullbackAssessment(item).detail}</small>
+    </div>
     <p>${item.executiveSummary}</p>
 
     <div class="report-grid">
