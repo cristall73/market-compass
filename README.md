@@ -139,3 +139,22 @@ La pagina Intelligence è uno strumento di supporto: per dati societari critici 
 - Il "Primo candidato da monitorare" coincide sempre con il n.1 della Top 3.
 - Corretto un div duplicato nella tabella ranking Trading.
 - Nessuna modifica ai criteri, memoria o classifica dell'Investment Coach.
+
+
+## Versione 16.0 — Integrated Coach
+
+Questa versione NON cambia:
+- universo Investment;
+- pesi e soglie della classifica;
+- memoria;
+- workflow automatico ogni 2 ore.
+
+Aggiunge:
+- homepage a 3 card realmente simmetriche;
+- collegamento diretto da ogni candidata Investment alla relativa scheda Intelligence;
+- deep-link tramite ticker;
+- spiegazione sintetica del voto Investment;
+- breakdown qualità / trend / ingresso / news;
+- cronologia visibile della Top5, permanenza e variazione di posizione;
+- navigazione rapida tra le cinque aziende nel News & Catalyst Coach;
+- dati di stabilità e fiducia anche nella scheda aziendale.

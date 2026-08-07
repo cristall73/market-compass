@@ -46,6 +46,61 @@ function conviction(item){
   };
 }
 
+
+function scoreExplanation(item){
+  const parts = [
+    {label:"Qualità", value:Number(item?.qualityScore ?? 0), weight:34},
+    {label:"Trend", value:Number(item?.trendScore ?? 0), weight:28},
+    {label:"Ingresso", value:Number(item?.entryScore ?? 0), weight:25},
+    {label:"News", value:Number(item?.newsScore ?? 0), weight:13}
+  ];
+  const best=[...parts].sort((a,b)=>b.value-a.value)[0];
+  const worst=[...parts].sort((a,b)=>a.value-b.value)[0];
+  return {
+    parts,
+    best,
+    worst,
+    text:`Il voto nasce soprattutto da ${best.label.toLowerCase()} (${fmt(best.value,1)}/10); il fattore più debole è ${worst.label.toLowerCase()} (${fmt(worst.value,1)}/10).`
+  };
+}
+
+function intelligenceUrl(item){
+  return `../intelligence/?ticker=${encodeURIComponent(item.ticker || "")}#company-${encodeURIComponent(item.ticker || "")}`;
+}
+
+function renderHistory(){
+  const panel=$("#historyPanel");
+  if(!panel) return;
+  const changes=payload?.changes || {};
+  const candidates=payload?.candidates || [];
+  panel.innerHTML=`
+    <div class="history-box">
+      <div class="history-head">
+        <div><small>CRONOLOGIA DELLE SELEZIONI</small><h3>Chi resta, chi entra, chi esce</h3></div>
+        <div class="history-summary">
+          <span>${candidates.length} attuali</span>
+          <span>${(changes.entered||[]).length} nuove</span>
+          <span>${(changes.exited||[]).length} uscite</span>
+        </div>
+      </div>
+      <div class="history-current">
+        ${candidates.map(item=>`
+          <div class="history-row">
+            <div>
+              <strong>${item.rank || "—"}. ${item.name}</strong>
+              <small>${item.ticker} · ${item.memory?.badge || "Nuovo candidato"}</small>
+            </div>
+            <div>
+              <span>Top5 ${item.memory?.consecutiveTop5Days || 0} gg</span>
+              <span>Stabilità ${fmt(item.memory?.stabilityScore,1)}/10</span>
+              <span>${item.rankChange == null ? "Nuova" : item.rankChange>0 ? `↑ ${item.rankChange}` : item.rankChange<0 ? `↓ ${Math.abs(item.rankChange)}` : "="}</span>
+            </div>
+          </div>`).join("")}
+      </div>
+      ${(changes.exited||[]).length ? `<p class="history-exit"><b>Uscite oggi:</b> ${(changes.exited||[]).join(", ")}</p>` : `<p class="history-exit">Nessuna uscita nell'ultimo aggiornamento.</p>`}
+    </div>`;
+}
+
 function pullbackAssessment(item){
   const pullback = Number(item?.pullbackPct ?? 0);
   const min = Number(item?.requiredPullbackMin ?? 10);
@@ -197,7 +252,14 @@ function card(item){
       <span>Fiducia ${fmt(item.memory?.confidencePct,0)}%</span>
     </div>
     <p class="why">${item.executiveSummary}</p>
-    <strong class="open">Apri report dettagliato →</strong>
+    <div class="score-why">
+      <strong>Perché questo voto</strong>
+      <span>${scoreExplanation(item).text}</span>
+    </div>
+    <div class="card-actions">
+      <strong class="open">Apri report dettagliato →</strong>
+      <a class="intel-link" href="${intelligenceUrl(item)}">News, azienda e fonti →</a>
+    </div>
   </article>`;
 }
 
@@ -288,10 +350,20 @@ function openDetail(ticker){
         ["Fiducia del modello",fmt(item.memory?.confidencePct,0)+"%"],
         ["Momentum 7 giorni",(item.memory?.momentum>=0?"+":"")+fmt(item.memory?.momentum,2)+" · "+(item.memory?.momentumLabel||"Stabile")]
       ])}</section>
+      <section class="report-section full"><h3>Come nasce il voto</h3>
+        <p>${scoreExplanation(item).text}</p>
+        <div class="score-breakdown">
+          ${scoreExplanation(item).parts.map(part=>`
+            <div><span>${part.label} · peso ${part.weight}%</span><strong>${fmt(part.value,1)}/10</strong></div>
+          `).join("")}
+        </div>
+        <p class="muted-note">Il punteggio stabile incorpora poi memoria storica e bonus di persistenza limitato.</p>
+      </section>
       <section class="report-section full"><h3>Perché è entrata o è rimasta</h3>
         <p>Il punteggio finale usa il 70% della media storica e il 30% dei dati odierni. 
         La permanenza viene premiata con un bonus limitato; una singola seduta del ±2% non basta a sostituire il titolo.</p>
         <p>${item.selectionReason}</p>
+        <p><a class="intel-link report-intel" href="${intelligenceUrl(item)}">Apri News & Catalyst Coach su ${item.name} →</a></p>
       </section>
       <section class="report-section full"><h3>Cosa manca per il verde</h3>${list(item.conditionsForGreen)}</section>
     </div>
@@ -312,7 +384,7 @@ async function load(){
     $("#yellowCount").textContent=candidates.filter(x=>x.status==="YELLOW").length;
     $("#freshness").textContent=freshness();
     $("#reportBtn").disabled=!candidates.length;
-    renderChanges(); renderValidation(); renderTop(); renderCards();
+    renderChanges(); renderHistory(); renderValidation(); renderTop(); renderCards();
   }catch(error){
     $("#topArea").innerHTML=`<div class="loading">Dati Investment Coach non ancora disponibili. Esegui il workflow “Update Investment Data”.<br><small>${error.message}</small></div>`;
   }

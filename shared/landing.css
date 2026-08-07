@@ -11,12 +11,29 @@
 footer{margin-top:auto;text-align:center;color:#7994b8}
 @media(max-width:850px){.coach-grid{grid-template-columns:1fr}.coach-card{grid-template-columns:1fr;min-height:auto}.landing{padding-top:35px}}
 
-@media(min-width:851px) and (max-width:1250px){
-  .coach-grid{grid-template-columns:1fr 1fr}
-  .intelligence-card{grid-column:1 / -1}
-}
-@media(min-width:1251px){
-  .coach-card{padding:28px;gap:18px;min-height:430px}
+
   .coach-card h2{font-size:1.85rem}
   .coach-icon{width:62px;height:62px;font-size:2rem}
+}
+
+/* v16 - Home a tre colonne realmente simmetriche */
+.coach-grid{
+  width:min(1560px,94vw);
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+  align-items:stretch;
+}
+.coach-card{
+  min-width:0;
+  min-height:470px;
+  padding:28px;
+  grid-template-columns:64px minmax(0,1fr);
+  gap:18px;
+}
+.coach-card h2{font-size:clamp(1.55rem,1.9vw,2rem)}
+.coach-card p,.coach-card li{font-size:.94rem}
+.coach-icon{width:62px;height:62px;font-size:2rem}
+@media(max-width:1100px){
+  .coach-grid{grid-template-columns:1fr}
+  .coach-card{min-height:auto}
 }

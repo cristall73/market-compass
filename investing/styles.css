@@ -55,3 +55,30 @@ dialog{width:min(1050px,96vw);max-height:94vh;padding:0;border:1px solid var(--l
   .ranking-conviction strong{font-size:.62rem}
   .pullback-short{font-size:.64rem}
 }
+
+/* v16 - integrazione Investment / Intelligence */
+.history-panel{margin:16px 0}
+.history-box{padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.history-head{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.history-head h3{margin:.25rem 0}
+.history-summary{display:flex;gap:8px;flex-wrap:wrap}
+.history-summary span{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:6px 9px;color:var(--muted)}
+.history-current{margin-top:12px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.history-row{padding:10px;border-radius:9px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06)}
+.history-row strong,.history-row small,.history-row span{display:block}
+.history-row small,.history-row span{color:var(--muted);font-size:.72rem}
+.history-row>div:last-child{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.history-row>div:last-child span{padding:3px 5px;background:rgba(79,140,255,.08);border-radius:5px}
+.history-exit{margin:12px 0 0;color:var(--muted)}
+.score-why{margin:10px 0;padding:9px;border-radius:8px;background:rgba(255,255,255,.035)}
+.score-why strong,.score-why span{display:block}.score-why span{color:var(--muted);font-size:.74rem;margin-top:3px}
+.card-actions{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.intel-link{color:#72e2b4;font-weight:800;font-size:.76rem}
+.score-breakdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.score-breakdown div{padding:10px;border-radius:8px;background:rgba(255,255,255,.035)}
+.score-breakdown span,.score-breakdown strong{display:block}.score-breakdown span{color:var(--muted);font-size:.74rem}
+.score-breakdown strong{margin-top:5px;font-size:1.15rem}
+.muted-note{color:var(--muted)}
+.report-intel{font-size:.9rem}
+@media(max-width:1100px){.history-current{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.history-head{flex-direction:column;align-items:flex-start}.history-current,.score-breakdown{grid-template-columns:1fr}}
