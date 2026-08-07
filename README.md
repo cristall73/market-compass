@@ -126,3 +126,16 @@ La classificazione usa il ritracciamento richiesto dal singolo titolo, la volati
 - Spiegazione sintetica del perché una notizia può influire sull'asset o sull'azienda.
 
 La pagina Intelligence è uno strumento di supporto: per dati societari critici verificare sempre Investor Relations e le fonti ufficiali.
+
+
+## Versione 15.1 — Cleanup e coerenza UI
+
+- Homepage con 3 card: Trading, Investment, News & Catalyst.
+- Navbar identica e completa nei tre moduli.
+- Investment: rimosso il link News fuori posto nell'header.
+- Diciture aggiornate all'universo globale di oltre 200 azioni.
+- Trading Top 3 ordinata per Setup finale decrescente.
+- A parità di Setup: semaforo, trend, confluenza, ingresso.
+- Il "Primo candidato da monitorare" coincide sempre con il n.1 della Top 3.
+- Corretto un div duplicato nella tabella ranking Trading.
+- Nessuna modifica ai criteri, memoria o classifica dell'Investment Coach.

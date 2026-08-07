@@ -1098,22 +1098,31 @@ function renderSummary() {
 
   const ranking = [...analyses]
     .sort((a, b) => {
+      // La classifica deve essere leggibile e coerente con il numero mostrato:
+      // 1) Setup finale, 2) semaforo, 3) trend, 4) confluenza, 5) ingresso.
+      const finalDifference = finalSetupScore(b) - finalSetupScore(a);
+      if (Math.abs(finalDifference) >= 0.05) return finalDifference;
+
       const statusOrder = { GREEN: 3, YELLOW: 2, RED: 1 };
       const statusDifference =
         statusOrder[operationalStatus(b).code] -
         statusOrder[operationalStatus(a).code];
-
       if (statusDifference !== 0) return statusDifference;
 
-      const finalDifference = finalSetupScore(b) - finalSetupScore(a);
-      if (Math.abs(finalDifference) >= 0.1) return finalDifference;
+      const trendDifference = tenScale(b.result.confidence) - tenScale(a.result.confidence);
+      if (trendDifference !== 0) return trendDifference;
 
-      return rankingScore(b) - rankingScore(a);
+      const confluenceDifference =
+        (b.structure?.confluenceScore || 0) - (a.structure?.confluenceScore || 0);
+      if (confluenceDifference !== 0) return confluenceDifference;
+
+      return tenScale(b.plan.opportunityScore) - tenScale(a.plan.opportunityScore);
     })
     .slice(0, 3);
 
-  const ready = ranking.find(item => operationalStatus(item).code === "GREEN");
-  const lead = ready || ranking[0];
+  // Il riquadro a destra deve sempre corrispondere al n.1 della classifica.
+  const ready = ranking[0] && operationalStatus(ranking[0]).code === "GREEN" ? ranking[0] : null;
+  const lead = ranking[0];
   const leadFinalScore = finalSetupScore(lead);
   const leadStatus = operationalStatus(lead);
   const leadChecklist = checklistState(lead.result, lead.plan);
@@ -1122,7 +1131,7 @@ function renderSummary() {
     <div class="ranking-panel">
       <small>${ready ? "INGRESSO PRONTO DA VERIFICARE" : "NESSUN INGRESSO PRONTO ADESSO"}</small>
       <p class="ranking-explanation">
-        La classifica privilegia prima il semaforo operativo, poi il voto finale del setup.
+        La classifica ordina prima per voto finale del setup; a parità usa semaforo, trend, confluenza e qualità d’ingresso.
         Colore, simbolo e testo sono sempre mostrati insieme.
       </p>
 
