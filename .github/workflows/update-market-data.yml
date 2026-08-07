@@ -3,7 +3,7 @@ name: Update Market Data
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 */2 * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   update:
