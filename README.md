@@ -158,3 +158,8 @@ Aggiunge:
 - cronologia visibile della Top5, permanenza e variazione di posizione;
 - navigazione rapida tra le cinque aziende nel News & Catalyst Coach;
 - dati di stabilità e fiducia anche nella scheda aziendale.
+
+## Versione 16.1 — Green Readiness
+Nessuna modifica alla logica Investment.
+Ogni candidata mostra ora chiaramente quali condizioni mancano per diventare VERDE:
+prezzo/ritracciamento, ingresso, trend, qualità, news/catalizzatori e memoria 3/3 giorni.

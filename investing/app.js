@@ -47,6 +47,59 @@ function conviction(item){
 }
 
 
+
+function greenReadiness(item){
+  const missing = [];
+  const passed = [];
+  const entry = Number(item?.entryScore ?? 0);
+  const trend = Number(item?.trendScore ?? 0);
+  const quality = Number(item?.qualityScore ?? 0);
+  const news = Number(item?.newsScore ?? 0);
+  const memoryDays = Number(item?.memory?.consecutiveTop5Days ?? 0);
+  const status = String(item?.status || "RED").toUpperCase();
+  const pullback = pullbackAssessment(item);
+
+  if (pullback.level === "IDEAL" || pullback.level === "DEEP") passed.push("Prezzo in area utile");
+  else if (pullback.level === "WATCH") missing.push("Prezzo quasi in zona: attendere ancora un piccolo ritracciamento");
+  else if (pullback.level === "WAIT") missing.push("Ritracciamento ancora insufficiente");
+  else missing.push("Ritracciamento troppo profondo: verificare il motivo del calo");
+
+  if (entry >= 7) passed.push(`Ingresso ${fmt(entry,1)}/10`);
+  else missing.push(`Ingresso ${fmt(entry,1)}/10: serve almeno 7/10`);
+
+  if (trend >= 6.5) passed.push(`Trend ${fmt(trend,1)}/10`);
+  else missing.push(`Trend ${fmt(trend,1)}/10: serve maggiore conferma`);
+
+  if (quality >= 6.5) passed.push(`Qualità ${fmt(quality,1)}/10`);
+  else missing.push(`Qualità ${fmt(quality,1)}/10: fondamentale ancora debole`);
+
+  if (news >= 5.5) passed.push(`News ${fmt(news,1)}/10`);
+  else missing.push(`News/catalizzatori ${fmt(news,1)}/10: manca una conferma positiva`);
+
+  if (memoryDays >= 3) passed.push(`Memoria ${memoryDays}/3 giorni`);
+  else missing.push(`Memoria ${memoryDays}/3 giorni: deve confermarsi ancora`);
+
+  if(status === "GREEN"){
+    return {
+      state:"GREEN",
+      title:"VERDE — INGRESSO VALUTABILE",
+      summary:"Le condizioni principali risultano soddisfatte.",
+      missing:[],
+      passed
+    };
+  }
+
+  return {
+    state:"YELLOW",
+    title: missing.length === 1 ? "MANCA 1 CONDIZIONE PER IL VERDE" : `MANCANO ${missing.length} CONDIZIONI PER IL VERDE`,
+    summary: missing.length <= 2
+      ? "Setup vicino alla validazione: aspetterei che si completi prima di entrare."
+      : "Setup ancora incompleto: per ora lo terrei soltanto in osservazione.",
+    missing,
+    passed
+  };
+}
+
 function scoreExplanation(item){
   const parts = [
     {label:"Qualità", value:Number(item?.qualityScore ?? 0), weight:34},
@@ -252,6 +305,13 @@ function card(item){
       <span>Fiducia ${fmt(item.memory?.confidencePct,0)}%</span>
     </div>
     <p class="why">${item.executiveSummary}</p>
+    <div class="green-readiness ${greenReadiness(item).state}">
+      <strong>${greenReadiness(item).title}</strong>
+      <span>${greenReadiness(item).summary}</span>
+      ${greenReadiness(item).missing.length
+        ? `<ul>${greenReadiness(item).missing.map(x=>`<li>${x}</li>`).join("")}</ul>`
+        : `<div class="all-passed">✓ Condizioni principali soddisfatte</div>`}
+    </div>
     <div class="score-why">
       <strong>Perché questo voto</strong>
       <span>${scoreExplanation(item).text}</span>
