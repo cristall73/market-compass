@@ -113,3 +113,16 @@ Le stelle non sostituiscono stop, invalidazione e verifica delle fonti ufficiali
 - `CALO DA VERIFICARE`
 
 La classificazione usa il ritracciamento richiesto dal singolo titolo, la volatilità storica, il trend Weekly e la qualità aziendale.
+
+
+## Versione 15.0 — Intelligence Coach
+
+- Aggiornamento automatico ogni 2 ore, 24/7, al minuto 17.
+- Trading, Investment, memoria, validazione e Intelligence vengono aggiornati nello stesso ciclo.
+- Universo Investment globale: USA, Europa, Regno Unito, Svizzera, Nordics, Giappone, Canada e Australia.
+- Terza pagina: `/intelligence/`.
+- Profilo aziendale delle 5 candidate: paese, sede, CEO, industria, capitalizzazione, descrizione e sito.
+- Notizie collegate ai mercati e alle candidate, con fonte e link originale quando disponibile.
+- Spiegazione sintetica del perché una notizia può influire sull'asset o sull'azienda.
+
+La pagina Intelligence è uno strumento di supporto: per dati societari critici verificare sempre Investor Relations e le fonti ufficiali.

@@ -38,6 +38,7 @@ TRADING_DOWNLOADS = {
 
 # Investment universe
 INVESTMENT_TICKERS = [
+    # USA
     "AAPL","MSFT","NVDA","AMZN","GOOGL","META","AVGO","TSLA","BRK-B","LLY",
     "JPM","V","MA","WMT","XOM","ORCL","COST","NFLX","HD","PG","JNJ","ABBV",
     "BAC","KO","CRM","AMD","CSCO","PM","CVX","IBM","WFC","ABT","MCD","GE",
@@ -46,11 +47,32 @@ INVESTMENT_TICKERS = [
     "PANW","MU","AMAT","LRCX","KLAC","SNPS","CDNS","ANET","PLTR","DE","HON",
     "UPS","SBUX","MDT","SYK","GILD","VRTX","REGN","BSX","C","MS","SCHW","CB",
     "MMC","LIN","APD","ECL","NOC","LMT","GD","ETN","PH","WM","RSG","MAR","HLT",
-    "ABNB","NKE","TGT","TJX","ROST","PGR","AON","ICE","ASML","SAP","NVO","TM",
-    "SONY","TSM","AZN","SHEL","BABA","MELI","MC.PA","OR.PA","RMS.PA","SU.PA",
-    "AIR.PA","SIE.DE","ALV.DE","DTE.DE","MBG.DE","BMW.DE","IFX.DE","RACE.MI",
-    "ENEL.MI","ISP.MI","UCG.MI","NESN.SW","NOVN.SW","ROG.SW","ULVR.L","HSBA.L",
-    "RIO.L","BP.L"
+    "ABNB","NKE","TGT","TJX","ROST","PGR","AON","ICE",
+
+    # Europa / UK / Svizzera / Nordics
+    "ASML","SAP","NVO","AZN","SHEL","UL","HSBC","RIO","BP",
+    "MC.PA","OR.PA","RMS.PA","SU.PA","AIR.PA","BNP.PA","SAN.PA","DG.PA","CS.PA",
+    "SIE.DE","ALV.DE","DTE.DE","MBG.DE","BMW.DE","IFX.DE","BAS.DE","DB1.DE","MUV2.DE",
+    "RACE.MI","ENEL.MI","ISP.MI","UCG.MI","LDO.MI","PRY.MI","MONC.MI","TRN.MI",
+    "NESN.SW","NOVN.SW","ROG.SW","UBSG.SW","ZURN.SW","SREN.SW","ABBN.SW",
+    "NOVO-B.CO","MAERSK-B.CO","VWS.CO","DSV.CO",
+    "ERIC-B.ST","VOLV-B.ST","ATCO-A.ST","SEB-A.ST",
+    "NOKIA.HE","KNEBV.HE","AD.AS","INGA.AS","UNA.AS","PRX.AS",
+    "IBE.MC","ITX.MC","SAN.MC","BBVA.MC",
+    "ULVR.L","HSBA.L","RIO.L","BP.L","GSK.L","REL.L","LSEG.L","BA.L",
+
+    # Giappone
+    "7203.T","6758.T","7974.T","6861.T","8035.T","9984.T","8306.T","9432.T",
+    "6501.T","8058.T","8001.T","6098.T","4063.T","6367.T","6902.T","7741.T",
+
+    # Canada
+    "RY.TO","TD.TO","BNS.TO","ENB.TO","CNQ.TO","CP.TO","CNR.TO","BN.TO","SHOP.TO","SU.TO",
+
+    # Australia
+    "BHP.AX","CSL.AX","CBA.AX","NAB.AX","WBC.AX","ANZ.AX","WES.AX","WOW.AX","RIO.AX","MQG.AX",
+
+    # Globali/ADR
+    "TSM","TM","SONY","MELI"
 ]
 
 NEGATIVE_WORDS = {
@@ -376,17 +398,35 @@ def as_percent(value: Any) -> float | None:
 def get_news(ticker_object: yf.Ticker) -> list[dict[str, Any]]:
     result = []
     try:
-        for item in (ticker_object.news or [])[:6]:
+        for item in (ticker_object.news or [])[:8]:
             content = item.get("content", item)
             title = content.get("title") or item.get("title")
             provider = content.get("provider")
             publisher = provider.get("displayName") if isinstance(provider, dict) else item.get("publisher")
+
+            canonical = content.get("canonicalUrl")
+            clickthrough = content.get("clickThroughUrl")
+            url = None
+            if isinstance(canonical, dict):
+                url = canonical.get("url")
+            elif isinstance(canonical, str):
+                url = canonical
+            if not url and isinstance(clickthrough, dict):
+                url = clickthrough.get("url")
+            if not url:
+                url = item.get("link")
+
+            published = content.get("pubDate") or item.get("providerPublishTime")
             if title:
-                result.append({"title": title, "publisher": publisher})
+                result.append({
+                    "title": title,
+                    "publisher": publisher or "Fonte non indicata",
+                    "url": url,
+                    "publishedAt": published,
+                })
     except Exception:
         pass
     return result
-
 
 def news_sentiment(news: list[dict[str, Any]]) -> int:
     score = 0
@@ -415,6 +455,26 @@ def enrich_candidate(base: dict[str, Any], history: dict[str, Any]) -> dict[str,
     name = info.get("longName") or info.get("shortName") or ticker
     sector = sector_name(info)
     currency = info.get("currency") or ""
+
+    officers = info.get("companyOfficers") or []
+    ceo = None
+    for officer in officers:
+        title = str(officer.get("title") or "").lower()
+        if "chief executive" in title or title == "ceo":
+            ceo = officer.get("name")
+            break
+
+    company_profile = {
+        "country": info.get("country"),
+        "city": info.get("city"),
+        "website": info.get("website"),
+        "industry": info.get("industry"),
+        "sector": info.get("sector"),
+        "employees": info.get("fullTimeEmployees"),
+        "marketCap": finite(info.get("marketCap")),
+        "ceo": ceo,
+        "description": info.get("longBusinessSummary"),
+    }
 
     revenue_growth = as_percent(info.get("revenueGrowth"))
     earnings_growth = as_percent(info.get("earningsGrowth"))
@@ -540,6 +600,7 @@ def enrich_candidate(base: dict[str, Any], history: dict[str, Any]) -> dict[str,
 
     return {
         "ticker": ticker, "name": name, "sector": sector, "currency": currency,
+        "companyProfile": company_profile,
         "currentPrice": base["price"], "high52": high52,
         "pullbackPct": base["pullbackPct"],
         "requiredPullbackMin": base["requiredPullbackMin"],
@@ -807,6 +868,103 @@ def build_investment_section(history: dict[str, Any]) -> tuple[dict[str, Any], l
     }, enriched
 
 
+
+MARKET_INTELLIGENCE_ASSETS = [
+    {"name": "Nasdaq 100", "symbol": "USATEC", "ticker": "^NDX", "themes": ["Fed","inflazione","tecnologia","AI","dazi","Treasury"]},
+    {"name": "S&P 500", "symbol": "US500", "ticker": "^GSPC", "themes": ["Fed","inflazione","utili","economia USA","dazi"]},
+    {"name": "DAX 40", "symbol": "GER40", "ticker": "^GDAXI", "themes": ["BCE","Germania","dazi","energia","Cina"]},
+    {"name": "Gold", "symbol": "XAUUSD", "ticker": "GC=F", "themes": ["Fed","dollaro","guerra","inflazione","rendimenti"]},
+    {"name": "Petrolio WTI", "symbol": "WTI", "ticker": "CL=F", "themes": ["OPEC","Medio Oriente","guerra","scorte","Cina"]},
+    {"name": "EUR/USD", "symbol": "EURUSD", "ticker": "EURUSD=X", "themes": ["Fed","BCE","inflazione","tassi","dollaro"]},
+]
+
+def intelligence_direction(title: str) -> str:
+    text = (title or "").lower()
+    positive = sum(1 for word in POSITIVE_WORDS if word in text)
+    negative = sum(1 for word in NEGATIVE_WORDS if word in text)
+    if negative > positive:
+        return "NEGATIVE"
+    if positive > negative:
+        return "POSITIVE"
+    return "NEUTRAL"
+
+
+def why_news_matters(title: str, subject: str) -> str:
+    text = (title or "").lower()
+    reasons = []
+    if any(word in text for word in ["fed","powell","rate","rates","treasury","yield"]):
+        reasons.append("può cambiare le aspettative sui tassi e quindi le valutazioni")
+    if any(word in text for word in ["tariff","trade","china","export"]):
+        reasons.append("può incidere su commercio, margini e catene di fornitura")
+    if any(word in text for word in ["war","iran","israel","russia","ukraine","middle east"]):
+        reasons.append("può aumentare volatilità e premio per il rischio")
+    if any(word in text for word in ["earnings","revenue","guidance","profit"]):
+        reasons.append("può cambiare le attese sugli utili")
+    if any(word in text for word in ["oil","opec","crude"]):
+        reasons.append("può muovere energia, inflazione e rendimenti")
+    if any(word in text for word in ["inflation","cpi","ppi"]):
+        reasons.append("può cambiare le aspettative di politica monetaria")
+    if not reasons:
+        reasons.append(f"è collegata ai fattori monitorati per {subject}")
+    return "; ".join(reasons[:2]).capitalize() + "."
+
+
+def build_market_intelligence() -> list[dict[str, Any]]:
+    rows = []
+    for asset in MARKET_INTELLIGENCE_ASSETS:
+        try:
+            raw = get_news(yf.Ticker(asset["ticker"]))
+        except Exception:
+            raw = []
+        news = []
+        for item in raw[:6]:
+            title = item.get("title") or ""
+            news.append({
+                **item,
+                "direction": intelligence_direction(title),
+                "whyItMatters": why_news_matters(title, asset["name"]),
+            })
+        rows.append({
+            "name": asset["name"],
+            "symbol": asset["symbol"],
+            "themes": asset["themes"],
+            "news": news,
+        })
+    return rows
+
+
+def build_candidate_intelligence(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    rows = []
+    for item in candidates:
+        news = []
+        for raw in item.get("news", [])[:6]:
+            title = raw.get("title") or ""
+            news.append({
+                **raw,
+                "direction": intelligence_direction(title),
+                "whyItMatters": why_news_matters(title, item.get("name") or item.get("ticker")),
+            })
+        rows.append({
+            "ticker": item.get("ticker"),
+            "name": item.get("name"),
+            "rank": item.get("rank"),
+            "score": item.get("stableScore"),
+            "status": item.get("status"),
+            "profile": item.get("companyProfile") or {},
+            "sector": item.get("sector"),
+            "currency": item.get("currency"),
+            "whySelected": item.get("selectionReason"),
+            "executiveSummary": item.get("executiveSummary"),
+            "catalysts": item.get("catalysts", []),
+            "risks": item.get("risks", []),
+            "news": news,
+            "fundamentals": item.get("fundamentals", {}),
+            "technical": item.get("technical", {}),
+            "memory": item.get("memory", {}),
+        })
+    return rows
+
+
 def main() -> int:
     generated_at = datetime.now(timezone.utc).isoformat()
     today = date.today().isoformat()
@@ -868,6 +1026,12 @@ def main() -> int:
     investment_payload["validationSummary"] = validation_summary(history["validations"])
     investment_payload["historyDays"] = len(unique_daily_snapshots(history["snapshots"]))
 
+    intelligence_payload = {
+        "generatedAt": generated_at,
+        "market": build_market_intelligence(),
+        "companies": build_candidate_intelligence(investment_payload.get("candidates", [])),
+    }
+
     combined = {
         **trading_payload,
         "investment": {
@@ -875,7 +1039,8 @@ def main() -> int:
             "generatedAt": generated_at,
             **investment_payload,
         },
-        "schemaVersion": 10,
+        "intelligence": intelligence_payload,
+        "schemaVersion": 15,
     }
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
