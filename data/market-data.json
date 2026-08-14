@@ -1,12 +1,12 @@
 {
   "provider": "Yahoo Finance tramite yfinance",
-  "generatedAt": "2026-08-14T12:08:31.133574+00:00",
+  "generatedAt": "2026-08-14T13:43:16.604368+00:00",
   "assets": [
     {
       "name": "Nasdaq 100",
       "symbol": "USATEC",
       "providerSymbol": "^NDX",
-      "currentPrice": 30085.28125,
+      "currentPrice": 30135.166015625,
       "timeframes": {
         "1M": [
           {
@@ -1825,9 +1825,9 @@
           {
             "time": "2026-08-01T00:00:00+00:00",
             "open": 28278.58984375,
-            "high": 30168.048828125,
+            "high": 30176.6796875,
             "low": 28196.880859375,
-            "close": 30084.501953125
+            "close": 30135.166015625
           }
         ],
         "1W": [
@@ -3647,19 +3647,12 @@
           {
             "time": "2026-08-10T00:00:00+00:00",
             "open": 29709.490234375,
-            "high": 30168.05078125,
+            "high": 30176.6796875,
             "low": 29427.609375,
-            "close": 30084.501953125
+            "close": 30135.166015625
           }
         ],
         "1D": [
-          {
-            "time": "2025-08-01T00:00:00+00:00",
-            "open": 22941.060546875,
-            "high": 22972.470703125,
-            "low": 22673.880859375,
-            "close": 22763.310546875
-          },
           {
             "time": "2025-08-04T00:00:00+00:00",
             "open": 22986.76953125,
@@ -5472,58 +5465,16 @@
             "high": 30168.05078125,
             "low": 29757.619140625,
             "close": 30084.5
+          },
+          {
+            "time": "2026-08-14T00:00:00+00:00",
+            "open": 30167.125,
+            "high": 30176.6796875,
+            "low": 30072.630859375,
+            "close": 30135.166015625
           }
         ],
         "1H": [
-          {
-            "time": "2026-05-19T13:30:00+00:00",
-            "open": 28795.33203125,
-            "high": 28976.791015625,
-            "low": 28567.162109375,
-            "close": 28610.64453125
-          },
-          {
-            "time": "2026-05-19T14:30:00+00:00",
-            "open": 28627.783203125,
-            "high": 28761.03515625,
-            "low": 28582.484375,
-            "close": 28678.322265625
-          },
-          {
-            "time": "2026-05-19T15:30:00+00:00",
-            "open": 28674.669921875,
-            "high": 28826.138671875,
-            "low": 28667.115234375,
-            "close": 28816.791015625
-          },
-          {
-            "time": "2026-05-19T16:30:00+00:00",
-            "open": 28814.1171875,
-            "high": 29031.91796875,
-            "low": 28810.78125,
-            "close": 28991.388671875
-          },
-          {
-            "time": "2026-05-19T17:30:00+00:00",
-            "open": 28992.763671875,
-            "high": 29025.26171875,
-            "low": 28915.4453125,
-            "close": 28930.33984375
-          },
-          {
-            "time": "2026-05-19T18:30:00+00:00",
-            "open": 28930.80859375,
-            "high": 28962.42578125,
-            "low": 28831.71484375,
-            "close": 28881.49609375
-          },
-          {
-            "time": "2026-05-19T19:30:00+00:00",
-            "open": 28886.123046875,
-            "high": 28906.556640625,
-            "low": 28765.892578125,
-            "close": 28822.53125
-          },
           {
             "time": "2026-05-20T13:30:00+00:00",
             "open": 28999.46875,
@@ -7291,7 +7242,7 @@
           {
             "time": "2026-07-14T13:30:00+00:00",
             "open": 29559.201171875,
-            "high": 29599.91015625,
+            "high": 29596.3359375,
             "low": 29371.1875,
             "close": 29483.19140625
           },
@@ -8414,23 +8365,16 @@
             "high": 30122.140625,
             "low": 30068.53125,
             "close": 30085.28125
+          },
+          {
+            "time": "2026-08-14T13:30:00+00:00",
+            "open": 30155.958984375,
+            "high": 30176.6796875,
+            "low": 30079.974609375,
+            "close": 30135.166015625
           }
         ],
         "4H": [
-          {
-            "time": "2026-05-19T12:00:00+00:00",
-            "open": 28795.33203125,
-            "high": 28976.791015625,
-            "low": 28567.162109375,
-            "close": 28816.791015625
-          },
-          {
-            "time": "2026-05-19T16:00:00+00:00",
-            "open": 28814.1171875,
-            "high": 29031.91796875,
-            "low": 28765.892578125,
-            "close": 28822.53125
-          },
           {
             "time": "2026-05-20T12:00:00+00:00",
             "open": 28999.46875,
@@ -9256,6 +9200,13 @@
             "high": 30168.048828125,
             "low": 30064.15234375,
             "close": 30085.28125
+          },
+          {
+            "time": "2026-08-14T12:00:00+00:00",
+            "open": 30155.958984375,
+            "high": 30176.6796875,
+            "low": 30079.974609375,
+            "close": 30135.166015625
           }
         ]
       },
@@ -9265,7 +9216,7 @@
       "name": "DAX 40",
       "symbol": "GER40",
       "providerSymbol": "^GDAXI",
-      "currentPrice": 26530.900390625,
+      "currentPrice": 26506.55078125,
       "timeframes": {
         "1M": [
           {
@@ -11086,7 +11037,7 @@
             "open": 25855.119140625,
             "high": 26573.5,
             "low": 25855.119140625,
-            "close": 26530.900390625
+            "close": 26506.6796875
           }
         ],
         "1W": [
@@ -12908,7 +12859,7 @@
             "open": 26360.439453125,
             "high": 26573.5,
             "low": 26245.5703125,
-            "close": 26530.900390625
+            "close": 26506.6796875
           }
         ],
         "1D": [
@@ -14728,9 +14679,9 @@
           {
             "time": "2026-08-14T00:00:00+00:00",
             "open": 26445.990234375,
-            "high": 26537.5,
+            "high": 26541.33984375,
             "low": 26404.94921875,
-            "close": 26530.900390625
+            "close": 26506.55078125
           }
         ],
         "1H": [
@@ -18482,9 +18433,23 @@
           {
             "time": "2026-08-14T11:00:00+00:00",
             "open": 26493.73046875,
-            "high": 26537.5,
+            "high": 26541.109375,
             "low": 26472.4609375,
-            "close": 26530.900390625
+            "close": 26540.810546875
+          },
+          {
+            "time": "2026-08-14T12:00:00+00:00",
+            "open": 26540.810546875,
+            "high": 26541.33984375,
+            "low": 26503.05078125,
+            "close": 26512.630859375
+          },
+          {
+            "time": "2026-08-14T13:00:00+00:00",
+            "open": 26511.740234375,
+            "high": 26521.970703125,
+            "low": 26485.26953125,
+            "close": 26506.55078125
           }
         ],
         "4H": [
@@ -19737,9 +19702,16 @@
           {
             "time": "2026-08-14T08:00:00+00:00",
             "open": 26485.580078125,
-            "high": 26537.5,
+            "high": 26541.109375,
             "low": 26404.94921875,
-            "close": 26530.900390625
+            "close": 26540.810546875
+          },
+          {
+            "time": "2026-08-14T12:00:00+00:00",
+            "open": 26540.810546875,
+            "high": 26541.33984375,
+            "low": 26485.26953125,
+            "close": 26506.55078125
           }
         ]
       },
@@ -19749,7 +19721,7 @@
       "name": "S&P 500",
       "symbol": "US500",
       "providerSymbol": "^GSPC",
-      "currentPrice": 7798.85986328125,
+      "currentPrice": 7805.06982421875,
       "timeframes": {
         "1M": [
           {
@@ -21570,7 +21542,7 @@
             "open": 7504.77978515625,
             "high": 7816.7001953125,
             "low": 7504.77978515625,
-            "close": 7798.990234375
+            "close": 7805.259765625
           }
         ],
         "1W": [
@@ -23392,17 +23364,10 @@
             "open": 7751.740234375,
             "high": 7816.7001953125,
             "low": 7717.25,
-            "close": 7798.990234375
+            "close": 7805.06982421875
           }
         ],
         "1D": [
-          {
-            "time": "2025-08-01T00:00:00+00:00",
-            "open": 6287.27978515625,
-            "high": 6287.27978515625,
-            "low": 6212.68994140625,
-            "close": 6238.009765625
-          },
           {
             "time": "2025-08-04T00:00:00+00:00",
             "open": 6271.7099609375,
@@ -25215,58 +25180,16 @@
             "high": 7816.7001953125,
             "low": 7763.18017578125,
             "close": 7798.990234375
+          },
+          {
+            "time": "2026-08-14T00:00:00+00:00",
+            "open": 7806.60009765625,
+            "high": 7807.7099609375,
+            "low": 7797.81005859375,
+            "close": 7805.06982421875
           }
         ],
         "1H": [
-          {
-            "time": "2026-05-19T13:30:00+00:00",
-            "open": 7375.75,
-            "high": 7381.64013671875,
-            "low": 7335.0498046875,
-            "close": 7341.47998046875
-          },
-          {
-            "time": "2026-05-19T14:30:00+00:00",
-            "open": 7341.58984375,
-            "high": 7358.10986328125,
-            "low": 7333.68017578125,
-            "close": 7341.4599609375
-          },
-          {
-            "time": "2026-05-19T15:30:00+00:00",
-            "open": 7341.10009765625,
-            "high": 7366.0,
-            "low": 7339.509765625,
-            "close": 7363.72021484375
-          },
-          {
-            "time": "2026-05-19T16:30:00+00:00",
-            "open": 7363.60009765625,
-            "high": 7395.31982421875,
-            "low": 7362.35986328125,
-            "close": 7388.81005859375
-          },
-          {
-            "time": "2026-05-19T17:30:00+00:00",
-            "open": 7388.7900390625,
-            "high": 7394.56982421875,
-            "low": 7377.56982421875,
-            "close": 7377.669921875
-          },
-          {
-            "time": "2026-05-19T18:30:00+00:00",
-            "open": 7377.7099609375,
-            "high": 7382.66015625,
-            "low": 7357.669921875,
-            "close": 7365.77978515625
-          },
-          {
-            "time": "2026-05-19T19:30:00+00:00",
-            "open": 7365.72021484375,
-            "high": 7368.75,
-            "low": 7343.89990234375,
-            "close": 7354.9599609375
-          },
           {
             "time": "2026-05-20T13:30:00+00:00",
             "open": 7369.18994140625,
@@ -28157,23 +28080,16 @@
             "high": 7804.85986328125,
             "low": 7796.259765625,
             "close": 7798.85986328125
+          },
+          {
+            "time": "2026-08-14T13:30:00+00:00",
+            "open": 7806.60009765625,
+            "high": 7807.7099609375,
+            "low": 7797.81005859375,
+            "close": 7805.06982421875
           }
         ],
         "4H": [
-          {
-            "time": "2026-05-19T12:00:00+00:00",
-            "open": 7375.75,
-            "high": 7381.64013671875,
-            "low": 7333.68017578125,
-            "close": 7363.72021484375
-          },
-          {
-            "time": "2026-05-19T16:00:00+00:00",
-            "open": 7363.60009765625,
-            "high": 7395.31982421875,
-            "low": 7343.89990234375,
-            "close": 7354.9599609375
-          },
           {
             "time": "2026-05-20T12:00:00+00:00",
             "open": 7369.18994140625,
@@ -28999,6 +28915,13 @@
             "high": 7806.919921875,
             "low": 7785.02978515625,
             "close": 7798.85986328125
+          },
+          {
+            "time": "2026-08-14T12:00:00+00:00",
+            "open": 7806.60009765625,
+            "high": 7807.7099609375,
+            "low": 7797.81005859375,
+            "close": 7805.06982421875
           }
         ]
       },
@@ -29008,7 +28931,7 @@
       "name": "Gold",
       "symbol": "XAUUSD",
       "providerSymbol": "GC=F",
-      "currentPrice": 4423.2001953125,
+      "currentPrice": 4446.2998046875,
       "timeframes": {
         "1M": [
           {
@@ -30827,9 +30750,9 @@
           {
             "time": "2026-08-01T00:00:00+00:00",
             "open": 4083.39990234375,
-            "high": 4434.0,
+            "high": 4447.89990234375,
             "low": 4026.5,
-            "close": 4423.2001953125
+            "close": 4446.5
           }
         ],
         "1W": [
@@ -32649,9 +32572,9 @@
           {
             "time": "2026-08-10T00:00:00+00:00",
             "open": 4336.10009765625,
-            "high": 4445.0,
+            "high": 4447.89990234375,
             "low": 4336.10009765625,
-            "close": 4423.2001953125
+            "close": 4446.2998046875
           }
         ],
         "1D": [
@@ -34471,26 +34394,12 @@
           {
             "time": "2026-08-14T00:00:00+00:00",
             "open": 4408.2001953125,
-            "high": 4424.89990234375,
+            "high": 4447.89990234375,
             "low": 4365.5,
-            "close": 4423.2001953125
+            "close": 4446.5
           }
         ],
         "1H": [
-          {
-            "time": "2026-07-01T11:00:00+00:00",
-            "open": 4011.5,
-            "high": 4049.39990234375,
-            "low": 4011.300048828125,
-            "close": 4044.0
-          },
-          {
-            "time": "2026-07-01T12:00:00+00:00",
-            "open": 4044.5,
-            "high": 4047.800048828125,
-            "low": 4033.199951171875,
-            "close": 4036.800048828125
-          },
           {
             "time": "2026-07-01T13:00:00+00:00",
             "open": 4036.800048828125,
@@ -37120,7 +37029,7 @@
             "time": "2026-07-24T14:00:00+00:00",
             "open": 4069.89990234375,
             "high": 4073.0,
-            "low": 4060.300048828125,
+            "low": 4058.39990234375,
             "close": 4066.199951171875
           },
           {
@@ -39513,19 +39422,26 @@
           {
             "time": "2026-08-14T11:00:00+00:00",
             "open": 4405.5,
-            "high": 4424.89990234375,
+            "high": 4426.0,
             "low": 4404.7001953125,
-            "close": 4423.2001953125
+            "close": 4425.7998046875
+          },
+          {
+            "time": "2026-08-14T12:00:00+00:00",
+            "open": 4425.5,
+            "high": 4444.0,
+            "low": 4421.7998046875,
+            "close": 4430.89990234375
+          },
+          {
+            "time": "2026-08-14T13:00:00+00:00",
+            "open": 4430.7001953125,
+            "high": 4447.89990234375,
+            "low": 4427.2998046875,
+            "close": 4446.2998046875
           }
         ],
         "4H": [
-          {
-            "time": "2026-06-15T20:00:00+00:00",
-            "open": 4342.60009765625,
-            "high": 4343.89990234375,
-            "low": 4326.7001953125,
-            "close": 4337.2998046875
-          },
           {
             "time": "2026-06-16T00:00:00+00:00",
             "open": 4336.60009765625,
@@ -41335,9 +41251,16 @@
           {
             "time": "2026-08-14T08:00:00+00:00",
             "open": 4399.7998046875,
-            "high": 4424.89990234375,
+            "high": 4426.0,
             "low": 4398.10009765625,
-            "close": 4423.2001953125
+            "close": 4425.7998046875
+          },
+          {
+            "time": "2026-08-14T12:00:00+00:00",
+            "open": 4425.5,
+            "high": 4447.89990234375,
+            "low": 4421.7998046875,
+            "close": 4446.2998046875
           }
         ]
       },
@@ -41347,7 +41270,7 @@
       "name": "Silver",
       "symbol": "XAGUSD",
       "providerSymbol": "SI=F",
-      "currentPrice": 65.12000274658203,
+      "currentPrice": 65.49500274658203,
       "timeframes": {
         "1M": [
           {
@@ -43168,7 +43091,7 @@
             "open": 57.66699981689453,
             "high": 66.6500015258789,
             "low": 57.66699981689453,
-            "close": 65.12000274658203
+            "close": 65.49500274658203
           }
         ],
         "1W": [
@@ -44990,7 +44913,7 @@
             "open": 63.904998779296875,
             "high": 66.6500015258789,
             "low": 63.64500045776367,
-            "close": 65.12000274658203
+            "close": 65.5
           }
         ],
         "1D": [
@@ -46810,26 +46733,12 @@
           {
             "time": "2026-08-14T00:00:00+00:00",
             "open": 64.62999725341797,
-            "high": 65.18000030517578,
+            "high": 65.5199966430664,
             "low": 63.64500045776367,
-            "close": 65.12000274658203
+            "close": 65.49500274658203
           }
         ],
         "1H": [
-          {
-            "time": "2026-07-01T13:00:00+00:00",
-            "open": 59.28499984741211,
-            "high": 61.20000076293945,
-            "low": 58.78499984741211,
-            "close": 60.775001525878906
-          },
-          {
-            "time": "2026-07-01T14:00:00+00:00",
-            "open": 60.810001373291016,
-            "high": 61.54499816894531,
-            "low": 60.619998931884766,
-            "close": 60.849998474121094
-          },
           {
             "time": "2026-07-01T15:00:00+00:00",
             "open": 60.86000061035156,
@@ -49059,7 +48968,7 @@
           {
             "time": "2026-07-22T05:00:00+00:00",
             "open": 59.95500183105469,
-            "high": 60.05500030517578,
+            "high": 60.060001373291016,
             "low": 59.724998474121094,
             "close": 59.959999084472656
           },
@@ -49445,7 +49354,7 @@
             "time": "2026-07-24T14:00:00+00:00",
             "open": 58.654998779296875,
             "high": 58.97999954223633,
-            "low": 58.470001220703125,
+            "low": 58.439998626708984,
             "close": 58.779998779296875
           },
           {
@@ -50850,7 +50759,7 @@
           },
           {
             "time": "2026-08-06T08:00:00+00:00",
-            "open": 62.17499923706055,
+            "open": 62.02000045776367,
             "high": 62.345001220703125,
             "low": 62.0,
             "close": 62.33000183105469
@@ -51852,19 +51761,26 @@
           {
             "time": "2026-08-14T11:00:00+00:00",
             "open": 64.83000183105469,
-            "high": 65.18000030517578,
+            "high": 65.19000244140625,
             "low": 64.76499938964844,
-            "close": 65.12000274658203
+            "close": 65.16999816894531
+          },
+          {
+            "time": "2026-08-14T12:00:00+00:00",
+            "open": 65.16000366210938,
+            "high": 65.29000091552734,
+            "low": 64.94999694824219,
+            "close": 65.24500274658203
+          },
+          {
+            "time": "2026-08-14T13:00:00+00:00",
+            "open": 65.25,
+            "high": 65.5199966430664,
+            "low": 65.09500122070312,
+            "close": 65.49500274658203
           }
         ],
         "4H": [
-          {
-            "time": "2026-06-15T20:00:00+00:00",
-            "open": 70.26000213623047,
-            "high": 70.30500030517578,
-            "low": 69.87000274658203,
-            "close": 69.98999786376953
-          },
           {
             "time": "2026-06-16T00:00:00+00:00",
             "open": 69.9749984741211,
@@ -53414,7 +53330,7 @@
           },
           {
             "time": "2026-08-06T08:00:00+00:00",
-            "open": 62.17499923706055,
+            "open": 62.02000045776367,
             "high": 62.48500061035156,
             "low": 61.869998931884766,
             "close": 62.07500076293945
@@ -53674,9 +53590,16 @@
           {
             "time": "2026-08-14T08:00:00+00:00",
             "open": 64.76000213623047,
-            "high": 65.18000030517578,
+            "high": 65.19000244140625,
             "low": 64.66000366210938,
-            "close": 65.12000274658203
+            "close": 65.16999816894531
+          },
+          {
+            "time": "2026-08-14T12:00:00+00:00",
+            "open": 65.16000366210938,
+            "high": 65.5199966430664,
+            "low": 64.94999694824219,
+            "close": 65.49500274658203
           }
         ]
       },
@@ -53686,7 +53609,7 @@
       "name": "Petrolio WTI",
       "symbol": "WTI",
       "providerSymbol": "CL=F",
-      "currentPrice": 81.6500015258789,
+      "currentPrice": 81.02999877929688,
       "timeframes": {
         "1M": [
           {
@@ -55507,7 +55430,7 @@
             "open": 80.0999984741211,
             "high": 84.61000061035156,
             "low": 74.23999786376953,
-            "close": 81.6500015258789
+            "close": 81.02999877929688
           }
         ],
         "1W": [
@@ -57329,7 +57252,7 @@
             "open": 78.41999816894531,
             "high": 84.61000061035156,
             "low": 77.79000091552734,
-            "close": 81.6500015258789
+            "close": 81.02999877929688
           }
         ],
         "1D": [
@@ -59151,24 +59074,10 @@
             "open": 81.2699966430664,
             "high": 82.98999786376953,
             "low": 80.70999908447266,
-            "close": 81.6500015258789
+            "close": 81.02999877929688
           }
         ],
         "1H": [
-          {
-            "time": "2026-07-01T12:00:00+00:00",
-            "open": 69.1500015258789,
-            "high": 69.18000030517578,
-            "low": 68.6500015258789,
-            "close": 68.76000213623047
-          },
-          {
-            "time": "2026-07-01T13:00:00+00:00",
-            "open": 68.7699966430664,
-            "high": 69.25,
-            "low": 68.75,
-            "close": 69.06999969482422
-          },
           {
             "time": "2026-07-01T14:00:00+00:00",
             "open": 69.06999969482422,
@@ -63037,7 +62946,7 @@
             "time": "2026-08-05T08:00:00+00:00",
             "open": 76.01000213623047,
             "high": 76.38999938964844,
-            "low": 75.75,
+            "low": 75.8499984741211,
             "close": 76.23999786376953
           },
           {
@@ -64193,17 +64102,24 @@
             "open": 81.51000213623047,
             "high": 81.86000061035156,
             "low": 81.43000030517578,
-            "close": 81.6500015258789
+            "close": 81.55999755859375
+          },
+          {
+            "time": "2026-08-14T12:00:00+00:00",
+            "open": 81.55999755859375,
+            "high": 82.18000030517578,
+            "low": 81.12000274658203,
+            "close": 81.13999938964844
+          },
+          {
+            "time": "2026-08-14T13:00:00+00:00",
+            "open": 81.13999938964844,
+            "high": 81.52999877929688,
+            "low": 81.0199966430664,
+            "close": 81.02999877929688
           }
         ],
         "4H": [
-          {
-            "time": "2026-06-15T20:00:00+00:00",
-            "open": 81.30999755859375,
-            "high": 81.61000061035156,
-            "low": 80.91999816894531,
-            "close": 81.52999877929688
-          },
           {
             "time": "2026-06-16T00:00:00+00:00",
             "open": 81.51000213623047,
@@ -65713,7 +65629,7 @@
             "time": "2026-08-05T08:00:00+00:00",
             "open": 76.01000213623047,
             "high": 76.69999694824219,
-            "low": 75.75,
+            "low": 75.80999755859375,
             "close": 76.05999755859375
           },
           {
@@ -66015,7 +65931,14 @@
             "open": 82.87000274658203,
             "high": 82.97000122070312,
             "low": 81.41999816894531,
-            "close": 81.6500015258789
+            "close": 81.55999755859375
+          },
+          {
+            "time": "2026-08-14T12:00:00+00:00",
+            "open": 81.55999755859375,
+            "high": 82.18000030517578,
+            "low": 81.0199966430664,
+            "close": 81.02999877929688
           }
         ]
       },
@@ -66025,7 +65948,7 @@
       "name": "EUR/USD",
       "symbol": "EURUSD",
       "providerSymbol": "EURUSD=X",
-      "currentPrice": 1.1574074029922485,
+      "currentPrice": 1.158077597618103,
       "timeframes": {
         "1M": [
           {
@@ -67844,9 +67767,9 @@
           {
             "time": "2026-08-01T00:00:00+00:00",
             "open": 1.1538017988204956,
-            "high": 1.1579434871673584,
+            "high": 1.1583458185195923,
             "low": 1.1502846479415894,
-            "close": 1.1574074029922485
+            "close": 1.158077597618103
           }
         ],
         "1W": [
@@ -69666,9 +69589,9 @@
           {
             "time": "2026-08-10T00:00:00+00:00",
             "open": 1.155575156211853,
-            "high": 1.1574074029922485,
+            "high": 1.1583458185195923,
             "low": 1.1512778997421265,
-            "close": 1.1574074029922485
+            "close": 1.158077597618103
           }
         ],
         "1D": [
@@ -71488,19 +71411,12 @@
           {
             "time": "2026-08-14T00:00:00+00:00",
             "open": 1.1531364917755127,
-            "high": 1.1574074029922485,
+            "high": 1.1583458185195923,
             "low": 1.1531364917755127,
-            "close": 1.1574074029922485
+            "close": 1.158077597618103
           }
         ],
         "1H": [
-          {
-            "time": "2026-07-03T07:00:00+00:00",
-            "open": 1.1456066370010376,
-            "high": 1.1460003852844238,
-            "low": 1.145213007926941,
-            "close": 1.145737886428833
-          },
           {
             "time": "2026-07-03T08:00:00+00:00",
             "open": 1.1458691358566284,
@@ -72500,7 +72416,7 @@
             "open": 1.1427265405654907,
             "high": 1.1449507474899292,
             "low": 1.1427265405654907,
-            "close": 1.1439030170440674
+            "close": 1.144164800643921
           },
           {
             "time": "2026-07-13T09:00:00+00:00",
@@ -73927,7 +73843,7 @@
             "time": "2026-07-23T21:00:00+00:00",
             "open": 1.1375269889831543,
             "high": 1.1384334564208984,
-            "low": 1.1371389627456665,
+            "low": 1.1375269889831543,
             "close": 1.1381744146347046
           },
           {
@@ -76530,9 +76446,16 @@
           {
             "time": "2026-08-14T12:00:00+00:00",
             "open": 1.1570056676864624,
-            "high": 1.1574074029922485,
-            "low": 1.1570056676864624,
-            "close": 1.1574074029922485
+            "high": 1.158077597618103,
+            "low": 1.156738042831421,
+            "close": 1.1570056676864624
+          },
+          {
+            "time": "2026-08-14T13:00:00+00:00",
+            "open": 1.1570056676864624,
+            "high": 1.1583458185195923,
+            "low": 1.1566041707992554,
+            "close": 1.158077597618103
           }
         ],
         "4H": [
@@ -77674,7 +77597,7 @@
             "time": "2026-07-23T20:00:00+00:00",
             "open": 1.1381744146347046,
             "high": 1.1384334564208984,
-            "low": 1.1371389627456665,
+            "low": 1.1375269889831543,
             "close": 1.138044834136963
           },
           {
@@ -78352,9 +78275,9 @@
           {
             "time": "2026-08-14T12:00:00+00:00",
             "open": 1.1570056676864624,
-            "high": 1.1574074029922485,
-            "low": 1.1570056676864624,
-            "close": 1.1574074029922485
+            "high": 1.1583458185195923,
+            "low": 1.1566041707992554,
+            "close": 1.158077597618103
           }
         ]
       },
@@ -78364,7 +78287,7 @@
       "name": "USD/JPY",
       "symbol": "USDJPY",
       "providerSymbol": "JPY=X",
-      "currentPrice": 158.96400451660156,
+      "currentPrice": 158.8719940185547,
       "timeframes": {
         "1M": [
           {
@@ -80185,7 +80108,7 @@
             "open": 157.4199981689453,
             "high": 159.5279998779297,
             "low": 155.25599670410156,
-            "close": 158.9709930419922
+            "close": 158.8719940185547
           }
         ],
         "1W": [
@@ -82007,7 +81930,7 @@
             "open": 157.89999389648438,
             "high": 159.5279998779297,
             "low": 157.8489990234375,
-            "close": 158.96400451660156
+            "close": 158.8719940185547
           }
         ],
         "1D": [
@@ -83828,18 +83751,11 @@
             "time": "2026-08-14T00:00:00+00:00",
             "open": 159.48699951171875,
             "high": 159.5279998779297,
-            "low": 158.8699951171875,
-            "close": 158.9709930419922
+            "low": 158.59500122070312,
+            "close": 158.86399841308594
           }
         ],
         "1H": [
-          {
-            "time": "2026-07-03T02:00:00+00:00",
-            "open": 161.2259979248047,
-            "high": 161.24899291992188,
-            "low": 161.11199951171875,
-            "close": 161.1649932861328
-          },
           {
             "time": "2026-07-03T03:00:00+00:00",
             "open": 161.16600036621094,
@@ -88870,8 +88786,15 @@
             "time": "2026-08-14T12:00:00+00:00",
             "open": 159.10400390625,
             "high": 159.11399841308594,
-            "low": 158.96400451660156,
-            "close": 158.96400451660156
+            "low": 158.59500122070312,
+            "close": 158.91799926757812
+          },
+          {
+            "time": "2026-08-14T13:00:00+00:00",
+            "open": 158.92100524902344,
+            "high": 159.09300231933594,
+            "low": 158.8300018310547,
+            "close": 158.8719940185547
           }
         ],
         "4H": [
@@ -90692,8 +90615,8 @@
             "time": "2026-08-14T12:00:00+00:00",
             "open": 159.10400390625,
             "high": 159.11399841308594,
-            "low": 158.96400451660156,
-            "close": 158.96400451660156
+            "low": 158.59500122070312,
+            "close": 158.8719940185547
           }
         ]
       },
@@ -90702,10 +90625,412 @@
   ],
   "investment": {
     "provider": "Yahoo Finance tramite yfinance",
-    "generatedAt": "2026-08-14T12:08:31.133574+00:00",
+    "generatedAt": "2026-08-14T13:43:16.604368+00:00",
     "screenedCount": 204,
     "universeCount": 208,
     "candidates": [
+      {
+        "ticker": "MU",
+        "name": "Micron Technology, Inc.",
+        "sector": "Semiconductors",
+        "currency": "USD",
+        "companyProfile": {
+          "country": "United States",
+          "city": "Boise",
+          "website": "https://www.micron.com",
+          "industry": "Semiconductors",
+          "sector": "Technology",
+          "employees": 53000,
+          "marketCap": 1092388585472.0,
+          "ceo": null,
+          "description": "Micron Technology, Inc. designs, develops, manufactures, and sells memory and storage products in the United States, Taiwan, Japan, Mainland China, Hong Kong, Europe, and internationally. It operates through the Cloud Memory Business Unit; Core Data Center Business Unit; Mobile and Client Business Unit; and Automotive and Embedded Business Unit segments. The company provides memory products, including dynamic random access memory components and modules, CXL-based memory, LPDDR components and modules, graphics memory, high-bandwidth memory, and data center memory products; multichip packages (MCP) comprising embedded multimedia card-based, universal flash storage-based, and NAND-based MCPs; and technology leadership products that include 1y DRAM and G9 NAND technologies. It also offers storage products, such as data center solid-state drives (SSD), client SSD storage, and auto and industrial SSD storage; managed NAND; NAND flash; NOR flash; and memory cards. In addition, the company provides design tools, including FBGA and part decoders; DRAM power calculators; NAND power calculators; simulation models; chipset compatibility guides; serial presence-detection tools; cross-reference tools; UFSparm; SSD firmware; software and drivers; storage executive software; and obsolete part catalogs. It markets its semiconductor memory and storage products under the Micron and Crucial brands. The company serves the data center, PC, graphics, networking, automotive, industrial, and consumer embedded markets, as well as the smartphone and other mobile-device markets. It sells its products through its direct sales force, independent sales representatives, distributors, and retailers; web-based customer direct sales channel; and channel and distribution partners. Micron Technology, Inc. was founded in 1978 and is headquartered in Boise, Idaho."
+        },
+        "currentPrice": 967.2899780273438,
+        "high52": 1213.3734130859375,
+        "pullbackPct": 20.280931855325303,
+        "requiredPullbackMin": 15,
+        "requiredPullbackMax": 22,
+        "qualityScore": 8.307134693877552,
+        "trendScore": 9.25,
+        "entryScore": 7.964649308199654,
+        "newsScore": 5,
+        "rawScore": 8.055588122968281,
+        "finalScore": 8.055588122968281,
+        "stableScore": 8.055588122968281,
+        "status": "GREEN",
+        "watchZoneLow": 1058.6683029174806,
+        "watchZoneHigh": 1131.4707077026367,
+        "entryZoneLow": 946.4312622070313,
+        "entryZoneHigh": 1031.3674011230469,
+        "invalidation": 584.8656748572809,
+        "target1": 1473.739719834349,
+        "target2": 1796.9666452805554,
+        "target3": 2201.0003020883137,
+        "riskReward": "1 : 2.0",
+        "executiveSummary": "Micron Technology, Inc. mantiene qualità 8.3/10 e trend 9.2/10. Quota a -20.3% dal massimo. Punteggio odierno 8.1, media storica 8.1.",
+        "selectionReason": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
+        "pullbackDiagnosis": "Il ritracciamento appare prevalentemente tecnico e compatibile con una presa di profitto.",
+        "catalysts": [
+          "Crescita degli utili positiva (13.7%).",
+          "Possibile recupero verso i massimi se il supporto Daily regge."
+        ],
+        "risks": [
+          "Settore ciclico e dipendente dalla domanda AI e data center.",
+          "Taiwan e controlli all'export sono fattori geopolitici rilevanti."
+        ],
+        "news": [
+          {
+            "title": "Wall Street's riskiest trades are suddenly back on top: Chart of the Day",
+            "publisher": "Yahoo Finance",
+            "url": "https://finance.yahoo.com/markets/article/wall-streets-riskiest-trades-are-suddenly-back-on-top-chart-of-the-day-100100027.html",
+            "publishedAt": "2026-08-14T10:01:00Z"
+          },
+          {
+            "title": "The next AI winners may look nothing like Nvidia or Micron: One Big Investment Idea",
+            "publisher": "Yahoo Finance",
+            "url": "https://finance.yahoo.com/markets/article/the-next-ai-winners-may-look-nothing-like-nvidia-or-micron-one-big-investment-idea-095700607.html",
+            "publishedAt": "2026-08-14T09:57:00Z"
+          },
+          {
+            "title": "Korean Stocks Rally Again Overnight. KOSPI Closes Up 2.41% As SK Hynix and Samsung Rally.",
+            "publisher": "24/7 Wall St.",
+            "url": "https://247wallst.com/investing/2026/08/14/korean-stocks-rally-again-overnight-kospi-closes-up-2-41-as-sk-hynix-and-samsung-rally/",
+            "publishedAt": "2026-08-14T13:20:21Z"
+          },
+          {
+            "title": "Sandisk Jumps 7%, Western Digital Gains 4%, Micron Climbs 3% as the Kospi Returns to a Bull Market",
+            "publisher": "24/7 Wall St.",
+            "url": "https://247wallst.com/investing/2026/08/14/sandisk-jumps-7-western-digital-gains-4-micron-climbs-3-as-the-kospi-returns-to-a-bull-market/",
+            "publishedAt": "2026-08-14T13:03:30Z"
+          },
+          {
+            "title": "Could Intel return to the red-hot memory market after $20B raise and recent hire?",
+            "publisher": "Investing.com",
+            "url": "https://finance.yahoo.com/technology/articles/could-intel-return-red-hot-125725820.html",
+            "publishedAt": "2026-08-14T12:57:25Z"
+          }
+        ],
+        "conditionsForGreen": [
+          "Conferma Daily nella zona prima dell'esecuzione."
+        ],
+        "memory": {
+          "firstSeen": null,
+          "lastSeen": null,
+          "daysObserved": 0,
+          "consecutiveTop5Days": 0,
+          "totalTop5Days": 0,
+          "stabilityScore": 4.5,
+          "reliabilityPct": 58.5,
+          "confidencePct": 59.58352873780969,
+          "momentum": 0.0,
+          "momentumLabel": "Stabile",
+          "score7DaysAgo": 8.055588122968281,
+          "historicalAverage": 8.055588122968281,
+          "previousRank": null,
+          "previousTop5": false,
+          "greenDays": 0,
+          "badge": "Nuovo candidato"
+        },
+        "fundamentals": {
+          "revenueGrowthPct": 3.457,
+          "earningsGrowthPct": 13.685,
+          "operatingMarginPct": 80.370003,
+          "roePct": 66.63799999999999,
+          "debtToEquity": 6.33,
+          "forwardPE": 6.244674,
+          "freeCashFlowLabel": "7.64 mld"
+        },
+        "technical": {
+          "monthly": "Rialzista",
+          "weekly": "Rialzista",
+          "daily": "Rialzista",
+          "rsiDaily": 56.02103458188505,
+          "relativeStrength3mPct": 33.502442885407405,
+          "support": 467.491301600037,
+          "resistance": 1096.878338736082
+        },
+        "earningsCommentary": "Il sistema considera dati disponibili, ma trimestrali, guidance e conference call devono essere verificate sulle fonti ufficiali.",
+        "nextEarningsDate": null,
+        "earningsSurprisePct": 13.983,
+        "estimateRevision": "Non disponibile in modo uniforme dalla fonte gratuita.",
+        "scenarios": {
+          "A": "Attendere un ritorno fra 946.43 e 1031.37 con stabilizzazione Daily.",
+          "B": "Se rompe i massimi senza ritracciare, non inseguire.",
+          "C": "Escludere con chiusura Daily/Weekly sotto 584.87 o deterioramento fondamentale."
+        },
+        "rank": 1,
+        "rankChange": null,
+        "isNewEntry": true
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc.",
+        "sector": "Communication Services",
+        "currency": "USD",
+        "companyProfile": {
+          "country": "United States",
+          "city": "Mountain View",
+          "website": "https://abc.xyz",
+          "industry": "Internet Content & Information",
+          "sector": "Communication Services",
+          "employees": 198933,
+          "marketCap": 4258811871232.0,
+          "ceo": null,
+          "description": "Alphabet Inc. offers various products and platforms in the United States, Europe, the Middle East, Africa, the Asia-Pacific, Canada, and Latin America. It operates through Google Services, Google Cloud, and Other Bets segments. The Google Services segment provides products and services, including ads, Android, Chrome, devices, Gmail, Google Drive, Google Maps, Google Photos, Google Play, Search, and YouTube. It is also involved in the sale of apps and in-app purchases and digital content in Google Play and YouTube; and devices, as well as the provision of YouTube consumer subscription services, such as YouTube TV, YouTube Music and Premium, NFL Sunday Ticket, and Google One. The Google Cloud segment offers consumption-based fees and subscriptions for AI solutions, including AI infrastructure, Vertex AI platform, and Gemini enterprise. It also provides cybersecurity, and data and analytics services; Google Workspace that include cloud-based communication and collaboration tools for enterprises, such as Calendar, Gmail, Docs, Drive, and Meet; and other enterprise services. The Other Bets segment sells transportation and internet services. Alphabet Inc. was incorporated in 1998 and is headquartered in Mountain View, California."
+        },
+        "currentPrice": 348.17999267578125,
+        "high52": 402.3796691894531,
+        "pullbackPct": 13.469785047254202,
+        "requiredPullbackMin": 11.977197371414816,
+        "requiredPullbackMax": 18.71437089283565,
+        "qualityScore": 9.164929567099566,
+        "trendScore": 6.1752380785453145,
+        "entryScore": 7.772360674509816,
+        "newsScore": 8,
+        "rawScore": 7.828232883433995,
+        "finalScore": 7.828232883433994,
+        "stableScore": 7.828232883433994,
+        "status": "GREEN",
+        "watchZoneLow": 361.4149331023763,
+        "watchZoneHigh": 380.6924559668831,
+        "entryZoneLow": 327.07684549997373,
+        "entryZoneHigh": 354.1858620281863,
+        "invalidation": 313.3248479065027,
+        "target1": 373.39916079317277,
+        "target2": 395.2443654792346,
+        "target3": 422.5508713368119,
+        "riskReward": "1 : 2.0",
+        "executiveSummary": "Alphabet Inc. mantiene qualità 9.2/10 e trend 6.2/10. Quota a -13.5% dal massimo. Punteggio odierno 7.8, media storica 7.8.",
+        "selectionReason": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
+        "pullbackDiagnosis": "Il ritracciamento appare prevalentemente tecnico e compatibile con una presa di profitto.",
+        "catalysts": [
+          "Crescita ricavi sostenuta (24.2%).",
+          "Crescita degli utili positiva (294.0%).",
+          "Flusso di notizie recente moderatamente favorevole.",
+          "Possibile recupero verso i massimi se il supporto Daily regge."
+        ],
+        "risks": [
+          "Rallentamento macroeconomico e compressione dei multipli."
+        ],
+        "news": [
+          {
+            "title": "Gemini & Zocdoc launch AI doctor booking",
+            "publisher": "Yahoo Finance Video",
+            "url": "https://finance.yahoo.com/video/gemini-zocdoc-launch-ai-doctor-195932395.html",
+            "publishedAt": "2026-08-13T19:59:32Z"
+          },
+          {
+            "title": "Google becomes latest company to raise prices thanks to memory shortage",
+            "publisher": "Yahoo Finance",
+            "url": "https://finance.yahoo.com/technology/article/google-becomes-latest-company-to-raise-prices-thanks-to-memory-shortage-151004099.html",
+            "publishedAt": "2026-08-13T15:10:04Z"
+          },
+          {
+            "title": "5 Revealing Analyst Questions From Taboola’s Q2 Earnings Call",
+            "publisher": "StockStory",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/5-revealing-analyst-questions-taboola-133300227.html",
+            "publishedAt": "2026-08-14T13:33:00Z"
+          },
+          {
+            "title": "Reddit Gains 12% by Joining the S&P 500",
+            "publisher": "GuruFocus.com",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/reddit-gains-12-joining-p-130240986.html",
+            "publishedAt": "2026-08-14T13:02:40Z"
+          },
+          {
+            "title": "Update: US Equity Futures Mixed Pre-Bell Friday Following Record-High Overnight Close for S&P 500",
+            "publisher": "MT Newswires",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/us-equity-futures-mixed-pre-130145386.html",
+            "publishedAt": "2026-08-14T13:01:45Z"
+          }
+        ],
+        "conditionsForGreen": [
+          "Conferma Daily nella zona prima dell'esecuzione."
+        ],
+        "memory": {
+          "firstSeen": null,
+          "lastSeen": null,
+          "daysObserved": 0,
+          "consecutiveTop5Days": 0,
+          "totalTop5Days": 0,
+          "stabilityScore": 4.5,
+          "reliabilityPct": 58.5,
+          "confidencePct": 58.219397300603966,
+          "momentum": 0.0,
+          "momentumLabel": "Stabile",
+          "score7DaysAgo": 7.828232883433995,
+          "historicalAverage": 7.828232883433995,
+          "previousRank": null,
+          "previousTop5": false,
+          "greenDays": 0,
+          "badge": "Nuovo candidato"
+        },
+        "fundamentals": {
+          "revenueGrowthPct": 24.2,
+          "earningsGrowthPct": 294.0,
+          "operatingMarginPct": 34.033,
+          "roePct": 48.676,
+          "debtToEquity": 18.859,
+          "forwardPE": 23.626427,
+          "freeCashFlowLabel": "22.67 mld"
+        },
+        "technical": {
+          "monthly": "Rialzista",
+          "weekly": "Rialzista",
+          "daily": "Rialzista debole",
+          "rsiDaily": 60.558706278135176,
+          "relativeStrength3mPct": -12.19619074327497,
+          "support": 330.58648102265397,
+          "resistance": 393.97167756578494
+        },
+        "earningsCommentary": "Il sistema considera dati disponibili, ma trimestrali, guidance e conference call devono essere verificate sulle fonti ufficiali.",
+        "nextEarningsDate": null,
+        "earningsSurprisePct": 2.979,
+        "estimateRevision": "Non disponibile in modo uniforme dalla fonte gratuita.",
+        "scenarios": {
+          "A": "Attendere un ritorno fra 327.08 e 354.19 con stabilizzazione Daily.",
+          "B": "Se rompe i massimi senza ritracciare, non inseguire.",
+          "C": "Escludere con chiusura Daily/Weekly sotto 313.32 o deterioramento fondamentale."
+        },
+        "rank": 2,
+        "rankChange": null,
+        "isNewEntry": true
+      },
+      {
+        "ticker": "LRCX",
+        "name": "Lam Research Corporation",
+        "sector": "Semiconductors",
+        "currency": "USD",
+        "companyProfile": {
+          "country": "United States",
+          "city": "Fremont",
+          "website": "https://www.lamresearch.com",
+          "industry": "Semiconductor Equipment & Materials",
+          "sector": "Technology",
+          "employees": 23300,
+          "marketCap": 422420905984.0,
+          "ceo": null,
+          "description": "Lam Research Corporation designs, manufactures, markets, refurbishes, and services semiconductor processing equipment used in the fabrication of integrated circuits in the United States, China, Korea, Taiwan, Japan, Southeast Asia, and Europe. The company offers ALTUS systems to deposit conformal or selective films for tungsten or molybdenum metallization applications; SABRE electrochemical deposition products for copper interconnect transition that offers copper damascene manufacturing; SPEED gapfill high-density plasma chemical vapor deposition (CVD) products; Striker single-wafer atomic layer deposition products for dielectric film solutions; and VECTOR plasma-enhanced CVD products. It also provides Flex for dielectric etch applications; Vantex, a dielectric etch system that provides RF technology and repeatable wafer-to-wafer performance enabled by Equipment Intelligence solutions; Kiyo for conductor etch applications; Syndion for through-silicon via etch applications; and Versys metal products for metal etch processes. In addition, the company offers Coronus bevel clean products to enhance die yield; and Da Vinci, DV-Prime, EOS, and SP series products to address various wafer cleaning applications. Further, it provides Reliant deposition, etch, and clean products; and Sense.i platform products, as well as customer service, spares, and upgrades. Lam Research Corporation was incorporated in 1980 and is headquartered in Fremont, California."
+        },
+        "currentPrice": 337.45001220703125,
+        "high52": 433.3299865722656,
+        "pullbackPct": 22.12631881852115,
+        "requiredPullbackMin": 15,
+        "requiredPullbackMax": 22,
+        "qualityScore": 8.949480692640693,
+        "trendScore": 8.850214742611339,
+        "entryScore": 5.85563563597583,
+        "newsScore": 6,
+        "rawScore": 7.764792472422969,
+        "finalScore": 7.764792472422968,
+        "stableScore": 7.764792472422968,
+        "status": "YELLOW",
+        "watchZoneLow": 378.08041328430176,
+        "watchZoneHigh": 404.0802124786377,
+        "entryZoneLow": 337.9973895263672,
+        "entryZoneHigh": 368.33048858642576,
+        "invalidation": 246.84304535064658,
+        "target1": 480.7490115032964,
+        "target2": 565.8057264678963,
+        "target3": 672.1266201736462,
+        "riskReward": "1 : 2.0",
+        "executiveSummary": "Lam Research Corporation mantiene qualità 8.9/10 e trend 8.9/10. Quota a -22.1% dal massimo. Punteggio odierno 7.8, media storica 7.8.",
+        "selectionReason": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
+        "pullbackDiagnosis": "Il ritracciamento appare prevalentemente tecnico e compatibile con una presa di profitto.",
+        "catalysts": [
+          "Crescita ricavi sostenuta (30.0%).",
+          "Crescita degli utili positiva (34.8%).",
+          "Flusso di notizie recente moderatamente favorevole.",
+          "Possibile recupero verso i massimi se il supporto Daily regge."
+        ],
+        "risks": [
+          "Settore ciclico e dipendente dalla domanda AI e data center.",
+          "Taiwan e controlli all'export sono fattori geopolitici rilevanti."
+        ],
+        "news": [
+          {
+            "title": "Why Lam Research (LRCX) Became This Portfolio’s Top Performer",
+            "publisher": "Insider Monkey",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/why-lam-research-lrcx-became-132837845.html",
+            "publishedAt": "2026-08-14T13:28:37Z"
+          },
+          {
+            "title": "Applied Materials is Down 6% Premarket. Will It Drag Down Lam Research, KLA, and Other Semi Equipment Stocks?",
+            "publisher": "24/7 Wall St.",
+            "url": "https://247wallst.com/investing/2026/08/14/applied-materials-is-down-6-premarket-will-it-drag-down-lam-research-kla-and-other-semi-equipment-stocks/",
+            "publishedAt": "2026-08-14T13:16:38Z"
+          },
+          {
+            "title": "Applied Materials slips as investors seek faster growth after stellar run",
+            "publisher": "Reuters",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/applied-materials-slips-investors-seek-085840731.html",
+            "publishedAt": "2026-08-14T08:58:40Z"
+          },
+          {
+            "title": "Why Lam Research (LRCX) Is Up 10.2% After $3 Billion Global R&D Lab Expansion Plan",
+            "publisher": "Simply Wall St.",
+            "url": "https://finance.yahoo.com/technology/articles/why-lam-research-lrcx-10-021318128.html",
+            "publishedAt": "2026-08-14T02:13:18Z"
+          },
+          {
+            "title": "Chip equipment maker Lam Research to invest more than $3 billion to expand R&D labs",
+            "publisher": "Reuters",
+            "url": "https://finance.yahoo.com/technology/articles/chip-equipment-maker-lam-research-201624790.html",
+            "publishedAt": "2026-08-13T20:16:24Z"
+          }
+        ],
+        "conditionsForGreen": [
+          "RSI Daily sotto 62 o stabilizzazione."
+        ],
+        "memory": {
+          "firstSeen": null,
+          "lastSeen": null,
+          "daysObserved": 0,
+          "consecutiveTop5Days": 0,
+          "totalTop5Days": 0,
+          "stabilityScore": 4.5,
+          "reliabilityPct": 58.5,
+          "confidencePct": 57.83875483453781,
+          "momentum": 0.0,
+          "momentumLabel": "Stabile",
+          "score7DaysAgo": 7.764792472422969,
+          "historicalAverage": 7.764792472422969,
+          "previousRank": null,
+          "previousTop5": false,
+          "greenDays": 0,
+          "badge": "Nuovo candidato"
+        },
+        "fundamentals": {
+          "revenueGrowthPct": 30.0,
+          "earningsGrowthPct": 34.8,
+          "operatingMarginPct": 37.390997999999996,
+          "roePct": 65.06600399999999,
+          "debtToEquity": 33.049,
+          "forwardPE": 29.209646,
+          "freeCashFlowLabel": "3.09 mld"
+        },
+        "technical": {
+          "monthly": "Rialzista",
+          "weekly": "Rialzista",
+          "daily": "Rialzista",
+          "rsiDaily": 63.67542268475239,
+          "relativeStrength3mPct": 18.603435881781436,
+          "support": 256.4013709561112,
+          "resistance": 392.52233664225497
+        },
+        "earningsCommentary": "Il sistema considera dati disponibili, ma trimestrali, guidance e conference call devono essere verificate sulle fonti ufficiali.",
+        "nextEarningsDate": null,
+        "earningsSurprisePct": 0.324,
+        "estimateRevision": "Non disponibile in modo uniforme dalla fonte gratuita.",
+        "scenarios": {
+          "A": "Attendere un ritorno fra 338.00 e 368.33 con stabilizzazione Daily.",
+          "B": "Se rompe i massimi senza ritracciare, non inseguire.",
+          "C": "Escludere con chiusura Daily/Weekly sotto 246.84 o deterioramento fondamentale."
+        },
+        "rank": 3,
+        "rankChange": null,
+        "isNewEntry": true
+      },
       {
         "ticker": "AXP",
         "name": "American Express Company",
@@ -90718,31 +91043,31 @@
           "industry": "Credit Services",
           "sector": "Financial Services",
           "employees": 76800,
-          "marketCap": 232070217728.0,
+          "marketCap": 232124252160.0,
           "ceo": null,
           "description": "American Express Company, together with its subsidiaries, operates as an integrated payments company in the United States, Europe, the Middle East and Africa, the Asia Pacific, Australia, New Zealand, Latin America, Canada, the Caribbean, and internationally. It operates through four segments: U.S. Consumer Services, Commercial Services, International Card Services, and Global Merchant and Network Services. The company offers credit and charge cards and complementary products and services, including travel, dining, and lifestyle and expense management products and services; and banking and other payment and financing products and services, including deposits and non-card lending. It also provides merchant acquisition and processing, servicing and settlement, fraud prevention, and point-of-sale marketing and information products and services, as well as network services. The company offers its products and services to consumers, small businesses, mid-sized companies, and large corporations through mobile and online applications, affiliate marketing, customer referral programs, third-party service providers and business partners, in-house sales teams, direct mail, telephone, and direct response advertising. American Express Company was founded in 1850 and is headquartered in New York, New York."
         },
-        "currentPrice": 343.6499938964844,
+        "currentPrice": 343.7300109863281,
         "high52": 381.78155517578125,
-        "pullbackPct": 9.987795576384041,
-        "requiredPullbackMin": 8.088251443482743,
-        "requiredPullbackMax": 12.637892880441786,
-        "qualityScore": 6.030605238095238,
-        "trendScore": 8.323364474928697,
-        "entryScore": 9.34012103454191,
+        "pullbackPct": 9.966836709000594,
+        "requiredPullbackMin": 8.07040579068549,
+        "requiredPullbackMax": 12.610009047946077,
+        "qualityScore": 6.03043303030303,
+        "trendScore": 8.309368249448877,
+        "entryScore": 9.342020543812017,
         "newsScore": 8,
-        "rawScore": 7.7559780925678945,
-        "finalScore": 7.755978092567894,
-        "stableScore": 7.755978092567894,
+        "rawScore": 7.752475476101721,
+        "finalScore": 7.75247547610172,
+        "stableScore": 7.75247547610172,
         "status": "YELLOW",
-        "watchZoneLow": 355.53402085044365,
-        "watchZoneHigh": 367.88580170942606,
-        "entryZoneLow": 333.53241119538126,
-        "entryZoneHigh": 350.90210302832526,
-        "invalidation": 325.65441611307097,
-        "target1": 362.092666310392,
-        "target2": 375.34293910941784,
-        "target3": 391.90578010820013,
+        "watchZoneLow": 355.5919325496072,
+        "watchZoneHigh": 367.9164608442773,
+        "entryZoneLow": 333.638866524726,
+        "entryZoneHigh": 350.9702344391059,
+        "invalidation": 326.4258682077089,
+        "target1": 361.3589692109644,
+        "target2": 374.06191503033006,
+        "target3": 389.9405973045371,
         "riskReward": "1 : 2.0",
         "executiveSummary": "American Express Company mantiene qualità 6.0/10 e trend 8.3/10. Quota a -10.0% dal massimo. Punteggio odierno 7.8, media storica 7.8.",
         "selectionReason": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
@@ -90791,7 +91116,6 @@
           }
         ],
         "conditionsForGreen": [
-          "RSI Daily sotto 62 o stabilizzazione.",
           "Conferma dei fondamentali."
         ],
         "memory": {
@@ -90802,11 +91126,11 @@
           "totalTop5Days": 0,
           "stabilityScore": 4.5,
           "reliabilityPct": 58.5,
-          "confidencePct": 57.78586855540736,
+          "confidencePct": 57.76485285661032,
           "momentum": 0.0,
           "momentumLabel": "Stabile",
-          "score7DaysAgo": 7.7559780925678945,
-          "historicalAverage": 7.7559780925678945,
+          "score7DaysAgo": 7.752475476101721,
+          "historicalAverage": 7.752475476101721,
           "previousRank": null,
           "previousTop5": false,
           "greenDays": 0,
@@ -90818,16 +91142,16 @@
           "operatingMarginPct": 20.32,
           "roePct": 34.377,
           "debtToEquity": 172.38,
-          "forwardPE": 17.084019,
+          "forwardPE": 17.087997,
           "freeCashFlowLabel": null
         },
         "technical": {
           "monthly": "Rialzista",
           "weekly": "Rialzista",
           "daily": "Rialzista",
-          "rsiDaily": 67.00388416611548,
-          "relativeStrength3mPct": 10.173831598859163,
-          "support": 308.869320099791,
+          "rsiDaily": 59.86748749796898,
+          "relativeStrength3mPct": 9.949891991182014,
+          "support": 309.07394794785114,
           "resistance": 353.17799072265626
         },
         "earningsCommentary": "Il sistema considera dati disponibili, ma trimestrali, guidance e conference call devono essere verificate sulle fonti ufficiali.",
@@ -90835,500 +91159,100 @@
         "earningsSurprisePct": 0.078,
         "estimateRevision": "Non disponibile in modo uniforme dalla fonte gratuita.",
         "scenarios": {
-          "A": "Attendere un ritorno fra 333.53 e 350.90 con stabilizzazione Daily.",
+          "A": "Attendere un ritorno fra 333.64 e 350.97 con stabilizzazione Daily.",
           "B": "Se rompe i massimi senza ritracciare, non inseguire.",
-          "C": "Escludere con chiusura Daily/Weekly sotto 325.65 o deterioramento fondamentale."
-        },
-        "rank": 1,
-        "rankChange": null,
-        "isNewEntry": true
-      },
-      {
-        "ticker": "LRCX",
-        "name": "Lam Research Corporation",
-        "sector": "Semiconductors",
-        "currency": "USD",
-        "companyProfile": {
-          "country": "United States",
-          "city": "Fremont",
-          "website": "https://www.lamresearch.com",
-          "industry": "Semiconductor Equipment & Materials",
-          "sector": "Technology",
-          "employees": 23300,
-          "marketCap": 421707677696.0,
-          "ceo": null,
-          "description": "Lam Research Corporation designs, manufactures, markets, refurbishes, and services semiconductor processing equipment used in the fabrication of integrated circuits in the United States, China, Korea, Taiwan, Japan, Southeast Asia, and Europe. The company offers ALTUS systems to deposit conformal or selective films for tungsten or molybdenum metallization applications; SABRE electrochemical deposition products for copper interconnect transition that offers copper damascene manufacturing; SPEED gapfill high-density plasma chemical vapor deposition (CVD) products; Striker single-wafer atomic layer deposition products for dielectric film solutions; and VECTOR plasma-enhanced CVD products. It also provides Flex for dielectric etch applications; Vantex, a dielectric etch system that provides RF technology and repeatable wafer-to-wafer performance enabled by Equipment Intelligence solutions; Kiyo for conductor etch applications; Syndion for through-silicon via etch applications; and Versys metal products for metal etch processes. In addition, the company offers Coronus bevel clean products to enhance die yield; and Da Vinci, DV-Prime, EOS, and SP series products to address various wafer cleaning applications. Further, it provides Reliant deposition, etch, and clean products; and Sense.i platform products, as well as customer service, spares, and upgrades. Lam Research Corporation was incorporated in 1980 and is headquartered in Fremont, California."
-        },
-        "currentPrice": 337.010009765625,
-        "high52": 433.3299865722656,
-        "pullbackPct": 22.22785862768293,
-        "requiredPullbackMin": 15,
-        "requiredPullbackMax": 22,
-        "qualityScore": 8.95161567099567,
-        "trendScore": 8.483451125025228,
-        "entryScore": 5.739590139790936,
-        "newsScore": 6,
-        "rawScore": 7.633813178093326,
-        "finalScore": 7.633813178093325,
-        "stableScore": 7.633813178093325,
-        "status": "YELLOW",
-        "watchZoneLow": 378.08041328430176,
-        "watchZoneHigh": 404.0802124786377,
-        "entryZoneLow": 337.9973895263672,
-        "entryZoneHigh": 368.33048858642576,
-        "invalidation": 245.17675835879135,
-        "target1": 482.7485558935226,
-        "target2": 569.1383004516067,
-        "target3": 677.125481149212,
-        "riskReward": "1 : 2.0",
-        "executiveSummary": "Lam Research Corporation mantiene qualità 9.0/10 e trend 8.5/10. Quota a -22.2% dal massimo. Punteggio odierno 7.6, media storica 7.6.",
-        "selectionReason": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
-        "pullbackDiagnosis": "Il ritracciamento appare prevalentemente tecnico e compatibile con una presa di profitto.",
-        "catalysts": [
-          "Crescita ricavi sostenuta (30.0%).",
-          "Crescita degli utili positiva (34.8%).",
-          "Flusso di notizie recente moderatamente favorevole.",
-          "Possibile recupero verso i massimi se il supporto Daily regge."
-        ],
-        "risks": [
-          "Settore ciclico e dipendente dalla domanda AI e data center.",
-          "Taiwan e controlli all'export sono fattori geopolitici rilevanti."
-        ],
-        "news": [
-          {
-            "title": "Applied Materials slips as investors seek faster growth after stellar run",
-            "publisher": "Reuters",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/applied-materials-slips-investors-seek-085840731.html",
-            "publishedAt": "2026-08-14T08:58:40Z"
-          },
-          {
-            "title": "Why Lam Research (LRCX) Is Up 10.2% After $3 Billion Global R&D Lab Expansion Plan",
-            "publisher": "Simply Wall St.",
-            "url": "https://finance.yahoo.com/technology/articles/why-lam-research-lrcx-10-021318128.html",
-            "publishedAt": "2026-08-14T02:13:18Z"
-          },
-          {
-            "title": "Chip equipment maker Lam Research to invest more than $3 billion to expand R&D labs",
-            "publisher": "Reuters",
-            "url": "https://finance.yahoo.com/technology/articles/chip-equipment-maker-lam-research-201624790.html",
-            "publishedAt": "2026-08-13T20:16:24Z"
-          },
-          {
-            "title": "Applied Materials forecasts revenue above estimates, shares fall on high expectations",
-            "publisher": "Reuters",
-            "url": "https://finance.yahoo.com/technology/ai/articles/applied-materials-forecasts-quarterly-revenue-200500160.html",
-            "publishedAt": "2026-08-13T20:05:00Z"
-          },
-          {
-            "title": "KLA Drops 9% in a Month: Should You Buy the Stock on the Dip?",
-            "publisher": "Zacks",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/kla-drops-9-month-buy-174200956.html",
-            "publishedAt": "2026-08-13T17:42:00Z"
-          }
-        ],
-        "conditionsForGreen": [
-          "Conferma Daily nella zona prima dell'esecuzione."
-        ],
-        "memory": {
-          "firstSeen": null,
-          "lastSeen": null,
-          "daysObserved": 0,
-          "consecutiveTop5Days": 0,
-          "totalTop5Days": 0,
-          "stabilityScore": 4.5,
-          "reliabilityPct": 58.5,
-          "confidencePct": 57.052879068559946,
-          "momentum": 0.0,
-          "momentumLabel": "Stabile",
-          "score7DaysAgo": 7.633813178093326,
-          "historicalAverage": 7.633813178093326,
-          "previousRank": null,
-          "previousTop5": false,
-          "greenDays": 0,
-          "badge": "Nuovo candidato"
-        },
-        "fundamentals": {
-          "revenueGrowthPct": 30.0,
-          "earningsGrowthPct": 34.8,
-          "operatingMarginPct": 37.390997999999996,
-          "roePct": 65.06600399999999,
-          "debtToEquity": 33.049,
-          "forwardPE": 29.160328,
-          "freeCashFlowLabel": "3.09 mld"
-        },
-        "technical": {
-          "monthly": "Rialzista",
-          "weekly": "Rialzista",
-          "daily": "Rialzista",
-          "rsiDaily": 58.79619695280125,
-          "relativeStrength3mPct": 12.735218000403648,
-          "support": 255.8641629640507,
-          "resistance": 392.52233664225497
-        },
-        "earningsCommentary": "Il sistema considera dati disponibili, ma trimestrali, guidance e conference call devono essere verificate sulle fonti ufficiali.",
-        "nextEarningsDate": null,
-        "earningsSurprisePct": 0.324,
-        "estimateRevision": "Non disponibile in modo uniforme dalla fonte gratuita.",
-        "scenarios": {
-          "A": "Attendere un ritorno fra 338.00 e 368.33 con stabilizzazione Daily.",
-          "B": "Se rompe i massimi senza ritracciare, non inseguire.",
-          "C": "Escludere con chiusura Daily/Weekly sotto 245.18 o deterioramento fondamentale."
-        },
-        "rank": 2,
-        "rankChange": null,
-        "isNewEntry": true
-      },
-      {
-        "ticker": "AMD",
-        "name": "Advanced Micro Devices, Inc.",
-        "sector": "Semiconductors",
-        "currency": "USD",
-        "companyProfile": {
-          "country": "United States",
-          "city": "Santa Clara",
-          "website": "https://www.amd.com",
-          "industry": "Semiconductors",
-          "sector": "Technology",
-          "employees": 31000,
-          "marketCap": 788501757952.0,
-          "ceo": null,
-          "description": "Advanced Micro Devices, Inc. operates as a semiconductor company internationally. It operates in three segments: Data Center, Client and Gaming, and Embedded. The company offers artificial intelligence (AI) accelerators, microprocessors, and graphics processing units (GPUs) as standalone devices or as incorporated into accelerated processing units, chipsets, and data center and professional GPUs; and embedded processors and semi-custom system-on-chip (SoC) products, microprocessor and SoC development services and technology, data processing units, field programmable gate arrays (FPGA), system on modules, AI network interface cards, and adaptive SoC products. It provides processors under the AMD Ryzen, AMD Ryzen AI, AMD Ryzen PRO, AMD Ryzen Threadripper, AMD Ryzen Threadripper PRO, AMD Athlon, and AMD PRO A-Series brands; graphics under the AMD Radeon graphics and AMD Embedded Radeon graphics; professional graphics under the AMD Radeon Pro graphics brand; and AI and general-purpose compute infrastructure for hyperscale providers. The company offers data center graphics under the AMD Instinct accelerators and Radeon PRO V-series brands; server microprocessors under the AMD EPYC brand; low power solutions under the AMD Athlon, AMD Geode, AMD Ryzen, AMD EPYC, and AMD R-Series and G-Series brands; FPGA products under the Virtex-6, Virtex-7, Virtex UltraScale+, Kintex-7, Kintex UltraScale, Kintex UltraScale+, Artix-7, Artix UltraScale+, Spartan-6, and Spartan-7 brands; adaptive SOCs under the Zynq-7000, Zynq UltraScale+ MPSoC, Zynq UltraScale+ RFSoCs, Versal HBM, Versal Premium, Versal Prime, Versal AI Core, Versal AI Edge, Vitis, and Vivado brands; and compute and network acceleration board products under the Alveo and Pensando brands. It serves original equipment and design manufacturers, public cloud service providers, system integrators, distributors, and add-in-board manufacturers. The company was incorporated in 1969 and is headquartered in Santa Clara, California."
-        },
-        "currentPrice": 483.010009765625,
-        "high52": 580.9099731445312,
-        "pullbackPct": 16.85286324987032,
-        "requiredPullbackMin": 15,
-        "requiredPullbackMax": 22,
-        "qualityScore": 6.904367748917749,
-        "trendScore": 7.400447474071596,
-        "entryScore": 8.117557999851796,
-        "newsScore": 9,
-        "rawScore": 7.618999827335031,
-        "finalScore": 7.618999827335031,
-        "stableScore": 7.618999827335031,
-        "status": "GREEN",
-        "watchZoneLow": 506.84395156860353,
-        "watchZoneHigh": 541.6985499572754,
-        "entryZoneLow": 453.1097790527344,
-        "entryZoneHigh": 493.7734771728515,
-        "invalidation": 339.62883996484544,
-        "target1": 634.01697389033,
-        "target2": 741.067204408688,
-        "target3": 874.8799925566354,
-        "riskReward": "1 : 2.0",
-        "executiveSummary": "Advanced Micro Devices, Inc. mantiene qualità 6.9/10 e trend 7.4/10. Quota a -16.9% dal massimo. Punteggio odierno 7.6, media storica 7.6.",
-        "selectionReason": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
-        "pullbackDiagnosis": "Il ritracciamento appare prevalentemente tecnico e compatibile con una presa di profitto.",
-        "catalysts": [
-          "Crescita ricavi sostenuta (50.1%).",
-          "Crescita degli utili positiva (159.5%).",
-          "Flusso di notizie recente moderatamente favorevole.",
-          "Possibile recupero verso i massimi se il supporto Daily regge."
-        ],
-        "risks": [
-          "Settore ciclico e dipendente dalla domanda AI e data center.",
-          "Taiwan e controlli all'export sono fattori geopolitici rilevanti."
-        ],
-        "news": [
-          {
-            "title": "Why Cloudflare and these 3 AI sub-sectors are 'the place to be' for tech investors",
-            "publisher": "Yahoo Finance Video",
-            "url": "https://finance.yahoo.com/video/why-cloudflare-3-ai-sub-120000708.html",
-            "publishedAt": "2026-08-14T12:00:00Z"
-          },
-          {
-            "title": "Latest News In AI Chips - Cerebras Expands Amidst Rising Demand For AI Innovation",
-            "publisher": "Simply Wall St.",
-            "url": "https://finance.yahoo.com/technology/ai/articles/latest-news-ai-chips-cerebras-113751324.html",
-            "publishedAt": "2026-08-14T11:37:51Z"
-          },
-          {
-            "title": "US Stock Futures Rangebound After S&P 500 Ends At Record Highs As Data Shows Cooling Inflation — WDAY, SNDK, AMD, DELL, HTZ In Focus",
-            "publisher": "Stocktwits",
-            "url": "https://stocktwits.com/news-articles/markets/equity/us-stock-futures-rangebound-after-s-and-p-500-ends-at-record-highs-as-data-shows-cooling-inflation-wday-sndk-amd-dell-htz-in-focus/cZoqpLeRJLz",
-            "publishedAt": "2026-08-13T22:59:21Z"
-          },
-          {
-            "title": "Cerebras Stock PlummetsDespite Solid Earnings",
-            "publisher": "Barrons.com",
-            "url": "https://www.barrons.com/articles/cerebras-systems-earnings-stock-price-fac4c486?siteid=yhoof2&yptr=yahoo",
-            "publishedAt": "2026-08-13T20:42:00Z"
-          },
-          {
-            "title": "AMD Stock Can Halve Or Nearly Double, And That Is The Calm Assumption",
-            "publisher": "Trefis",
-            "url": "https://www.trefis.com/articles/611363/amd-stock-can-halve-or-nearly-double-and-that-is-the-calm-assumption/2026-08-13",
-            "publishedAt": "2026-08-13T20:07:53Z"
-          }
-        ],
-        "conditionsForGreen": [
-          "Conferma Daily nella zona prima dell'esecuzione."
-        ],
-        "memory": {
-          "firstSeen": null,
-          "lastSeen": null,
-          "daysObserved": 0,
-          "consecutiveTop5Days": 0,
-          "totalTop5Days": 0,
-          "stabilityScore": 4.5,
-          "reliabilityPct": 58.5,
-          "confidencePct": 56.96399896401019,
-          "momentum": 0.0,
-          "momentumLabel": "Stabile",
-          "score7DaysAgo": 7.618999827335031,
-          "historicalAverage": 7.618999827335031,
-          "previousRank": null,
-          "previousTop5": false,
-          "greenDays": 0,
-          "badge": "Nuovo candidato"
-        },
-        "fundamentals": {
-          "revenueGrowthPct": 50.1,
-          "earningsGrowthPct": 159.5,
-          "operatingMarginPct": 17.25,
-          "roePct": 10.196,
-          "debtToEquity": 6.361,
-          "forwardPE": 31.242825,
-          "freeCashFlowLabel": "8.84 mld"
-        },
-        "technical": {
-          "monthly": "Rialzista",
-          "weekly": "Rialzista",
-          "daily": "Rialzista debole",
-          "rsiDaily": 42.966551506464334,
-          "relativeStrength3mPct": 7.4071595851455285,
-          "support": 283.0936083984375,
-          "resistance": 558.4219970703125
-        },
-        "earningsCommentary": "Il sistema considera dati disponibili, ma trimestrali, guidance e conference call devono essere verificate sulle fonti ufficiali.",
-        "nextEarningsDate": null,
-        "earningsSurprisePct": 1.634,
-        "estimateRevision": "Non disponibile in modo uniforme dalla fonte gratuita.",
-        "scenarios": {
-          "A": "Attendere un ritorno fra 453.11 e 493.77 con stabilizzazione Daily.",
-          "B": "Se rompe i massimi senza ritracciare, non inseguire.",
-          "C": "Escludere con chiusura Daily/Weekly sotto 339.63 o deterioramento fondamentale."
-        },
-        "rank": 3,
-        "rankChange": null,
-        "isNewEntry": true
-      },
-      {
-        "ticker": "ECL",
-        "name": "Ecolab Inc.",
-        "sector": "Basic Materials",
-        "currency": "USD",
-        "companyProfile": {
-          "country": "United States",
-          "city": "Saint Paul",
-          "website": "https://www.ecolab.com",
-          "industry": "Specialty Chemicals",
-          "sector": "Basic Materials",
-          "employees": 48000,
-          "marketCap": 77443579904.0,
-          "ceo": null,
-          "description": "Ecolab Inc. provides water, hygiene, and infection prevention solutions and services in the United States and internationally. The company operates through four segments: Global Water, Global Institutional & Specialty, Global Pest Elimination, and Global Life Sciences. The Global Water segment offers water treatment and process applications, and cleaning and sanitizing solutions to manufacturing, food and beverage processing, transportation, chemical, primary metals and mining, power generation, global refining, petrochemical, pulp and paper industries. The Global Institutional & Specialty segment provides cleaning and sanitizing products to the foodservice, healthcare, hospitality, lodging, government, education and retail industries. The Global Pest Elimination segment provides pest elimination services to detect, prevent, and eliminate pests comprising rodents and insects in full-service and quick-service restaurants, food and beverage processors, hotels, grocery operations, and other commercial segments, including education, life sciences, and healthcare. The Global Life Sciences segment provides cleaning and contamination control solutions to pharmaceutical and personal care manufacturers. It offers its products under the Ecolab, Kay, Purolite, and Bioquell brand names. The company sells its products through field sales and corporate account personnel, distributors, and dealers. Ecolab Inc. was founded in 1923 and is headquartered in Saint Paul, Minnesota."
-        },
-        "currentPrice": 276.260009765625,
-        "high52": 306.6899719238281,
-        "pullbackPct": 9.922059716305606,
-        "requiredPullbackMin": 8,
-        "requiredPullbackMax": 12.015746566028138,
-        "qualityScore": 5.546056662337662,
-        "trendScore": 8.393988113930005,
-        "entryScore": 9.82904585177876,
-        "newsScore": 7,
-        "rawScore": 7.603237400039896,
-        "finalScore": 7.6032374000398955,
-        "stableScore": 7.6032374000398955,
-        "status": "RED",
-        "watchZoneLow": 285.8350538330078,
-        "watchZoneHigh": 295.6491329345703,
-        "entryZoneLow": 269.83888215403806,
-        "entryZoneHigh": 282.1547741699219,
-        "invalidation": 262.14174557479697,
-        "target1": 292.62292726659956,
-        "target2": 303.706993336346,
-        "target3": 317.562075923529,
-        "riskReward": "1 : 2.0",
-        "executiveSummary": "Ecolab Inc. mantiene qualità 5.5/10 e trend 8.4/10. Quota a -9.9% dal massimo. Punteggio odierno 7.6, media storica 7.6.",
-        "selectionReason": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
-        "pullbackDiagnosis": "Il ritracciamento appare prevalentemente tecnico e compatibile con una presa di profitto.",
-        "catalysts": [
-          "Flusso di notizie recente moderatamente favorevole.",
-          "Possibile recupero verso i massimi se il supporto Daily regge."
-        ],
-        "risks": [
-          "Rallentamento macroeconomico e compressione dei multipli."
-        ],
-        "news": [
-          {
-            "title": "Ecolab (ECL) Stock Looks Overvalued As Its 60% Three Year Run Continues",
-            "publisher": "Simply Wall St.",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/ecolab-ecl-stock-looks-overvalued-111140448.html",
-            "publishedAt": "2026-08-08T11:11:40Z"
-          },
-          {
-            "title": "Ecolab (ECL) Could Be 12% Undervalued After Its Dividend Affirmation",
-            "publisher": "Simply Wall St.",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/ecolab-ecl-could-12-undervalued-081327952.html",
-            "publishedAt": "2026-08-08T08:13:27Z"
-          },
-          {
-            "title": "Is VLTO Worth Buying as Growth Improves but Valuation Stays Rich?",
-            "publisher": "Zacks",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/vlto-worth-buying-growth-improves-150900210.html",
-            "publishedAt": "2026-08-06T15:09:00Z"
-          },
-          {
-            "title": "VLTO Climbs 13.2% in 3 Months: Will Its Momentum Keep Building Now?",
-            "publisher": "Zacks",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/vlto-climbs-13-2-3-144000720.html",
-            "publishedAt": "2026-08-06T14:40:00Z"
-          },
-          {
-            "title": "International Flavors Q2 Earnings Miss Estimates, Sales Rise Y/Y",
-            "publisher": "Zacks",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/international-flavors-q2-earnings-miss-143000466.html",
-            "publishedAt": "2026-08-05T14:30:00Z"
-          }
-        ],
-        "conditionsForGreen": [
-          "Conferma dei fondamentali."
-        ],
-        "memory": {
-          "firstSeen": null,
-          "lastSeen": null,
-          "daysObserved": 0,
-          "consecutiveTop5Days": 0,
-          "totalTop5Days": 0,
-          "stabilityScore": 4.5,
-          "reliabilityPct": 58.5,
-          "confidencePct": 56.869424400239375,
-          "momentum": 0.0,
-          "momentumLabel": "Stabile",
-          "score7DaysAgo": 7.603237400039896,
-          "historicalAverage": 7.603237400039896,
-          "previousRank": null,
-          "previousTop5": false,
-          "greenDays": 0,
-          "badge": "Nuovo candidato"
-        },
-        "fundamentals": {
-          "revenueGrowthPct": 9.700000000000001,
-          "earningsGrowthPct": 3.3000000000000003,
-          "operatingMarginPct": 18.521999,
-          "roePct": 21.956,
-          "debtToEquity": 138.023,
-          "forwardPE": 29.28276,
-          "freeCashFlowLabel": "1.47 mld"
-        },
-        "technical": {
-          "monthly": "Rialzista",
-          "weekly": "Rialzista",
-          "daily": "Rialzista",
-          "rsiDaily": 58.95112831182436,
-          "relativeStrength3mPct": 11.303809822880083,
-          "support": 249.7393631655012,
-          "resistance": 283.9800109863281
-        },
-        "earningsCommentary": "Il sistema considera dati disponibili, ma trimestrali, guidance e conference call devono essere verificate sulle fonti ufficiali.",
-        "nextEarningsDate": null,
-        "earningsSurprisePct": 0.02,
-        "estimateRevision": "Non disponibile in modo uniforme dalla fonte gratuita.",
-        "scenarios": {
-          "A": "Attendere un ritorno fra 269.84 e 282.15 con stabilizzazione Daily.",
-          "B": "Se rompe i massimi senza ritracciare, non inseguire.",
-          "C": "Escludere con chiusura Daily/Weekly sotto 262.14 o deterioramento fondamentale."
+          "C": "Escludere con chiusura Daily/Weekly sotto 326.43 o deterioramento fondamentale."
         },
         "rank": 4,
         "rankChange": null,
         "isNewEntry": true
       },
       {
-        "ticker": "GOOGL",
-        "name": "Alphabet Inc.",
-        "sector": "Communication Services",
+        "ticker": "CAT",
+        "name": "Caterpillar Inc.",
+        "sector": "Industrials",
         "currency": "USD",
         "companyProfile": {
           "country": "United States",
-          "city": "Mountain View",
-          "website": "https://abc.xyz",
-          "industry": "Internet Content & Information",
-          "sector": "Communication Services",
-          "employees": 198933,
-          "marketCap": 4235960254464.0,
+          "city": "Irving",
+          "website": "https://www.caterpillar.com",
+          "industry": "Farm & Heavy Construction Machinery",
+          "sector": "Industrials",
+          "employees": 118000,
+          "marketCap": 397000507392.0,
           "ceo": null,
-          "description": "Alphabet Inc. offers various products and platforms in the United States, Europe, the Middle East, Africa, the Asia-Pacific, Canada, and Latin America. It operates through Google Services, Google Cloud, and Other Bets segments. The Google Services segment provides products and services, including ads, Android, Chrome, devices, Gmail, Google Drive, Google Maps, Google Photos, Google Play, Search, and YouTube. It is also involved in the sale of apps and in-app purchases and digital content in Google Play and YouTube; and devices, as well as the provision of YouTube consumer subscription services, such as YouTube TV, YouTube Music and Premium, NFL Sunday Ticket, and Google One. The Google Cloud segment offers consumption-based fees and subscriptions for AI solutions, including AI infrastructure, Vertex AI platform, and Gemini enterprise. It also provides cybersecurity, and data and analytics services; Google Workspace that include cloud-based communication and collaboration tools for enterprises, such as Calendar, Gmail, Docs, Drive, and Meet; and other enterprise services. The Other Bets segment sells transportation and internet services. Alphabet Inc. was incorporated in 1998 and is headquartered in Mountain View, California."
+          "description": "Caterpillar Inc. provides construction and mining equipment, off-highway diesel and natural gas engines, industrial gas turbines, and diesel-electric locomotives in the United States and internationally. The Construction Industries segment offers asphalt pavers, cold planers, compactors, forestry machines, material handlers, motor graders, pipelayers, road reclaimers, telehandlers, track-type tractors, and track and wheel excavators; backhoe, compact track, skid steer, track-type, and wheel loaders; and related parts and work tools. Its Resource Industries segment provides electric rope and hydraulic shovels, draglines, rotary drills, hard rock vehicles, mining trucks, wheel loaders, off-highway and articulated trucks, wide-body trucks, wheel tractor scrapers and dozers, and landfill and soil compactors; machinery components, and wear and maintenance components; and technology products and services for fleet management, equipment management analytics, autonomous machine capabilities, safety services, and mining performance solutions. The Energy & Transportation segment offers reciprocating engine powered generator sets; reciprocating engines, drivetrain, and integrated systems and solutions; centrifugal gas compressors and related services; and diesel-electric locomotive components, and other rail-related products. Its Financial Products segment provides operating and finance leases, revolving charge accounts, installment sale contracts, repair/rebuild financing, working capital loans, and wholesale financing; and insurance and risk management products and services. The All Other segment offers parts distribution; logistics and distribution services; electronics and control systems; dealer portfolio management; brand management and marketing strategy; and digital investment services. It also provides mining software solutions. The company was formerly known as Caterpillar Tractor Co. Caterpillar Inc. was incorporated in 1925 and is headquartered in Irving, Texas."
         },
-        "currentPrice": 346.3599853515625,
-        "high52": 402.3796691894531,
-        "pullbackPct": 13.922096002200046,
-        "requiredPullbackMin": 11.968546753056385,
-        "requiredPullbackMax": 18.7008543016506,
-        "qualityScore": 9.17041761904762,
-        "trendScore": 5.338160341452537,
-        "entryScore": 8.321402265173205,
+        "currentPrice": 863.655029296875,
+        "high52": 1062.92822265625,
+        "pullbackPct": 18.747568190577603,
+        "requiredPullbackMin": 14.845458427479263,
+        "requiredPullbackMax": 22,
+        "qualityScore": 7.138651995670996,
+        "trendScore": 6.775304246429541,
+        "entryScore": 9.636774517505785,
         "newsScore": 7,
-        "rawScore": 7.602977452376203,
-        "finalScore": 7.602977452376203,
-        "stableScore": 7.602977452376203,
-        "status": "RED",
-        "watchZoneLow": 361.4445201824798,
-        "watchZoneHigh": 380.70811971517315,
-        "entryZoneLow": 327.1312335148698,
-        "entryZoneHigh": 354.2206703577198,
-        "invalidation": 312.81952174031625,
-        "target1": 374.10366817146917,
-        "target2": 396.388812328252,
-        "target3": 424.2452425242306,
+        "rawScore": 7.643420496904857,
+        "finalScore": 7.643420496904856,
+        "stableScore": 7.643420496904856,
+        "status": "GREEN",
+        "watchZoneLow": 928.8011403591288,
+        "watchZoneHigh": 991.91976732248,
+        "entryZoneLow": 829.084013671875,
+        "entryZoneHigh": 905.1316552478722,
+        "invalidation": 743.7526071847896,
+        "target1": 1015.1341071899745,
+        "target2": 1113.8182890100418,
+        "target3": 1237.173516285126,
         "riskReward": "1 : 2.0",
-        "executiveSummary": "Alphabet Inc. mantiene qualità 9.2/10 e trend 5.3/10. Quota a -13.9% dal massimo. Punteggio odierno 7.6, media storica 7.6.",
+        "executiveSummary": "Caterpillar Inc. mantiene qualità 7.1/10 e trend 6.8/10. Quota a -18.7% dal massimo. Punteggio odierno 7.6, media storica 7.6.",
         "selectionReason": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
         "pullbackDiagnosis": "Il ritracciamento appare prevalentemente tecnico e compatibile con una presa di profitto.",
         "catalysts": [
-          "Crescita ricavi sostenuta (24.2%).",
-          "Crescita degli utili positiva (294.0%).",
+          "Crescita ricavi sostenuta (24.0%).",
+          "Crescita degli utili positiva (68.2%).",
           "Flusso di notizie recente moderatamente favorevole.",
           "Possibile recupero verso i massimi se il supporto Daily regge."
         ],
         "risks": [
-          "Rallentamento macroeconomico e compressione dei multipli."
+          "Sensibilità al ciclo economico e agli investimenti.",
+          "Dazi e costi delle materie prime possono comprimere i margini.",
+          "Leva finanziaria elevata."
         ],
         "news": [
           {
-            "title": "Gemini & Zocdoc launch AI doctor booking",
-            "publisher": "Yahoo Finance Video",
-            "url": "https://finance.yahoo.com/video/gemini-zocdoc-launch-ai-doctor-195932395.html",
-            "publishedAt": "2026-08-13T19:59:32Z"
+            "title": "Global equity funds extend inflow streak as earnings optimism and reduced rate-hike bets lift sentiment",
+            "publisher": "Reuters",
+            "url": "https://finance.yahoo.com/news/global-equity-funds-extend-inflow-104703387.html",
+            "publishedAt": "2026-08-14T10:47:03Z"
           },
           {
-            "title": "Google becomes latest company to raise prices thanks to memory shortage",
-            "publisher": "Yahoo Finance",
-            "url": "https://finance.yahoo.com/technology/article/google-becomes-latest-company-to-raise-prices-thanks-to-memory-shortage-151004099.html",
-            "publishedAt": "2026-08-13T15:10:04Z"
+            "title": "Caterpillar's Falling Multiple Rests On Margin, Not Its Backlog",
+            "publisher": "Trefis",
+            "url": "https://www.trefis.com/articles/611368/caterpillars-falling-multiple-rests-on-margin-not-its-backlog/2026-08-13",
+            "publishedAt": "2026-08-13T22:32:42Z"
           },
           {
-            "title": "Cathie Wood picks up $44.7 million in shares of two highly watched tech stocks. Is it too late to follow along?",
-            "publisher": "Moneywise",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-picks-44-7-115500302.html",
-            "publishedAt": "2026-08-14T11:55:00Z"
+            "title": "Do Wall Street Analysts Like Caterpillar Stock?",
+            "publisher": "Barchart",
+            "url": "https://www.barchart.com/story/news/3836053/do-wall-street-analysts-like-caterpillar-stock",
+            "publishedAt": "2026-08-13T18:03:11Z"
           },
           {
-            "title": "Meta And Alphabet Offer Incredible Value And No One Cares",
-            "publisher": "24/7 Wall St.",
-            "url": "https://247wallst.com/investing/2026/08/14/meta-and-alphabet-offer-incredible-value-and-no-one-cares/",
-            "publishedAt": "2026-08-14T11:50:43Z"
+            "title": "Trimble Q2 Earnings Beat Estimates on Field Systems Strength",
+            "publisher": "Zacks",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/trimble-q2-earnings-beat-estimates-155000722.html",
+            "publishedAt": "2026-08-13T15:50:00Z"
           },
           {
-            "title": "Better Tech Behemoth: Alphabet vs. Microsoft Stock",
-            "publisher": "Motley Fool",
-            "url": "https://www.fool.com/investing/2026/08/14/better-tech-behemoth-alphabet-versus-microsoft-sto/",
-            "publishedAt": "2026-08-14T11:35:00Z"
+            "title": "These nontech stocks can ride the AI build-out for years",
+            "publisher": "MarketWatch",
+            "url": "https://www.marketwatch.com/story/these-nontech-stocks-can-ride-the-ai-build-out-for-years-67e2e39b",
+            "publishedAt": "2026-08-13T15:48:00Z"
           }
         ],
         "conditionsForGreen": [
-          "RSI Daily sotto 62 o stabilizzazione."
+          "Conferma Daily nella zona prima dell'esecuzione."
         ],
         "memory": {
           "firstSeen": null,
@@ -91338,42 +91262,42 @@
           "totalTop5Days": 0,
           "stabilityScore": 4.5,
           "reliabilityPct": 58.5,
-          "confidencePct": 56.86786471425722,
+          "confidencePct": 57.110522981429135,
           "momentum": 0.0,
           "momentumLabel": "Stabile",
-          "score7DaysAgo": 7.602977452376203,
-          "historicalAverage": 7.602977452376203,
+          "score7DaysAgo": 7.643420496904857,
+          "historicalAverage": 7.643420496904857,
           "previousRank": null,
           "previousTop5": false,
           "greenDays": 0,
           "badge": "Nuovo candidato"
         },
         "fundamentals": {
-          "revenueGrowthPct": 24.2,
-          "earningsGrowthPct": 294.0,
-          "operatingMarginPct": 34.033,
-          "roePct": 48.676,
-          "debtToEquity": 18.859,
-          "forwardPE": 23.499653,
-          "freeCashFlowLabel": "22.67 mld"
+          "revenueGrowthPct": 24.0,
+          "earningsGrowthPct": 68.2,
+          "operatingMarginPct": 22.183001,
+          "roePct": 56.972003,
+          "debtToEquity": 232.783,
+          "forwardPE": 26.98099,
+          "freeCashFlowLabel": "5.05 mld"
         },
         "technical": {
           "monthly": "Rialzista",
-          "weekly": "Rialzista debole",
+          "weekly": "Rialzista",
           "daily": "Rialzista debole",
-          "rsiDaily": 62.395236094998445,
-          "relativeStrength3mPct": -13.589434536759414,
-          "support": 330.29520141601563,
-          "resistance": 393.97167756578494
+          "rsiDaily": 48.085985954640236,
+          "relativeStrength3mPct": -2.5951320571273473,
+          "support": 799.9624672840347,
+          "resistance": 992.6594751752068
         },
         "earningsCommentary": "Il sistema considera dati disponibili, ma trimestrali, guidance e conference call devono essere verificate sulle fonti ufficiali.",
         "nextEarningsDate": null,
-        "earningsSurprisePct": 2.979,
+        "earningsSurprisePct": 0.649,
         "estimateRevision": "Non disponibile in modo uniforme dalla fonte gratuita.",
         "scenarios": {
-          "A": "Attendere un ritorno fra 327.13 e 354.22 con stabilizzazione Daily.",
+          "A": "Attendere un ritorno fra 829.08 e 905.13 con stabilizzazione Daily.",
           "B": "Se rompe i massimi senza ritracciare, non inseguire.",
-          "C": "Escludere con chiusura Daily/Weekly sotto 312.82 o deterioramento fondamentale."
+          "C": "Escludere con chiusura Daily/Weekly sotto 743.75 o deterioramento fondamentale."
         },
         "rank": 5,
         "rankChange": null,
@@ -91383,11 +91307,11 @@
     "changes": {
       "date": "2026-08-14",
       "entered": [
-        "AXP",
+        "MU",
+        "GOOGL",
         "LRCX",
-        "AMD",
-        "ECL",
-        "GOOGL"
+        "AXP",
+        "CAT"
       ],
       "exited": [],
       "removedReasons": [],
@@ -91422,7 +91346,7 @@
     "historyDays": 1
   },
   "intelligence": {
-    "generatedAt": "2026-08-14T12:08:31.133574+00:00",
+    "generatedAt": "2026-08-14T13:43:16.604368+00:00",
     "market": [
       {
         "name": "Nasdaq 100",
@@ -91498,7 +91422,7 @@
         ],
         "news": [
           {
-            "title": "Stock market today: Dow, S&P 500, Nasdaq futures waver after stocks hit record high",
+            "title": "Stock market today: Dow, S&P 500, Nasdaq waver after stocks hit record high",
             "publisher": "Yahoo Finance",
             "url": "https://finance.yahoo.com/markets/live/stock-market-today-friday-august-14-dow-sp-500-nasdaq-102635519.html",
             "publishedAt": "2026-08-14T10:26:35Z",
@@ -91522,28 +91446,28 @@
             "whyItMatters": "È collegata ai fattori monitorati per s&p 500."
           },
           {
-            "title": "Stocks Mostly Up Pre-Bell as Investors Await Retail Sales Report, Assess Inflation Data",
-            "publisher": "MT Newswires",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/stocks-mostly-pre-bell-investors-120106161.html",
-            "publishedAt": "2026-08-14T12:01:06Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "Può cambiare le aspettative di politica monetaria."
+            "title": "Wall St set for muted open as Middle East tensions curb risk appetite",
+            "publisher": "Reuters",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/wall-st-futures-muted-higher-111429941.html",
+            "publishedAt": "2026-08-14T13:23:44Z",
+            "direction": "NEGATIVE",
+            "whyItMatters": "Può aumentare volatilità e premio per il rischio."
           },
           {
-            "title": "US Equity Futures Mixed Pre-Bell Friday Following Record-High Overnight Close for S&P 500",
-            "publisher": "MT Newswires",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/us-equity-futures-mixed-pre-115913448.html",
-            "publishedAt": "2026-08-14T11:59:13Z",
-            "direction": "POSITIVE",
+            "title": "This Is the 1 Investing Move That History Says Has Never Once Failed Long-Term Investors",
+            "publisher": "Motley Fool",
+            "url": "https://www.fool.com/investing/2026/08/14/this-is-the-1-investing-move-that-history-says-has/",
+            "publishedAt": "2026-08-14T13:20:00Z",
+            "direction": "NEUTRAL",
             "whyItMatters": "È collegata ai fattori monitorati per s&p 500."
           },
           {
-            "title": "Here Are Friday’s Top Wall Street Analyst Research Calls: Cinemark, Digital Realty, Fox Corporation, Krystal Biotech, LTC Properties, Roku, Sandisk, T-Mobile US, Wayfair, and More",
-            "publisher": "24/7 Wall St.",
-            "url": "https://247wallst.com/investing/2026/08/14/here-are-fridays-top-wall-street-analyst-research-calls-cinemark-digital-realty-fox-corporation-krystal-biotech-ltc-properties-roku-sandisk-t-mobile-us-wayfair-and-more/",
-            "publishedAt": "2026-08-14T11:55:57Z",
+            "title": "Exchange-Traded Funds Higher, Equity Futures Mixed Pre-Bell Friday Amid Retail Sales Data",
+            "publisher": "MT Newswires",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/exchange-traded-funds-higher-equity-131348296.html",
+            "publishedAt": "2026-08-14T13:13:48Z",
             "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per s&p 500."
+            "whyItMatters": "Può incidere su commercio, margini e catene di fornitura."
           }
         ]
       },
@@ -91620,12 +91544,20 @@
         ],
         "news": [
           {
-            "title": "Gold prices today, Friday, August 14, 2026: Gold prices hold above $4,400 on softening inflation",
+            "title": "Bitcoin and ethereum prices today, Friday, August 14, 2026: Crypto prices backing off further",
             "publisher": "Yahoo Personal Finance",
-            "url": "https://finance.yahoo.com/personal-finance/investing/article/gold-prices-today-friday-august-14-2026-gold-prices-hold-above-4400-on-softening-inflation-115406311.html",
-            "publishedAt": "2026-08-14T11:54:06Z",
+            "url": "https://finance.yahoo.com/personal-finance/investing/article/bitcoin-and-ethereum-prices-today-friday-august-14-2026-crypto-prices-backing-off-further-123636029.html",
+            "publishedAt": "2026-08-14T12:36:36Z",
             "direction": "NEUTRAL",
-            "whyItMatters": "Può cambiare le aspettative di politica monetaria."
+            "whyItMatters": "È collegata ai fattori monitorati per gold."
+          },
+          {
+            "title": "Stocks rise on broad sector strength: AlphaCheck",
+            "publisher": "Yahoo Finance",
+            "url": "https://finance.yahoo.com/markets/article/stocks-rise-on-broad-sector-strength-alphacheck-135545759.html",
+            "publishedAt": "2026-08-13T13:55:45Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per gold."
           },
           {
             "title": "Cathie Wood picks up $44.7 million in shares of two highly watched tech stocks. Is it too late to follow along?",
@@ -91656,14 +91588,6 @@
             "publisher": "Investing.com",
             "url": "https://finance.yahoo.com/markets/commodities/articles/chase-mini-rally-gold-citi-112914202.html",
             "publishedAt": "2026-08-14T11:29:14Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per gold."
-          },
-          {
-            "title": "Newmont (NEM) Could Be 19% Undervalued Following Its New Nevada Gold Deals",
-            "publisher": "Simply Wall St.",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/newmont-nem-could-19-undervalued-111155046.html",
-            "publishedAt": "2026-08-14T11:11:55Z",
             "direction": "NEUTRAL",
             "whyItMatters": "È collegata ai fattori monitorati per gold."
           }
@@ -91697,36 +91621,36 @@
             "whyItMatters": "È collegata ai fattori monitorati per petrolio wti."
           },
           {
-            "title": "Pine Cliff Energy Q2 Earnings Call Highlights",
-            "publisher": "MarketBeat",
-            "url": "https://www.marketbeat.com/instant-alerts/pine-cliff-energy-q2-earnings-call-highlights-2026-08-14/?utm_source=yahoofinance&utm_medium=yahoofinance",
-            "publishedAt": "2026-08-14T12:04:07Z",
+            "title": "Sector Update: Energy Stocks Edge Higher Pre-Bell Friday",
+            "publisher": "MT Newswires",
+            "url": "https://finance.yahoo.com/energy/articles/sector-energy-stocks-edge-higher-132415026.html",
+            "publishedAt": "2026-08-14T13:24:15Z",
             "direction": "NEUTRAL",
-            "whyItMatters": "Può cambiare le attese sugli utili."
+            "whyItMatters": "È collegata ai fattori monitorati per petrolio wti."
           },
           {
-            "title": "US Equity Futures Mixed Pre-Bell Friday Following Record-High Overnight Close for S&P 500",
+            "title": "Wall St set for muted open as Middle East tensions curb risk appetite",
+            "publisher": "Reuters",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/wall-st-futures-muted-higher-111429941.html",
+            "publishedAt": "2026-08-14T13:23:44Z",
+            "direction": "NEGATIVE",
+            "whyItMatters": "Può aumentare volatilità e premio per il rischio."
+          },
+          {
+            "title": "Exchange-Traded Funds Higher, Equity Futures Mixed Pre-Bell Friday Amid Retail Sales Data",
             "publisher": "MT Newswires",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/us-equity-futures-mixed-pre-115913448.html",
-            "publishedAt": "2026-08-14T11:59:13Z",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/exchange-traded-funds-higher-equity-131348296.html",
+            "publishedAt": "2026-08-14T13:13:48Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "Può incidere su commercio, margini e catene di fornitura."
+          },
+          {
+            "title": "Update: US Equity Futures Mixed Pre-Bell Friday Following Record-High Overnight Close for S&P 500",
+            "publisher": "MT Newswires",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/us-equity-futures-mixed-pre-130145386.html",
+            "publishedAt": "2026-08-14T13:01:45Z",
             "direction": "POSITIVE",
             "whyItMatters": "È collegata ai fattori monitorati per petrolio wti."
-          },
-          {
-            "title": "Dow Jones Futures: Sandisk, Memory Stocks Extend Gains; Applied Materials Tumbles",
-            "publisher": "Investor's Business Daily",
-            "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-sp-500-high-workday-sandisk-oil-prices-applied-materials-earnings/?src=A00220&yptr=yahoo",
-            "publishedAt": "2026-08-14T11:54:12Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per petrolio wti."
-          },
-          {
-            "title": "US Inflation Report, Oil Prices Limit European Bourses Midday",
-            "publisher": "MT Newswires",
-            "url": "https://finance.yahoo.com/markets/world-indices/articles/us-inflation-report-oil-prices-114336491.html",
-            "publishedAt": "2026-08-14T11:43:36Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "Può muovere energia, inflazione e rendimenti; può cambiare le aspettative di politica monetaria."
           }
         ]
       },
@@ -91742,12 +91666,20 @@
         ],
         "news": [
           {
-            "title": "Euro Could Rise as it Looks Undervalued Against Dollar",
+            "title": "Dollar’s Falls Capped by U.S. Equity Market Gains",
             "publisher": "The Wall Street Journal",
             "url": "https://www.wsj.com/finance/currencies/yen-consolidates-may-be-buoyed-by-prospects-of-boj-rate-hike-d2e15aae?siteid=yhoof2&yptr=yahoo",
-            "publishedAt": "2026-08-14T08:24:00Z",
+            "publishedAt": "2026-08-14T11:35:00Z",
             "direction": "NEUTRAL",
             "whyItMatters": "È collegata ai fattori monitorati per eur/usd."
+          },
+          {
+            "title": "US Dollar Price Forecast: Softer PPI Boosts Fed Cut Bets – Can EUR/USD and GBP/USD Rally?",
+            "publisher": "FX Empire",
+            "url": "https://finance.yahoo.com/markets/currencies/articles/us-dollar-price-forecast-softer-070021827.html",
+            "publishedAt": "2026-08-14T07:00:21Z",
+            "direction": "NEGATIVE",
+            "whyItMatters": "Può cambiare le aspettative sui tassi e quindi le valutazioni; può cambiare le aspettative di politica monetaria."
           },
           {
             "title": "US Dollar Price Forecast: Can PPI Revive DXY as EUR/USD and GBP/USD Retreat?",
@@ -91780,24 +91712,343 @@
             "publishedAt": "2026-08-12T08:14:12Z",
             "direction": "NEUTRAL",
             "whyItMatters": "Può cambiare le aspettative di politica monetaria."
-          },
-          {
-            "title": "Forex Market Forecast – Euro, Pound, and Yen Test Support as US Yields Drift",
-            "publisher": "FX Empire",
-            "url": "https://finance.yahoo.com/markets/currencies/articles/forex-market-forecast-euro-pound-133208907.html",
-            "publishedAt": "2026-08-11T13:32:08Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "Può cambiare le aspettative sui tassi e quindi le valutazioni."
           }
         ]
       }
     ],
     "companies": [
       {
+        "ticker": "MU",
+        "name": "Micron Technology, Inc.",
+        "rank": 1,
+        "score": 8.055588122968281,
+        "status": "GREEN",
+        "profile": {
+          "country": "United States",
+          "city": "Boise",
+          "website": "https://www.micron.com",
+          "industry": "Semiconductors",
+          "sector": "Technology",
+          "employees": 53000,
+          "marketCap": 1092388585472.0,
+          "ceo": null,
+          "description": "Micron Technology, Inc. designs, develops, manufactures, and sells memory and storage products in the United States, Taiwan, Japan, Mainland China, Hong Kong, Europe, and internationally. It operates through the Cloud Memory Business Unit; Core Data Center Business Unit; Mobile and Client Business Unit; and Automotive and Embedded Business Unit segments. The company provides memory products, including dynamic random access memory components and modules, CXL-based memory, LPDDR components and modules, graphics memory, high-bandwidth memory, and data center memory products; multichip packages (MCP) comprising embedded multimedia card-based, universal flash storage-based, and NAND-based MCPs; and technology leadership products that include 1y DRAM and G9 NAND technologies. It also offers storage products, such as data center solid-state drives (SSD), client SSD storage, and auto and industrial SSD storage; managed NAND; NAND flash; NOR flash; and memory cards. In addition, the company provides design tools, including FBGA and part decoders; DRAM power calculators; NAND power calculators; simulation models; chipset compatibility guides; serial presence-detection tools; cross-reference tools; UFSparm; SSD firmware; software and drivers; storage executive software; and obsolete part catalogs. It markets its semiconductor memory and storage products under the Micron and Crucial brands. The company serves the data center, PC, graphics, networking, automotive, industrial, and consumer embedded markets, as well as the smartphone and other mobile-device markets. It sells its products through its direct sales force, independent sales representatives, distributors, and retailers; web-based customer direct sales channel; and channel and distribution partners. Micron Technology, Inc. was founded in 1978 and is headquartered in Boise, Idaho."
+        },
+        "sector": "Semiconductors",
+        "currency": "USD",
+        "whySelected": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
+        "executiveSummary": "Micron Technology, Inc. mantiene qualità 8.3/10 e trend 9.2/10. Quota a -20.3% dal massimo. Punteggio odierno 8.1, media storica 8.1.",
+        "catalysts": [
+          "Crescita degli utili positiva (13.7%).",
+          "Possibile recupero verso i massimi se il supporto Daily regge."
+        ],
+        "risks": [
+          "Settore ciclico e dipendente dalla domanda AI e data center.",
+          "Taiwan e controlli all'export sono fattori geopolitici rilevanti."
+        ],
+        "news": [
+          {
+            "title": "Wall Street's riskiest trades are suddenly back on top: Chart of the Day",
+            "publisher": "Yahoo Finance",
+            "url": "https://finance.yahoo.com/markets/article/wall-streets-riskiest-trades-are-suddenly-back-on-top-chart-of-the-day-100100027.html",
+            "publishedAt": "2026-08-14T10:01:00Z",
+            "direction": "NEGATIVE",
+            "whyItMatters": "Può incidere su commercio, margini e catene di fornitura."
+          },
+          {
+            "title": "The next AI winners may look nothing like Nvidia or Micron: One Big Investment Idea",
+            "publisher": "Yahoo Finance",
+            "url": "https://finance.yahoo.com/markets/article/the-next-ai-winners-may-look-nothing-like-nvidia-or-micron-one-big-investment-idea-095700607.html",
+            "publishedAt": "2026-08-14T09:57:00Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per micron technology, inc.."
+          },
+          {
+            "title": "Korean Stocks Rally Again Overnight. KOSPI Closes Up 2.41% As SK Hynix and Samsung Rally.",
+            "publisher": "24/7 Wall St.",
+            "url": "https://247wallst.com/investing/2026/08/14/korean-stocks-rally-again-overnight-kospi-closes-up-2-41-as-sk-hynix-and-samsung-rally/",
+            "publishedAt": "2026-08-14T13:20:21Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per micron technology, inc.."
+          },
+          {
+            "title": "Sandisk Jumps 7%, Western Digital Gains 4%, Micron Climbs 3% as the Kospi Returns to a Bull Market",
+            "publisher": "24/7 Wall St.",
+            "url": "https://247wallst.com/investing/2026/08/14/sandisk-jumps-7-western-digital-gains-4-micron-climbs-3-as-the-kospi-returns-to-a-bull-market/",
+            "publishedAt": "2026-08-14T13:03:30Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per micron technology, inc.."
+          },
+          {
+            "title": "Could Intel return to the red-hot memory market after $20B raise and recent hire?",
+            "publisher": "Investing.com",
+            "url": "https://finance.yahoo.com/technology/articles/could-intel-return-red-hot-125725820.html",
+            "publishedAt": "2026-08-14T12:57:25Z",
+            "direction": "POSITIVE",
+            "whyItMatters": "È collegata ai fattori monitorati per micron technology, inc.."
+          }
+        ],
+        "fundamentals": {
+          "revenueGrowthPct": 3.457,
+          "earningsGrowthPct": 13.685,
+          "operatingMarginPct": 80.370003,
+          "roePct": 66.63799999999999,
+          "debtToEquity": 6.33,
+          "forwardPE": 6.244674,
+          "freeCashFlowLabel": "7.64 mld"
+        },
+        "technical": {
+          "monthly": "Rialzista",
+          "weekly": "Rialzista",
+          "daily": "Rialzista",
+          "rsiDaily": 56.02103458188505,
+          "relativeStrength3mPct": 33.502442885407405,
+          "support": 467.491301600037,
+          "resistance": 1096.878338736082
+        },
+        "memory": {
+          "firstSeen": null,
+          "lastSeen": null,
+          "daysObserved": 0,
+          "consecutiveTop5Days": 0,
+          "totalTop5Days": 0,
+          "stabilityScore": 4.5,
+          "reliabilityPct": 58.5,
+          "confidencePct": 59.58352873780969,
+          "momentum": 0.0,
+          "momentumLabel": "Stabile",
+          "score7DaysAgo": 8.055588122968281,
+          "historicalAverage": 8.055588122968281,
+          "previousRank": null,
+          "previousTop5": false,
+          "greenDays": 0,
+          "badge": "Nuovo candidato"
+        }
+      },
+      {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc.",
+        "rank": 2,
+        "score": 7.828232883433994,
+        "status": "GREEN",
+        "profile": {
+          "country": "United States",
+          "city": "Mountain View",
+          "website": "https://abc.xyz",
+          "industry": "Internet Content & Information",
+          "sector": "Communication Services",
+          "employees": 198933,
+          "marketCap": 4258811871232.0,
+          "ceo": null,
+          "description": "Alphabet Inc. offers various products and platforms in the United States, Europe, the Middle East, Africa, the Asia-Pacific, Canada, and Latin America. It operates through Google Services, Google Cloud, and Other Bets segments. The Google Services segment provides products and services, including ads, Android, Chrome, devices, Gmail, Google Drive, Google Maps, Google Photos, Google Play, Search, and YouTube. It is also involved in the sale of apps and in-app purchases and digital content in Google Play and YouTube; and devices, as well as the provision of YouTube consumer subscription services, such as YouTube TV, YouTube Music and Premium, NFL Sunday Ticket, and Google One. The Google Cloud segment offers consumption-based fees and subscriptions for AI solutions, including AI infrastructure, Vertex AI platform, and Gemini enterprise. It also provides cybersecurity, and data and analytics services; Google Workspace that include cloud-based communication and collaboration tools for enterprises, such as Calendar, Gmail, Docs, Drive, and Meet; and other enterprise services. The Other Bets segment sells transportation and internet services. Alphabet Inc. was incorporated in 1998 and is headquartered in Mountain View, California."
+        },
+        "sector": "Communication Services",
+        "currency": "USD",
+        "whySelected": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
+        "executiveSummary": "Alphabet Inc. mantiene qualità 9.2/10 e trend 6.2/10. Quota a -13.5% dal massimo. Punteggio odierno 7.8, media storica 7.8.",
+        "catalysts": [
+          "Crescita ricavi sostenuta (24.2%).",
+          "Crescita degli utili positiva (294.0%).",
+          "Flusso di notizie recente moderatamente favorevole.",
+          "Possibile recupero verso i massimi se il supporto Daily regge."
+        ],
+        "risks": [
+          "Rallentamento macroeconomico e compressione dei multipli."
+        ],
+        "news": [
+          {
+            "title": "Gemini & Zocdoc launch AI doctor booking",
+            "publisher": "Yahoo Finance Video",
+            "url": "https://finance.yahoo.com/video/gemini-zocdoc-launch-ai-doctor-195932395.html",
+            "publishedAt": "2026-08-13T19:59:32Z",
+            "direction": "POSITIVE",
+            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
+          },
+          {
+            "title": "Google becomes latest company to raise prices thanks to memory shortage",
+            "publisher": "Yahoo Finance",
+            "url": "https://finance.yahoo.com/technology/article/google-becomes-latest-company-to-raise-prices-thanks-to-memory-shortage-151004099.html",
+            "publishedAt": "2026-08-13T15:10:04Z",
+            "direction": "POSITIVE",
+            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
+          },
+          {
+            "title": "5 Revealing Analyst Questions From Taboola’s Q2 Earnings Call",
+            "publisher": "StockStory",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/5-revealing-analyst-questions-taboola-133300227.html",
+            "publishedAt": "2026-08-14T13:33:00Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "Può cambiare le attese sugli utili."
+          },
+          {
+            "title": "Reddit Gains 12% by Joining the S&P 500",
+            "publisher": "GuruFocus.com",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/reddit-gains-12-joining-p-130240986.html",
+            "publishedAt": "2026-08-14T13:02:40Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
+          },
+          {
+            "title": "Update: US Equity Futures Mixed Pre-Bell Friday Following Record-High Overnight Close for S&P 500",
+            "publisher": "MT Newswires",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/us-equity-futures-mixed-pre-130145386.html",
+            "publishedAt": "2026-08-14T13:01:45Z",
+            "direction": "POSITIVE",
+            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
+          }
+        ],
+        "fundamentals": {
+          "revenueGrowthPct": 24.2,
+          "earningsGrowthPct": 294.0,
+          "operatingMarginPct": 34.033,
+          "roePct": 48.676,
+          "debtToEquity": 18.859,
+          "forwardPE": 23.626427,
+          "freeCashFlowLabel": "22.67 mld"
+        },
+        "technical": {
+          "monthly": "Rialzista",
+          "weekly": "Rialzista",
+          "daily": "Rialzista debole",
+          "rsiDaily": 60.558706278135176,
+          "relativeStrength3mPct": -12.19619074327497,
+          "support": 330.58648102265397,
+          "resistance": 393.97167756578494
+        },
+        "memory": {
+          "firstSeen": null,
+          "lastSeen": null,
+          "daysObserved": 0,
+          "consecutiveTop5Days": 0,
+          "totalTop5Days": 0,
+          "stabilityScore": 4.5,
+          "reliabilityPct": 58.5,
+          "confidencePct": 58.219397300603966,
+          "momentum": 0.0,
+          "momentumLabel": "Stabile",
+          "score7DaysAgo": 7.828232883433995,
+          "historicalAverage": 7.828232883433995,
+          "previousRank": null,
+          "previousTop5": false,
+          "greenDays": 0,
+          "badge": "Nuovo candidato"
+        }
+      },
+      {
+        "ticker": "LRCX",
+        "name": "Lam Research Corporation",
+        "rank": 3,
+        "score": 7.764792472422968,
+        "status": "YELLOW",
+        "profile": {
+          "country": "United States",
+          "city": "Fremont",
+          "website": "https://www.lamresearch.com",
+          "industry": "Semiconductor Equipment & Materials",
+          "sector": "Technology",
+          "employees": 23300,
+          "marketCap": 422420905984.0,
+          "ceo": null,
+          "description": "Lam Research Corporation designs, manufactures, markets, refurbishes, and services semiconductor processing equipment used in the fabrication of integrated circuits in the United States, China, Korea, Taiwan, Japan, Southeast Asia, and Europe. The company offers ALTUS systems to deposit conformal or selective films for tungsten or molybdenum metallization applications; SABRE electrochemical deposition products for copper interconnect transition that offers copper damascene manufacturing; SPEED gapfill high-density plasma chemical vapor deposition (CVD) products; Striker single-wafer atomic layer deposition products for dielectric film solutions; and VECTOR plasma-enhanced CVD products. It also provides Flex for dielectric etch applications; Vantex, a dielectric etch system that provides RF technology and repeatable wafer-to-wafer performance enabled by Equipment Intelligence solutions; Kiyo for conductor etch applications; Syndion for through-silicon via etch applications; and Versys metal products for metal etch processes. In addition, the company offers Coronus bevel clean products to enhance die yield; and Da Vinci, DV-Prime, EOS, and SP series products to address various wafer cleaning applications. Further, it provides Reliant deposition, etch, and clean products; and Sense.i platform products, as well as customer service, spares, and upgrades. Lam Research Corporation was incorporated in 1980 and is headquartered in Fremont, California."
+        },
+        "sector": "Semiconductors",
+        "currency": "USD",
+        "whySelected": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
+        "executiveSummary": "Lam Research Corporation mantiene qualità 8.9/10 e trend 8.9/10. Quota a -22.1% dal massimo. Punteggio odierno 7.8, media storica 7.8.",
+        "catalysts": [
+          "Crescita ricavi sostenuta (30.0%).",
+          "Crescita degli utili positiva (34.8%).",
+          "Flusso di notizie recente moderatamente favorevole.",
+          "Possibile recupero verso i massimi se il supporto Daily regge."
+        ],
+        "risks": [
+          "Settore ciclico e dipendente dalla domanda AI e data center.",
+          "Taiwan e controlli all'export sono fattori geopolitici rilevanti."
+        ],
+        "news": [
+          {
+            "title": "Why Lam Research (LRCX) Became This Portfolio’s Top Performer",
+            "publisher": "Insider Monkey",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/why-lam-research-lrcx-became-132837845.html",
+            "publishedAt": "2026-08-14T13:28:37Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per lam research corporation."
+          },
+          {
+            "title": "Applied Materials is Down 6% Premarket. Will It Drag Down Lam Research, KLA, and Other Semi Equipment Stocks?",
+            "publisher": "24/7 Wall St.",
+            "url": "https://247wallst.com/investing/2026/08/14/applied-materials-is-down-6-premarket-will-it-drag-down-lam-research-kla-and-other-semi-equipment-stocks/",
+            "publishedAt": "2026-08-14T13:16:38Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per lam research corporation."
+          },
+          {
+            "title": "Applied Materials slips as investors seek faster growth after stellar run",
+            "publisher": "Reuters",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/applied-materials-slips-investors-seek-085840731.html",
+            "publishedAt": "2026-08-14T08:58:40Z",
+            "direction": "POSITIVE",
+            "whyItMatters": "È collegata ai fattori monitorati per lam research corporation."
+          },
+          {
+            "title": "Why Lam Research (LRCX) Is Up 10.2% After $3 Billion Global R&D Lab Expansion Plan",
+            "publisher": "Simply Wall St.",
+            "url": "https://finance.yahoo.com/technology/articles/why-lam-research-lrcx-10-021318128.html",
+            "publishedAt": "2026-08-14T02:13:18Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per lam research corporation."
+          },
+          {
+            "title": "Chip equipment maker Lam Research to invest more than $3 billion to expand R&D labs",
+            "publisher": "Reuters",
+            "url": "https://finance.yahoo.com/technology/articles/chip-equipment-maker-lam-research-201624790.html",
+            "publishedAt": "2026-08-13T20:16:24Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per lam research corporation."
+          }
+        ],
+        "fundamentals": {
+          "revenueGrowthPct": 30.0,
+          "earningsGrowthPct": 34.8,
+          "operatingMarginPct": 37.390997999999996,
+          "roePct": 65.06600399999999,
+          "debtToEquity": 33.049,
+          "forwardPE": 29.209646,
+          "freeCashFlowLabel": "3.09 mld"
+        },
+        "technical": {
+          "monthly": "Rialzista",
+          "weekly": "Rialzista",
+          "daily": "Rialzista",
+          "rsiDaily": 63.67542268475239,
+          "relativeStrength3mPct": 18.603435881781436,
+          "support": 256.4013709561112,
+          "resistance": 392.52233664225497
+        },
+        "memory": {
+          "firstSeen": null,
+          "lastSeen": null,
+          "daysObserved": 0,
+          "consecutiveTop5Days": 0,
+          "totalTop5Days": 0,
+          "stabilityScore": 4.5,
+          "reliabilityPct": 58.5,
+          "confidencePct": 57.83875483453781,
+          "momentum": 0.0,
+          "momentumLabel": "Stabile",
+          "score7DaysAgo": 7.764792472422969,
+          "historicalAverage": 7.764792472422969,
+          "previousRank": null,
+          "previousTop5": false,
+          "greenDays": 0,
+          "badge": "Nuovo candidato"
+        }
+      },
+      {
         "ticker": "AXP",
         "name": "American Express Company",
-        "rank": 1,
-        "score": 7.755978092567894,
+        "rank": 4,
+        "score": 7.75247547610172,
         "status": "YELLOW",
         "profile": {
           "country": "United States",
@@ -91806,7 +92057,7 @@
           "industry": "Credit Services",
           "sector": "Financial Services",
           "employees": 76800,
-          "marketCap": 232070217728.0,
+          "marketCap": 232124252160.0,
           "ceo": null,
           "description": "American Express Company, together with its subsidiaries, operates as an integrated payments company in the United States, Europe, the Middle East and Africa, the Asia Pacific, Australia, New Zealand, Latin America, Canada, the Caribbean, and internationally. It operates through four segments: U.S. Consumer Services, Commercial Services, International Card Services, and Global Merchant and Network Services. The company offers credit and charge cards and complementary products and services, including travel, dining, and lifestyle and expense management products and services; and banking and other payment and financing products and services, including deposits and non-card lending. It also provides merchant acquisition and processing, servicing and settlement, fraud prevention, and point-of-sale marketing and information products and services, as well as network services. The company offers its products and services to consumers, small businesses, mid-sized companies, and large corporations through mobile and online applications, affiliate marketing, customer referral programs, third-party service providers and business partners, in-house sales teams, direct mail, telephone, and direct response advertising. American Express Company was founded in 1850 and is headquartered in New York, New York."
         },
@@ -91873,16 +92124,16 @@
           "operatingMarginPct": 20.32,
           "roePct": 34.377,
           "debtToEquity": 172.38,
-          "forwardPE": 17.084019,
+          "forwardPE": 17.087997,
           "freeCashFlowLabel": null
         },
         "technical": {
           "monthly": "Rialzista",
           "weekly": "Rialzista",
           "daily": "Rialzista",
-          "rsiDaily": 67.00388416611548,
-          "relativeStrength3mPct": 10.173831598859163,
-          "support": 308.869320099791,
+          "rsiDaily": 59.86748749796898,
+          "relativeStrength3mPct": 9.949891991182014,
+          "support": 309.07394794785114,
           "resistance": 353.17799072265626
         },
         "memory": {
@@ -91893,11 +92144,11 @@
           "totalTop5Days": 0,
           "stabilityScore": 4.5,
           "reliabilityPct": 58.5,
-          "confidencePct": 57.78586855540736,
+          "confidencePct": 57.76485285661032,
           "momentum": 0.0,
           "momentumLabel": "Stabile",
-          "score7DaysAgo": 7.7559780925678945,
-          "historicalAverage": 7.7559780925678945,
+          "score7DaysAgo": 7.752475476101721,
+          "historicalAverage": 7.752475476101721,
           "previousRank": null,
           "previousTop5": false,
           "greenDays": 0,
@@ -91905,421 +92156,96 @@
         }
       },
       {
-        "ticker": "LRCX",
-        "name": "Lam Research Corporation",
-        "rank": 2,
-        "score": 7.633813178093325,
-        "status": "YELLOW",
-        "profile": {
-          "country": "United States",
-          "city": "Fremont",
-          "website": "https://www.lamresearch.com",
-          "industry": "Semiconductor Equipment & Materials",
-          "sector": "Technology",
-          "employees": 23300,
-          "marketCap": 421707677696.0,
-          "ceo": null,
-          "description": "Lam Research Corporation designs, manufactures, markets, refurbishes, and services semiconductor processing equipment used in the fabrication of integrated circuits in the United States, China, Korea, Taiwan, Japan, Southeast Asia, and Europe. The company offers ALTUS systems to deposit conformal or selective films for tungsten or molybdenum metallization applications; SABRE electrochemical deposition products for copper interconnect transition that offers copper damascene manufacturing; SPEED gapfill high-density plasma chemical vapor deposition (CVD) products; Striker single-wafer atomic layer deposition products for dielectric film solutions; and VECTOR plasma-enhanced CVD products. It also provides Flex for dielectric etch applications; Vantex, a dielectric etch system that provides RF technology and repeatable wafer-to-wafer performance enabled by Equipment Intelligence solutions; Kiyo for conductor etch applications; Syndion for through-silicon via etch applications; and Versys metal products for metal etch processes. In addition, the company offers Coronus bevel clean products to enhance die yield; and Da Vinci, DV-Prime, EOS, and SP series products to address various wafer cleaning applications. Further, it provides Reliant deposition, etch, and clean products; and Sense.i platform products, as well as customer service, spares, and upgrades. Lam Research Corporation was incorporated in 1980 and is headquartered in Fremont, California."
-        },
-        "sector": "Semiconductors",
-        "currency": "USD",
-        "whySelected": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
-        "executiveSummary": "Lam Research Corporation mantiene qualità 9.0/10 e trend 8.5/10. Quota a -22.2% dal massimo. Punteggio odierno 7.6, media storica 7.6.",
-        "catalysts": [
-          "Crescita ricavi sostenuta (30.0%).",
-          "Crescita degli utili positiva (34.8%).",
-          "Flusso di notizie recente moderatamente favorevole.",
-          "Possibile recupero verso i massimi se il supporto Daily regge."
-        ],
-        "risks": [
-          "Settore ciclico e dipendente dalla domanda AI e data center.",
-          "Taiwan e controlli all'export sono fattori geopolitici rilevanti."
-        ],
-        "news": [
-          {
-            "title": "Applied Materials slips as investors seek faster growth after stellar run",
-            "publisher": "Reuters",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/applied-materials-slips-investors-seek-085840731.html",
-            "publishedAt": "2026-08-14T08:58:40Z",
-            "direction": "POSITIVE",
-            "whyItMatters": "È collegata ai fattori monitorati per lam research corporation."
-          },
-          {
-            "title": "Why Lam Research (LRCX) Is Up 10.2% After $3 Billion Global R&D Lab Expansion Plan",
-            "publisher": "Simply Wall St.",
-            "url": "https://finance.yahoo.com/technology/articles/why-lam-research-lrcx-10-021318128.html",
-            "publishedAt": "2026-08-14T02:13:18Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per lam research corporation."
-          },
-          {
-            "title": "Chip equipment maker Lam Research to invest more than $3 billion to expand R&D labs",
-            "publisher": "Reuters",
-            "url": "https://finance.yahoo.com/technology/articles/chip-equipment-maker-lam-research-201624790.html",
-            "publishedAt": "2026-08-13T20:16:24Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per lam research corporation."
-          },
-          {
-            "title": "Applied Materials forecasts revenue above estimates, shares fall on high expectations",
-            "publisher": "Reuters",
-            "url": "https://finance.yahoo.com/technology/ai/articles/applied-materials-forecasts-quarterly-revenue-200500160.html",
-            "publishedAt": "2026-08-13T20:05:00Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "Può cambiare le attese sugli utili."
-          },
-          {
-            "title": "KLA Drops 9% in a Month: Should You Buy the Stock on the Dip?",
-            "publisher": "Zacks",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/kla-drops-9-month-buy-174200956.html",
-            "publishedAt": "2026-08-13T17:42:00Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per lam research corporation."
-          }
-        ],
-        "fundamentals": {
-          "revenueGrowthPct": 30.0,
-          "earningsGrowthPct": 34.8,
-          "operatingMarginPct": 37.390997999999996,
-          "roePct": 65.06600399999999,
-          "debtToEquity": 33.049,
-          "forwardPE": 29.160328,
-          "freeCashFlowLabel": "3.09 mld"
-        },
-        "technical": {
-          "monthly": "Rialzista",
-          "weekly": "Rialzista",
-          "daily": "Rialzista",
-          "rsiDaily": 58.79619695280125,
-          "relativeStrength3mPct": 12.735218000403648,
-          "support": 255.8641629640507,
-          "resistance": 392.52233664225497
-        },
-        "memory": {
-          "firstSeen": null,
-          "lastSeen": null,
-          "daysObserved": 0,
-          "consecutiveTop5Days": 0,
-          "totalTop5Days": 0,
-          "stabilityScore": 4.5,
-          "reliabilityPct": 58.5,
-          "confidencePct": 57.052879068559946,
-          "momentum": 0.0,
-          "momentumLabel": "Stabile",
-          "score7DaysAgo": 7.633813178093326,
-          "historicalAverage": 7.633813178093326,
-          "previousRank": null,
-          "previousTop5": false,
-          "greenDays": 0,
-          "badge": "Nuovo candidato"
-        }
-      },
-      {
-        "ticker": "AMD",
-        "name": "Advanced Micro Devices, Inc.",
-        "rank": 3,
-        "score": 7.618999827335031,
+        "ticker": "CAT",
+        "name": "Caterpillar Inc.",
+        "rank": 5,
+        "score": 7.643420496904856,
         "status": "GREEN",
         "profile": {
           "country": "United States",
-          "city": "Santa Clara",
-          "website": "https://www.amd.com",
-          "industry": "Semiconductors",
-          "sector": "Technology",
-          "employees": 31000,
-          "marketCap": 788501757952.0,
+          "city": "Irving",
+          "website": "https://www.caterpillar.com",
+          "industry": "Farm & Heavy Construction Machinery",
+          "sector": "Industrials",
+          "employees": 118000,
+          "marketCap": 397000507392.0,
           "ceo": null,
-          "description": "Advanced Micro Devices, Inc. operates as a semiconductor company internationally. It operates in three segments: Data Center, Client and Gaming, and Embedded. The company offers artificial intelligence (AI) accelerators, microprocessors, and graphics processing units (GPUs) as standalone devices or as incorporated into accelerated processing units, chipsets, and data center and professional GPUs; and embedded processors and semi-custom system-on-chip (SoC) products, microprocessor and SoC development services and technology, data processing units, field programmable gate arrays (FPGA), system on modules, AI network interface cards, and adaptive SoC products. It provides processors under the AMD Ryzen, AMD Ryzen AI, AMD Ryzen PRO, AMD Ryzen Threadripper, AMD Ryzen Threadripper PRO, AMD Athlon, and AMD PRO A-Series brands; graphics under the AMD Radeon graphics and AMD Embedded Radeon graphics; professional graphics under the AMD Radeon Pro graphics brand; and AI and general-purpose compute infrastructure for hyperscale providers. The company offers data center graphics under the AMD Instinct accelerators and Radeon PRO V-series brands; server microprocessors under the AMD EPYC brand; low power solutions under the AMD Athlon, AMD Geode, AMD Ryzen, AMD EPYC, and AMD R-Series and G-Series brands; FPGA products under the Virtex-6, Virtex-7, Virtex UltraScale+, Kintex-7, Kintex UltraScale, Kintex UltraScale+, Artix-7, Artix UltraScale+, Spartan-6, and Spartan-7 brands; adaptive SOCs under the Zynq-7000, Zynq UltraScale+ MPSoC, Zynq UltraScale+ RFSoCs, Versal HBM, Versal Premium, Versal Prime, Versal AI Core, Versal AI Edge, Vitis, and Vivado brands; and compute and network acceleration board products under the Alveo and Pensando brands. It serves original equipment and design manufacturers, public cloud service providers, system integrators, distributors, and add-in-board manufacturers. The company was incorporated in 1969 and is headquartered in Santa Clara, California."
+          "description": "Caterpillar Inc. provides construction and mining equipment, off-highway diesel and natural gas engines, industrial gas turbines, and diesel-electric locomotives in the United States and internationally. The Construction Industries segment offers asphalt pavers, cold planers, compactors, forestry machines, material handlers, motor graders, pipelayers, road reclaimers, telehandlers, track-type tractors, and track and wheel excavators; backhoe, compact track, skid steer, track-type, and wheel loaders; and related parts and work tools. Its Resource Industries segment provides electric rope and hydraulic shovels, draglines, rotary drills, hard rock vehicles, mining trucks, wheel loaders, off-highway and articulated trucks, wide-body trucks, wheel tractor scrapers and dozers, and landfill and soil compactors; machinery components, and wear and maintenance components; and technology products and services for fleet management, equipment management analytics, autonomous machine capabilities, safety services, and mining performance solutions. The Energy & Transportation segment offers reciprocating engine powered generator sets; reciprocating engines, drivetrain, and integrated systems and solutions; centrifugal gas compressors and related services; and diesel-electric locomotive components, and other rail-related products. Its Financial Products segment provides operating and finance leases, revolving charge accounts, installment sale contracts, repair/rebuild financing, working capital loans, and wholesale financing; and insurance and risk management products and services. The All Other segment offers parts distribution; logistics and distribution services; electronics and control systems; dealer portfolio management; brand management and marketing strategy; and digital investment services. It also provides mining software solutions. The company was formerly known as Caterpillar Tractor Co. Caterpillar Inc. was incorporated in 1925 and is headquartered in Irving, Texas."
         },
-        "sector": "Semiconductors",
+        "sector": "Industrials",
         "currency": "USD",
         "whySelected": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
-        "executiveSummary": "Advanced Micro Devices, Inc. mantiene qualità 6.9/10 e trend 7.4/10. Quota a -16.9% dal massimo. Punteggio odierno 7.6, media storica 7.6.",
+        "executiveSummary": "Caterpillar Inc. mantiene qualità 7.1/10 e trend 6.8/10. Quota a -18.7% dal massimo. Punteggio odierno 7.6, media storica 7.6.",
         "catalysts": [
-          "Crescita ricavi sostenuta (50.1%).",
-          "Crescita degli utili positiva (159.5%).",
+          "Crescita ricavi sostenuta (24.0%).",
+          "Crescita degli utili positiva (68.2%).",
           "Flusso di notizie recente moderatamente favorevole.",
           "Possibile recupero verso i massimi se il supporto Daily regge."
         ],
         "risks": [
-          "Settore ciclico e dipendente dalla domanda AI e data center.",
-          "Taiwan e controlli all'export sono fattori geopolitici rilevanti."
+          "Sensibilità al ciclo economico e agli investimenti.",
+          "Dazi e costi delle materie prime possono comprimere i margini.",
+          "Leva finanziaria elevata."
         ],
         "news": [
           {
-            "title": "Why Cloudflare and these 3 AI sub-sectors are 'the place to be' for tech investors",
-            "publisher": "Yahoo Finance Video",
-            "url": "https://finance.yahoo.com/video/why-cloudflare-3-ai-sub-120000708.html",
-            "publishedAt": "2026-08-14T12:00:00Z",
+            "title": "Global equity funds extend inflow streak as earnings optimism and reduced rate-hike bets lift sentiment",
+            "publisher": "Reuters",
+            "url": "https://finance.yahoo.com/news/global-equity-funds-extend-inflow-104703387.html",
+            "publishedAt": "2026-08-14T10:47:03Z",
             "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per advanced micro devices, inc.."
+            "whyItMatters": "Può cambiare le aspettative sui tassi e quindi le valutazioni; può cambiare le attese sugli utili."
           },
           {
-            "title": "Latest News In AI Chips - Cerebras Expands Amidst Rising Demand For AI Innovation",
-            "publisher": "Simply Wall St.",
-            "url": "https://finance.yahoo.com/technology/ai/articles/latest-news-ai-chips-cerebras-113751324.html",
-            "publishedAt": "2026-08-14T11:37:51Z",
-            "direction": "POSITIVE",
-            "whyItMatters": "È collegata ai fattori monitorati per advanced micro devices, inc.."
-          },
-          {
-            "title": "US Stock Futures Rangebound After S&P 500 Ends At Record Highs As Data Shows Cooling Inflation — WDAY, SNDK, AMD, DELL, HTZ In Focus",
-            "publisher": "Stocktwits",
-            "url": "https://stocktwits.com/news-articles/markets/equity/us-stock-futures-rangebound-after-s-and-p-500-ends-at-record-highs-as-data-shows-cooling-inflation-wday-sndk-amd-dell-htz-in-focus/cZoqpLeRJLz",
-            "publishedAt": "2026-08-13T22:59:21Z",
-            "direction": "POSITIVE",
-            "whyItMatters": "Può cambiare le aspettative di politica monetaria."
-          },
-          {
-            "title": "Cerebras Stock PlummetsDespite Solid Earnings",
-            "publisher": "Barrons.com",
-            "url": "https://www.barrons.com/articles/cerebras-systems-earnings-stock-price-fac4c486?siteid=yhoof2&yptr=yahoo",
-            "publishedAt": "2026-08-13T20:42:00Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "Può cambiare le attese sugli utili."
-          },
-          {
-            "title": "AMD Stock Can Halve Or Nearly Double, And That Is The Calm Assumption",
+            "title": "Caterpillar's Falling Multiple Rests On Margin, Not Its Backlog",
             "publisher": "Trefis",
-            "url": "https://www.trefis.com/articles/611363/amd-stock-can-halve-or-nearly-double-and-that-is-the-calm-assumption/2026-08-13",
-            "publishedAt": "2026-08-13T20:07:53Z",
+            "url": "https://www.trefis.com/articles/611368/caterpillars-falling-multiple-rests-on-margin-not-its-backlog/2026-08-13",
+            "publishedAt": "2026-08-13T22:32:42Z",
             "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per advanced micro devices, inc.."
-          }
-        ],
-        "fundamentals": {
-          "revenueGrowthPct": 50.1,
-          "earningsGrowthPct": 159.5,
-          "operatingMarginPct": 17.25,
-          "roePct": 10.196,
-          "debtToEquity": 6.361,
-          "forwardPE": 31.242825,
-          "freeCashFlowLabel": "8.84 mld"
-        },
-        "technical": {
-          "monthly": "Rialzista",
-          "weekly": "Rialzista",
-          "daily": "Rialzista debole",
-          "rsiDaily": 42.966551506464334,
-          "relativeStrength3mPct": 7.4071595851455285,
-          "support": 283.0936083984375,
-          "resistance": 558.4219970703125
-        },
-        "memory": {
-          "firstSeen": null,
-          "lastSeen": null,
-          "daysObserved": 0,
-          "consecutiveTop5Days": 0,
-          "totalTop5Days": 0,
-          "stabilityScore": 4.5,
-          "reliabilityPct": 58.5,
-          "confidencePct": 56.96399896401019,
-          "momentum": 0.0,
-          "momentumLabel": "Stabile",
-          "score7DaysAgo": 7.618999827335031,
-          "historicalAverage": 7.618999827335031,
-          "previousRank": null,
-          "previousTop5": false,
-          "greenDays": 0,
-          "badge": "Nuovo candidato"
-        }
-      },
-      {
-        "ticker": "ECL",
-        "name": "Ecolab Inc.",
-        "rank": 4,
-        "score": 7.6032374000398955,
-        "status": "RED",
-        "profile": {
-          "country": "United States",
-          "city": "Saint Paul",
-          "website": "https://www.ecolab.com",
-          "industry": "Specialty Chemicals",
-          "sector": "Basic Materials",
-          "employees": 48000,
-          "marketCap": 77443579904.0,
-          "ceo": null,
-          "description": "Ecolab Inc. provides water, hygiene, and infection prevention solutions and services in the United States and internationally. The company operates through four segments: Global Water, Global Institutional & Specialty, Global Pest Elimination, and Global Life Sciences. The Global Water segment offers water treatment and process applications, and cleaning and sanitizing solutions to manufacturing, food and beverage processing, transportation, chemical, primary metals and mining, power generation, global refining, petrochemical, pulp and paper industries. The Global Institutional & Specialty segment provides cleaning and sanitizing products to the foodservice, healthcare, hospitality, lodging, government, education and retail industries. The Global Pest Elimination segment provides pest elimination services to detect, prevent, and eliminate pests comprising rodents and insects in full-service and quick-service restaurants, food and beverage processors, hotels, grocery operations, and other commercial segments, including education, life sciences, and healthcare. The Global Life Sciences segment provides cleaning and contamination control solutions to pharmaceutical and personal care manufacturers. It offers its products under the Ecolab, Kay, Purolite, and Bioquell brand names. The company sells its products through field sales and corporate account personnel, distributors, and dealers. Ecolab Inc. was founded in 1923 and is headquartered in Saint Paul, Minnesota."
-        },
-        "sector": "Basic Materials",
-        "currency": "USD",
-        "whySelected": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
-        "executiveSummary": "Ecolab Inc. mantiene qualità 5.5/10 e trend 8.4/10. Quota a -9.9% dal massimo. Punteggio odierno 7.6, media storica 7.6.",
-        "catalysts": [
-          "Flusso di notizie recente moderatamente favorevole.",
-          "Possibile recupero verso i massimi se il supporto Daily regge."
-        ],
-        "risks": [
-          "Rallentamento macroeconomico e compressione dei multipli."
-        ],
-        "news": [
-          {
-            "title": "Ecolab (ECL) Stock Looks Overvalued As Its 60% Three Year Run Continues",
-            "publisher": "Simply Wall St.",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/ecolab-ecl-stock-looks-overvalued-111140448.html",
-            "publishedAt": "2026-08-08T11:11:40Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per ecolab inc.."
+            "whyItMatters": "È collegata ai fattori monitorati per caterpillar inc.."
           },
           {
-            "title": "Ecolab (ECL) Could Be 12% Undervalued After Its Dividend Affirmation",
-            "publisher": "Simply Wall St.",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/ecolab-ecl-could-12-undervalued-081327952.html",
-            "publishedAt": "2026-08-08T08:13:27Z",
+            "title": "Do Wall Street Analysts Like Caterpillar Stock?",
+            "publisher": "Barchart",
+            "url": "https://www.barchart.com/story/news/3836053/do-wall-street-analysts-like-caterpillar-stock",
+            "publishedAt": "2026-08-13T18:03:11Z",
             "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per ecolab inc.."
+            "whyItMatters": "È collegata ai fattori monitorati per caterpillar inc.."
           },
           {
-            "title": "Is VLTO Worth Buying as Growth Improves but Valuation Stays Rich?",
+            "title": "Trimble Q2 Earnings Beat Estimates on Field Systems Strength",
             "publisher": "Zacks",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/vlto-worth-buying-growth-improves-150900210.html",
-            "publishedAt": "2026-08-06T15:09:00Z",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/trimble-q2-earnings-beat-estimates-155000722.html",
+            "publishedAt": "2026-08-13T15:50:00Z",
             "direction": "POSITIVE",
-            "whyItMatters": "È collegata ai fattori monitorati per ecolab inc.."
-          },
-          {
-            "title": "VLTO Climbs 13.2% in 3 Months: Will Its Momentum Keep Building Now?",
-            "publisher": "Zacks",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/vlto-climbs-13-2-3-144000720.html",
-            "publishedAt": "2026-08-06T14:40:00Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per ecolab inc.."
-          },
-          {
-            "title": "International Flavors Q2 Earnings Miss Estimates, Sales Rise Y/Y",
-            "publisher": "Zacks",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/international-flavors-q2-earnings-miss-143000466.html",
-            "publishedAt": "2026-08-05T14:30:00Z",
-            "direction": "NEGATIVE",
             "whyItMatters": "Può cambiare le attese sugli utili."
+          },
+          {
+            "title": "These nontech stocks can ride the AI build-out for years",
+            "publisher": "MarketWatch",
+            "url": "https://www.marketwatch.com/story/these-nontech-stocks-can-ride-the-ai-build-out-for-years-67e2e39b",
+            "publishedAt": "2026-08-13T15:48:00Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per caterpillar inc.."
           }
         ],
         "fundamentals": {
-          "revenueGrowthPct": 9.700000000000001,
-          "earningsGrowthPct": 3.3000000000000003,
-          "operatingMarginPct": 18.521999,
-          "roePct": 21.956,
-          "debtToEquity": 138.023,
-          "forwardPE": 29.28276,
-          "freeCashFlowLabel": "1.47 mld"
+          "revenueGrowthPct": 24.0,
+          "earningsGrowthPct": 68.2,
+          "operatingMarginPct": 22.183001,
+          "roePct": 56.972003,
+          "debtToEquity": 232.783,
+          "forwardPE": 26.98099,
+          "freeCashFlowLabel": "5.05 mld"
         },
         "technical": {
           "monthly": "Rialzista",
           "weekly": "Rialzista",
-          "daily": "Rialzista",
-          "rsiDaily": 58.95112831182436,
-          "relativeStrength3mPct": 11.303809822880083,
-          "support": 249.7393631655012,
-          "resistance": 283.9800109863281
-        },
-        "memory": {
-          "firstSeen": null,
-          "lastSeen": null,
-          "daysObserved": 0,
-          "consecutiveTop5Days": 0,
-          "totalTop5Days": 0,
-          "stabilityScore": 4.5,
-          "reliabilityPct": 58.5,
-          "confidencePct": 56.869424400239375,
-          "momentum": 0.0,
-          "momentumLabel": "Stabile",
-          "score7DaysAgo": 7.603237400039896,
-          "historicalAverage": 7.603237400039896,
-          "previousRank": null,
-          "previousTop5": false,
-          "greenDays": 0,
-          "badge": "Nuovo candidato"
-        }
-      },
-      {
-        "ticker": "GOOGL",
-        "name": "Alphabet Inc.",
-        "rank": 5,
-        "score": 7.602977452376203,
-        "status": "RED",
-        "profile": {
-          "country": "United States",
-          "city": "Mountain View",
-          "website": "https://abc.xyz",
-          "industry": "Internet Content & Information",
-          "sector": "Communication Services",
-          "employees": 198933,
-          "marketCap": 4235960254464.0,
-          "ceo": null,
-          "description": "Alphabet Inc. offers various products and platforms in the United States, Europe, the Middle East, Africa, the Asia-Pacific, Canada, and Latin America. It operates through Google Services, Google Cloud, and Other Bets segments. The Google Services segment provides products and services, including ads, Android, Chrome, devices, Gmail, Google Drive, Google Maps, Google Photos, Google Play, Search, and YouTube. It is also involved in the sale of apps and in-app purchases and digital content in Google Play and YouTube; and devices, as well as the provision of YouTube consumer subscription services, such as YouTube TV, YouTube Music and Premium, NFL Sunday Ticket, and Google One. The Google Cloud segment offers consumption-based fees and subscriptions for AI solutions, including AI infrastructure, Vertex AI platform, and Gemini enterprise. It also provides cybersecurity, and data and analytics services; Google Workspace that include cloud-based communication and collaboration tools for enterprises, such as Calendar, Gmail, Docs, Drive, and Meet; and other enterprise services. The Other Bets segment sells transportation and internet services. Alphabet Inc. was incorporated in 1998 and is headquartered in Mountain View, California."
-        },
-        "sector": "Communication Services",
-        "currency": "USD",
-        "whySelected": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
-        "executiveSummary": "Alphabet Inc. mantiene qualità 9.2/10 e trend 5.3/10. Quota a -13.9% dal massimo. Punteggio odierno 7.6, media storica 7.6.",
-        "catalysts": [
-          "Crescita ricavi sostenuta (24.2%).",
-          "Crescita degli utili positiva (294.0%).",
-          "Flusso di notizie recente moderatamente favorevole.",
-          "Possibile recupero verso i massimi se il supporto Daily regge."
-        ],
-        "risks": [
-          "Rallentamento macroeconomico e compressione dei multipli."
-        ],
-        "news": [
-          {
-            "title": "Gemini & Zocdoc launch AI doctor booking",
-            "publisher": "Yahoo Finance Video",
-            "url": "https://finance.yahoo.com/video/gemini-zocdoc-launch-ai-doctor-195932395.html",
-            "publishedAt": "2026-08-13T19:59:32Z",
-            "direction": "POSITIVE",
-            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
-          },
-          {
-            "title": "Google becomes latest company to raise prices thanks to memory shortage",
-            "publisher": "Yahoo Finance",
-            "url": "https://finance.yahoo.com/technology/article/google-becomes-latest-company-to-raise-prices-thanks-to-memory-shortage-151004099.html",
-            "publishedAt": "2026-08-13T15:10:04Z",
-            "direction": "POSITIVE",
-            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
-          },
-          {
-            "title": "Cathie Wood picks up $44.7 million in shares of two highly watched tech stocks. Is it too late to follow along?",
-            "publisher": "Moneywise",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-picks-44-7-115500302.html",
-            "publishedAt": "2026-08-14T11:55:00Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
-          },
-          {
-            "title": "Meta And Alphabet Offer Incredible Value And No One Cares",
-            "publisher": "24/7 Wall St.",
-            "url": "https://247wallst.com/investing/2026/08/14/meta-and-alphabet-offer-incredible-value-and-no-one-cares/",
-            "publishedAt": "2026-08-14T11:50:43Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
-          },
-          {
-            "title": "Better Tech Behemoth: Alphabet vs. Microsoft Stock",
-            "publisher": "Motley Fool",
-            "url": "https://www.fool.com/investing/2026/08/14/better-tech-behemoth-alphabet-versus-microsoft-sto/",
-            "publishedAt": "2026-08-14T11:35:00Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
-          }
-        ],
-        "fundamentals": {
-          "revenueGrowthPct": 24.2,
-          "earningsGrowthPct": 294.0,
-          "operatingMarginPct": 34.033,
-          "roePct": 48.676,
-          "debtToEquity": 18.859,
-          "forwardPE": 23.499653,
-          "freeCashFlowLabel": "22.67 mld"
-        },
-        "technical": {
-          "monthly": "Rialzista",
-          "weekly": "Rialzista debole",
           "daily": "Rialzista debole",
-          "rsiDaily": 62.395236094998445,
-          "relativeStrength3mPct": -13.589434536759414,
-          "support": 330.29520141601563,
-          "resistance": 393.97167756578494
+          "rsiDaily": 48.085985954640236,
+          "relativeStrength3mPct": -2.5951320571273473,
+          "support": 799.9624672840347,
+          "resistance": 992.6594751752068
         },
         "memory": {
           "firstSeen": null,
@@ -92329,11 +92255,11 @@
           "totalTop5Days": 0,
           "stabilityScore": 4.5,
           "reliabilityPct": 58.5,
-          "confidencePct": 56.86786471425722,
+          "confidencePct": 57.110522981429135,
           "momentum": 0.0,
           "momentumLabel": "Stabile",
-          "score7DaysAgo": 7.602977452376203,
-          "historicalAverage": 7.602977452376203,
+          "score7DaysAgo": 7.643420496904857,
+          "historicalAverage": 7.643420496904857,
           "previousRank": null,
           "previousTop5": false,
           "greenDays": 0,
