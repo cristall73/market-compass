@@ -1,6 +1,6 @@
 {
   "provider": "Yahoo Finance tramite yfinance",
-  "generatedAt": "2026-08-14T21:43:11.549018+00:00",
+  "generatedAt": "2026-08-14T22:01:37.711081+00:00",
   "assets": [
     {
       "name": "Nasdaq 100",
@@ -12913,6 +12913,13 @@
         ],
         "1D": [
           {
+            "time": "2025-07-31T00:00:00+00:00",
+            "open": 24340.2109375,
+            "high": 24433.400390625,
+            "low": 24039.919921875,
+            "close": 24065.470703125
+          },
+          {
             "time": "2025-08-01T00:00:00+00:00",
             "open": 23786.91015625,
             "high": 23802.73046875,
@@ -14724,13 +14731,6 @@
             "high": 26489.779296875,
             "low": 26285.23046875,
             "close": 26299.740234375
-          },
-          {
-            "time": "2026-08-14T00:00:00+00:00",
-            "open": 26445.990234375,
-            "high": 26541.33984375,
-            "low": 26404.94921875,
-            "close": 26440.310546875
           }
         ],
         "1H": [
@@ -90716,7 +90716,7 @@
   ],
   "investment": {
     "provider": "Yahoo Finance tramite yfinance",
-    "generatedAt": "2026-08-14T21:43:11.549018+00:00",
+    "generatedAt": "2026-08-14T22:01:37.711081+00:00",
     "screenedCount": 204,
     "universeCount": 208,
     "candidates": [
@@ -90753,10 +90753,10 @@
         "watchZoneHigh": 1131.4707077026367,
         "entryZoneLow": 946.4312622070313,
         "entryZoneHigh": 1031.3674011230469,
-        "invalidation": 584.9121455773176,
-        "target1": 1473.683954970305,
-        "target2": 1796.873703840482,
-        "target3": 2200.8608899282035,
+        "invalidation": 584.9121452909808,
+        "target1": 1473.6839553139089,
+        "target2": 1796.8737044131558,
+        "target3": 2200.860890787214,
         "riskReward": "1 : 2.0",
         "executiveSummary": "Micron Technology, Inc. mantiene qualità 8.3/10 e trend 9.2/10. Quota a -19.9% dal massimo. Punteggio odierno 8.0, media storica 8.0.",
         "selectionReason": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
@@ -90784,6 +90784,12 @@
             "publishedAt": "2026-08-14T09:57:00Z"
           },
           {
+            "title": "Druckenmiller loads up on Amazon and AMD while dumping some chipmakers, 13F shows",
+            "publisher": "Investing.com",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/druckenmiller-loads-amazon-amd-while-215638635.html",
+            "publishedAt": "2026-08-14T21:56:38Z"
+          },
+          {
             "title": "Marvell Technology, MACOM, Micron, Western Digital, and Semtech Shares Skyrocket, What You Need To Know",
             "publisher": "StockStory",
             "url": "https://finance.yahoo.com/markets/stocks/articles/marvell-technology-macom-micron-western-195700965.html",
@@ -90794,12 +90800,6 @@
             "publisher": "GuruFocus.com",
             "url": "https://finance.yahoo.com/markets/stocks/articles/micron-stock-jumps-2-1-191520910.html",
             "publishedAt": "2026-08-14T19:15:20Z"
-          },
-          {
-            "title": "Lam Research bets $3 billion on speed, not size",
-            "publisher": "TheStreet",
-            "url": "https://www.thestreet.com/technology/lam-research-3b-lab-investment-chip-bottleneck",
-            "publishedAt": "2026-08-14T19:13:00Z"
           }
         ],
         "conditionsForGreen": [
@@ -91123,6 +91123,140 @@
         "isNewEntry": true
       },
       {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc.",
+        "sector": "Communication Services",
+        "currency": "USD",
+        "companyProfile": {
+          "country": "United States",
+          "city": "Mountain View",
+          "website": "https://abc.xyz",
+          "industry": "Internet Content & Information",
+          "sector": "Communication Services",
+          "employees": 198933,
+          "marketCap": 4230334382080.0,
+          "ceo": null,
+          "description": "Alphabet Inc. offers various products and platforms in the United States, Europe, the Middle East, Africa, the Asia-Pacific, Canada, and Latin America. It operates through Google Services, Google Cloud, and Other Bets segments. The Google Services segment provides products and services, including ads, Android, Chrome, devices, Gmail, Google Drive, Google Maps, Google Photos, Google Play, Search, and YouTube. It is also involved in the sale of apps and in-app purchases and digital content in Google Play and YouTube; and devices, as well as the provision of YouTube consumer subscription services, such as YouTube TV, YouTube Music and Premium, NFL Sunday Ticket, and Google One. The Google Cloud segment offers consumption-based fees and subscriptions for AI solutions, including AI infrastructure, Vertex AI platform, and Gemini enterprise. It also provides cybersecurity, and data and analytics services; Google Workspace that include cloud-based communication and collaboration tools for enterprises, such as Calendar, Gmail, Docs, Drive, and Meet; and other enterprise services. The Other Bets segment sells transportation and internet services. Alphabet Inc. was incorporated in 1998 and is headquartered in Mountain View, California."
+        },
+        "currentPrice": 345.8999938964844,
+        "high52": 402.3796691894531,
+        "pullbackPct": 14.036413769796189,
+        "requiredPullbackMin": 11.968103149741912,
+        "requiredPullbackMax": 18.700161171471738,
+        "qualityScore": 9.17226818181818,
+        "trendScore": 5.389302538355229,
+        "entryScore": 8.457864282664419,
+        "newsScore": 6,
+        "rawScore": 7.52204196322375,
+        "finalScore": 7.522041963223749,
+        "stableScore": 7.522041963223749,
+        "status": "RED",
+        "watchZoneLow": 361.4460374065967,
+        "watchZoneHigh": 380.7089229514703,
+        "entryZoneLow": 327.13402252979057,
+        "entryZoneHigh": 354.2224553272691,
+        "invalidation": 313.22774026835083,
+        "target1": 373.6188373207446,
+        "target2": 395.5792362488878,
+        "target3": 423.0297349090668,
+        "riskReward": "1 : 2.0",
+        "executiveSummary": "Alphabet Inc. mantiene qualità 9.2/10 e trend 5.4/10. Quota a -14.0% dal massimo. Punteggio odierno 7.5, media storica 7.5.",
+        "selectionReason": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
+        "pullbackDiagnosis": "Il ritracciamento appare prevalentemente tecnico e compatibile con una presa di profitto.",
+        "catalysts": [
+          "Crescita ricavi sostenuta (24.2%).",
+          "Crescita degli utili positiva (294.0%).",
+          "Flusso di notizie recente moderatamente favorevole.",
+          "Possibile recupero verso i massimi se il supporto Daily regge."
+        ],
+        "risks": [
+          "Rallentamento macroeconomico e compressione dei multipli."
+        ],
+        "news": [
+          {
+            "title": "Berkshire ups Alphabet stake under Greg Abel, making it a top-3 holding",
+            "publisher": "Yahoo Finance Video",
+            "url": "https://finance.yahoo.com/video/berkshire-ups-alphabet-stake-under-212900630.html",
+            "publishedAt": "2026-08-14T21:29:00Z"
+          },
+          {
+            "title": "Alphabet Just Borrowed $25 Billion, and $2.5 Billion of It Isn't Due Until 2066",
+            "publisher": "Motley Fool",
+            "url": "https://www.fool.com/investing/2026/08/14/alphabet-just-borrowed-25-billion-and-25-billion-o/",
+            "publishedAt": "2026-08-14T21:43:00Z"
+          },
+          {
+            "title": "Reddit Stock's Pullback Is Tempting, But Don't Ignore The User Question",
+            "publisher": "Trefis",
+            "url": "https://www.trefis.com/articles/611486/reddit-stocks-pullback-is-tempting-but-dont-ignore-the-user-question/2026-08-14",
+            "publishedAt": "2026-08-14T21:37:30Z"
+          },
+          {
+            "title": "Berkshire Adds to Alphabet Stake, Buys Homebuilders and Exits Constellation",
+            "publisher": "The Wall Street Journal",
+            "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-08-14-2026/card/berkshire-adds-to-alphabet-stake-buys-homebuilders-and-exits-constellation-jIhDPk4CLybS4nTMewM7?siteid=yhoof2&yptr=yahoo",
+            "publishedAt": "2026-08-14T21:28:39Z"
+          },
+          {
+            "title": "Berkshire Hathaway expands Alphabet stake and trims bank exposure in Q2",
+            "publisher": "Investing.com",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaway-expands-alphabet-stake-212358443.html",
+            "publishedAt": "2026-08-14T21:23:58Z"
+          }
+        ],
+        "conditionsForGreen": [
+          "Conferma Daily nella zona prima dell'esecuzione."
+        ],
+        "memory": {
+          "firstSeen": null,
+          "lastSeen": null,
+          "daysObserved": 0,
+          "consecutiveTop5Days": 0,
+          "totalTop5Days": 0,
+          "stabilityScore": 4.5,
+          "reliabilityPct": 58.5,
+          "confidencePct": 56.382251779342496,
+          "momentum": 0.0,
+          "momentumLabel": "Stabile",
+          "score7DaysAgo": 7.52204196322375,
+          "historicalAverage": 7.52204196322375,
+          "previousRank": null,
+          "previousTop5": false,
+          "greenDays": 0,
+          "badge": "Nuovo candidato"
+        },
+        "fundamentals": {
+          "revenueGrowthPct": 24.2,
+          "earningsGrowthPct": 294.0,
+          "operatingMarginPct": 34.033,
+          "roePct": 48.676,
+          "debtToEquity": 18.859,
+          "forwardPE": 23.456905,
+          "freeCashFlowLabel": "22.67 mld"
+        },
+        "technical": {
+          "monthly": "Rialzista",
+          "weekly": "Rialzista debole",
+          "daily": "Rialzista debole",
+          "rsiDaily": 59.572366920516785,
+          "relativeStrength3mPct": -12.771159386316345,
+          "support": 330.58648102265397,
+          "resistance": 393.97167756578494
+        },
+        "earningsCommentary": "Il sistema considera dati disponibili, ma trimestrali, guidance e conference call devono essere verificate sulle fonti ufficiali.",
+        "nextEarningsDate": null,
+        "earningsSurprisePct": 2.979,
+        "estimateRevision": "Non disponibile in modo uniforme dalla fonte gratuita.",
+        "scenarios": {
+          "A": "Attendere un ritorno fra 327.13 e 354.22 con stabilizzazione Daily.",
+          "B": "Se rompe i massimi senza ritracciare, non inseguire.",
+          "C": "Escludere con chiusura Daily/Weekly sotto 313.23 o deterioramento fondamentale."
+        },
+        "rank": 4,
+        "rankChange": null,
+        "isNewEntry": true
+      },
+      {
         "ticker": "BP.L",
         "name": "BP p.l.c.",
         "sector": "Energy",
@@ -91253,141 +91387,6 @@
           "B": "Se rompe i massimi senza ritracciare, non inseguire.",
           "C": "Escludere con chiusura Daily/Weekly sotto 490.55 o deterioramento fondamentale."
         },
-        "rank": 4,
-        "rankChange": null,
-        "isNewEntry": true
-      },
-      {
-        "ticker": "LRCX",
-        "name": "Lam Research Corporation",
-        "sector": "Semiconductors",
-        "currency": "USD",
-        "companyProfile": {
-          "country": "United States",
-          "city": "Fremont",
-          "website": "https://www.lamresearch.com",
-          "industry": "Semiconductor Equipment & Materials",
-          "sector": "Technology",
-          "employees": 23300,
-          "marketCap": 415889031168.0,
-          "ceo": null,
-          "description": "Lam Research Corporation designs, manufactures, markets, refurbishes, and services semiconductor processing equipment used in the fabrication of integrated circuits in the United States, China, Korea, Taiwan, Japan, Southeast Asia, and Europe. The company offers ALTUS systems to deposit conformal or selective films for tungsten or molybdenum metallization applications; SABRE electrochemical deposition products for copper interconnect transition that offers copper damascene manufacturing; SPEED gapfill high-density plasma chemical vapor deposition (CVD) products; Striker single-wafer atomic layer deposition products for dielectric film solutions; and VECTOR plasma-enhanced CVD products. It also provides Flex for dielectric etch applications; Vantex, a dielectric etch system that provides RF technology and repeatable wafer-to-wafer performance enabled by Equipment Intelligence solutions; Kiyo for conductor etch applications; Syndion for through-silicon via etch applications; and Versys metal products for metal etch processes. In addition, the company offers Coronus bevel clean products to enhance die yield; and Da Vinci, DV-Prime, EOS, and SP series products to address various wafer cleaning applications. Further, it provides Reliant deposition, etch, and clean products; and Sense.i platform products, as well as customer service, spares, and upgrades. Lam Research Corporation was incorporated in 1980 and is headquartered in Fremont, California."
-        },
-        "currentPrice": 332.3599853515625,
-        "high52": 433.3299865722656,
-        "pullbackPct": 23.300949472571187,
-        "requiredPullbackMin": 15,
-        "requiredPullbackMax": 22,
-        "qualityScore": 8.96903341991342,
-        "trendScore": 8.738402871972935,
-        "entryScore": 4.513200602775787,
-        "newsScore": 6,
-        "rawScore": 7.404524317616931,
-        "finalScore": 7.404524317616931,
-        "stableScore": 7.404524317616931,
-        "status": "YELLOW",
-        "watchZoneLow": 378.08041328430176,
-        "watchZoneHigh": 404.0802124786377,
-        "entryZoneLow": 337.9973895263672,
-        "entryZoneHigh": 368.33048858642576,
-        "invalidation": 246.4844516266143,
-        "target1": 481.1793239721351,
-        "target2": 566.5229139159609,
-        "target3": 673.202401345743,
-        "riskReward": "1 : 2.0",
-        "executiveSummary": "Lam Research Corporation mantiene qualità 9.0/10 e trend 8.7/10. Quota a -23.3% dal massimo. Punteggio odierno 7.4, media storica 7.4.",
-        "selectionReason": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
-        "pullbackDiagnosis": "Il ritracciamento appare prevalentemente tecnico e compatibile con una presa di profitto.",
-        "catalysts": [
-          "Crescita ricavi sostenuta (30.0%).",
-          "Crescita degli utili positiva (34.8%).",
-          "Flusso di notizie recente moderatamente favorevole.",
-          "Possibile recupero verso i massimi se il supporto Daily regge."
-        ],
-        "risks": [
-          "Settore ciclico e dipendente dalla domanda AI e data center.",
-          "Taiwan e controlli all'export sono fattori geopolitici rilevanti."
-        ],
-        "news": [
-          {
-            "title": "Lam Research bets $3 billion on speed, not size",
-            "publisher": "TheStreet",
-            "url": "https://www.thestreet.com/technology/lam-research-3b-lab-investment-chip-bottleneck",
-            "publishedAt": "2026-08-14T19:13:00Z"
-          },
-          {
-            "title": "Lam Research’s Etch Moat Could Become the Most Profitable Lever in Next‑Gen Semiconductor Manufacturing",
-            "publisher": "24/7 Wall St.",
-            "url": "https://247wallst.com/investing/2026/08/14/lam-researchs-etch-moat-could-become-the-most-profitable-lever-in-next%e2%80%91gen-semiconductor-manufacturing/",
-            "publishedAt": "2026-08-14T15:25:31Z"
-          },
-          {
-            "title": "AMKR Stock Slides 18% in Three Months: Is the Dip Worth Buying?",
-            "publisher": "Zacks",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/amkr-stock-slides-18-three-134400152.html",
-            "publishedAt": "2026-08-14T13:44:00Z"
-          },
-          {
-            "title": "Why Lam Research (LRCX) Became This Portfolio’s Top Performer",
-            "publisher": "Insider Monkey",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/why-lam-research-lrcx-became-132837845.html",
-            "publishedAt": "2026-08-14T13:28:37Z"
-          },
-          {
-            "title": "AMAT Stock Falls After Wall Street Split On Q3 Results — Morgan Stanley Says Earnings Were 'Good, But Not Great'",
-            "publisher": "Stocktwits",
-            "url": "https://stocktwits.com/news-articles/markets/equity/amat-stock-falls-wall-street-split-q3-results-morgan-stanley-good-not-great/cZotjQHRJ0B",
-            "publishedAt": "2026-08-14T13:28:34Z"
-          }
-        ],
-        "conditionsForGreen": [
-          "Conferma Daily nella zona prima dell'esecuzione."
-        ],
-        "memory": {
-          "firstSeen": null,
-          "lastSeen": null,
-          "daysObserved": 0,
-          "consecutiveTop5Days": 0,
-          "totalTop5Days": 0,
-          "stabilityScore": 4.5,
-          "reliabilityPct": 58.5,
-          "confidencePct": 55.677145905701586,
-          "momentum": 0.0,
-          "momentumLabel": "Stabile",
-          "score7DaysAgo": 7.404524317616931,
-          "historicalAverage": 7.404524317616931,
-          "previousRank": null,
-          "previousTop5": false,
-          "greenDays": 0,
-          "badge": "Nuovo candidato"
-        },
-        "fundamentals": {
-          "revenueGrowthPct": 30.0,
-          "earningsGrowthPct": 34.8,
-          "operatingMarginPct": 37.390997999999996,
-          "roePct": 65.06600399999999,
-          "debtToEquity": 33.049,
-          "forwardPE": 28.757978,
-          "freeCashFlowLabel": "3.09 mld"
-        },
-        "technical": {
-          "monthly": "Rialzista",
-          "weekly": "Rialzista",
-          "daily": "Rialzista",
-          "rsiDaily": 61.85902627981595,
-          "relativeStrength3mPct": 16.81444595156696,
-          "support": 256.4013709561112,
-          "resistance": 392.52233664225497
-        },
-        "earningsCommentary": "Il sistema considera dati disponibili, ma trimestrali, guidance e conference call devono essere verificate sulle fonti ufficiali.",
-        "nextEarningsDate": null,
-        "earningsSurprisePct": 0.324,
-        "estimateRevision": "Non disponibile in modo uniforme dalla fonte gratuita.",
-        "scenarios": {
-          "A": "Attendere un ritorno fra 338.00 e 368.33 con stabilizzazione Daily.",
-          "B": "Se rompe i massimi senza ritracciare, non inseguire.",
-          "C": "Escludere con chiusura Daily/Weekly sotto 246.48 o deterioramento fondamentale."
-        },
         "rank": 5,
         "rankChange": null,
         "isNewEntry": true
@@ -91399,8 +91398,8 @@
         "MU",
         "ECL",
         "AXP",
-        "BP.L",
-        "LRCX"
+        "GOOGL",
+        "BP.L"
       ],
       "exited": [],
       "removedReasons": [],
@@ -91435,7 +91434,7 @@
     "historyDays": 1
   },
   "intelligence": {
-    "generatedAt": "2026-08-14T21:43:11.549018+00:00",
+    "generatedAt": "2026-08-14T22:01:37.711081+00:00",
     "market": [
       {
         "name": "Nasdaq 100",
@@ -91527,6 +91526,22 @@
             "whyItMatters": "Può cambiare le attese sugli utili."
           },
           {
+            "title": "3 Reasons to Sell RF and 1 Stock to Buy Instead",
+            "publisher": "StockStory",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/3-reasons-sell-rf-1-214900556.html",
+            "publishedAt": "2026-08-14T21:49:00Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per s&p 500."
+          },
+          {
+            "title": "3 Reasons to Avoid GPC and 1 Stock to Buy Instead",
+            "publisher": "StockStory",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/3-reasons-avoid-gpc-1-214100145.html",
+            "publishedAt": "2026-08-14T21:41:00Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per s&p 500."
+          },
+          {
             "title": "Two Funds Promise 20% Income From the S&P 500. One Caps Your Upside, One Doesn’t, and It Charges Less",
             "publisher": "24/7 Wall St.",
             "url": "https://247wallst.com/investing/2026/08/14/two-funds-promise-20-income-from-the-sp-500-one-caps-your-upside-one-doesnt-and-it-charges-less/",
@@ -91539,22 +91554,6 @@
             "publisher": "StockStory",
             "url": "https://finance.yahoo.com/markets/stocks/articles/3-reasons-sell-ndsn-1-213300929.html",
             "publishedAt": "2026-08-14T21:33:00Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per s&p 500."
-          },
-          {
-            "title": "Stock Market Today, Aug. 14: Rally Stalls on Disappointing Consumer Data, Broadcom Falls 6%",
-            "publisher": "Motley Fool",
-            "url": "https://www.fool.com/coverage/stock-market-today/2026/08/14/stock-market-today-aug-14-stocks-slip-as-consumer-data-disappoints-broadcom-falls-6/",
-            "publishedAt": "2026-08-14T21:30:18Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per s&p 500."
-          },
-          {
-            "title": "2 Reasons to Like AMAL and 1 to Stay Skeptical",
-            "publisher": "StockStory",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/2-reasons-amal-1-stay-212500987.html",
-            "publishedAt": "2026-08-14T21:25:00Z",
             "direction": "NEUTRAL",
             "whyItMatters": "È collegata ai fattori monitorati per s&p 500."
           }
@@ -91726,20 +91725,20 @@
             "whyItMatters": "È collegata ai fattori monitorati per petrolio wti."
           },
           {
+            "title": "Energy & Utilities Roundup: Market Talk",
+            "publisher": "The Wall Street Journal",
+            "url": "https://www.wsj.com/business/energy-utilities-roundup-market-talk-67496cf5?siteid=yhoof2&yptr=yahoo",
+            "publishedAt": "2026-08-14T21:00:00Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per petrolio wti."
+          },
+          {
             "title": "Stocks slip in cautious trading after weak US retail sales data",
             "publisher": "AFP",
             "url": "https://finance.yahoo.com/markets/world-indices/articles/most-asian-stocks-track-wall-024850728.html",
             "publishedAt": "2026-08-14T20:37:02Z",
             "direction": "NEGATIVE",
             "whyItMatters": "È collegata ai fattori monitorati per petrolio wti."
-          },
-          {
-            "title": "Update: US Equity Indexes Fall After Retail Sales Drop Most in 14 Months, Crude Oil Rises as Iran Warned Against Economic Pain",
-            "publisher": "MT Newswires",
-            "url": "https://finance.yahoo.com/economy/articles/us-equity-indexes-fall-retail-201926907.html",
-            "publishedAt": "2026-08-14T20:19:26Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "Può aumentare volatilità e premio per il rischio; può muovere energia, inflazione e rendimenti."
           }
         ]
       },
@@ -91854,6 +91853,14 @@
             "whyItMatters": "È collegata ai fattori monitorati per micron technology, inc.."
           },
           {
+            "title": "Druckenmiller loads up on Amazon and AMD while dumping some chipmakers, 13F shows",
+            "publisher": "Investing.com",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/druckenmiller-loads-amazon-amd-while-215638635.html",
+            "publishedAt": "2026-08-14T21:56:38Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per micron technology, inc.."
+          },
+          {
             "title": "Marvell Technology, MACOM, Micron, Western Digital, and Semtech Shares Skyrocket, What You Need To Know",
             "publisher": "StockStory",
             "url": "https://finance.yahoo.com/markets/stocks/articles/marvell-technology-macom-micron-western-195700965.html",
@@ -91866,14 +91873,6 @@
             "publisher": "GuruFocus.com",
             "url": "https://finance.yahoo.com/markets/stocks/articles/micron-stock-jumps-2-1-191520910.html",
             "publishedAt": "2026-08-14T19:15:20Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per micron technology, inc.."
-          },
-          {
-            "title": "Lam Research bets $3 billion on speed, not size",
-            "publisher": "TheStreet",
-            "url": "https://www.thestreet.com/technology/lam-research-3b-lab-investment-chip-bottleneck",
-            "publishedAt": "2026-08-14T19:13:00Z",
             "direction": "NEUTRAL",
             "whyItMatters": "È collegata ai fattori monitorati per micron technology, inc.."
           }
@@ -92134,9 +92133,118 @@
         }
       },
       {
+        "ticker": "GOOGL",
+        "name": "Alphabet Inc.",
+        "rank": 4,
+        "score": 7.522041963223749,
+        "status": "RED",
+        "profile": {
+          "country": "United States",
+          "city": "Mountain View",
+          "website": "https://abc.xyz",
+          "industry": "Internet Content & Information",
+          "sector": "Communication Services",
+          "employees": 198933,
+          "marketCap": 4230334382080.0,
+          "ceo": null,
+          "description": "Alphabet Inc. offers various products and platforms in the United States, Europe, the Middle East, Africa, the Asia-Pacific, Canada, and Latin America. It operates through Google Services, Google Cloud, and Other Bets segments. The Google Services segment provides products and services, including ads, Android, Chrome, devices, Gmail, Google Drive, Google Maps, Google Photos, Google Play, Search, and YouTube. It is also involved in the sale of apps and in-app purchases and digital content in Google Play and YouTube; and devices, as well as the provision of YouTube consumer subscription services, such as YouTube TV, YouTube Music and Premium, NFL Sunday Ticket, and Google One. The Google Cloud segment offers consumption-based fees and subscriptions for AI solutions, including AI infrastructure, Vertex AI platform, and Gemini enterprise. It also provides cybersecurity, and data and analytics services; Google Workspace that include cloud-based communication and collaboration tools for enterprises, such as Calendar, Gmail, Docs, Drive, and Meet; and other enterprise services. The Other Bets segment sells transportation and internet services. Alphabet Inc. was incorporated in 1998 and is headquartered in Mountain View, California."
+        },
+        "sector": "Communication Services",
+        "currency": "USD",
+        "whySelected": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
+        "executiveSummary": "Alphabet Inc. mantiene qualità 9.2/10 e trend 5.4/10. Quota a -14.0% dal massimo. Punteggio odierno 7.5, media storica 7.5.",
+        "catalysts": [
+          "Crescita ricavi sostenuta (24.2%).",
+          "Crescita degli utili positiva (294.0%).",
+          "Flusso di notizie recente moderatamente favorevole.",
+          "Possibile recupero verso i massimi se il supporto Daily regge."
+        ],
+        "risks": [
+          "Rallentamento macroeconomico e compressione dei multipli."
+        ],
+        "news": [
+          {
+            "title": "Berkshire ups Alphabet stake under Greg Abel, making it a top-3 holding",
+            "publisher": "Yahoo Finance Video",
+            "url": "https://finance.yahoo.com/video/berkshire-ups-alphabet-stake-under-212900630.html",
+            "publishedAt": "2026-08-14T21:29:00Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
+          },
+          {
+            "title": "Alphabet Just Borrowed $25 Billion, and $2.5 Billion of It Isn't Due Until 2066",
+            "publisher": "Motley Fool",
+            "url": "https://www.fool.com/investing/2026/08/14/alphabet-just-borrowed-25-billion-and-25-billion-o/",
+            "publishedAt": "2026-08-14T21:43:00Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
+          },
+          {
+            "title": "Reddit Stock's Pullback Is Tempting, But Don't Ignore The User Question",
+            "publisher": "Trefis",
+            "url": "https://www.trefis.com/articles/611486/reddit-stocks-pullback-is-tempting-but-dont-ignore-the-user-question/2026-08-14",
+            "publishedAt": "2026-08-14T21:37:30Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
+          },
+          {
+            "title": "Berkshire Adds to Alphabet Stake, Buys Homebuilders and Exits Constellation",
+            "publisher": "The Wall Street Journal",
+            "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-08-14-2026/card/berkshire-adds-to-alphabet-stake-buys-homebuilders-and-exits-constellation-jIhDPk4CLybS4nTMewM7?siteid=yhoof2&yptr=yahoo",
+            "publishedAt": "2026-08-14T21:28:39Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
+          },
+          {
+            "title": "Berkshire Hathaway expands Alphabet stake and trims bank exposure in Q2",
+            "publisher": "Investing.com",
+            "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaway-expands-alphabet-stake-212358443.html",
+            "publishedAt": "2026-08-14T21:23:58Z",
+            "direction": "NEUTRAL",
+            "whyItMatters": "È collegata ai fattori monitorati per alphabet inc.."
+          }
+        ],
+        "fundamentals": {
+          "revenueGrowthPct": 24.2,
+          "earningsGrowthPct": 294.0,
+          "operatingMarginPct": 34.033,
+          "roePct": 48.676,
+          "debtToEquity": 18.859,
+          "forwardPE": 23.456905,
+          "freeCashFlowLabel": "22.67 mld"
+        },
+        "technical": {
+          "monthly": "Rialzista",
+          "weekly": "Rialzista debole",
+          "daily": "Rialzista debole",
+          "rsiDaily": 59.572366920516785,
+          "relativeStrength3mPct": -12.771159386316345,
+          "support": 330.58648102265397,
+          "resistance": 393.97167756578494
+        },
+        "memory": {
+          "firstSeen": null,
+          "lastSeen": null,
+          "daysObserved": 0,
+          "consecutiveTop5Days": 0,
+          "totalTop5Days": 0,
+          "stabilityScore": 4.5,
+          "reliabilityPct": 58.5,
+          "confidencePct": 56.382251779342496,
+          "momentum": 0.0,
+          "momentumLabel": "Stabile",
+          "score7DaysAgo": 7.52204196322375,
+          "historicalAverage": 7.52204196322375,
+          "previousRank": null,
+          "previousTop5": false,
+          "greenDays": 0,
+          "badge": "Nuovo candidato"
+        }
+      },
+      {
         "ticker": "BP.L",
         "name": "BP p.l.c.",
-        "rank": 4,
+        "rank": 5,
         "score": 7.4921961373703265,
         "status": "GREEN",
         "profile": {
@@ -92237,116 +92345,6 @@
           "momentumLabel": "Stabile",
           "score7DaysAgo": 7.492196137370327,
           "historicalAverage": 7.492196137370327,
-          "previousRank": null,
-          "previousTop5": false,
-          "greenDays": 0,
-          "badge": "Nuovo candidato"
-        }
-      },
-      {
-        "ticker": "LRCX",
-        "name": "Lam Research Corporation",
-        "rank": 5,
-        "score": 7.404524317616931,
-        "status": "YELLOW",
-        "profile": {
-          "country": "United States",
-          "city": "Fremont",
-          "website": "https://www.lamresearch.com",
-          "industry": "Semiconductor Equipment & Materials",
-          "sector": "Technology",
-          "employees": 23300,
-          "marketCap": 415889031168.0,
-          "ceo": null,
-          "description": "Lam Research Corporation designs, manufactures, markets, refurbishes, and services semiconductor processing equipment used in the fabrication of integrated circuits in the United States, China, Korea, Taiwan, Japan, Southeast Asia, and Europe. The company offers ALTUS systems to deposit conformal or selective films for tungsten or molybdenum metallization applications; SABRE electrochemical deposition products for copper interconnect transition that offers copper damascene manufacturing; SPEED gapfill high-density plasma chemical vapor deposition (CVD) products; Striker single-wafer atomic layer deposition products for dielectric film solutions; and VECTOR plasma-enhanced CVD products. It also provides Flex for dielectric etch applications; Vantex, a dielectric etch system that provides RF technology and repeatable wafer-to-wafer performance enabled by Equipment Intelligence solutions; Kiyo for conductor etch applications; Syndion for through-silicon via etch applications; and Versys metal products for metal etch processes. In addition, the company offers Coronus bevel clean products to enhance die yield; and Da Vinci, DV-Prime, EOS, and SP series products to address various wafer cleaning applications. Further, it provides Reliant deposition, etch, and clean products; and Sense.i platform products, as well as customer service, spares, and upgrades. Lam Research Corporation was incorporated in 1980 and is headquartered in Fremont, California."
-        },
-        "sector": "Semiconductors",
-        "currency": "USD",
-        "whySelected": "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5.",
-        "executiveSummary": "Lam Research Corporation mantiene qualità 9.0/10 e trend 8.7/10. Quota a -23.3% dal massimo. Punteggio odierno 7.4, media storica 7.4.",
-        "catalysts": [
-          "Crescita ricavi sostenuta (30.0%).",
-          "Crescita degli utili positiva (34.8%).",
-          "Flusso di notizie recente moderatamente favorevole.",
-          "Possibile recupero verso i massimi se il supporto Daily regge."
-        ],
-        "risks": [
-          "Settore ciclico e dipendente dalla domanda AI e data center.",
-          "Taiwan e controlli all'export sono fattori geopolitici rilevanti."
-        ],
-        "news": [
-          {
-            "title": "Lam Research bets $3 billion on speed, not size",
-            "publisher": "TheStreet",
-            "url": "https://www.thestreet.com/technology/lam-research-3b-lab-investment-chip-bottleneck",
-            "publishedAt": "2026-08-14T19:13:00Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per lam research corporation."
-          },
-          {
-            "title": "Lam Research’s Etch Moat Could Become the Most Profitable Lever in Next‑Gen Semiconductor Manufacturing",
-            "publisher": "24/7 Wall St.",
-            "url": "https://247wallst.com/investing/2026/08/14/lam-researchs-etch-moat-could-become-the-most-profitable-lever-in-next%e2%80%91gen-semiconductor-manufacturing/",
-            "publishedAt": "2026-08-14T15:25:31Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "Può cambiare le attese sugli utili."
-          },
-          {
-            "title": "AMKR Stock Slides 18% in Three Months: Is the Dip Worth Buying?",
-            "publisher": "Zacks",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/amkr-stock-slides-18-three-134400152.html",
-            "publishedAt": "2026-08-14T13:44:00Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per lam research corporation."
-          },
-          {
-            "title": "Why Lam Research (LRCX) Became This Portfolio’s Top Performer",
-            "publisher": "Insider Monkey",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/why-lam-research-lrcx-became-132837845.html",
-            "publishedAt": "2026-08-14T13:28:37Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "È collegata ai fattori monitorati per lam research corporation."
-          },
-          {
-            "title": "AMAT Stock Falls After Wall Street Split On Q3 Results — Morgan Stanley Says Earnings Were 'Good, But Not Great'",
-            "publisher": "Stocktwits",
-            "url": "https://stocktwits.com/news-articles/markets/equity/amat-stock-falls-wall-street-split-q3-results-morgan-stanley-good-not-great/cZotjQHRJ0B",
-            "publishedAt": "2026-08-14T13:28:34Z",
-            "direction": "NEUTRAL",
-            "whyItMatters": "Può cambiare le attese sugli utili."
-          }
-        ],
-        "fundamentals": {
-          "revenueGrowthPct": 30.0,
-          "earningsGrowthPct": 34.8,
-          "operatingMarginPct": 37.390997999999996,
-          "roePct": 65.06600399999999,
-          "debtToEquity": 33.049,
-          "forwardPE": 28.757978,
-          "freeCashFlowLabel": "3.09 mld"
-        },
-        "technical": {
-          "monthly": "Rialzista",
-          "weekly": "Rialzista",
-          "daily": "Rialzista",
-          "rsiDaily": 61.85902627981595,
-          "relativeStrength3mPct": 16.81444595156696,
-          "support": 256.4013709561112,
-          "resistance": 392.52233664225497
-        },
-        "memory": {
-          "firstSeen": null,
-          "lastSeen": null,
-          "daysObserved": 0,
-          "consecutiveTop5Days": 0,
-          "totalTop5Days": 0,
-          "stabilityScore": 4.5,
-          "reliabilityPct": 58.5,
-          "confidencePct": 55.677145905701586,
-          "momentum": 0.0,
-          "momentumLabel": "Stabile",
-          "score7DaysAgo": 7.404524317616931,
-          "historicalAverage": 7.404524317616931,
           "previousRank": null,
           "previousTop5": false,
           "greenDays": 0,
