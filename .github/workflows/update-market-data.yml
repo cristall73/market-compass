@@ -20,16 +20,20 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install yfinance pandas numpy
+          pip install yfinance pandas numpy requests deep-translator
 
       - name: Update market data
         run: |
           python scripts/update_market_data.py
 
+      - name: Stabilita selezione, italiano e calendario economico
+        run: |
+          python scripts/postprocess_site.py
+
       - name: Commit updated data
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add data/market-data.json
+          git add data/market-data.json data/market-history.json data/investment-selection-state.json data/translation-cache.json data/economic-calendar.json
           git diff --cached --quiet || git commit -m "Aggiornamento automatico dati"
           git push
