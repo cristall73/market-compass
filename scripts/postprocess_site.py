@@ -16,6 +16,9 @@ STATE=ROOT/'data'/'investment-selection-state.json'
 CACHE=ROOT/'data'/'translation-cache.json'
 CAL=ROOT/'data'/'economic-calendar.json'
 REVIEW_TRADING_DAYS=5
+CONFIRM_TRADING_DAYS=5
+
+COUNTRIES={'United States':'Stati Uniti','USA':'Stati Uniti','US':'Stati Uniti','Japan':'Giappone','JP':'Giappone','Germany':'Germania','DE':'Germania','Italy':'Italia','IT':'Italia','United Kingdom':'Regno Unito','UK':'Regno Unito','GB':'Regno Unito','France':'Francia','FR':'Francia','Spain':'Spagna','ES':'Spagna','Switzerland':'Svizzera','CH':'Svizzera','Canada':'Canada','CA':'Canada','Australia':'Australia','AU':'Australia','China':'Cina','CN':'Cina'}
 
 def load(path, default):
     try:return json.loads(path.read_text(encoding='utf-8'))
@@ -48,45 +51,71 @@ def refresh_prices(candidates):
             if not h.empty:c['currentPrice']=float(h['Close'].dropna().iloc[-1])
         except Exception:pass
 
+def apply_confirmation(inv,state,today):
+    confirmations=state.setdefault('confirmations',{})
+    for c in inv.get('candidates') or []:
+        ticker=c.get('ticker'); raw_status=str(c.get('status') or 'RED').upper()
+        rec=confirmations.setdefault(ticker,{'startDate':today.isoformat(),'lastDate':today.isoformat(),'days':0})
+        if raw_status=='GREEN':
+            # Conta una sola volta per giorno di Borsa, mai ad ogni aggiornamento prezzi.
+            if rec.get('lastDate')!=today.isoformat():
+                last=datetime.fromisoformat(rec.get('lastDate',today.isoformat())).date()
+                rec['days']=int(rec.get('days',0))+business_days(last,today)
+                rec['lastDate']=today.isoformat()
+            elif int(rec.get('days',0))==0:
+                rec['days']=1
+            confirmed=int(rec.get('days',0))>=CONFIRM_TRADING_DAYS
+            c['rawStatus']='GREEN'
+            c['confirmation']={'days':int(rec.get('days',0)),'requiredDays':CONFIRM_TRADING_DAYS,'confirmed':confirmed,'label':'ACQUISTO CONFERMATO' if confirmed else f'IN CONFERMA {int(rec.get("days",0))}/{CONFIRM_TRADING_DAYS} GIORNI'}
+            # Verde definitivo solo dopo persistenza. Prima resta giallo/in osservazione.
+            c['status']='GREEN' if confirmed else 'YELLOW'
+        else:
+            confirmations[ticker]={'startDate':today.isoformat(),'lastDate':today.isoformat(),'days':0}
+            c['confirmation']={'days':0,'requiredDays':CONFIRM_TRADING_DAYS,'confirmed':False,'label':'NON CONFERMATO'}
+    inv.setdefault('rules',{})['entryConfirmationDays']=CONFIRM_TRADING_DAYS
+    inv['confirmedGreenCount']=sum(1 for c in inv.get('candidates') or [] if (c.get('confirmation') or {}).get('confirmed'))
+
 def stabilize(root):
-    inv=root.get('investment') or {}; fresh=inv.get('candidates') or []
-    state=load(STATE,{})
-    today=datetime.now(timezone.utc).date(); review=True
+    inv=root.get('investment') or {};fresh=inv.get('candidates') or [];state=load(STATE,{})
+    today=datetime.now(timezone.utc).date();review=True
     if state.get('reviewDate') and state.get('candidates'):
         try:review=business_days(datetime.fromisoformat(state['reviewDate']).date(),today)>=REVIEW_TRADING_DAYS
         except Exception:review=True
     if review or not state.get('candidates'):
-        state={'reviewDate':today.isoformat(),'candidates':fresh};save(STATE,state)
+        state['reviewDate']=today.isoformat();state['candidates']=fresh
         inv['selectionReview']={'reviewedToday':True,'reviewDate':today.isoformat(),'nextReviewAfterTradingDays':REVIEW_TRADING_DAYS}
     else:
         held=state['candidates'];refresh_prices(held);inv['candidates']=held
         inv['changes']={'date':today.isoformat(),'entered':[],'exited':[],'removedReasons':[],'unchangedCount':len(held),'frozenUntilNextReview':True}
-        inv['selectionReview']={'reviewedToday':False,'reviewDate':state['reviewDate'],'nextReviewAfterTradingDays':REVIEW_TRADING_DAYS-business_days(datetime.fromisoformat(state['reviewDate']).date(),today)}
-    root['investment']=inv
+        inv['selectionReview']={'reviewedToday':False,'reviewDate':state['reviewDate'],'nextReviewAfterTradingDays':max(0,REVIEW_TRADING_DAYS-business_days(datetime.fromisoformat(state['reviewDate']).date(),today))}
+    apply_confirmation(inv,state,today)
+    # Salva anche stato/status aggiornati, così i cicli successivi non azzerano la conferma.
+    state['candidates']=inv.get('candidates') or []
+    save(STATE,state);root['investment']=inv
 
 def italianize(root):
     cache=load(CACHE,{})
     intel=root.get('intelligence') or {}
     for group in list(intel.get('market') or [])+list(intel.get('companies') or []):
         for n in group.get('news') or []:
-            original=n.get('originalTitle') or n.get('title') or ''
-            n['originalTitle']=original;n['title']=translate(original,cache)
+            original=n.get('originalTitle') or n.get('title') or '';n['originalTitle']=original;n['title']=translate(original,cache)
             if n.get('whyItMatters'):n['whyItMatters']=translate(n['whyItMatters'],cache)
         profile=group.get('profile') or {}
         if profile.get('description'):profile['description']=translate(profile['description'],cache)
         if profile.get('industry'):profile['industry']=translate(profile['industry'],cache)
+        if profile.get('country'):profile['country']=COUNTRIES.get(profile['country'],translate(profile['country'],cache))
         group['profile']=profile
         if group.get('sector'):group['sector']=translate(group['sector'],cache)
-    # Traduce anche le schede Investment: nome e ticker restano sempre originali.
     for c in (root.get('investment') or {}).get('candidates') or []:
         p=c.get('companyProfile') or {}
         if p.get('description'):p['description']=translate(p['description'],cache)
         if p.get('industry'):p['industry']=translate(p['industry'],cache)
+        if p.get('country'):p['country']=COUNTRIES.get(p['country'],translate(p['country'],cache))
         c['companyProfile']=p
+        if c.get('country'):c['country']=COUNTRIES.get(c['country'],translate(c['country'],cache))
         if c.get('sector'):c['sector']=translate(c['sector'],cache)
         for n in c.get('news') or []:
-            original=n.get('originalTitle') or n.get('title') or ''
-            n['originalTitle']=original;n['title']=translate(original,cache)
+            original=n.get('originalTitle') or n.get('title') or '';n['originalTitle']=original;n['title']=translate(original,cache)
     save(CACHE,cache)
 
 def impact(event):
@@ -109,8 +138,7 @@ def economic_calendar(root):
     cache=load(CACHE,{})
     for e in events:e['title']=translate(e['title'],cache)
     save(CACHE,cache)
-    candidates=(root.get('investment') or {}).get('candidates') or []
-    assets=[{'name':a.get('name'),'symbol':a.get('symbol')} for a in root.get('assets') or []]
+    candidates=(root.get('investment') or {}).get('candidates') or [];assets=[{'name':a.get('name'),'symbol':a.get('symbol')} for a in root.get('assets') or []]
     save(CAL,{'generatedAt':now.isoformat(),'timezone':'Europe/Rome','events':events,'investmentCandidates':[{'name':c.get('name'),'ticker':c.get('ticker'),'sector':c.get('sector')} for c in candidates],'tradingAssets':assets})
 
 def main():
