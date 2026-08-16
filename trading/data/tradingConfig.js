@@ -21,11 +21,11 @@ window.TRADING_CONFIG = {
   },
   weights: {
     timeframeTrend: {
-      "1M": 18,
-      "1W": 22,
-      "1D": 25,
-      "4H": 20,
-      "1H": 15
+      "1M": 10,
+      "1W": 15,
+      "1D": 30,
+      "4H": 25,
+      "1H": 20
     },
     movingAverages: 25,
     supportResistance: 15,
