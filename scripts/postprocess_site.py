@@ -51,27 +51,64 @@ def refresh_prices(candidates):
             if not h.empty:c['currentPrice']=float(h['Close'].dropna().iloc[-1])
         except Exception:pass
 
+def fetch_spot(symbol):
+    try:
+        r=requests.get(f'https://api.gold-api.com/price/{symbol}',timeout=12)
+        r.raise_for_status();d=r.json()
+        price=d.get('price') or d.get('ask') or d.get('bid')
+        return float(price) if price is not None else None
+    except Exception:return None
+
+def align_precious_metals_to_spot(root):
+    """Yahoo fornisce GC=F/SI=F (futures). Il sito opera invece XAUUSD/XAGUSD spot.
+    Manteniamo la forma delle serie Yahoo ma riscalibriamo tutti i livelli al prezzo spot live.
+    Questo evita che prezzo, zone, ATR e target siano espressi sulla scala del future."""
+    spot_map={'XAUUSD':('XAU','Gold API spot XAU/USD'),'XAGUSD':('XAG','Gold API spot XAG/USD')}
+    for asset in root.get('assets') or []:
+        symbol=asset.get('symbol')
+        if symbol not in spot_map:continue
+        api_symbol,label=spot_map[symbol];spot=fetch_spot(api_symbol)
+        if not spot or spot<=0:continue
+        tfs=asset.get('timeframes') or {}
+        anchor=None
+        for tf in ('1H','4H','1D','1W','1M'):
+            rows=tfs.get(tf) or []
+            if rows:
+                try:anchor=float(rows[-1]['close'])
+                except Exception:anchor=None
+                if anchor and anchor>0:break
+        if not anchor:continue
+        ratio=spot/anchor
+        # Protezione da dati palesemente errati della fonte spot.
+        if ratio<0.70 or ratio>1.30:continue
+        for rows in tfs.values():
+            if not isinstance(rows,list):continue
+            for c in rows:
+                for k in ('open','high','low','close'):
+                    try:c[k]=float(c[k])*ratio
+                    except Exception:pass
+        asset['priceReference']='spot'
+        asset['referencePrice']=spot
+        asset['referenceSource']=label
+        asset['sourceNote']='Serie tecnica Yahoo futures riallineata al prezzo spot live; usare il prezzo del broker come ultimo riferimento esecutivo.'
+        asset['futuresAnchorPrice']=anchor
+        asset['spotAdjustmentRatio']=ratio
+
 def apply_confirmation(inv,state,today):
     confirmations=state.setdefault('confirmations',{})
     for c in inv.get('candidates') or []:
         ticker=c.get('ticker'); raw_status=str(c.get('status') or 'RED').upper()
         rec=confirmations.setdefault(ticker,{'startDate':today.isoformat(),'lastDate':today.isoformat(),'days':0})
         if raw_status=='GREEN':
-            # Conta una sola volta per giorno di Borsa, mai ad ogni aggiornamento prezzi.
             if rec.get('lastDate')!=today.isoformat():
                 last=datetime.fromisoformat(rec.get('lastDate',today.isoformat())).date()
-                rec['days']=int(rec.get('days',0))+business_days(last,today)
-                rec['lastDate']=today.isoformat()
-            elif int(rec.get('days',0))==0:
-                rec['days']=1
-            confirmed=int(rec.get('days',0))>=CONFIRM_TRADING_DAYS
-            c['rawStatus']='GREEN'
-            c['confirmation']={'days':int(rec.get('days',0)),'requiredDays':CONFIRM_TRADING_DAYS,'confirmed':confirmed,'label':'ACQUISTO CONFERMATO' if confirmed else f'IN CONFERMA {int(rec.get("days",0))}/{CONFIRM_TRADING_DAYS} GIORNI'}
-            # Verde definitivo solo dopo persistenza. Prima resta giallo/in osservazione.
-            c['status']='GREEN' if confirmed else 'YELLOW'
+                rec['days']=int(rec.get('days',0))+business_days(last,today);rec['lastDate']=today.isoformat()
+            elif int(rec.get('days',0))==0:rec['days']=1
+            ok=int(rec.get('days',0))>=CONFIRM_TRADING_DAYS
+            c['rawStatus']='GREEN';c['confirmation']={'days':int(rec.get('days',0)),'requiredDays':CONFIRM_TRADING_DAYS,'confirmed':ok,'label':'ACQUISTO CONFERMATO' if ok else f'IN CONFERMA {int(rec.get("days",0))}/{CONFIRM_TRADING_DAYS} GIORNI'}
+            c['status']='GREEN' if ok else 'YELLOW'
         else:
-            confirmations[ticker]={'startDate':today.isoformat(),'lastDate':today.isoformat(),'days':0}
-            c['confirmation']={'days':0,'requiredDays':CONFIRM_TRADING_DAYS,'confirmed':False,'label':'NON CONFERMATO'}
+            confirmations[ticker]={'startDate':today.isoformat(),'lastDate':today.isoformat(),'days':0};c['confirmation']={'days':0,'requiredDays':CONFIRM_TRADING_DAYS,'confirmed':False,'label':'NON CONFERMATO'}
     inv.setdefault('rules',{})['entryConfirmationDays']=CONFIRM_TRADING_DAYS
     inv['confirmedGreenCount']=sum(1 for c in inv.get('candidates') or [] if (c.get('confirmation') or {}).get('confirmed'))
 
@@ -88,10 +125,7 @@ def stabilize(root):
         held=state['candidates'];refresh_prices(held);inv['candidates']=held
         inv['changes']={'date':today.isoformat(),'entered':[],'exited':[],'removedReasons':[],'unchangedCount':len(held),'frozenUntilNextReview':True}
         inv['selectionReview']={'reviewedToday':False,'reviewDate':state['reviewDate'],'nextReviewAfterTradingDays':max(0,REVIEW_TRADING_DAYS-business_days(datetime.fromisoformat(state['reviewDate']).date(),today))}
-    apply_confirmation(inv,state,today)
-    # Salva anche stato/status aggiornati, così i cicli successivi non azzerano la conferma.
-    state['candidates']=inv.get('candidates') or []
-    save(STATE,state);root['investment']=inv
+    apply_confirmation(inv,state,today);state['candidates']=inv.get('candidates') or [];save(STATE,state);root['investment']=inv
 
 def italianize(root):
     cache=load(CACHE,{})
@@ -144,5 +178,5 @@ def economic_calendar(root):
 def main():
     root=load(DATA,{})
     if not root:return 1
-    stabilize(root);italianize(root);economic_calendar(root);save(DATA,root);return 0
+    align_precious_metals_to_spot(root);stabilize(root);italianize(root);economic_calendar(root);save(DATA,root);return 0
 if __name__=='__main__':raise SystemExit(main())
