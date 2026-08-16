@@ -33,3 +33,10 @@ function mountInvestmentTradingView(items){
     host.appendChild(s);
   });
 }
+async function loadInvestmentTradingView(){
+  try{
+    const r=await fetch(`../data/market-data.json?tv=${Date.now()}`,{cache:'no-store'});if(!r.ok)throw Error(`HTTP ${r.status}`);
+    const d=await r.json();mountInvestmentTradingView((d.investment||{}).candidates||[]);
+  }catch(e){const root=document.getElementById('investmentTradingView');if(root)root.innerHTML='<p class="tv-invest-error">Anteprime TradingView temporaneamente non disponibili.</p>'}
+}
+loadInvestmentTradingView();
