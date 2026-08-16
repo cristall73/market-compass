@@ -1,330 +1,86 @@
 (() => {
   "use strict";
 
-  const avg = values => values.length
-    ? values.reduce((sum, value) => sum + value, 0) / values.length
-    : null;
+  const avg=v=>v.length?v.reduce((a,b)=>a+b,0)/v.length:null;
+  const emaSeries=(v,p)=>{if(!v?.length||v.length<p)return[];const m=2/(p+1),o=[];let x=avg(v.slice(0,p));for(let i=0;i<p-1;i++)o.push(null);o.push(x);for(let i=p;i<v.length;i++){x=(v[i]-x)*m+x;o.push(x)}return o};
+  const ema=(v,p)=>{const s=emaSeries(v,p);return s.length?s.at(-1):null};
+  const atr=(c,p=14)=>{if(!c?.length||c.length<p+1)return null;const tr=c.map((x,i)=>!i?x.high-x.low:Math.max(x.high-x.low,Math.abs(x.high-c[i-1].close),Math.abs(x.low-c[i-1].close)));return avg(tr.slice(-p))};
+  const rsi=(v,p=14)=>{if(!v?.length||v.length<p+1)return null;let g=0,l=0;for(let i=v.length-p;i<v.length;i++){const d=v[i]-v[i-1];d>=0?g+=d:l+=Math.abs(d)}if(l===0)return 100;const rs=(g/p)/(l/p);return 100-(100/(1+rs))};
+  const stochastic=(c,p=14)=>{if(!c?.length||c.length<p)return null;const w=c.slice(-p),h=Math.max(...w.map(x=>x.high)),l=Math.min(...w.map(x=>x.low)),cl=c.at(-1).close;return h===l?50:(cl-l)/(h-l)*100};
+  const nadarayaWatson=(v,b=8)=>{if(!v?.length||v.length<3)return null;const t=v.length-1;let n=0,d=0;v.forEach((x,i)=>{const z=(t-i)/b,w=Math.exp(-.5*z*z);n+=w*x;d+=w});return d?n/d:null};
+  const recentSwing=(c,n=20)=>{const w=(c||[]).slice(-n);if(w.length<3)return null;const low=Math.min(...w.map(x=>x.low)),high=Math.max(...w.map(x=>x.high));return{low,high,midpoint:low+(high-low)*.5}};
 
-  function sma(values, period) {
-    if (!Array.isArray(values) || values.length < period) return null;
-    return avg(values.slice(-period));
-  }
-
-  function emaSeries(values, period) {
-    if (!Array.isArray(values) || values.length < period) return [];
-    const multiplier = 2 / (period + 1);
-    const output = [];
-    let previous = avg(values.slice(0, period));
-    for (let i = 0; i < period - 1; i++) output.push(null);
-    output.push(previous);
-    for (let i = period; i < values.length; i++) {
-      previous = (values[i] - previous) * multiplier + previous;
-      output.push(previous);
+  function pivots(candles,lookback=80){
+    const c=(candles||[]).slice(-lookback),out=[];
+    for(let i=2;i<c.length-2;i++){
+      if(c[i].high>c[i-1].high&&c[i].high>c[i-2].high&&c[i].high>=c[i+1].high&&c[i].high>=c[i+2].high)out.push({type:"H",value:c[i].high,i});
+      if(c[i].low<c[i-1].low&&c[i].low<c[i-2].low&&c[i].low<=c[i+1].low&&c[i].low<=c[i+2].low)out.push({type:"L",value:c[i].low,i});
     }
-    return output;
+    return out;
   }
 
-  function ema(values, period) {
-    const series = emaSeries(values, period);
-    return series.length ? series.at(-1) : null;
-  }
-
-  function trueRanges(candles) {
-    return candles.map((candle, index) => {
-      if (index === 0) return candle.high - candle.low;
-      const previousClose = candles[index - 1].close;
-      return Math.max(
-        candle.high - candle.low,
-        Math.abs(candle.high - previousClose),
-        Math.abs(candle.low - previousClose)
-      );
-    });
-  }
-
-  function atr(candles, period = 14) {
-    if (!Array.isArray(candles) || candles.length < period + 1) return null;
-    return avg(trueRanges(candles).slice(-period));
-  }
-
-  function rsi(values, period = 14) {
-    if (!Array.isArray(values) || values.length < period + 1) return null;
-    let gains = 0;
-    let losses = 0;
-    for (let i = values.length - period; i < values.length; i++) {
-      const change = values[i] - values[i - 1];
-      if (change >= 0) gains += change;
-      else losses += Math.abs(change);
+  function dowStructure(c){
+    const p=pivots(c,100),h=p.filter(x=>x.type==="H").slice(-3),l=p.filter(x=>x.type==="L").slice(-3);
+    if(h.length>=2&&l.length>=2){
+      const hh=h.at(-1).value>h.at(-2).value,ll=l.at(-1).value>l.at(-2).value;
+      const lh=h.at(-1).value<h.at(-2).value,low=l.at(-1).value<l.at(-2).value;
+      if(hh&&ll)return{direction:"LONG",score:1,label:"Dow: massimi e minimi crescenti"};
+      if(lh&&low)return{direction:"SHORT",score:-1,label:"Dow: massimi e minimi decrescenti"};
     }
-    if (losses === 0) return 100;
-    const rs = (gains / period) / (losses / period);
-    return 100 - (100 / (1 + rs));
+    return{direction:"WAIT",score:0,label:"Dow: struttura non confermata"};
   }
 
-  function stochastic(candles, period = 14) {
-    if (!Array.isArray(candles) || candles.length < period) return null;
-    const window = candles.slice(-period);
-    const highest = Math.max(...window.map(c => c.high));
-    const lowest = Math.min(...window.map(c => c.low));
-    const close = candles.at(-1).close;
-    if (highest === lowest) return 50;
-    return ((close - lowest) / (highest - lowest)) * 100;
+  function candlestickPatterns(c){
+    if(!c?.length||c.length<3)return[];const x=c.at(-1),p=c.at(-2),range=Math.max(.000001,x.high-x.low),body=Math.abs(x.close-x.open),upper=x.high-Math.max(x.open,x.close),lower=Math.min(x.open,x.close)-x.low;const out=[];
+    if(body/range<=.25&&upper/range>=.55)out.push({name:"Shooting star",bias:-1});
+    if(body/range<=.35&&lower/range>=.55)out.push({name:"Hammer",bias:1});
+    if(body/range<=.18&&upper/range>.25&&lower/range>.25)out.push({name:"Spinning top",bias:0});
+    if(x.close>x.open&&p.close<p.open&&x.open<=p.close&&x.close>=p.open)out.push({name:"Bullish engulfing",bias:1});
+    if(x.close<x.open&&p.close>p.open&&x.open>=p.close&&x.close<=p.open)out.push({name:"Bearish engulfing",bias:-1});
+    return out;
   }
 
-  function nadarayaWatson(values, bandwidth = 8) {
-    if (!Array.isArray(values) || values.length < 3) return null;
-    const target = values.length - 1;
-    let numerator = 0;
-    let denominator = 0;
-    values.forEach((value, index) => {
-      const distance = (target - index) / bandwidth;
-      const weight = Math.exp(-0.5 * distance * distance);
-      numerator += weight * value;
-      denominator += weight;
-    });
-    return denominator ? numerator / denominator : null;
+  function classicalPatterns(c){
+    const p=pivots(c,120),h=p.filter(x=>x.type==="H"),l=p.filter(x=>x.type==="L"),out=[];
+    const close=(a,b,t=.018)=>Math.abs(a-b)/((a+b)/2)<=t;
+    if(h.length>=2&&close(h.at(-1).value,h.at(-2).value))out.push({name:"Doppio massimo",bias:-1});
+    if(l.length>=2&&close(l.at(-1).value,l.at(-2).value))out.push({name:"Doppio minimo",bias:1});
+    if(h.length>=3){const a=h.slice(-3);if(a[1].value>a[0].value&&a[1].value>a[2].value&&close(a[0].value,a[2].value,.03))out.push({name:"Testa e spalle",bias:-1})}
+    if(l.length>=3){const a=l.slice(-3);if(a[1].value<a[0].value&&a[1].value<a[2].value&&close(a[0].value,a[2].value,.03))out.push({name:"Testa e spalle inverso",bias:1})}
+    const w=(c||[]).slice(-40);if(w.length>=20){const first=w.slice(0,20),last=w.slice(-10),hi1=Math.max(...first.map(x=>x.high)),lo1=Math.min(...first.map(x=>x.low)),hi2=Math.max(...last.map(x=>x.high)),lo2=Math.min(...last.map(x=>x.low));if((hi2-lo2)<(hi1-lo1)*.55)out.push({name:"Triangolo / compressione",bias:0});const move=(w[20]?.close-w[0].close)/(w[0].close||1);if(Math.abs(move)>.05&&(hi2-lo2)<Math.abs(w[20].close-w[0].close)*.45)out.push({name:move>0?"Bandiera rialzista":"Bandiera ribassista",bias:move>0?1:-1})}
+    return out;
   }
 
-  function recentSwing(candles, lookback = 20) {
-    const window = candles.slice(-lookback);
-    if (window.length < 3) return null;
-    const low = Math.min(...window.map(c => c.low));
-    const high = Math.max(...window.map(c => c.high));
-    return { low, high, midpoint: low + (high - low) * 0.5 };
+  function trendScore(c){
+    const v=c.map(x=>x.close),cur=v.at(-1),m5=ema(v,5),m10=ema(v,10),m50=ema(v,50),m60=ema(v,60),m200=ema(v,200);let s=0;
+    [[m5,1],[m10,1],[m50,1],[m60,1],[m200,2]].forEach(([m,w])=>{if(m!=null)s+=cur>m?w:-w});if(m5!=null&&m10!=null)s+=m5>m10?1:-1;if(m50!=null&&m200!=null)s+=m50>m200?2:-2;
+    return{score:Math.max(-1,Math.min(1,s/10)),averages:{ma5:m5,ma10:m10,ma50:m50,ma60:m60,ma200:m200}};
   }
 
-  function detectDoubleTopBottom(candles, tolerancePercent = 1.2) {
-    if (!Array.isArray(candles) || candles.length < 12) return { type: "none", score: 0 };
-    const points = candles.slice(-30);
-    const highs = points.map((c, i) => ({ value: c.high, i }))
-      .sort((a, b) => b.value - a.value).slice(0, 4).sort((a, b) => a.i - b.i);
-    const lows = points.map((c, i) => ({ value: c.low, i }))
-      .sort((a, b) => a.value - b.value).slice(0, 4).sort((a, b) => a.i - b.i);
-
-    const comparable = (a, b) =>
-      Math.abs(a.value - b.value) / ((a.value + b.value) / 2) * 100 <= tolerancePercent
-      && Math.abs(a.i - b.i) >= 4;
-
-    for (let i = 0; i < highs.length - 1; i++) {
-      for (let j = i + 1; j < highs.length; j++) {
-        if (comparable(highs[i], highs[j])) return { type: "double-top", score: -1 };
-      }
-    }
-    for (let i = 0; i < lows.length - 1; i++) {
-      for (let j = i + 1; j < lows.length; j++) {
-        if (comparable(lows[i], lows[j])) return { type: "double-bottom", score: 1 };
-      }
-    }
-    return { type: "none", score: 0 };
+  function analyzeTimeframe(c,config){
+    if(!Array.isArray(c)||c.length<20)return{valid:false,score:0,reasons:["Dati insufficienti"]};
+    const closes=c.map(x=>x.close),current=closes.at(-1),trend=trendScore(c),a=atr(c,config.indicators.atrPeriod),r=rsi(closes,config.indicators.rsiPeriod),st=stochastic(c,config.indicators.stochasticPeriod),nw=nadarayaWatson(closes,config.indicators.nadarayaBandwidth),swing=recentSwing(c),dow=dowStructure(c),candles=candlestickPatterns(c),charts=classicalPatterns(c);
+    let momentum=0;if(r!=null){if(r>=55&&r<=72)momentum+=.6;else if(r<=45&&r>=28)momentum-=.6;else if(r>78)momentum-=.25;else if(r<22)momentum+=.25}if(st!=null){if(st>55&&st<85)momentum+=.4;else if(st<45&&st>15)momentum-=.4}momentum=Math.max(-1,Math.min(1,momentum));
+    let retr=0,dist=null;if(swing&&a){dist=Math.abs(current-swing.midpoint);if(dist<=a*config.entry.toleranceAtr)retr=trend.score>=0?1:-1}
+    const candleBias=candles.reduce((z,x)=>z+x.bias,0),chartBias=charts.reduce((z,x)=>z+x.bias,0);const patternScore=Math.max(-1,Math.min(1,(candleBias*.45+chartBias*.35+dow.score*.7)));
+    const raw=trend.score*.30+momentum*.16+(nw==null?0:current>nw?1:-1)*.12+patternScore*.22+retr*.20;
+    const reasons=[trend.score>.25?"Trend rialzista":trend.score<-.25?"Trend ribassista":"Trend neutrale",dow.label];if(nw!=null)reasons.push(current>nw?"Prezzo sopra Nadaraya":"Prezzo sotto Nadaraya");if(retr)reasons.push("Ritracciamento vicino al 50%");candles.forEach(x=>reasons.push(x.name));charts.forEach(x=>reasons.push(x.name));
+    return{valid:true,score:Math.round(raw*100),current,atr:a,rsi:r,stochastic:st,nadaraya:nw,swing,retracementDistance:dist,movingAverages:trend.averages,patterns:[...candles,...charts].map(x=>x.name),candlestickPatterns:candles,dow,chartPatterns:charts,reasons};
   }
 
-  function detectHeadAndShoulders(candles, tolerancePercent = 3) {
-    if (!Array.isArray(candles) || candles.length < 15) return { type: "none", score: 0 };
-    const points = candles.slice(-25);
-    const pivots = [];
-    for (let i = 2; i < points.length - 2; i++) {
-      const current = points[i];
-      const isHigh = current.high > points[i-1].high && current.high > points[i-2].high
-        && current.high > points[i+1].high && current.high > points[i+2].high;
-      const isLow = current.low < points[i-1].low && current.low < points[i-2].low
-        && current.low < points[i+1].low && current.low < points[i+2].low;
-      if (isHigh) pivots.push({ type: "high", value: current.high, i });
-      if (isLow) pivots.push({ type: "low", value: current.low, i });
-    }
-    const highs = pivots.filter(p => p.type === "high").slice(-3);
-    if (highs.length === 3) {
-      const [left, head, right] = highs;
-      const shouldersClose = Math.abs(left.value - right.value) / ((left.value + right.value) / 2) * 100 <= tolerancePercent;
-      if (head.value > left.value && head.value > right.value && shouldersClose) {
-        return { type: "head-and-shoulders", score: -1 };
-      }
-    }
-    const lows = pivots.filter(p => p.type === "low").slice(-3);
-    if (lows.length === 3) {
-      const [left, head, right] = lows;
-      const shouldersClose = Math.abs(left.value - right.value) / ((left.value + right.value) / 2) * 100 <= tolerancePercent;
-      if (head.value < left.value && head.value < right.value && shouldersClose) {
-        return { type: "inverse-head-and-shoulders", score: 1 };
-      }
-    }
-    return { type: "none", score: 0 };
+  const dir=s=>s>=25?"LONG":s<=-25?"SHORT":"WAIT";
+  function analyzeMarket(tf,custom={}){
+    const base=window.TRADING_CONFIG,config={...base,...custom,indicators:{...base.indicators,...(custom.indicators||{})},entry:{...base.entry,...(custom.entry||{})}};const details={};let ws=0,tw=0;
+    config.timeframes.forEach(t=>{const r=analyzeTimeframe(tf[t],config);details[t]=r;if(r.valid){const w=config.weights.timeframeTrend[t]||0;ws+=r.score*w;tw+=w}});const score=tw?Math.round(ws/tw):0;
+    const d={};config.timeframes.forEach(t=>d[t]=dir(details[t]?.score||0));
+    const longTermLong=[d["1M"],d["1W"]].every(x=>x!=="SHORT")&&(d["1M"]==="LONG"||d["1W"]==="LONG");
+    const longTermShort=[d["1M"],d["1W"]].every(x=>x!=="LONG")&&(d["1M"]==="SHORT"||d["1W"]==="SHORT");
+    const fastLong=d["1D"]==="LONG"&&d["4H"]==="LONG"&&d["1H"]==="LONG";
+    const fastShort=d["1D"]==="SHORT"&&d["4H"]==="SHORT"&&d["1H"]==="SHORT";
+    let direction="WAIT";if(longTermLong&&fastLong&&score>=20)direction="LONG";else if(longTermShort&&fastShort&&score<=-20)direction="SHORT";
+    const vals=Object.values(d),lc=vals.filter(x=>x==="LONG").length,sc=vals.filter(x=>x==="SHORT").length,wc=vals.filter(x=>x==="WAIT").length,alignment=Math.round(Math.max(lc,sc,wc)/config.timeframes.length*100),confidence=Math.min(100,Math.round(Math.abs(score)*.72+alignment*.28));
+    return{direction,score,confidence,alignment,consensus:{long:lc,short:sc,wait:wc},details,timeframeDirections:d,fastTradeReady:direction!=="WAIT",rules:{entryRetracement:"50%",timeframes:config.timeframes,movingAverages:config.movingAverages,logic:"1M/1W trend di fondo; 1D/4H/1H devono essere allineati per un ingresso veloce"}};
   }
 
-  function trendScore(candles) {
-    const closes = candles.map(c => c.close);
-    const current = closes.at(-1);
-    const ma5 = ema(closes, 5);
-    const ma10 = ema(closes, 10);
-    const ma50 = ema(closes, 50);
-    const ma60 = ema(closes, 60);
-    const ma200 = ema(closes, 200);
-
-    const available = [ma5, ma10, ma50, ma60, ma200].filter(v => v !== null);
-    if (!available.length) return { score: 0, averages: { ma5, ma10, ma50, ma60, ma200 } };
-
-    let score = 0;
-    if (ma5 !== null) score += current > ma5 ? 1 : -1;
-    if (ma10 !== null) score += current > ma10 ? 1 : -1;
-    if (ma50 !== null) score += current > ma50 ? 1 : -1;
-    if (ma60 !== null) score += current > ma60 ? 1 : -1;
-    if (ma200 !== null) score += current > ma200 ? 2 : -2;
-    if (ma5 !== null && ma10 !== null) score += ma5 > ma10 ? 1 : -1;
-    if (ma50 !== null && ma200 !== null) score += ma50 > ma200 ? 2 : -2;
-
-    const max = 10;
-    return {
-      score: Math.max(-1, Math.min(1, score / max)),
-      averages: { ma5, ma10, ma50, ma60, ma200 }
-    };
-  }
-
-  function analyzeTimeframe(candles, config) {
-    if (!Array.isArray(candles) || candles.length < 20) {
-      return { valid: false, score: 0, reasons: ["Dati insufficienti"] };
-    }
-
-    const closes = candles.map(c => c.close);
-    const current = closes.at(-1);
-    const trend = trendScore(candles);
-    const currentAtr = atr(candles, config.indicators.atrPeriod);
-    const currentRsi = rsi(closes, config.indicators.rsiPeriod);
-    const currentStoch = stochastic(candles, config.indicators.stochasticPeriod);
-    const nw = nadarayaWatson(closes, config.indicators.nadarayaBandwidth);
-    const swing = recentSwing(candles);
-    const doublePattern = detectDoubleTopBottom(candles);
-    const hsPattern = detectHeadAndShoulders(candles);
-
-    let momentum = 0;
-    if (currentRsi !== null) {
-      if (currentRsi >= 55 && currentRsi <= 72) momentum += 0.6;
-      else if (currentRsi <= 45 && currentRsi >= 28) momentum -= 0.6;
-      else if (currentRsi > 78) momentum -= 0.25;
-      else if (currentRsi < 22) momentum += 0.25;
-    }
-    if (currentStoch !== null) {
-      if (currentStoch > 55 && currentStoch < 85) momentum += 0.4;
-      else if (currentStoch < 45 && currentStoch > 15) momentum -= 0.4;
-    }
-    momentum = Math.max(-1, Math.min(1, momentum));
-
-    const nadarayaScore = nw === null ? 0 : current > nw ? 1 : -1;
-    const patternScore = Math.max(-1, Math.min(1, doublePattern.score + hsPattern.score));
-
-    let retracementScore = 0;
-    let retracementDistance = null;
-    if (swing && currentAtr) {
-      retracementDistance = Math.abs(current - swing.midpoint);
-      const tolerance = currentAtr * config.entry.toleranceAtr;
-      if (retracementDistance <= tolerance) {
-        retracementScore = trend.score >= 0 ? 1 : -1;
-      }
-    }
-
-    const raw = (
-      trend.score * 0.35 +
-      momentum * 0.20 +
-      nadarayaScore * 0.15 +
-      patternScore * 0.10 +
-      retracementScore * 0.20
-    );
-
-    const reasons = [];
-    reasons.push(trend.score > 0.25 ? "Trend rialzista" : trend.score < -0.25 ? "Trend ribassista" : "Trend neutrale");
-    if (nw !== null) reasons.push(current > nw ? "Prezzo sopra Nadaraya" : "Prezzo sotto Nadaraya");
-    if (retracementScore !== 0) reasons.push("Prezzo vicino al ritracciamento del 50%");
-    if (doublePattern.type !== "none") reasons.push(doublePattern.type);
-    if (hsPattern.type !== "none") reasons.push(hsPattern.type);
-
-    return {
-      valid: true,
-      score: Math.round(raw * 100),
-      current,
-      atr: currentAtr,
-      rsi: currentRsi,
-      stochastic: currentStoch,
-      nadaraya: nw,
-      swing,
-      retracementDistance,
-      movingAverages: trend.averages,
-      patterns: [doublePattern.type, hsPattern.type].filter(x => x !== "none"),
-      reasons
-    };
-  }
-
-  function analyzeMarket(timeframeCandles, customConfig = {}) {
-    const config = {
-      ...window.TRADING_CONFIG,
-      ...customConfig,
-      indicators: { ...window.TRADING_CONFIG.indicators, ...(customConfig.indicators || {}) },
-      entry: { ...window.TRADING_CONFIG.entry, ...(customConfig.entry || {}) }
-    };
-
-    const details = {};
-    let weightedScore = 0;
-    let totalWeight = 0;
-
-    for (const timeframe of config.timeframes) {
-      const result = analyzeTimeframe(timeframeCandles[timeframe], config);
-      details[timeframe] = result;
-      if (result.valid) {
-        const weight = config.weights.timeframeTrend[timeframe] || 0;
-        weightedScore += result.score * weight;
-        totalWeight += weight;
-      }
-    }
-
-    const score = totalWeight ? Math.round(weightedScore / totalWeight) : 0;
-
-    const timeframeDirections = config.timeframes.map(timeframe => {
-      const timeframeScore = details[timeframe]?.score ?? 0;
-      if (timeframeScore >= 25) return "LONG";
-      if (timeframeScore <= -25) return "SHORT";
-      return "WAIT";
-    });
-
-    const longCount = timeframeDirections.filter(value => value === "LONG").length;
-    const shortCount = timeframeDirections.filter(value => value === "SHORT").length;
-    const waitCount = timeframeDirections.filter(value => value === "WAIT").length;
-
-    let direction = "WAIT";
-    if (
-      score >= config.thresholds.long ||
-      (score >= 20 && longCount >= 3 && longCount > shortCount)
-    ) {
-      direction = "LONG";
-    } else if (
-      score <= config.thresholds.short ||
-      (score <= -20 && shortCount >= 3 && shortCount > longCount)
-    ) {
-      direction = "SHORT";
-    }
-
-    const alignment = Math.round(
-      (Math.max(longCount, shortCount, waitCount) / config.timeframes.length) * 100
-    );
-    const strength = Math.min(
-      100,
-      Math.round(Math.abs(score) * 0.72 + alignment * 0.28)
-    );
-
-    return {
-      direction,
-      score,
-      confidence: strength,
-      alignment,
-      consensus: { long: longCount, short: shortCount, wait: waitCount },
-      details,
-      rules: {
-        entryRetracement: "50%",
-        timeframes: config.timeframes,
-        movingAverages: config.movingAverages
-      }
-    };
-  }
-
-  window.TradingEngine = {
-    analyzeMarket,
-    analyzeTimeframe,
-    indicators: { sma, ema, atr, rsi, stochastic, nadarayaWatson },
-    patterns: { detectDoubleTopBottom, detectHeadAndShoulders }
-  };
+  window.TradingEngine={analyzeMarket,analyzeTimeframe,indicators:{ema,atr,rsi,stochastic,nadarayaWatson},patterns:{candlestickPatterns,classicalPatterns,dowStructure}};
 })();
