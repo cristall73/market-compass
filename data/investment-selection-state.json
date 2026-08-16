@@ -29,7 +29,7 @@
       "rawScore": 8.28848884751166,
       "finalScore": 8.28848884751166,
       "stableScore": 8.28848884751166,
-      "status": "GREEN",
+      "status": "YELLOW",
       "watchZoneLow": 1058.6683029174806,
       "watchZoneHigh": 1131.4707077026367,
       "entryZoneLow": 946.4312622070313,
@@ -133,7 +133,14 @@
       },
       "rank": 1,
       "rankChange": null,
-      "isNewEntry": true
+      "isNewEntry": true,
+      "rawStatus": "GREEN",
+      "confirmation": {
+        "days": 1,
+        "requiredDays": 5,
+        "confirmed": false,
+        "label": "IN CONFERMA 1/5 GIORNI"
+      }
     },
     {
       "ticker": "AVGO",
@@ -163,7 +170,7 @@
       "rawScore": 7.8514801775930145,
       "finalScore": 7.851480177593014,
       "stableScore": 7.851480177593014,
-      "status": "GREEN",
+      "status": "YELLOW",
       "watchZoneLow": 419.5058974456787,
       "watchZoneHigh": 448.354440536499,
       "entryZoneLow": 375.0310601806641,
@@ -268,7 +275,14 @@
       },
       "rank": 2,
       "rankChange": null,
-      "isNewEntry": true
+      "isNewEntry": true,
+      "rawStatus": "GREEN",
+      "confirmation": {
+        "days": 1,
+        "requiredDays": 5,
+        "confirmed": false,
+        "label": "IN CONFERMA 1/5 GIORNI"
+      }
     },
     {
       "ticker": "ECL",
@@ -400,7 +414,13 @@
       },
       "rank": 3,
       "rankChange": null,
-      "isNewEntry": true
+      "isNewEntry": true,
+      "confirmation": {
+        "days": 0,
+        "requiredDays": 5,
+        "confirmed": false,
+        "label": "NON CONFERMATO"
+      }
     },
     {
       "ticker": "BP.L",
@@ -430,7 +450,7 @@
       "rawScore": 7.492196137370327,
       "finalScore": 7.4921961373703265,
       "stableScore": 7.4921961373703265,
-      "status": "GREEN",
+      "status": "YELLOW",
       "watchZoneLow": 553.1649587365539,
       "watchZoneHigh": 578.0906916197198,
       "entryZoneLow": 508.76599703841487,
@@ -535,7 +555,14 @@
       },
       "rank": 4,
       "rankChange": null,
-      "isNewEntry": true
+      "isNewEntry": true,
+      "rawStatus": "GREEN",
+      "confirmation": {
+        "days": 1,
+        "requiredDays": 5,
+        "confirmed": false,
+        "label": "IN CONFERMA 1/5 GIORNI"
+      }
     },
     {
       "ticker": "GOOGL",
@@ -668,7 +695,40 @@
       },
       "rank": 5,
       "rankChange": null,
-      "isNewEntry": true
+      "isNewEntry": true,
+      "confirmation": {
+        "days": 0,
+        "requiredDays": 5,
+        "confirmed": false,
+        "label": "NON CONFERMATO"
+      }
     }
-  ]
+  ],
+  "confirmations": {
+    "MU": {
+      "startDate": "2026-08-16",
+      "lastDate": "2026-08-16",
+      "days": 1
+    },
+    "AVGO": {
+      "startDate": "2026-08-16",
+      "lastDate": "2026-08-16",
+      "days": 1
+    },
+    "ECL": {
+      "startDate": "2026-08-16",
+      "lastDate": "2026-08-16",
+      "days": 0
+    },
+    "BP.L": {
+      "startDate": "2026-08-16",
+      "lastDate": "2026-08-16",
+      "days": 1
+    },
+    "GOOGL": {
+      "startDate": "2026-08-16",
+      "lastDate": "2026-08-16",
+      "days": 0
+    }
+  }
 }
