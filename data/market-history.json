@@ -1,10 +1,10 @@
 {
   "schemaVersion": 10,
-  "updatedAt": "2026-08-16T15:52:24.408136+00:00",
+  "updatedAt": "2026-08-16T16:21:01.965965+00:00",
   "snapshots": [
     {
       "date": "2026-08-16",
-      "generatedAt": "2026-08-16T15:52:24.408136+00:00",
+      "generatedAt": "2026-08-16T16:21:01.965965+00:00",
       "top5": [
         {
           "ticker": "MU",
@@ -28,18 +28,18 @@
           "status": "RED"
         },
         {
-          "ticker": "BP.L",
+          "ticker": "GOOGL",
           "rank": 4,
+          "score": 7.5570419632237495,
+          "price": 345.8999938964844,
+          "status": "RED"
+        },
+        {
+          "ticker": "BP.L",
+          "rank": 5,
           "score": 7.527196137370327,
           "price": 522.9000244140625,
           "status": "GREEN"
-        },
-        {
-          "ticker": "GOOGL",
-          "rank": 5,
-          "score": 7.46604196322375,
-          "price": 345.8999938964844,
-          "status": "RED"
         }
       ],
       "universe": [
@@ -71,22 +71,22 @@
           "price": 276.1099853515625
         },
         {
-          "ticker": "BP.L",
+          "ticker": "GOOGL",
           "rank": 4,
+          "rawScore": 7.52204196322375,
+          "stableScore": 7.5570419632237495,
+          "status": "RED",
+          "inTop5": true,
+          "price": 345.8999938964844
+        },
+        {
+          "ticker": "BP.L",
+          "rank": 5,
           "rawScore": 7.492196137370327,
           "stableScore": 7.527196137370327,
           "status": "GREEN",
           "inTop5": true,
           "price": 522.9000244140625
-        },
-        {
-          "ticker": "GOOGL",
-          "rank": 5,
-          "rawScore": 7.52204196322375,
-          "stableScore": 7.46604196322375,
-          "status": "RED",
-          "inTop5": true,
-          "price": 345.8999938964844
         },
         {
           "ticker": "RIO",
@@ -128,7 +128,7 @@
           "ticker": "MDT",
           "rank": 10,
           "rawScore": 7.242640968481765,
-          "stableScore": 7.242642646196699,
+          "stableScore": 7.242640968481764,
           "status": "YELLOW",
           "inTop5": false,
           "price": 91.2699966430664
