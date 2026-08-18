@@ -39,4 +39,25 @@ async function loadInvestmentTradingView(){
     const d=await r.json();mountInvestmentTradingView((d.investment||{}).candidates||[]);
   }catch(e){const root=document.getElementById('investmentTradingView');if(root)root.innerHTML='<p class="tv-invest-error">Anteprime TradingView temporaneamente non disponibili.</p>'}
 }
-loadInvestmentTradingView();
+
+// I widget TradingView vengono caricati solo quando l'utente arriva davvero vicino alla sezione.
+// In questo modo gli iframe non possono prendere il focus durante il caricamento iniziale
+// e trascinare automaticamente la pagina verso il fondo.
+(function lazyTradingView(){
+  const section=document.querySelector('.tv-invest-section');
+  const root=document.getElementById('investmentTradingView');
+  if(!section||!root)return;
+  root.innerHTML='<div class="loading">I grafici TradingView verranno caricati quando arrivi a questa sezione…</div>';
+  let started=false;
+  const start=()=>{if(started)return;started=true;loadInvestmentTradingView();};
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(entries=>{
+      if(entries.some(e=>e.isIntersecting)){io.disconnect();start();}
+    },{rootMargin:'350px 0px'});
+    io.observe(section);
+  }else{
+    const onScroll=()=>{const r=section.getBoundingClientRect();if(r.top<window.innerHeight+350){window.removeEventListener('scroll',onScroll);start();}};
+    window.addEventListener('scroll',onScroll,{passive:true});
+    onScroll();
+  }
+})();
