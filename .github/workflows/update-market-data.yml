@@ -26,6 +26,10 @@ jobs:
         run: |
           python scripts/update_market_data.py
 
+      - name: Controllo freschezza intraday
+        run: |
+          python scripts/refresh_trading_intraday.py
+
       - name: Update ETF e PAC
         run: |
           python scripts/update_etf_data.py
