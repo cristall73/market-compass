@@ -1854,3 +1854,7 @@ footer { padding: 20px; text-align: center; border-top: 1px solid var(--line); }
 .traffic-yellow .popup-traffic-symbol {
   color: #07111f;
 }
+
+.module-nav{display:flex;gap:8px;align-items:center;padding:10px 3.2%;border-bottom:1px solid var(--line);background:#081524;position:sticky;top:0;z-index:50}
+.module-nav a{padding:8px 12px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:.78rem;font-weight:800}
+.module-nav a.active{background:rgba(79,140,255,.15);color:#dce8ff}
