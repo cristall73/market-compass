@@ -24,6 +24,15 @@
   close.addEventListener('pointerup',closeDetail);
   dialog.addEventListener('click',function(e){if(e.target===dialog)closeDetail(e);});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dialog.open)closeDetail(e);});
+
+  if(!location.hash){
+    let userMoved=false;
+    const mark=()=>{userMoved=true;};
+    ['wheel','touchstart','pointerdown','keydown'].forEach(ev=>window.addEventListener(ev,mark,{once:true,passive:true}));
+    window.scrollTo(0,0);
+    const guard=setInterval(()=>{if(userMoved){clearInterval(guard);return;}if(window.scrollY>40)window.scrollTo(0,0);},180);
+    setTimeout(()=>clearInterval(guard),3200);
+  }
 })();
 </script>
 </body></html>
