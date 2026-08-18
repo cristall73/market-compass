@@ -97,7 +97,7 @@ def align_precious_metals_to_spot(root):
 def apply_confirmation(inv,state,today):
     confirmations=state.setdefault('confirmations',{})
     for c in inv.get('candidates') or []:
-        ticker=c.get('ticker'); raw_status=str(c.get('status') or 'RED').upper()
+        ticker=c.get('ticker'); raw_status=str(c.get('rawStatus') or c.get('status') or 'RED').upper()
         rec=confirmations.setdefault(ticker,{'startDate':today.isoformat(),'lastDate':today.isoformat(),'days':0})
         if raw_status=='GREEN':
             if rec.get('lastDate')!=today.isoformat():
