@@ -24,6 +24,14 @@ def cagr(s,years):
  days=(s.index[-1]-s.index[0]).days/365.25
  if days<years*.7:return None
  return ((float(s.iloc[-1])/float(s.iloc[0]))**(1/days)-1)*100
+def quote_meta(ticker,tv):
+ currency=None
+ try:
+  fi=yf.Ticker(ticker).fast_info
+  currency=fi.get('currency') if hasattr(fi,'get') else getattr(fi,'currency',None)
+ except Exception: pass
+ exchange='Xetra' if tv.startswith('XETR:') else 'London Stock Exchange' if tv.startswith('LSE:') else tv.split(':')[0]
+ return currency,exchange
 def analyse(t):
  ticker,name,cat,isin,tv,ter,repl,dist=t;h=yf.download(ticker,period='10y',interval='1d',auto_adjust=True,progress=False)
  if h.empty:return None
@@ -38,7 +46,8 @@ def analyse(t):
  status='GREEN' if score>=7.2 else 'YELLOW' if score>=5.8 else 'RED';verdict='ADATTO AL PAC' if status=='GREEN' else 'ADATTO, MA DA VALUTARE' if status=='YELLOW' else 'NON PREFERITO PER IL PAC';action='Continua la rata ordinaria.'
  if current<-15:action='Drawdown significativo: valuta un incremento solo se coerente con il piano e il rischio.'
  elif current>-3 and trend>8:action='Vicino ai massimi: continua il PAC senza aumentare la rata per inseguire il prezzo.'
- return {'ticker':ticker,'name':name,'category':cat,'isin':isin,'tvSymbol':tv,'ter':ter,'replication':repl,'distribution':dist,'currentPrice':p,'return1y':r1,'return3y':r3,'return5y':r5,'return10y':r10,'drawdown':draw,'currentDrawdown':current,'volatility':vol,'trendScore':trend,'score':score,'status':status,'verdict':verdict,'pacAction':action,'monthlyHistory':monthly,'historyStart':monthly[0]['date'] if monthly else None,'summary':f'Costi {cost:.1f}/10 · diversificazione {div:.1f}/10 · robustezza {rob:.1f}/10 · trend {trend:.1f}/10.'}
+ currency,exchange=quote_meta(ticker,tv)
+ return {'ticker':ticker,'name':name,'category':cat,'isin':isin,'tvSymbol':tv,'exchange':exchange,'quoteCurrency':currency,'ter':ter,'replication':repl,'distribution':dist,'currentPrice':p,'return1y':r1,'return3y':r3,'return5y':r5,'return10y':r10,'drawdown':draw,'currentDrawdown':current,'volatility':vol,'trendScore':trend,'score':score,'status':status,'verdict':verdict,'pacAction':action,'monthlyHistory':monthly,'historyStart':monthly[0]['date'] if monthly else None,'summary':f'Costi {cost:.1f}/10 · diversificazione {div:.1f}/10 · robustezza {rob:.1f}/10 · trend {trend:.1f}/10.'}
 def main():
  out=[]
  for t in ETFS:
@@ -46,5 +55,6 @@ def main():
    x=analyse(t)
    if x:out.append(x)
   except Exception as e:print(t[0],e)
- OUT.parent.mkdir(exist_ok=True);OUT.write_text(json.dumps({'generatedAt':datetime.now(timezone.utc).isoformat(),'screenedCount':len(ETFS),'validCount':len(out),'sourceNotes':['Prezzi e storico mensile reale: Yahoo Finance/yfinance auto-adjusted','Universo: ETF/ETC UCITS liquidi rappresentativi su LSE/Xetra','Selezione portafoglio: ruoli diversi, costi, diversificazione, robustezza e trend; non semplice classifica rendimento'],'etfs':sorted(out,key=lambda x:x['score'],reverse=True)},ensure_ascii=False,indent=2),encoding='utf-8')
+ generated=datetime.now(timezone.utc).isoformat()
+ OUT.parent.mkdir(exist_ok=True);OUT.write_text(json.dumps({'generatedAt':generated,'screenedCount':len(ETFS),'validCount':len(out),'sourceNotes':['Prezzi e storico mensile reale: Yahoo Finance/yfinance auto-adjusted','Prezzo mostrato con valuta e mercato della quotazione usata dal motore','Universo: ETF/ETC UCITS liquidi rappresentativi su LSE/Xetra','Selezione portafoglio: ruoli diversi, costi, diversificazione, robustezza e trend; non semplice classifica rendimento'],'etfs':sorted(out,key=lambda x:x['score'],reverse=True)},ensure_ascii=False,indent=2),encoding='utf-8')
 if __name__=='__main__':main()
