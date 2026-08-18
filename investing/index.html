@@ -13,4 +13,17 @@
 <section class="tv-invest-section"><div class="section-heading"><div><h2>Controllo grafici TradingView</h2><p>Anteprima Daily delle 5 candidate attuali. Serve come controllo visivo di prezzo, trend e struttura prima di pianificare l’ingresso.</p></div></div><div id="investmentTradingView" class="tv-invest-grid"><div class="loading">Carico i grafici TradingView…</div></div></section>
 <section class="limitations"><h3>Cosa significa il punteggio</h3><p>Il punteggio sintetizza dati tecnici, fondamentali e notizie disponibili. Non rappresenta una probabilità garantita.</p></section>
 </main>
-<dialog id="detailDialog"><button class="close" id="closeDialog">×</button><div id="detailContent"></div></dialog><script src="app.js?v=1010"></script><script src="tradingview.js?v=1"></script></body></html>
+<dialog id="detailDialog"><button type="button" class="close" id="closeDialog" aria-label="Chiudi">×</button><div id="detailContent"></div></dialog>
+<script src="app.js?v=1010"></script><script src="tradingview.js?v=1"></script>
+<script>
+(function(){
+  const dialog=document.getElementById('detailDialog');
+  const close=document.getElementById('closeDialog');
+  function closeDetail(e){if(e){e.preventDefault();e.stopPropagation();}if(dialog&&dialog.open)dialog.close();}
+  close.addEventListener('click',closeDetail);
+  close.addEventListener('pointerup',closeDetail);
+  dialog.addEventListener('click',function(e){if(e.target===dialog)closeDetail(e);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dialog.open)closeDetail(e);});
+})();
+</script>
+</body></html>
