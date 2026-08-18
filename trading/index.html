@@ -15,7 +15,7 @@
     <a href="../">Market Compass</a>
     <a class="active" href="./">Trading Coach</a>
     <a href="../investing/">Investment Coach</a>
-    <a href="../etf/">ETF</a>
+    <a href="../etf/">ETF & PAC Coach</a>
     <a href="../intelligence/">News & Catalyst Coach</a>
     <a href="../calendar/">Calendario Economico</a>
   </nav>
@@ -41,11 +41,21 @@
       <div class="tv-note">Questi grafici sono widget TradingView: servono per controllo visivo e per aprire il grafico del broker. Il motore non può leggere i prezzi dal widget; i calcoli restano separati e devono usare uno strumento coerente con quello mostrato.</div>
     </section>
   </main>
-  <dialog id="detailDialog"><button id="closeDialog" class="dialog-close" aria-label="Chiudi">×</button><div id="dialogContent"></div></dialog>
+  <dialog id="detailDialog"><button type="button" id="closeDialog" class="dialog-close" aria-label="Chiudi">×</button><div id="dialogContent"></div></dialog>
   <footer>Prototipo sperimentale. Non costituisce consulenza finanziaria.</footer>
   <script src="data/tradingConfig.js?v=522"></script>
   <script src="engine/tradingEngine.js?v=522"></script>
   <script src="app.js?v=702"></script>
   <script src="tradingview-widgets.js?v=1"></script>
+  <script>
+  (function(){
+    const dialog=document.getElementById('detailDialog');
+    const close=document.getElementById('closeDialog');
+    function closeDetail(e){if(e){e.preventDefault();e.stopPropagation();}if(dialog&&dialog.open)dialog.close();}
+    if(close){close.addEventListener('click',closeDetail);close.addEventListener('pointerup',closeDetail);}
+    if(dialog){dialog.addEventListener('click',e=>{if(e.target===dialog)closeDetail(e);});}
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&dialog?.open)closeDetail(e);});
+  })();
+  </script>
 </body>
 </html>
