@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T14:55:15.436397+00:00",
+  "generatedAt": "2026-08-20T15:36:40.628882+00:00",
   "timezone": "Europe/Rome",
   "events": [
     {
@@ -13,16 +13,6 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "PPI MoM",
-      "country": "DE",
-      "date": "2026-08-20T06:00:00.000Z",
-      "importance": -1,
-      "forecast": 0.7,
-      "previous": -0.3,
-      "actual": 1.1,
-      "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
-    },
-    {
       "title": "PPI su base annua",
       "country": "DE",
       "date": "2026-08-20T06:00:00.000Z",
@@ -33,14 +23,14 @@
       "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
     },
     {
-      "title": "Indice del costo del lavoro su base annua Flash",
-      "country": "EU",
-      "date": "2026-08-20T09:00:00.000Z",
+      "title": "PPI MoM",
+      "country": "DE",
+      "date": "2026-08-20T06:00:00.000Z",
       "importance": -1,
-      "forecast": null,
-      "previous": 3.2,
-      "actual": 3,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+      "forecast": 0.7,
+      "previous": -0.3,
+      "actual": 1.1,
+      "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
     },
     {
       "title": "Produzione edilizia su base annua",
@@ -50,6 +40,16 @@
       "forecast": null,
       "previous": 0.7,
       "actual": -0.7,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Indice del costo del lavoro su base annua Flash",
+      "country": "EU",
+      "date": "2026-08-20T09:00:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 3.2,
+      "actual": 3,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
@@ -83,33 +83,13 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Indice CAPEX della Fed di Philadelphia",
+      "title": "Indice manifatturiero della Fed di Filadelfia",
       "country": "US",
       "date": "2026-08-20T12:30:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 30.1,
-      "actual": 48.2,
-      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
-    },
-    {
-      "title": "Nuovi ordini della Fed di Philadelphia",
-      "country": "US",
-      "date": "2026-08-20T12:30:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 37,
-      "actual": 30.1,
-      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
-    },
-    {
-      "title": "Occupazione della Fed di Philadelphia",
-      "country": "US",
-      "date": "2026-08-20T12:30:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 10,
-      "actual": 27.9,
+      "importance": null,
+      "forecast": 25,
+      "previous": 41.4,
+      "actual": 47.4,
       "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
@@ -123,23 +103,33 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Media di 4 settimane per le richieste di sussidio di disoccupazione",
+      "title": "Occupazione della Fed di Philadelphia",
       "country": "US",
       "date": "2026-08-20T12:30:00.000Z",
       "importance": -1,
       "forecast": null,
-      "previous": 199.75,
-      "actual": 204,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+      "previous": 10,
+      "actual": 27.9,
+      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
-      "title": "Condizioni commerciali della Fed di Philadelphia",
+      "title": "Nuovi ordini della Fed di Philadelphia",
       "country": "US",
       "date": "2026-08-20T12:30:00.000Z",
       "importance": -1,
       "forecast": null,
-      "previous": 34.4,
-      "actual": 73.6,
+      "previous": 37,
+      "actual": 30.1,
+      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
+    },
+    {
+      "title": "Indice CAPEX della Fed di Philadelphia",
+      "country": "US",
+      "date": "2026-08-20T12:30:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 30.1,
+      "actual": 48.2,
       "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
@@ -153,14 +143,24 @@
       "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
-      "title": "Indice manifatturiero della Fed di Filadelfia",
+      "title": "Condizioni commerciali della Fed di Philadelphia",
       "country": "US",
       "date": "2026-08-20T12:30:00.000Z",
-      "importance": null,
-      "forecast": 25,
-      "previous": 41.4,
-      "actual": 47.4,
+      "importance": -1,
+      "forecast": null,
+      "previous": 34.4,
+      "actual": 73.6,
       "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
+    },
+    {
+      "title": "Media di 4 settimane per le richieste di sussidio di disoccupazione",
+      "country": "US",
+      "date": "2026-08-20T12:30:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 199.75,
+      "actual": 204,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
       "title": "Indice principale delle banche centrali su base mensile",
@@ -168,7 +168,7 @@
       "date": "2026-08-20T14:00:00.000Z",
       "importance": -1,
       "forecast": 0.1,
-      "previous": -0.2,
+      "previous": -0.1,
       "actual": 0.2,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -183,23 +183,23 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Asta di fatture di 8 settimane",
-      "country": "US",
-      "date": "2026-08-20T15:30:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 3.665,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
       "title": "Asta di fatture di 4 settimane",
       "country": "US",
       "date": "2026-08-20T15:30:00.000Z",
       "importance": -1,
       "forecast": null,
       "previous": 3.625,
-      "actual": null,
+      "actual": 3.64,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Asta di fatture di 8 settimane",
+      "country": "US",
+      "date": "2026-08-20T15:30:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 3.665,
+      "actual": 3.655,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
@@ -263,10 +263,10 @@
       "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
     },
     {
-      "title": "Tasso di inflazione su base annua",
+      "title": "Tasso di inflazione ex-alimentari ed energia su base annua",
       "country": "JP",
       "date": "2026-08-20T23:30:00.000Z",
-      "importance": 1,
+      "importance": -1,
       "forecast": null,
       "previous": 1.7,
       "actual": null,
@@ -283,14 +283,24 @@
       "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
     },
     {
-      "title": "Tasso di inflazione ex-alimentari ed energia su base annua",
+      "title": "Tasso di inflazione su base annua",
       "country": "JP",
       "date": "2026-08-20T23:30:00.000Z",
-      "importance": -1,
+      "importance": 1,
       "forecast": null,
       "previous": 1.7,
       "actual": null,
       "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
+    },
+    {
+      "title": "PMI composito globale S&P in breve",
+      "country": "JP",
+      "date": "2026-08-21T00:30:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 52.7,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
       "title": "Flash sull'indice S&P dei servizi globali",
@@ -313,22 +323,42 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "PMI composito globale S&P in breve",
-      "country": "JP",
-      "date": "2026-08-21T00:30:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 52.7,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
       "title": "Asta di fatture trimestrali",
       "country": "JP",
       "date": "2026-08-21T03:35:00.000Z",
       "importance": -1,
       "forecast": null,
       "previous": 1.0919,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Indebitamento netto del settore pubblico, escluse le banche",
+      "country": "GB",
+      "date": "2026-08-21T06:00:00.000Z",
+      "importance": -1,
+      "forecast": 0,
+      "previous": -16,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Vendite al dettaglio ex carburante su base mensile",
+      "country": "GB",
+      "date": "2026-08-21T06:00:00.000Z",
+      "importance": -1,
+      "forecast": -0.5,
+      "previous": 1.1,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Vendite al dettaglio escluso carburante su base annua",
+      "country": "GB",
+      "date": "2026-08-21T06:00:00.000Z",
+      "importance": -1,
+      "forecast": 3.3,
+      "previous": 5.4,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -349,36 +379,6 @@
       "importance": 1,
       "forecast": -0.5,
       "previous": 1,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Vendite al dettaglio ex carburante su base mensile",
-      "country": "GB",
-      "date": "2026-08-21T06:00:00.000Z",
-      "importance": -1,
-      "forecast": -0.5,
-      "previous": 1.1,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Indebitamento netto del settore pubblico, escluse le banche",
-      "country": "GB",
-      "date": "2026-08-21T06:00:00.000Z",
-      "importance": -1,
-      "forecast": 0,
-      "previous": -16,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Vendite al dettaglio escluso carburante su base annua",
-      "country": "GB",
-      "date": "2026-08-21T06:00:00.000Z",
-      "importance": -1,
-      "forecast": 3.3,
-      "previous": 5.4,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -413,6 +413,16 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
+      "title": "Flash sull'indice S&P dei servizi globali",
+      "country": "EU",
+      "date": "2026-08-21T08:00:00.000Z",
+      "importance": null,
+      "forecast": 51.5,
+      "previous": 51.7,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
       "title": "Aspettative di inflazione al consumo della BCE",
       "country": "EU",
       "date": "2026-08-21T08:00:00.000Z",
@@ -433,42 +443,12 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Flash sull'indice S&P dei servizi globali",
-      "country": "EU",
-      "date": "2026-08-21T08:00:00.000Z",
-      "importance": null,
-      "forecast": 51.5,
-      "previous": 51.7,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
       "title": "PMI composito globale S&P in breve",
       "country": "EU",
       "date": "2026-08-21T08:00:00.000Z",
       "importance": null,
       "forecast": 51.7,
       "previous": 52,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Flash sull'indice S&P manifatturiero globale",
-      "country": "GB",
-      "date": "2026-08-21T08:30:00.000Z",
-      "importance": 1,
-      "forecast": 51.5,
-      "previous": 51.9,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "PMI composito globale S&P in breve",
-      "country": "GB",
-      "date": "2026-08-21T08:30:00.000Z",
-      "importance": -1,
-      "forecast": 51.6,
-      "previous": 52.2,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -483,6 +463,26 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
+      "title": "PMI composito globale S&P in breve",
+      "country": "GB",
+      "date": "2026-08-21T08:30:00.000Z",
+      "importance": -1,
+      "forecast": 51.6,
+      "previous": 52.2,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Flash sull'indice S&P manifatturiero globale",
+      "country": "GB",
+      "date": "2026-08-21T08:30:00.000Z",
+      "importance": 1,
+      "forecast": 51.5,
+      "previous": 51.9,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
       "title": "Crescita salariale negoziata",
       "country": "EU",
       "date": "2026-08-21T09:00:00.000Z",
@@ -493,12 +493,12 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Flash sull'indice S&P dei servizi globali",
+      "title": "PMI composito globale S&P in breve",
       "country": "US",
       "date": "2026-08-21T13:45:00.000Z",
       "importance": null,
-      "forecast": 54,
-      "previous": 54.6,
+      "forecast": null,
+      "previous": 54.5,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -513,12 +513,12 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "PMI composito globale S&P in breve",
+      "title": "Flash sull'indice S&P dei servizi globali",
       "country": "US",
       "date": "2026-08-21T13:45:00.000Z",
       "importance": null,
-      "forecast": null,
-      "previous": 54.5,
+      "forecast": 54,
+      "previous": 54.6,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -613,22 +613,22 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please try again later.That’s all we know.",
-      "country": "JP",
-      "date": "2026-08-25T05:00:00.000Z",
-      "importance": -1,
-      "forecast": 116.4,
-      "previous": 116.4,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
       "title": "Finale dell'indice coincidente",
       "country": "JP",
       "date": "2026-08-25T05:00:00.000Z",
       "importance": -1,
       "forecast": null,
       "previous": 117.9,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please try again later.That’s all we know.",
+      "country": "JP",
+      "date": "2026-08-25T05:00:00.000Z",
+      "importance": -1,
+      "forecast": 116.4,
+      "previous": 116.4,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -656,6 +656,16 @@
       "title": "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please try again later.That’s all we know.",
       "country": "DE",
       "date": "2026-08-25T08:00:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 86.7,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please try again later.That’s all we know.",
+      "country": "DE",
+      "date": "2026-08-25T08:00:00.000Z",
       "importance": 1,
       "forecast": null,
       "previous": 86.6,
@@ -669,16 +679,6 @@
       "importance": -1,
       "forecast": null,
       "previous": 86.5,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please try again later.That’s all we know.",
-      "country": "DE",
-      "date": "2026-08-25T08:00:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 86.7,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -703,14 +703,14 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Permessi di costruire MoM definitivi",
+      "title": "Discorso della Fed Barkin",
       "country": "US",
       "date": "2026-08-25T12:00:00.000Z",
-      "importance": -1,
-      "forecast": 5,
-      "previous": -2.6,
+      "importance": null,
+      "forecast": null,
+      "previous": null,
       "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
       "title": "Permessi di costruire definitivi",
@@ -719,6 +719,16 @@
       "importance": -1,
       "forecast": 1.443,
       "previous": 1.374,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Permessi di costruire MoM definitivi",
+      "country": "US",
+      "date": "2026-08-25T12:00:00.000Z",
+      "importance": -1,
+      "forecast": 5,
+      "previous": -2.6,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -743,22 +753,22 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
+      "title": "Indice dei prezzi delle case su base annua",
+      "country": "US",
+      "date": "2026-08-25T13:00:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 2.2,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
       "title": "Prezzo delle case S&P/Case-Shiller su base annua",
       "country": "US",
       "date": "2026-08-25T13:00:00.000Z",
       "importance": null,
       "forecast": null,
       "previous": 1.6,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Indice dei prezzi delle case su base mensile",
-      "country": "US",
-      "date": "2026-08-25T13:00:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 0.3,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -773,16 +783,6 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Indice dei prezzi delle case su base annua",
-      "country": "US",
-      "date": "2026-08-25T13:00:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 2.2,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
       "title": "Prezzo delle case S&P/Case-Shiller su base mensile",
       "country": "US",
       "date": "2026-08-25T13:00:00.000Z",
@@ -793,12 +793,12 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Fiducia dei consumatori CB",
+      "title": "Indice dei prezzi delle case su base mensile",
       "country": "US",
-      "date": "2026-08-25T14:00:00.000Z",
-      "importance": null,
-      "forecast": 91.2,
-      "previous": 90.8,
+      "date": "2026-08-25T13:00:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 0.3,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -853,12 +853,32 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
+      "title": "Fiducia dei consumatori CB",
+      "country": "US",
+      "date": "2026-08-25T14:00:00.000Z",
+      "importance": null,
+      "forecast": 91.2,
+      "previous": 90.8,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
       "title": "Asta di fatture di 6 settimane",
       "country": "US",
       "date": "2026-08-25T15:30:00.000Z",
       "importance": -1,
       "forecast": null,
       "previous": 3.645,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Offerta di moneta",
+      "country": "US",
+      "date": "2026-08-25T17:00:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 23.15,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -873,14 +893,14 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Offerta di moneta",
+      "title": "Discorso della Fed Barkin",
       "country": "US",
-      "date": "2026-08-25T17:00:00.000Z",
-      "importance": -1,
+      "date": "2026-08-25T20:00:00.000Z",
+      "importance": null,
       "forecast": null,
-      "previous": 23.15,
+      "previous": null,
       "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
       "title": "Variazione delle scorte di petrolio greggio API",
@@ -933,26 +953,6 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Indice del mercato ipotecario MBA",
-      "country": "US",
-      "date": "2026-08-26T11:00:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 247.7,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Indice di acquisto MBA",
-      "country": "US",
-      "date": "2026-08-26T11:00:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 154.8,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
       "title": "Richieste di mutuo MBA",
       "country": "US",
       "date": "2026-08-26T11:00:00.000Z",
@@ -973,42 +973,22 @@
       "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
-      "title": "Indice Core dei prezzi PCE su base mensile",
+      "title": "Indice di acquisto MBA",
       "country": "US",
-      "date": "2026-08-26T12:30:00.000Z",
-      "importance": 1,
-      "forecast": 0.2,
-      "previous": 0.1,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Tasso di crescita del PIL trimestrale 2a stima",
-      "country": "US",
-      "date": "2026-08-26T12:30:00.000Z",
-      "importance": 1,
-      "forecast": 1.5,
-      "previous": 2.1,
-      "actual": null,
-      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
-    },
-    {
-      "title": "Ordini di beni durevoli ex MoM della Difesa",
-      "country": "US",
-      "date": "2026-08-26T12:30:00.000Z",
+      "date": "2026-08-26T11:00:00.000Z",
       "importance": -1,
       "forecast": null,
-      "previous": 0.3,
+      "previous": 154.8,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please try again later.That’s all we know.",
+      "title": "Indice del mercato ipotecario MBA",
       "country": "US",
-      "date": "2026-08-26T12:30:00.000Z",
+      "date": "2026-08-26T11:00:00.000Z",
       "importance": -1,
-      "forecast": 5.1,
-      "previous": 4.6,
+      "forecast": null,
+      "previous": 247.7,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -1023,112 +1003,52 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Vendite PIL trimestrale 2° est",
-      "country": "US",
-      "date": "2026-08-26T12:30:00.000Z",
-      "importance": -1,
-      "forecast": 2.2,
-      "previous": 1.9,
-      "actual": null,
-      "generalImpact": "Una crescita superiore alle attese sostiene i ciclici ma può mantenere pressione sui tassi; una crescita debole penalizza i ciclici e aumenta i timori di rallentamento."
-    },
-    {
-      "title": "Prezzi PCE core QoQ 2a stima",
-      "country": "US",
-      "date": "2026-08-26T12:30:00.000Z",
-      "importance": -1,
-      "forecast": 3.4,
-      "previous": 4.4,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Indice Core dei prezzi PCE su base annua",
-      "country": "US",
-      "date": "2026-08-26T12:30:00.000Z",
-      "importance": -1,
-      "forecast": 3.3,
-      "previous": 3.3,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
       "title": "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please try again later.That’s all we know.",
       "country": "US",
       "date": "2026-08-26T12:30:00.000Z",
       "importance": -1,
-      "forecast": null,
-      "previous": 0.9,
+      "forecast": 5.1,
+      "previous": 4.6,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Spese personali reali su base mensile",
+      "title": "Ordini di beni durevoli ex MoM della Difesa",
       "country": "US",
       "date": "2026-08-26T12:30:00.000Z",
       "importance": -1,
       "forecast": null,
-      "previous": 0.4,
+      "previous": 0.3,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Utili aziendali trimestrali prel",
+      "title": "Tasso di crescita del PIL trimestrale 2a stima",
       "country": "US",
       "date": "2026-08-26T12:30:00.000Z",
-      "importance": null,
-      "forecast": null,
-      "previous": 0.5,
+      "importance": 1,
+      "forecast": 1.5,
+      "previous": 2.1,
       "actual": null,
       "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
-      "title": "Indice dei prezzi PCE su base mensile",
+      "title": "Ordini di beni durevoli su base mensile",
       "country": "US",
       "date": "2026-08-26T12:30:00.000Z",
-      "importance": null,
-      "forecast": 0.1,
-      "previous": -0.1,
+      "importance": 1,
+      "forecast": 0.7,
+      "previous": 0.3,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please try again later.That’s all we know.",
-      "country": "US",
-      "date": "2026-08-26T12:30:00.000Z",
-      "importance": null,
-      "forecast": 0.5,
-      "previous": 0.6,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Indice dei prezzi PIL trimestrale 2a stima",
-      "country": "US",
-      "date": "2026-08-26T12:30:00.000Z",
-      "importance": null,
-      "forecast": 6.3,
-      "previous": 3.6,
-      "actual": null,
-      "generalImpact": "Una crescita superiore alle attese sostiene i ciclici ma può mantenere pressione sui tassi; una crescita debole penalizza i ciclici e aumenta i timori di rallentamento."
-    },
-    {
-      "title": "Indice dei prezzi PCE su base annua",
-      "country": "US",
-      "date": "2026-08-26T12:30:00.000Z",
-      "importance": null,
-      "forecast": null,
-      "previous": 3.7,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Spese personali su base mensile",
+      "title": "Indice Core dei prezzi PCE su base mensile",
       "country": "US",
       "date": "2026-08-26T12:30:00.000Z",
       "importance": 1,
       "forecast": 0.2,
-      "previous": 0.3,
+      "previous": 0.1,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -1143,34 +1063,114 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Ordini di beni durevoli su base mensile",
+      "title": "Spese personali su base mensile",
       "country": "US",
       "date": "2026-08-26T12:30:00.000Z",
       "importance": 1,
-      "forecast": 0.7,
+      "forecast": 0.2,
       "previous": 0.3,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Modifica della produzione di combustibile distillato EIA",
+      "title": "Indice dei prezzi PCE su base annua",
       "country": "US",
-      "date": "2026-08-26T14:30:00.000Z",
-      "importance": -1,
+      "date": "2026-08-26T12:30:00.000Z",
+      "importance": null,
       "forecast": null,
-      "previous": -0.054,
+      "previous": 3.7,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Modifica della produzione di benzina VIA",
+      "title": "Indice dei prezzi PIL trimestrale 2a stima",
       "country": "US",
-      "date": "2026-08-26T14:30:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 0.143,
+      "date": "2026-08-26T12:30:00.000Z",
+      "importance": null,
+      "forecast": 6.3,
+      "previous": 3.6,
+      "actual": null,
+      "generalImpact": "Una crescita superiore alle attese sostiene i ciclici ma può mantenere pressione sui tassi; una crescita debole penalizza i ciclici e aumenta i timori di rallentamento."
+    },
+    {
+      "title": "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please try again later.That’s all we know.",
+      "country": "US",
+      "date": "2026-08-26T12:30:00.000Z",
+      "importance": null,
+      "forecast": 0.5,
+      "previous": 0.6,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Indice dei prezzi PCE su base mensile",
+      "country": "US",
+      "date": "2026-08-26T12:30:00.000Z",
+      "importance": null,
+      "forecast": 0.1,
+      "previous": -0.1,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Utili aziendali trimestrali prel",
+      "country": "US",
+      "date": "2026-08-26T12:30:00.000Z",
+      "importance": null,
+      "forecast": null,
+      "previous": 0.5,
+      "actual": null,
+      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
+    },
+    {
+      "title": "Spese personali reali su base mensile",
+      "country": "US",
+      "date": "2026-08-26T12:30:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 0.4,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please try again later.That’s all we know.",
+      "country": "US",
+      "date": "2026-08-26T12:30:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 0.9,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Indice Core dei prezzi PCE su base annua",
+      "country": "US",
+      "date": "2026-08-26T12:30:00.000Z",
+      "importance": -1,
+      "forecast": 3.3,
+      "previous": 3.3,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Prezzi PCE core QoQ 2a stima",
+      "country": "US",
+      "date": "2026-08-26T12:30:00.000Z",
+      "importance": -1,
+      "forecast": 3.4,
+      "previous": 4.4,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Vendite PIL trimestrale 2° est",
+      "country": "US",
+      "date": "2026-08-26T12:30:00.000Z",
+      "importance": -1,
+      "forecast": 2.2,
+      "previous": 1.9,
+      "actual": null,
+      "generalImpact": "Una crescita superiore alle attese sostiene i ciclici ma può mantenere pressione sui tassi; una crescita debole penalizza i ciclici e aumenta i timori di rallentamento."
     },
     {
       "title": "Variazione delle scorte di benzina EIA",
@@ -1243,6 +1243,26 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
+      "title": "Modifica della produzione di combustibile distillato EIA",
+      "country": "US",
+      "date": "2026-08-26T14:30:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": -0.054,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Modifica della produzione di benzina VIA",
+      "country": "US",
+      "date": "2026-08-26T14:30:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 0.143,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
       "title": "Asta di fatture di 17 settimane",
       "country": "US",
       "date": "2026-08-26T15:30:00.000Z",
@@ -1251,6 +1271,16 @@
       "previous": 3.75,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Discorso della Fed Barkin",
+      "country": "US",
+      "date": "2026-08-26T15:45:00.000Z",
+      "importance": null,
+      "forecast": null,
+      "previous": null,
+      "actual": null,
+      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
       "title": "Asta di titoli a 5 anni",
@@ -1353,22 +1383,22 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Offerta di moneta M3 su base annua",
-      "country": "EU",
-      "date": "2026-08-27T08:00:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 3.3,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
       "title": "Prestiti alle famiglie su base annua",
       "country": "EU",
       "date": "2026-08-27T08:00:00.000Z",
       "importance": -1,
       "forecast": null,
       "previous": 3,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Offerta di moneta M3 su base annua",
+      "country": "EU",
+      "date": "2026-08-27T08:00:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 3.3,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -1403,22 +1433,12 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Continuano le richieste di disoccupazione",
+      "title": "Inventari al dettaglio Ex Autos MoM Adv",
       "country": "US",
       "date": "2026-08-27T12:30:00.000Z",
-      "importance": -1,
+      "importance": null,
       "forecast": null,
-      "previous": 1799,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Media di 4 settimane per le richieste di sussidio di disoccupazione",
-      "country": "US",
-      "date": "2026-08-27T12:30:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 204,
+      "previous": -0.4,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -1433,22 +1453,32 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Avv. bilancia commerciale dei beni",
+      "title": "Media di 4 settimane per le richieste di sussidio di disoccupazione",
       "country": "US",
       "date": "2026-08-27T12:30:00.000Z",
-      "importance": null,
+      "importance": -1,
       "forecast": null,
-      "previous": -101.4,
+      "previous": 204,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Inventari al dettaglio Ex Autos MoM Adv",
+      "title": "Continuano le richieste di disoccupazione",
+      "country": "US",
+      "date": "2026-08-27T12:30:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 1799,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Avv. bilancia commerciale dei beni",
       "country": "US",
       "date": "2026-08-27T12:30:00.000Z",
       "importance": null,
-      "forecast": null,
-      "previous": null,
+      "forecast": -99,
+      "previous": -101.4,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -1458,19 +1488,9 @@
       "date": "2026-08-27T14:30:00.000Z",
       "importance": -1,
       "forecast": null,
-      "previous": null,
+      "previous": 16,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Indice composito della Fed del Kansas",
-      "country": "US",
-      "date": "2026-08-27T15:00:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 9,
-      "actual": null,
-      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
       "title": "Error 500 (Server Error)!!1500.That’s an error.There was an error. Please try again later.That’s all we know.",
@@ -1479,6 +1499,16 @@
       "importance": -1,
       "forecast": null,
       "previous": 17,
+      "actual": null,
+      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
+    },
+    {
+      "title": "Indice composito della Fed del Kansas",
+      "country": "US",
+      "date": "2026-08-27T15:00:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 9,
       "actual": null,
       "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
@@ -1543,7 +1573,7 @@
       "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
-      "title": "IPC di Tokyo ex alimentare ed energia su base annua",
+      "title": "IPC di Tokyo su base annua",
       "country": "JP",
       "date": "2026-08-27T23:30:00.000Z",
       "importance": -1,
@@ -1551,16 +1581,6 @@
       "previous": 2,
       "actual": null,
       "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
-    },
-    {
-      "title": "Tasso di disoccupazione",
-      "country": "JP",
-      "date": "2026-08-27T23:30:00.000Z",
-      "importance": null,
-      "forecast": null,
-      "previous": 2.5,
-      "actual": null,
-      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
       "title": "Rapporto posti di lavoro/applicazioni",
@@ -1573,7 +1593,7 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "IPC di Tokyo su base annua",
+      "title": "IPC di Tokyo ex alimentare ed energia su base annua",
       "country": "JP",
       "date": "2026-08-27T23:30:00.000Z",
       "importance": -1,
@@ -1593,20 +1613,20 @@
       "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
     },
     {
+      "title": "Tasso di disoccupazione",
+      "country": "JP",
+      "date": "2026-08-27T23:30:00.000Z",
+      "importance": null,
+      "forecast": null,
+      "previous": 2.5,
+      "actual": null,
+      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
+    },
+    {
       "title": "Simposio di Jackson Hole",
       "country": "US",
       "date": "2026-08-28T00:00:00.000Z",
       "importance": null,
-      "forecast": null,
-      "previous": null,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Asta di fatture trimestrali",
-      "country": "JP",
-      "date": "2026-08-28T03:35:00.000Z",
-      "importance": -1,
       "forecast": null,
       "previous": null,
       "actual": null,
@@ -1619,6 +1639,16 @@
       "importance": -1,
       "forecast": null,
       "previous": 1.483,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Asta di fatture trimestrali",
+      "country": "JP",
+      "date": "2026-08-28T03:35:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": null,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -1673,6 +1703,16 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
+      "title": "Tasso di disoccupazione",
+      "country": "DE",
+      "date": "2026-08-28T07:55:00.000Z",
+      "importance": null,
+      "forecast": null,
+      "previous": 6.4,
+      "actual": null,
+      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
+    },
+    {
       "title": "Disoccupati",
       "country": "DE",
       "date": "2026-08-28T07:55:00.000Z",
@@ -1691,16 +1731,6 @@
       "previous": 6,
       "actual": null,
       "generalImpact": "Un mercato del lavoro molto forte può mantenere alti i tassi; un rallentamento moderato può favorire i mercati, mentre un deterioramento brusco aumenta il rischio recessione."
-    },
-    {
-      "title": "Tasso di disoccupazione",
-      "country": "DE",
-      "date": "2026-08-28T07:55:00.000Z",
-      "importance": null,
-      "forecast": null,
-      "previous": 6.4,
-      "actual": null,
-      "generalImpact": "Toni o decisioni più restrittivi del previsto tendono a penalizzare azioni growth e sostenere la valuta; indicazioni più accomodanti possono produrre l’effetto opposto."
     },
     {
       "title": "Vendite industriali su base annua",
@@ -1723,16 +1753,6 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Aspettative di inflazione dei consumatori",
-      "country": "EU",
-      "date": "2026-08-28T09:00:00.000Z",
-      "importance": -1,
-      "forecast": null,
-      "previous": 30.3,
-      "actual": null,
-      "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
-    },
-    {
       "title": "Sentimento dei servizi",
       "country": "EU",
       "date": "2026-08-28T09:00:00.000Z",
@@ -1743,14 +1763,24 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Aspettative sui prezzi di vendita",
+      "title": "Finale sulla fiducia dei consumatori",
       "country": "EU",
       "date": "2026-08-28T09:00:00.000Z",
       "importance": -1,
       "forecast": null,
-      "previous": 17.7,
+      "previous": -15.9,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Aspettative di inflazione dei consumatori",
+      "country": "EU",
+      "date": "2026-08-28T09:00:00.000Z",
+      "importance": -1,
+      "forecast": null,
+      "previous": 30.3,
+      "actual": null,
+      "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
     },
     {
       "title": "Sentimento industriale",
@@ -1773,16 +1803,6 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Fiducia dei consumatori",
-      "country": "IT",
-      "date": "2026-08-28T09:00:00.000Z",
-      "importance": null,
-      "forecast": null,
-      "previous": 94.2,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
       "title": "Fiducia aziendale",
       "country": "IT",
       "date": "2026-08-28T09:00:00.000Z",
@@ -1793,12 +1813,22 @@
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
     {
-      "title": "Finale sulla fiducia dei consumatori",
+      "title": "Aspettative sui prezzi di vendita",
       "country": "EU",
       "date": "2026-08-28T09:00:00.000Z",
       "importance": -1,
       "forecast": null,
-      "previous": -15.9,
+      "previous": 17.7,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Fiducia dei consumatori",
+      "country": "IT",
+      "date": "2026-08-28T09:00:00.000Z",
+      "importance": null,
+      "forecast": null,
+      "previous": 94.2,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -1833,32 +1863,12 @@
       "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
     },
     {
-      "title": "Finale sulle aspettative di inflazione a 5 anni del Michigan",
-      "country": "US",
-      "date": "2026-08-28T14:00:00.000Z",
-      "importance": -1,
-      "forecast": 3.3,
-      "previous": 3.3,
-      "actual": null,
-      "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
-    },
-    {
       "title": "Finale sulle aspettative dei consumatori del Michigan",
       "country": "US",
       "date": "2026-08-28T14:00:00.000Z",
       "importance": -1,
       "forecast": 50.6,
       "previous": 55.4,
-      "actual": null,
-      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
-    },
-    {
-      "title": "Finale sulla fiducia dei consumatori nel Michigan",
-      "country": "US",
-      "date": "2026-08-28T14:00:00.000Z",
-      "importance": null,
-      "forecast": 51,
-      "previous": 55.2,
       "actual": null,
       "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
     },
@@ -1871,6 +1881,26 @@
       "previous": -911,
       "actual": null,
       "generalImpact": "Un mercato del lavoro molto forte può mantenere alti i tassi; un rallentamento moderato può favorire i mercati, mentre un deterioramento brusco aumenta il rischio recessione."
+    },
+    {
+      "title": "Finale sulla fiducia dei consumatori nel Michigan",
+      "country": "US",
+      "date": "2026-08-28T14:00:00.000Z",
+      "importance": null,
+      "forecast": 51,
+      "previous": 55.2,
+      "actual": null,
+      "generalImpact": "Una sorpresa rispetto alle attese può modificare aspettative su crescita, inflazione, tassi e propensione al rischio. Conta soprattutto lo scarto fra dato effettivo e consenso."
+    },
+    {
+      "title": "Finale sulle aspettative di inflazione a 5 anni del Michigan",
+      "country": "US",
+      "date": "2026-08-28T14:00:00.000Z",
+      "importance": -1,
+      "forecast": 3.3,
+      "previous": 3.3,
+      "actual": null,
+      "generalImpact": "Se il dato supera le attese può aumentare la pressione sui tassi e pesare soprattutto su Nasdaq e titoli growth; se è inferiore alle attese tende a favorire azioni e obbligazioni."
     },
     {
       "title": "Condizioni attuali del Michigan finali",
