@@ -1,7 +1,7 @@
 (() => {
   "use strict";
-  const INDEX_SYMBOLS = ["USATEC","GER40","US500","UK100","ESP35","FRA40","ITA40","CHINA50","BRA50"];
-  const ALL_SYMBOLS = [...INDEX_SYMBOLS,"XAUUSD","XAGUSD","WTI","EURUSD","USDJPY"];
+  const INDEX_SYMBOLS=["USATEC","GER40","US500","UK100","ESP35","FRA40","ITA40","CHINA50","BRA50"];
+  const ALL_SYMBOLS=[...INDEX_SYMBOLS,"XAUUSD","XAGUSD","WTI","EURUSD","USDJPY"];
 
   function reorderMainMarkets(){
     const grid=document.querySelector("#marketGrid");
@@ -31,23 +31,29 @@
     nodes.forEach(node=>{if(from.test(node.nodeValue||""))node.nodeValue=(node.nodeValue||"").replace(from,to);});
   }
 
+  function setYellowVisual(card){
+    card.querySelectorAll(".traffic-red").forEach(el=>{
+      el.classList.remove("traffic-red");
+      el.classList.add("traffic-yellow");
+      const symbol=el.querySelector(":scope > b, .popup-traffic-symbol");
+      if(symbol)symbol.textContent="!";
+    });
+  }
+
   function applySemaphoreTiers(){
     document.querySelectorAll("#marketGrid .market-card").forEach(card=>{
       const missing=missingConditions(card);
       const trend=metric(card,"Forza trend") ?? metric(card,"Trend");
       const confluence=metric(card,"Confluenza");
-
-      // GIALLO = trend-following interessante ma non ancora eseguibile.
-      // Verde resta riservato ai setup completi del motore originale.
-      // Rosso resta per trend debole/contraddittorio o setup ancora lontani.
-      const nearReady = missing===1 || missing===2;
-      const strongTrendWatch = missing===3 && trend!==null && trend>=6 && (confluence===null || confluence>=3);
-      const yellow = nearReady || strongTrendWatch;
+      const nearReady=missing===1||missing===2;
+      const strongTrendWatch=missing===3&&trend!==null&&trend>=6&&(confluence===null||confluence>=3);
+      const yellow=nearReady||strongTrendWatch;
 
       card.classList.toggle("near-ready",yellow);
       if(yellow){
         replaceText(card,/ROSSO\s*[·\-–—:]\s*RIMANI FUORI/gi,"GIALLO · MONITORA");
         replaceText(card,/SEMAFORO ROSSO/gi,"SEMAFORO GIALLO");
+        setYellowVisual(card);
       }
     });
   }
@@ -55,8 +61,7 @@
   function updateCoverage(){
     const el=document.getElementById("assetCount");
     if(!el)return;
-    const raw=(el.textContent||"").trim();
-    const analyzed=Number.parseInt(raw,10);
+    const analyzed=Number.parseInt((el.textContent||"").trim(),10);
     if(Number.isFinite(analyzed)){
       el.textContent=`${analyzed} / ${ALL_SYMBOLS.length}`;
       el.title=`${analyzed} asset con dati sufficienti su ${ALL_SYMBOLS.length} mercati monitorati`;
@@ -65,7 +70,10 @@
 
   function loadReadyHistory(){
     const rows=[];
-    ALL_SYMBOLS.forEach(symbol=>{try{const entries=JSON.parse(localStorage.getItem(`marketCompassJournal:${symbol}`)||"[]");entries.filter(entry=>/VALUTA (UN )?(LONG|SHORT) ORA/i.test(entry.action||"")).forEach(entry=>rows.push({symbol,...entry}));}catch(_){}});
+    ALL_SYMBOLS.forEach(symbol=>{try{
+      const entries=JSON.parse(localStorage.getItem(`marketCompassJournal:${symbol}`)||"[]");
+      entries.filter(entry=>/VALUTA (UN )?(LONG|SHORT) ORA/i.test(entry.action||"")).forEach(entry=>rows.push({symbol,...entry}));
+    }catch(_){}});
     return rows.sort((a,b)=>new Date(b.generatedAt)-new Date(a.generatedAt));
   }
 
