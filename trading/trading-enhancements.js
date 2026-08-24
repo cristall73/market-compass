@@ -18,6 +18,12 @@
     return match?Number(match[1]):null;
   }
 
+  function metric(card,label){
+    const text=(card.textContent||"").replace(/\s+/g," ");
+    const match=text.match(new RegExp(`${label}[^0-9]{0,30}(\\d+(?:[.,]\\d+)?)\\/10`,"i"));
+    return match?Number(match[1].replace(",",".")):null;
+  }
+
   function replaceText(root,from,to){
     const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
     const nodes=[];
@@ -28,8 +34,18 @@
   function applySemaphoreTiers(){
     document.querySelectorAll("#marketGrid .market-card").forEach(card=>{
       const missing=missingConditions(card);
-      card.classList.toggle("near-ready",missing===1||missing===2);
-      if(missing===1||missing===2){
+      const trend=metric(card,"Forza trend") ?? metric(card,"Trend");
+      const confluence=metric(card,"Confluenza");
+
+      // GIALLO = trend-following interessante ma non ancora eseguibile.
+      // Verde resta riservato ai setup completi del motore originale.
+      // Rosso resta per trend debole/contraddittorio o setup ancora lontani.
+      const nearReady = missing===1 || missing===2;
+      const strongTrendWatch = missing===3 && trend!==null && trend>=6 && (confluence===null || confluence>=3);
+      const yellow = nearReady || strongTrendWatch;
+
+      card.classList.toggle("near-ready",yellow);
+      if(yellow){
         replaceText(card,/ROSSO\s*[·\-–—:]\s*RIMANI FUORI/gi,"GIALLO · MONITORA");
         replaceText(card,/SEMAFORO ROSSO/gi,"SEMAFORO GIALLO");
       }
