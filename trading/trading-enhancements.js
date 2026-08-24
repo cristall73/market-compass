@@ -28,7 +28,7 @@
     const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
     const nodes=[];
     while(walker.nextNode())nodes.push(walker.currentNode);
-    nodes.forEach(node=>{if(from.test(node.nodeValue||""))node.nodeValue=(node.nodeValue||"").replace(from,to);});
+    nodes.forEach(node=>{if(from.test(node.nodeValue||""))node.nodeValue=(node.nodeValue||"").replace(from,to);from.lastIndex=0;});
   }
 
   function setYellowVisual(root){
@@ -49,12 +49,40 @@
     return nearReady||strongTrendWatch;
   }
 
+  function forceYellowLabels(root){
+    // Le etichette della Top 3 e del pannello laterale sono composte da nodi HTML
+    // separati; una semplice sostituzione testuale non basta. Le aggiorniamo quindi
+    // direttamente, mantenendo identica la logica usata per le schede sottostanti.
+    root.querySelectorAll(".traffic-status").forEach(el=>{
+      el.classList.remove("traffic-red");
+      el.classList.add("traffic-yellow");
+      const icon=el.querySelector("b");
+      const label=el.querySelector("span");
+      if(icon)icon.textContent="!";
+      if(label)label.textContent="GIALLO · MONITORA";
+    });
+
+    root.querySelectorAll(".lead-traffic").forEach(el=>{
+      el.classList.remove("traffic-red");
+      el.classList.add("traffic-yellow");
+      const icon=el.querySelector(":scope > b");
+      const color=el.querySelector("div > small");
+      const action=el.querySelector("div > strong");
+      const label=el.querySelector("div > span");
+      if(icon)icon.textContent="!";
+      if(color)color.textContent="GIALLO";
+      if(action)action.textContent="MONITORA";
+      if(label)label.textContent="SEMAFORO GIALLO · SETUP DA MONITORARE";
+    });
+  }
+
   function yellowize(root){
     replaceText(root,/ROSSO\s*[·\-–—:]\s*RIMANI FUORI/gi,"GIALLO · MONITORA");
     replaceText(root,/ROSSO\s*[·\-–—:]\s*NESSUN INGRESSO/gi,"GIALLO · MONITORA");
     replaceText(root,/SEMAFORO ROSSO\s*[·\-–—:]\s*NESSUN INGRESSO/gi,"SEMAFORO GIALLO · MONITORA");
     replaceText(root,/SEMAFORO ROSSO/gi,"SEMAFORO GIALLO");
     setYellowVisual(root);
+    forceYellowLabels(root);
   }
 
   function applySemaphoreTiers(){
@@ -64,14 +92,10 @@
       if(yellow)yellowize(card);
     });
 
-    // La Top 3 viene renderizzata separatamente dalle schede. Applichiamo la stessa
-    // regola visiva anche qui, altrimenti lo stesso asset può risultare rosso sopra
-    // e giallo sotto.
     document.querySelectorAll(".ranking-table-row").forEach(row=>{
       if(shouldBeYellow(row))yellowize(row);
     });
 
-    // Anche il pannello del primo candidato deve usare lo stesso livello del n.1.
     const lead=document.querySelector(".lead-panel");
     if(lead&&shouldBeYellow(lead))yellowize(lead);
   }
