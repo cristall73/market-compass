@@ -27,6 +27,6 @@
   </main>
   <dialog id="detailDialog"><button type="button" id="closeDialog" class="dialog-close" aria-label="Chiudi">×</button><div id="dialogContent"></div></dialog>
   <footer>Prototipo sperimentale. Non costituisce consulenza finanziaria.</footer>
-  <script src="data/tradingConfig.js?v=522"></script><script src="engine/tradingEngine.js?v=522"></script><script src="trend-following-guard.js?v=3"></script><script src="app-bootstrap.js?v=1"></script><script src="trading-enhancements.js?v=2"></script><script src="tradingview-widgets.js?v=2"></script>
+  <script src="data/tradingConfig.js?v=522"></script><script src="engine/tradingEngine.js?v=522"></script><script src="trend-following-guard.js?v=3"></script><script src="app-bootstrap.js?v=1"></script><script src="trading-enhancements.js?v=3"></script><script src="tradingview-widgets.js?v=2"></script>
   <script>(function(){const dialog=document.getElementById('detailDialog');const close=document.getElementById('closeDialog');function closeDetail(e){if(e){e.preventDefault();e.stopPropagation();}if(dialog&&dialog.open)dialog.close();}if(close){close.addEventListener('click',closeDetail);close.addEventListener('pointerup',closeDetail);}if(dialog){dialog.addEventListener('click',e=>{if(e.target===dialog)closeDetail(e);});}document.addEventListener('keydown',e=>{if(e.key==='Escape'&&dialog?.open)closeDetail(e);});})();</script>
 </body></html>
