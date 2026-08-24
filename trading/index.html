@@ -6,6 +6,7 @@
   <meta name="description" content="Market Compass: dashboard tecnica multi-timeframe per trading e opportunità azionarie." />
   <title>Market Compass</title>
   <link rel="stylesheet" href="styles.css?v=521" />
+  <link rel="stylesheet" href="enhancements.css?v=1" />
   <style>
     .tv-check{margin-top:32px;padding-top:8px}.tv-check-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:16px}.tv-check-head p{color:#93a5be;margin:4px 0 0}.tv-preview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.tv-preview-card{background:#0f1b2e;border:1px solid #263a55;border-radius:15px;overflow:hidden}.tv-preview-head{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid #263a55}.tv-preview-head span{color:#93a5be;font-size:.78rem}.tv-preview-card .tradingview-widget-container{height:560px;width:100%}.tv-preview-card .tradingview-widget-container__widget{height:100%;width:100%}.tv-note{margin-top:12px;padding:10px 12px;border:1px solid rgba(79,140,255,.35);border-radius:10px;color:#b9cff8;background:rgba(79,140,255,.08);font-size:.9rem}@media(max-width:1050px){.tv-preview-grid{grid-template-columns:1fr}.tv-preview-card .tradingview-widget-container{height:500px}}@media(max-width:700px){.tv-check-head{flex-direction:column;align-items:stretch}.tv-preview-grid{grid-template-columns:1fr}.tv-preview-card .tradingview-widget-container{height:400px}}
   </style>
@@ -21,9 +22,9 @@
   </nav>
   <header class="topbar">
     <div>
-      <p class="eyebrow">MARKET COMPASS · v16.3 PRICE CHECK</p>
+      <p class="eyebrow">MARKET COMPASS · TREND FOLLOWING RIGIDO</p>
       <h1>Trading Coach AI</h1>
-      <p class="subtitle">1M e 1W definiscono il trend di fondo · 1D, 4H e 1H devono allinearsi per l'ingresso veloce</p>
+      <p class="subtitle">LONG solo con prezzo sopra EMA 5/10/50/60/200 su tutti i timeframe · SHORT solo con prezzo sotto tutte le EMA · altrimenti WAIT</p>
     </div>
     <div class="header-actions">
       <div id="freshnessStatus" class="freshness-status freshness-loading" role="status" aria-live="polite"><span class="freshness-symbol" aria-hidden="true">…</span><div><strong>Controllo aggiornamento</strong><small>Verifico l’età dei dati</small></div></div>
@@ -32,9 +33,16 @@
   </header>
   <main>
     <section class="summary-bar"><div><span>Asset analizzati</span><strong id="assetCount">0</strong></div><div><span>Segnali LONG</span><strong id="longCount">0</strong></div><div><span>Segnali SHORT</span><strong id="shortCount">0</strong></div><div><span>WAIT</span><strong id="waitCount">0</strong></div></section>
-    <section class="notice">Il verde operativo richiede trend di fondo coerente e allineamento 1D · 4H · 1H. Pattern, candele e struttura di Dow servono come conferma del timing, non come segnali isolati.</section>
-    <section class="toolbar"><div><h2>Mercati principali</h2><p>Apri una scheda per vedere ogni timeframe, indicatori e motivazioni.</p></div><select id="directionFilter" aria-label="Filtra per direzione"><option value="ALL">Tutti</option><option value="LONG">LONG</option><option value="SHORT">SHORT</option><option value="WAIT">WAIT</option></select></section>
+    <section class="notice">Il verde operativo richiede allineamento EMA completo su 1M · 1W · 1D · 4H · 1H. Pattern, candele, RSI, Nadaraya e struttura di Dow confermano timing e qualità, ma non possono trasformare un contro-trend in un segnale LONG o SHORT.</section>
+    <section class="toolbar"><div><h2>Mercati principali</h2><p>Nasdaq 100, DAX 40 e S&amp;P 500 restano sempre in testa; seguono metalli, petrolio e valute. Nessun mercato principale viene escluso perché non è tra i migliori setup.</p></div><select id="directionFilter" aria-label="Filtra per direzione"><option value="ALL">Tutti</option><option value="LONG">LONG</option><option value="SHORT">SHORT</option><option value="WAIT">WAIT</option></select></section>
+    <p class="core-market-note"><strong>Indici sempre monitorati:</strong> Nasdaq 100 · DAX 40 · S&amp;P 500</p>
     <section id="marketGrid" class="market-grid"></section>
+
+    <section class="signal-archive-section">
+      <div class="signal-archive-head"><div><h2>Archivio segnali verdi</h2><p>I setup arrivati a VERDE PIENO restano consultabili anche nei giorni successivi, così puoi verificare come si sono comportati dopo il segnale.</p></div></div>
+      <div id="signalArchive" class="signal-archive-grid"></div>
+    </section>
+
     <section class="tv-check">
       <div class="tv-check-head"><div><h2>Controllo grafici TradingView</h2><p>Anteprima 1H del feed TradingView/ActivTrades per confrontare subito prezzo e struttura con Market Compass.</p></div></div>
       <div id="tradingviewPreviewGrid" class="tv-preview-grid"></div>
@@ -45,7 +53,9 @@
   <footer>Prototipo sperimentale. Non costituisce consulenza finanziaria.</footer>
   <script src="data/tradingConfig.js?v=522"></script>
   <script src="engine/tradingEngine.js?v=522"></script>
+  <script src="trend-following-guard.js?v=1"></script>
   <script src="app.js?v=702"></script>
+  <script src="trading-enhancements.js?v=1"></script>
   <script src="tradingview-widgets.js?v=1"></script>
   <script>
   (function(){
