@@ -3,8 +3,8 @@ name: Update Market Data
 on:
   workflow_dispatch:
   schedule:
-    # Aggiornamento ogni 2 ore durante la fascia operativa europea.
-    - cron: '0 5-21/2 * * *'
+    # Trading Coach veloce: aggiorna ogni 15 minuti.
+    - cron: '*/15 * * * *'
   push:
     branches:
       - main
@@ -12,8 +12,8 @@ on:
       - '.github/workflows/update-market-data.yml'
       - 'scripts/**'
 
-# Se arriva un nuovo aggiornamento mentre il precedente e ancora in corso,
-# annulla quello vecchio: evita due job che provano a scrivere gli stessi JSON.
+# Un solo aggiornamento dati alla volta: se parte il successivo mentre il
+# precedente e ancora attivo, annulla quello vecchio evitando conflitti di push.
 concurrency:
   group: market-data-main
   cancel-in-progress: true
