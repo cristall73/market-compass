@@ -3,23 +3,34 @@ name: Update Market Data
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/5 * * * *'
+    # Aggiornamento ogni 2 ore durante la fascia operativa europea.
+    - cron: '0 5-21/2 * * *'
   push:
     branches:
       - main
     paths:
       - '.github/workflows/update-market-data.yml'
       - 'scripts/**'
-      - 'trading/**'
-      - 'app.js'
+
+# Se arriva un nuovo aggiornamento mentre il precedente e ancora in corso,
+# annulla quello vecchio: evita due job che provano a scrivere gli stessi JSON.
+concurrency:
+  group: market-data-main
+  cancel-in-progress: true
+
+permissions:
+  contents: write
 
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
 
     steps:
       - name: Repository checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Python setup
         uses: actions/setup-python@v5
@@ -55,5 +66,10 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add data/market-data.json data/market-history.json data/investment-selection-state.json data/translation-cache.json data/economic-calendar.json data/etf-data.json
-          git diff --cached --quiet || git commit -m "Aggiornamento automatico dati"
-          git push
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica dati da pubblicare"
+            exit 0
+          fi
+          git commit -m "Aggiornamento automatico dati"
+          git pull --rebase origin main
+          git push origin HEAD:main
