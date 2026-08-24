@@ -16,11 +16,39 @@
   { name: "USD/JPY", symbol: "USDJPY", bias: -0.01, volatility: 0.70 }
 ];`;
   const originalBlock = /const ASSETS = \[[\s\S]*?\n\];/;
+  const rankingBlock = /const ranking = \[\.\.\.analyses\][\s\S]*?\.slice\(0, 3\);/;
+  const rankingReplacement = `const ranking = [...analyses]
+    .sort((a, b) => {
+      // Prima viene la reale operatività: VERDE > GIALLO > ROSSO.
+      // Solo dentro lo stesso colore ordiniamo per qualità tecnica.
+      const statusOrder = { GREEN: 3, YELLOW: 2, RED: 1 };
+      const statusDifference =
+        statusOrder[operationalStatus(b).code] -
+        statusOrder[operationalStatus(a).code];
+      if (statusDifference !== 0) return statusDifference;
+
+      const finalDifference = finalSetupScore(b) - finalSetupScore(a);
+      if (Math.abs(finalDifference) >= 0.05) return finalDifference;
+
+      const trendDifference = tenScale(b.result.confidence) - tenScale(a.result.confidence);
+      if (trendDifference !== 0) return trendDifference;
+
+      const confluenceDifference =
+        (b.structure?.confluenceScore || 0) - (a.structure?.confluenceScore || 0);
+      if (confluenceDifference !== 0) return confluenceDifference;
+
+      return tenScale(b.plan.opportunityScore) - tenScale(a.plan.opportunityScore);
+    })
+    .slice(0, 3);`;
+
   fetch(`app.js?bootstrap=${Date.now()}`, {cache:"no-store"})
     .then(r => { if(!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); })
     .then(source => {
       if(!originalBlock.test(source)) throw new Error("Blocco ASSETS non trovato");
-      (0, eval)(source.replace(originalBlock, expandedAssets));
+      let patched = source.replace(originalBlock, expandedAssets);
+      if(!rankingBlock.test(patched)) throw new Error("Blocco classifica Trading non trovato");
+      patched = patched.replace(rankingBlock, rankingReplacement);
+      (0, eval)(patched);
     })
     .catch(error => {
       console.error("Errore bootstrap Trading Coach", error);
