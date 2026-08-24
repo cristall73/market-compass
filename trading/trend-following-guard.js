@@ -15,39 +15,43 @@
 
   window.TradingEngine.analyzeMarket = function guardedAnalyzeMarket(tf, custom = {}) {
     const result = original(tf, custom);
-    const timeframes = window.TRADING_CONFIG?.timeframes || ["1M", "1W", "1D", "4H", "1H"];
+    const displayTimeframes = window.TRADING_CONFIG?.timeframes || ["1M", "1W", "1D", "4H", "1H"];
+    const operationalTimeframes = ["1D", "4H", "1H"];
     const emaDirections = {};
 
-    timeframes.forEach(tfName => {
+    displayTimeframes.forEach(tfName => {
       const detail = result.details?.[tfName];
       const side = emaSide(detail);
       emaDirections[tfName] = side;
       if (detail?.valid) {
-        if (side === "LONG") detail.score = Math.max(25, Math.abs(detail.score || 25));
-        else if (side === "SHORT") detail.score = -Math.max(25, Math.abs(detail.score || 25));
-        else detail.score = 0;
         detail.emaTrendDirection = side;
         detail.reasons = [
-          `Filtro EMA rigido: ${side === "LONG" ? "prezzo sopra EMA 5/10/50/60/200" : side === "SHORT" ? "prezzo sotto EMA 5/10/50/60/200" : "EMA non tutte dalla stessa parte del prezzo"}`,
+          `${operationalTimeframes.includes(tfName) ? "Filtro EMA operativo" : "Contesto superiore"}: ${side === "LONG" ? "prezzo sopra EMA 5/10/50/60/200" : side === "SHORT" ? "prezzo sotto EMA 5/10/50/60/200" : "EMA non tutte dalla stessa parte del prezzo"}`,
           ...(detail.reasons || [])
         ];
+        // Solo Daily, 4H e 1H governano la direzione operativa.
+        if (operationalTimeframes.includes(tfName)) {
+          if (side === "LONG") detail.score = Math.max(25, Math.abs(detail.score || 25));
+          else if (side === "SHORT") detail.score = -Math.max(25, Math.abs(detail.score || 25));
+          else detail.score = 0;
+        }
       }
     });
 
-    const allLong = timeframes.every(tfName => emaDirections[tfName] === "LONG");
-    const allShort = timeframes.every(tfName => emaDirections[tfName] === "SHORT");
+    const allLong = operationalTimeframes.every(tfName => emaDirections[tfName] === "LONG");
+    const allShort = operationalTimeframes.every(tfName => emaDirections[tfName] === "SHORT");
     result.direction = allLong ? "LONG" : allShort ? "SHORT" : "WAIT";
     result.fastTradeReady = result.direction !== "WAIT";
     result.timeframeDirections = emaDirections;
     result.consensus = {
-      long: timeframes.filter(tfName => emaDirections[tfName] === "LONG").length,
-      short: timeframes.filter(tfName => emaDirections[tfName] === "SHORT").length,
-      wait: timeframes.filter(tfName => emaDirections[tfName] === "WAIT").length
+      long: operationalTimeframes.filter(tfName => emaDirections[tfName] === "LONG").length,
+      short: operationalTimeframes.filter(tfName => emaDirections[tfName] === "SHORT").length,
+      wait: operationalTimeframes.filter(tfName => emaDirections[tfName] === "WAIT").length
     };
-    result.alignment = Math.round(Math.max(result.consensus.long, result.consensus.short, result.consensus.wait) / timeframes.length * 100);
+    result.alignment = Math.round(Math.max(result.consensus.long, result.consensus.short, result.consensus.wait) / operationalTimeframes.length * 100);
     result.rules = {
       ...(result.rules || {}),
-      logic: "Trend following rigido: LONG solo se il prezzo è sopra EMA 5/10/50/60/200 su 1M, 1W, 1D, 4H e 1H; SHORT solo se è sotto tutte le EMA su tutti i timeframe. Qualsiasi disallineamento = WAIT."
+      logic: "Trading veloce trend following: LONG solo se il prezzo è sopra EMA 5/10/50/60/200 su 1D, 4H e 1H; SHORT solo se è sotto tutte le EMA su 1D, 4H e 1H. 1W e 1M restano contesto e non bloccano il trade."
     };
     return result;
   };
