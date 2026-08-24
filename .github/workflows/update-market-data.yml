@@ -57,6 +57,10 @@ jobs:
         run: |
           python scripts/postprocess_site.py
 
+      - name: Archivio segnali definitivi Investing
+        run: |
+          python scripts/archive_investment_signals.py
+
       - name: Correzione contatori selezione
         run: |
           python scripts/fix_selection_counters.py
