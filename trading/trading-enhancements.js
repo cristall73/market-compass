@@ -12,14 +12,14 @@
     cards.filter(card=>!INDEX_SYMBOLS.includes(card.dataset.symbol)).forEach(card=>grid.appendChild(card));
   }
 
-  function missingConditions(card){
-    const text=(card.textContent||"").replace(/\s+/g," ");
+  function missingConditions(root){
+    const text=(root?.textContent||"").replace(/\s+/g," ");
     const match=text.match(/Manc(?:a|ano)\s+(\d+)\s+condizion/i);
     return match?Number(match[1]):null;
   }
 
-  function metric(card,label){
-    const text=(card.textContent||"").replace(/\s+/g," ");
+  function metric(root,label){
+    const text=(root?.textContent||"").replace(/\s+/g," ");
     const match=text.match(new RegExp(`${label}[^0-9]{0,30}(\\d+(?:[.,]\\d+)?)\\/10`,"i"));
     return match?Number(match[1].replace(",",".")):null;
   }
@@ -31,8 +31,8 @@
     nodes.forEach(node=>{if(from.test(node.nodeValue||""))node.nodeValue=(node.nodeValue||"").replace(from,to);});
   }
 
-  function setYellowVisual(card){
-    card.querySelectorAll(".traffic-red").forEach(el=>{
+  function setYellowVisual(root){
+    root.querySelectorAll(".traffic-red").forEach(el=>{
       el.classList.remove("traffic-red");
       el.classList.add("traffic-yellow");
       const symbol=el.querySelector(":scope > b, .popup-traffic-symbol");
@@ -40,22 +40,40 @@
     });
   }
 
+  function shouldBeYellow(root){
+    const missing=missingConditions(root);
+    const trend=metric(root,"Forza trend") ?? metric(root,"Trend");
+    const confluence=metric(root,"Confluenza");
+    const nearReady=missing===1||missing===2;
+    const strongTrendWatch=missing===3&&trend!==null&&trend>=6&&(confluence===null||confluence>=3);
+    return nearReady||strongTrendWatch;
+  }
+
+  function yellowize(root){
+    replaceText(root,/ROSSO\s*[·\-–—:]\s*RIMANI FUORI/gi,"GIALLO · MONITORA");
+    replaceText(root,/ROSSO\s*[·\-–—:]\s*NESSUN INGRESSO/gi,"GIALLO · MONITORA");
+    replaceText(root,/SEMAFORO ROSSO\s*[·\-–—:]\s*NESSUN INGRESSO/gi,"SEMAFORO GIALLO · MONITORA");
+    replaceText(root,/SEMAFORO ROSSO/gi,"SEMAFORO GIALLO");
+    setYellowVisual(root);
+  }
+
   function applySemaphoreTiers(){
     document.querySelectorAll("#marketGrid .market-card").forEach(card=>{
-      const missing=missingConditions(card);
-      const trend=metric(card,"Forza trend") ?? metric(card,"Trend");
-      const confluence=metric(card,"Confluenza");
-      const nearReady=missing===1||missing===2;
-      const strongTrendWatch=missing===3&&trend!==null&&trend>=6&&(confluence===null||confluence>=3);
-      const yellow=nearReady||strongTrendWatch;
-
+      const yellow=shouldBeYellow(card);
       card.classList.toggle("near-ready",yellow);
-      if(yellow){
-        replaceText(card,/ROSSO\s*[·\-–—:]\s*RIMANI FUORI/gi,"GIALLO · MONITORA");
-        replaceText(card,/SEMAFORO ROSSO/gi,"SEMAFORO GIALLO");
-        setYellowVisual(card);
-      }
+      if(yellow)yellowize(card);
     });
+
+    // La Top 3 viene renderizzata separatamente dalle schede. Applichiamo la stessa
+    // regola visiva anche qui, altrimenti lo stesso asset può risultare rosso sopra
+    // e giallo sotto.
+    document.querySelectorAll(".ranking-table-row").forEach(row=>{
+      if(shouldBeYellow(row))yellowize(row);
+    });
+
+    // Anche il pannello del primo candidato deve usare lo stesso livello del n.1.
+    const lead=document.querySelector(".lead-panel");
+    if(lead&&shouldBeYellow(lead))yellowize(lead);
   }
 
   function updateCoverage(){
@@ -87,6 +105,6 @@
   function run(){reorderMainMarkets();applySemaphoreTiers();updateCoverage();renderSignalArchive();}
   let running=false;
   const observer=new MutationObserver(()=>{if(running)return;running=true;requestAnimationFrame(()=>{run();running=false;});});
-  const grid=document.querySelector("#marketGrid");if(grid)observer.observe(grid,{childList:true,subtree:true});
+  const main=document.querySelector("main");if(main)observer.observe(main,{childList:true,subtree:true});
   window.addEventListener("load",()=>setTimeout(run,700));
 })();
