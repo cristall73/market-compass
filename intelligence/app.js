@@ -1,12 +1,16 @@
-
 const DATA_URL="../data/market-data.json";let payload=null,currentFilter="ALL";
 const $=s=>document.querySelector(s);const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
 const fmt=(n,d=1)=>Number.isFinite(Number(n))?Number(n).toLocaleString("it-IT",{maximumFractionDigits:d,minimumFractionDigits:d}):"—";
+const NEWS_MAX_AGE_MS=48*60*60*1000;
 function money(n){const x=Number(n);if(!Number.isFinite(x))return"—";if(x>=1e12)return fmt(x/1e12,1)+" T";if(x>=1e9)return fmt(x/1e9,1)+" mld";if(x>=1e6)return fmt(x/1e6,0)+" mln";return fmt(x,0)}
 function ageText(iso){if(!iso)return"Età dati sconosciuta";const min=Math.max(0,Math.round((Date.now()-new Date(iso).getTime())/60000));if(min<60)return`Dati aggiornati ${min} min fa`;return`Dati aggiornati ${Math.floor(min/60)}h ${min%60}m fa`}
+function parsePublishedAt(value){if(value===null||value===undefined||value==="")return null;let d;if(typeof value==="number"||/^\d{10,13}$/.test(String(value))){let n=Number(value);if(n<1e12)n*=1000;d=new Date(n)}else d=new Date(value);return Number.isNaN(d.getTime())?null:d}
+function isErrorNews(i){const t=String(i?.title||"").toLowerCase();return t.includes("error 500")||t.includes("server error")||t.includes("please try again later")||t.includes("that's all we know")}
+function isRecentNews(i){const d=parsePublishedAt(i?.publishedAt);return !!d&&(Date.now()-d.getTime())>=-6*60*60*1000&&(Date.now()-d.getTime())<=NEWS_MAX_AGE_MS&&!isErrorNews(i)}
+function newsDate(i){const d=parsePublishedAt(i?.publishedAt);if(!d)return"";return `<span class="news-date">${esc(d.toLocaleString("it-IT",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}))}</span>`}
 function sourceLink(i){const p=esc(i.publisher||"Fonte");return i.url?`<a class="source" href="${esc(i.url)}" target="_blank" rel="noopener"><strong>${p}</strong> · Apri fonte ↗</a>`:`<span class="source"><strong>${p}</strong> · link originale non disponibile</span>`}
-function newsHtml(i){return `<article class="news-item"><div class="news-top"><strong>${esc(i.title)}</strong><span class="badge ${esc(i.direction)}">${i.direction==="POSITIVE"?"POSITIVA":i.direction==="NEGATIVE"?"NEGATIVA":"NEUTRA"}</span></div><p>${esc(i.whyItMatters)}</p>${sourceLink(i)}</article>`}
-function renderMarket(){const t=$("#marketNews"),rows=payload?.market||[];if(!rows.length){t.innerHTML='<div class="empty">Nessuna intelligence di mercato disponibile.</div>';return}t.innerHTML=rows.map(a=>{const n=(a.news||[]).filter(x=>currentFilter==="ALL"||x.direction===currentFilter);return `<section class="market-card"><h3>${esc(a.name)}</h3><div class="themes">${(a.themes||[]).map(esc).join(" · ")}</div>${n.length?n.map(newsHtml).join(""):'<div class="empty">Nessuna notizia nel filtro selezionato.</div>'}</section>`}).join("")}
+function newsHtml(i){return `<article class="news-item"><div class="news-top"><strong>${esc(i.title)}</strong><span class="badge ${esc(i.direction)}">${i.direction==="POSITIVE"?"POSITIVA":i.direction==="NEGATIVE"?"NEGATIVA":"NEUTRA"}</span></div>${newsDate(i)}<p>${esc(i.whyItMatters)}</p>${sourceLink(i)}</article>`}
+function renderMarket(){const t=$("#marketNews"),rows=payload?.market||[];if(!rows.length){t.innerHTML='<div class="empty">Nessuna intelligence di mercato disponibile.</div>';return}t.innerHTML=rows.map(a=>{const n=(a.news||[]).filter(isRecentNews).filter(x=>currentFilter==="ALL"||x.direction===currentFilter);return `<section class="market-card"><h3>${esc(a.name)}</h3><div class="themes">${(a.themes||[]).map(esc).join(" · ")}</div>${n.length?n.map(newsHtml).join(""):'<div class="empty">Nessuna notizia valida nelle ultime 48 ore.</div>'}</section>`}).join("")}
 
 function renderCompanies(){
   const t=$("#companyIntel"), rows=payload?.companies||[];
@@ -23,6 +27,7 @@ function renderCompanies(){
 
   t.innerHTML=rows.map((i,k)=>{
     const p=i.profile||{};
+    const recentCompanyNews=(i.news||[]).filter(isRecentNews);
     return `<article class="company-card" id="company-${esc(i.ticker)}" data-ticker="${esc(i.ticker)}">
       <div class="company-head">
         <div>
@@ -56,7 +61,7 @@ function renderCompanies(){
       </div>
       <div class="company-news">
         <h4>Notizie collegate e fonti</h4>
-        ${(i.news||[]).length?(i.news||[]).map(newsHtml).join(""):'<div class="empty">Nessuna notizia recente restituita dalla fonte dati.</div>'}
+        ${recentCompanyNews.length?recentCompanyNews.map(newsHtml).join(""):'<div class="empty">Nessuna notizia valida nelle ultime 48 ore.</div>'}
       </div>
       <p class="back-invest"><a href="../investing/">← Torna all'Investment Coach</a></p>
     </article>`
