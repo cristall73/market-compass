@@ -11,32 +11,32 @@ window.TRADING_CONFIG = {
   },
   entry: {
     retracementPercent: 50,
-    toleranceAtr: 0.35
+    toleranceAtr: 0.50
   },
   structure: {
     minimumTouches: 2,
     orderBlockImpulseAtr: 1.6,
     fairValueGapMinimumAtr: 0.12,
-    confluenceToleranceAtr: 0.55
+    confluenceToleranceAtr: 0.65
   },
   weights: {
     timeframeTrend: {
-      "1M": 10,
-      "1W": 15,
-      "1D": 30,
-      "4H": 25,
-      "1H": 20
+      "1M": 3,
+      "1W": 7,
+      "1D": 20,
+      "4H": 40,
+      "1H": 30
     },
     movingAverages: 25,
     supportResistance: 15,
-    classicalPatterns: 15,
-    momentum: 15,
+    classicalPatterns: 10,
+    momentum: 20,
     nadaraya: 10,
     retracementEntry: 20
   },
   thresholds: {
-    long: 30,
-    short: -30,
-    waitBand: 18
+    long: 25,
+    short: -25,
+    waitBand: 15
   }
 };
