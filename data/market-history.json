@@ -1,6 +1,6 @@
 {
   "schemaVersion": 10,
-  "updatedAt": "2026-08-26T05:08:12.546513+00:00",
+  "updatedAt": "2026-08-26T05:52:38.783933+00:00",
   "snapshots": [
     {
       "date": "2026-08-16",
@@ -3236,7 +3236,7 @@
     },
     {
       "date": "2026-08-26",
-      "generatedAt": "2026-08-26T05:08:12.546513+00:00",
+      "generatedAt": "2026-08-26T05:52:38.783933+00:00",
       "top5": [
         {
           "ticker": "GOOGL",
@@ -3368,8 +3368,8 @@
         {
           "ticker": "WFC",
           "rank": 11,
-          "rawScore": 7.135366956991051,
-          "stableScore": 6.920405460531152,
+          "rawScore": 7.135363441409188,
+          "stableScore": 6.920404405856593,
           "status": "YELLOW",
           "inTop5": false,
           "price": 84.79000091552734
@@ -3458,24 +3458,33 @@
         {
           "ticker": "6758.T",
           "rank": 21,
-          "rawScore": 6.452651689485166,
-          "stableScore": 6.488913404509972,
+          "rawScore": 6.478378477223667,
+          "stableScore": 6.460369725806716,
           "status": "YELLOW",
           "inTop5": false,
-          "price": 3896.0
+          "price": 3899.0
         },
         {
           "ticker": "ABT",
           "rank": 22,
-          "rawScore": 6.302132785720571,
-          "stableScore": 6.3552587457409215,
+          "rawScore": 6.302129391849048,
+          "stableScore": 6.355257727579465,
           "status": "RED",
           "inTop5": false,
           "price": 116.12999725341797
         },
         {
-          "ticker": "LIN",
+          "ticker": "WES.AX",
           "rank": 23,
+          "rawScore": 5.950027134340804,
+          "stableScore": 6.305206187206796,
+          "status": "RED",
+          "inTop5": false,
+          "price": 83.02999877929688
+        },
+        {
+          "ticker": "LIN",
+          "rank": 24,
           "rawScore": 6.193157248764466,
           "stableScore": 6.300359393707868,
           "status": "YELLOW",
@@ -3484,21 +3493,12 @@
         },
         {
           "ticker": "UNH",
-          "rank": 24,
+          "rank": 25,
           "rawScore": 6.009176777489908,
           "stableScore": 6.292079148026847,
           "status": "RED",
           "inTop5": false,
           "price": 396.5899963378906
-        },
-        {
-          "ticker": "WES.AX",
-          "rank": 25,
-          "rawScore": 5.833240959564199,
-          "stableScore": 6.27101527563321,
-          "status": "RED",
-          "inTop5": false,
-          "price": 82.87000274658203
         },
         {
           "ticker": "UPS",
@@ -3512,8 +3512,8 @@
         {
           "ticker": "UL",
           "rank": 27,
-          "rawScore": 6.001995074866397,
-          "stableScore": 6.1742254891341695,
+          "rawScore": 6.001998724934832,
+          "stableScore": 6.174226264773711,
           "status": "RED",
           "inTop5": false,
           "price": 65.1500015258789
@@ -3539,20 +3539,20 @@
         {
           "ticker": "ANZ.AX",
           "rank": 30,
-          "rawScore": 5.681104014407708,
-          "stableScore": 5.6236419273554334,
+          "rawScore": 5.697341980693743,
+          "stableScore": 5.6663956860662035,
           "status": "RED",
           "inTop5": false,
-          "price": 36.91999816894531
+          "price": 36.90999984741211
         },
         {
           "ticker": "CSL.AX",
           "rank": 31,
-          "rawScore": 5.417328252245881,
-          "stableScore": 5.449145054931029,
+          "rawScore": 5.401818024375361,
+          "stableScore": 5.426990919011387,
           "status": "RED",
           "inTop5": false,
-          "price": 173.32000732421875
+          "price": 173.1999969482422
         }
       ],
       "changes": {
