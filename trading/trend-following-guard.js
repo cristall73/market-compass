@@ -13,40 +13,46 @@
     const ma50 = av.ma50;
     const ma60 = av.ma60;
     const ma200 = av.ma200;
+    const dow = detail.dow?.direction || "WAIT";
 
     if (![ma50, ma60, ma200].every(Number.isFinite)) return "WAIT";
 
-    // Il trend operativo non richiede più che il prezzo sia dalla stessa parte
-    // di TUTTE le EMA veloci. 50/60/200 definiscono la struttura di fondo.
-    const longStructure = current > ma50 && current > ma60 && current > ma200 && ma50 > ma200;
-    const shortStructure = current < ma50 && current < ma60 && current < ma200 && ma50 < ma200;
-    if (longStructure) return "LONG";
-    if (shortStructure) return "SHORT";
+    // La direzione strutturale non viene decisa dal momentum dell'ultima candela.
+    // EMA 50/60/200 + struttura Dow devono raccontare la stessa storia oppure si resta WAIT.
+    const longEma = current > ma50 && current > ma60 && current > ma200 && ma50 > ma200;
+    const shortEma = current < ma50 && current < ma60 && current < ma200 && ma50 < ma200;
+
+    if (longEma && dow !== "SHORT") return "LONG";
+    if (shortEma && dow !== "LONG") return "SHORT";
     return "WAIT";
   };
 
   const timingState = (detail, direction) => {
-    if (!detail?.valid || !Number.isFinite(detail.current)) return "WAIT";
+    if (!detail?.valid || !Number.isFinite(detail.current) || direction === "WAIT") return "WAIT";
     const av = detail.movingAverages || {};
     const current = detail.current;
     const ma10 = av.ma10;
     const ma50 = av.ma50;
+    const ma200 = av.ma200;
     const text = (detail.reasons || []).join(" ");
     const onRetracement = /Ritracciamento nel trend/i.test(text);
     const score = Number(detail.score || 0);
+    const dow = detail.dow?.direction || "WAIT";
 
     if (direction === "LONG") {
-      // 1H serve al timing: un piccolo ritracciamento sotto EMA10 è ammesso.
-      // Si blocca soltanto se il breve è realmente diventato contrario.
-      if (Number.isFinite(ma50) && current < ma50 && score <= -25) return "OPPOSITE";
-      if (onRetracement || (Number.isFinite(ma10) && current >= ma10) || score >= 0) return "READY";
-      return "WAIT";
+      // Un ritracciamento 1H non diventa SHORT solo perché RSI/Stoch o le ultime candele scendono.
+      // Si considera realmente opposto solo con deterioramento strutturale più ampio.
+      const structurallyOpposite = Number.isFinite(ma50) && Number.isFinite(ma200) && current < ma50 && current < ma200 && score <= -35 && dow === "SHORT";
+      if (structurallyOpposite) return "OPPOSITE";
+      if (onRetracement || (Number.isFinite(ma10) && current >= ma10) || score >= -20) return "READY";
+      return "PULLBACK";
     }
 
     if (direction === "SHORT") {
-      if (Number.isFinite(ma50) && current > ma50 && score >= 25) return "OPPOSITE";
-      if (onRetracement || (Number.isFinite(ma10) && current <= ma10) || score <= 0) return "READY";
-      return "WAIT";
+      const structurallyOpposite = Number.isFinite(ma50) && Number.isFinite(ma200) && current > ma50 && current > ma200 && score >= 35 && dow === "LONG";
+      if (structurallyOpposite) return "OPPOSITE";
+      if (onRetracement || (Number.isFinite(ma10) && current <= ma10) || score <= 20) return "READY";
+      return "PULLBACK";
     }
 
     return "WAIT";
@@ -64,21 +70,23 @@
       if (!detail?.valid) return;
 
       detail.emaTrendDirection = side;
-      const role = contextTimeframes.includes(tfName) ? "Contesto superiore" : tfName === "1H" ? "Timing 1H" : "Trend operativo";
+      const role = contextTimeframes.includes(tfName) ? "Contesto superiore" : tfName === "1H" ? "Struttura 1H" : "Trend operativo";
       detail.reasons = [
-        `${role}: ${side === "LONG" ? "struttura rialzista su EMA 50/60/200" : side === "SHORT" ? "struttura ribassista su EMA 50/60/200" : "struttura non ancora netta su EMA 50/60/200"}`,
+        `${role}: ${side === "LONG" ? "struttura rialzista confermata da EMA 50/60/200" : side === "SHORT" ? "struttura ribassista confermata da EMA 50/60/200" : "struttura non abbastanza netta per dichiarare LONG o SHORT"}`,
         ...(detail.reasons || [])
       ];
     });
 
-    // Daily + 4H governano la direzione. Devono essere concordi.
+    // Per trading veloce il 4H guida la direzione; il Daily è un guardrail, non deve per forza essere già concorde.
+    // Questo evita di perdere setup intraday mentre il Daily è ancora neutrale.
     const daily = structure["1D"];
     const h4 = structure["4H"];
-    const trendDirection = daily === h4 && (daily === "LONG" || daily === "SHORT") ? daily : "WAIT";
+    let trendDirection = "WAIT";
+    if (h4 === "LONG" && daily !== "SHORT") trendDirection = "LONG";
+    else if (h4 === "SHORT" && daily !== "LONG") trendDirection = "SHORT";
+
     const timing = timingState(result.details?.["1H"], trendDirection);
 
-    // 1H non deve più essere perfettamente allineato con tutte le EMA:
-    // può essere in ritracciamento, purché non sia diventato chiaramente opposto.
     let direction = "WAIT";
     if (trendDirection !== "WAIT" && timing === "READY") direction = trendDirection;
 
@@ -88,7 +96,9 @@
     const tfDirections = {};
     displayTimeframes.forEach(tfName => {
       if (tfName === "1H" && trendDirection !== "WAIT") {
-        tfDirections[tfName] = timing === "OPPOSITE" ? (trendDirection === "LONG" ? "SHORT" : "LONG") : timing === "READY" ? trendDirection : "WAIT";
+        // IMPORTANTISSIMO: il rimbalzo/pullback 1H contro il 4H non viene etichettato come nuovo trend opposto.
+        // Finché non c'è una vera inversione strutturale, l'1H resta nella direzione del trend operativo oppure WAIT.
+        tfDirections[tfName] = timing === "OPPOSITE" ? "WAIT" : trendDirection;
       } else {
         tfDirections[tfName] = structure[tfName] || "WAIT";
       }
@@ -103,19 +113,19 @@
     };
     result.alignment = Math.round(Math.max(result.consensus.long, result.consensus.short, result.consensus.wait) / operationalTimeframes.length * 100);
 
-    // Espone il motivo del WAIT per la UI e per il diario dei segnali.
     result.operationalFilter = {
       trendDirection,
       timing,
       daily,
       h4,
+      h1Structure: structure["1H"],
       ready: result.fastTradeReady
     };
 
     result.rules = {
       ...(result.rules || {}),
-      entryRetracement: "Trend 1D + 4H concorde; 1H usato come timing del ritracciamento verso EMA10/EMA50/Nadaraya o 50% swing.",
-      logic: "Trading veloce trend following: 1D e 4H definiscono la direzione tramite la struttura EMA 50/60/200. 1H serve al timing e può essere temporaneamente in ritracciamento; blocca il trade solo se diventa chiaramente opposto. 1W e 1M restano contesto e non bloccano da soli l'ingresso."
+      entryRetracement: "4H definisce il trend operativo; 1D fa da guardrail. 1H cerca il timing del ritracciamento verso EMA10/EMA50/Nadaraya o 50% swing senza scambiare il pullback per inversione.",
+      logic: "Trading veloce trend following: 4H guida la direzione, 1D blocca solo se chiaramente opposto. 1H separa trend e momentum: un rimbalzo controtrend viene trattato come pullback e non come nuovo LONG/SHORT finché non compare una vera inversione strutturale. 1W e 1M restano contesto."
     };
 
     return result;
