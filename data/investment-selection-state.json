@@ -170,7 +170,7 @@
       "rawScore": 7.977383749680865,
       "finalScore": 7.76382628198839,
       "stableScore": 7.76382628198839,
-      "status": "YELLOW",
+      "status": "GREEN",
       "watchZoneLow": 217.87198085784914,
       "watchZoneHigh": 232.85458126068116,
       "entryZoneLow": 194.7738052368164,
@@ -278,10 +278,10 @@
       "isNewEntry": false,
       "rawStatus": "GREEN",
       "confirmation": {
-        "days": 4,
+        "days": 5,
         "requiredDays": 5,
-        "confirmed": false,
-        "label": "IN CONFERMA 4/5 GIORNI"
+        "confirmed": true,
+        "label": "ACQUISTO CONFERMATO"
       }
     },
     {
@@ -707,8 +707,8 @@
   ],
   "confirmations": {
     "MU": {
-      "startDate": "2026-08-26",
-      "lastDate": "2026-08-26",
+      "startDate": "2026-08-27",
+      "lastDate": "2026-08-27",
       "days": 0
     },
     "AVGO": {
@@ -727,31 +727,31 @@
       "days": 3
     },
     "GOOGL": {
-      "startDate": "2026-08-26",
-      "lastDate": "2026-08-26",
+      "startDate": "2026-08-27",
+      "lastDate": "2026-08-27",
       "days": 0
     },
     "TXN": {
-      "startDate": "2026-08-26",
-      "lastDate": "2026-08-26",
+      "startDate": "2026-08-27",
+      "lastDate": "2026-08-27",
       "days": 0
     },
     "SHOP.TO": {
       "startDate": "2026-08-21",
-      "lastDate": "2026-08-26",
-      "days": 4
+      "lastDate": "2026-08-27",
+      "days": 5
     },
     "CSCO": {
-      "startDate": "2026-08-26",
-      "lastDate": "2026-08-26",
+      "startDate": "2026-08-27",
+      "lastDate": "2026-08-27",
       "days": 0
     }
   },
   "selectionTenure": {
     "MU": {
       "firstDate": "2026-08-18",
-      "lastDate": "2026-08-26",
-      "days": 7
+      "lastDate": "2026-08-27",
+      "days": 8
     },
     "AVGO": {
       "firstDate": "2026-08-18",
@@ -770,23 +770,23 @@
     },
     "GOOGL": {
       "firstDate": "2026-08-18",
-      "lastDate": "2026-08-26",
-      "days": 7
+      "lastDate": "2026-08-27",
+      "days": 8
     },
     "TXN": {
       "firstDate": "2026-08-21",
-      "lastDate": "2026-08-26",
-      "days": 4
+      "lastDate": "2026-08-27",
+      "days": 5
     },
     "SHOP.TO": {
       "firstDate": "2026-08-21",
-      "lastDate": "2026-08-26",
-      "days": 4
+      "lastDate": "2026-08-27",
+      "days": 5
     },
     "CSCO": {
       "firstDate": "2026-08-21",
-      "lastDate": "2026-08-26",
-      "days": 4
+      "lastDate": "2026-08-27",
+      "days": 5
     }
   },
   "selectionCounterActive": [
@@ -796,6 +796,29 @@
     "SHOP.TO",
     "TXN"
   ],
-  "confirmedPurchaseHistory": [],
-  "activeConfirmedPurchases": {}
+  "confirmedPurchaseHistory": [
+    {
+      "id": "SHOP.TO:2026-08-27T03:32:14.953683+00:00",
+      "ticker": "SHOP.TO",
+      "name": "Shopify Inc.",
+      "signalDate": "2026-08-27T03:32:14.953683+00:00",
+      "signalPrice": 208.5,
+      "finalScore": 7.76382628198839,
+      "qualityScore": 6.6288857142857145,
+      "trendScore": 9.25,
+      "entryScore": 9.934250427294883,
+      "pullbackPct": 18.557530876116978,
+      "entryZoneLow": 194.7738052368164,
+      "entryZoneHigh": 212.2535057067871,
+      "invalidation": 170.40621302059617,
+      "target1": 243.2425864132485,
+      "target2": 269.72854037421297,
+      "target3": 302.83598282541857,
+      "statusAtSignal": "GREEN",
+      "summaryAtSignal": "Shopify Inc. mantiene qualità 6.6/10 e trend 9.2/10. Quota a -18.6% dal massimo. Punteggio odierno 8.0, media storica 7.6."
+    }
+  ],
+  "activeConfirmedPurchases": {
+    "SHOP.TO": "SHOP.TO:2026-08-27T03:32:14.953683+00:00"
+  }
 }
