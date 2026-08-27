@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import yfinance as yf
@@ -16,6 +16,7 @@ EXIT_CONFIRM_DAYS = 5
 ENTRY_MARGIN = 0.40
 MAX_ROTATIONS_PER_DAY = 1
 MIN_CHALLENGER_SCORE = 7.15
+EXIT_ARCHIVE_DAYS = 14
 
 
 def load(path: Path, default):
@@ -53,6 +54,33 @@ def refresh_price(item: dict) -> None:
         pass
 
 
+def prune_and_refresh_exit_archive(rows: list[dict], today_text: str) -> list[dict]:
+    try:
+        today = datetime.fromisoformat(today_text).date()
+    except Exception:
+        today = datetime.now(timezone.utc).date()
+    cutoff = today - timedelta(days=EXIT_ARCHIVE_DAYS)
+    kept = []
+    for row in rows:
+        try:
+            exit_date = datetime.fromisoformat(str(row.get("exitDate"))).date()
+        except Exception:
+            continue
+        if exit_date < cutoff:
+            continue
+        refreshed = dict(row)
+        refresh_price(refreshed)
+        exit_price = refreshed.get("exitPrice")
+        current_price = refreshed.get("currentPrice")
+        try:
+            refreshed["returnSinceExitPct"] = (float(current_price) / float(exit_price) - 1) * 100
+        except Exception:
+            refreshed["returnSinceExitPct"] = None
+        kept.append(refreshed)
+    kept.sort(key=lambda x: str(x.get("exitDate") or ""), reverse=True)
+    return kept[:30]
+
+
 def main() -> int:
     root = load(DATA, {})
     state = load(STATE, {})
@@ -63,9 +91,6 @@ def main() -> int:
 
     today = datetime.now(timezone.utc).date().isoformat()
 
-    # strictSelection è la vera lista persistente. È separata da state['candidates']
-    # perché postprocess_site può rivalutare la lista tecnica: qui impediamo che una
-    # rivalutazione sostituisca in blocco la Top 5.
     strict = state.get("strictSelection") or state.get("candidates") or proposed
     strict = list(strict)[:5]
 
@@ -78,8 +103,6 @@ def main() -> int:
     incumbent_weak_days = rotation.setdefault("incumbentWeakDays", {})
     last_count_date = rotation.get("lastCountDate")
 
-    # I contatori avanzano una sola volta per giornata di Borsa, non ad ogni run
-    # del workflow (che può avvenire molte volte nella stessa giornata).
     if last_count_date != today:
         for ticker in strict_tickers:
             incumbent = proposed_map.get(ticker)
@@ -93,17 +116,12 @@ def main() -> int:
             eligible = (not is_red(candidate)) and score(candidate) >= MIN_CHALLENGER_SCORE
             challenger_days[ticker] = int(challenger_days.get(ticker, 0)) + 1 if eligible else 0
 
-        # Chi non è più fra i challenger proposti perde la sequenza: servono
-        # davvero giorni consecutivi, non cinque apparizioni sparse.
         for ticker in list(challenger_days):
             if ticker not in proposed_map or ticker in strict_map:
                 challenger_days.pop(ticker, None)
 
         rotation["lastCountDate"] = today
 
-    # Aggiorna i dati dei titoli già presenti con la versione fresca, quando c'è.
-    # Se un incumbent è temporaneamente fuori dalla proposta, resta visibile e
-    # viene espulso solo dopo EXIT_CONFIRM_DAYS giorni consecutivi di debolezza.
     updated_strict = []
     for old in strict:
         ticker = old.get("ticker")
@@ -131,6 +149,7 @@ def main() -> int:
     eligible_out.sort(key=score)
     eligible_in.sort(key=score, reverse=True)
 
+    exit_archive = prune_and_refresh_exit_archive(state.get("recentExitedCandidates") or [], today)
     entered, exited, reasons = [], [], []
     rotations = 0
     while eligible_out and eligible_in and rotations < MAX_ROTATIONS_PER_DAY:
@@ -145,16 +164,38 @@ def main() -> int:
         strict = [challenger if x.get("ticker") == out_ticker else x for x in strict]
         entered.append(in_ticker)
         exited.append(out_ticker)
-        reasons.append({
+        reason = (
+            f"Uscita confermata dopo {EXIT_CONFIRM_DAYS} giorni consecutivi di deterioramento; "
+            f"{in_ticker} confermato per {ENTRY_CONFIRM_DAYS} giorni e superiore di {gap:.2f} punti"
+        )
+        reasons.append({"ticker": out_ticker, "reason": reason})
+
+        archived = {
             "ticker": out_ticker,
-            "reason": (
-                f"Uscita confermata dopo {EXIT_CONFIRM_DAYS} giorni consecutivi di deterioramento; "
-                f"{in_ticker} confermato per {ENTRY_CONFIRM_DAYS} giorni e superiore di {gap:.2f} punti"
-            ),
-        })
+            "name": incumbent.get("name") or out_ticker,
+            "sector": incumbent.get("sector"),
+            "currency": incumbent.get("currency"),
+            "exitDate": today,
+            "exitPrice": incumbent.get("currentPrice"),
+            "currentPrice": incumbent.get("currentPrice"),
+            "exitScore": score(incumbent),
+            "statusAtExit": incumbent.get("status"),
+            "rawStatusAtExit": incumbent.get("rawStatus"),
+            "replacementTicker": in_ticker,
+            "reason": reason,
+            "entryZoneLow": incumbent.get("entryZoneLow"),
+            "entryZoneHigh": incumbent.get("entryZoneHigh"),
+            "invalidation": incumbent.get("invalidation"),
+            "returnSinceExitPct": 0.0,
+        }
+        exit_archive = [x for x in exit_archive if x.get("ticker") != out_ticker]
+        exit_archive.insert(0, archived)
+
         challenger_days.pop(in_ticker, None)
         incumbent_weak_days.pop(out_ticker, None)
         rotations += 1
+
+    exit_archive = prune_and_refresh_exit_archive(exit_archive, today)
 
     strict.sort(key=score, reverse=True)
     for rank, item in enumerate(strict, 1):
@@ -162,6 +203,8 @@ def main() -> int:
         item["isNewEntry"] = item.get("ticker") in entered
 
     inv["candidates"] = strict[:5]
+    inv["recentExitedCandidates"] = exit_archive
+    inv["recentExitedRetentionDays"] = EXIT_ARCHIVE_DAYS
     inv["changes"] = {
         "date": today,
         "entered": entered,
@@ -176,14 +219,15 @@ def main() -> int:
         "selectionEntryMargin": ENTRY_MARGIN,
         "maxRotationsPerDay": MAX_ROTATIONS_PER_DAY,
         "strictSelection": True,
+        "recentExitedRetentionDays": EXIT_ARCHIVE_DAYS,
     })
 
     state["strictSelection"] = strict[:5]
     state["candidates"] = strict[:5]
     state["strictRotation"] = rotation
+    state["recentExitedCandidates"] = exit_archive
     root["investment"] = inv
 
-    # Mantiene coerente anche il calendario economico con la Top 5 realmente visibile.
     cal = load(CAL, {})
     if cal:
         cal["investmentCandidates"] = [
@@ -196,7 +240,8 @@ def main() -> int:
     save(DATA, root)
     print(
         f"Top5 Investing rigida: {', '.join(c.get('ticker','?') for c in strict[:5])}; "
-        f"entrate={entered or 'nessuna'} uscite={exited or 'nessuna'}"
+        f"entrate={entered or 'nessuna'} uscite={exited or 'nessuna'}; "
+        f"archivio uscite recenti={len(exit_archive)}"
     )
     return 0
 
