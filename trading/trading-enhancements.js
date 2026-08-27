@@ -49,17 +49,59 @@
     return nearReady||strongTrendWatch;
   }
 
-  function forceYellowLabels(root){
-    // Le etichette della Top 3 e del pannello laterale sono composte da nodi HTML
-    // separati; una semplice sostituzione testuale non basta. Le aggiorniamo quindi
-    // direttamente, mantenendo identica la logica usata per le schede sottostanti.
+  function timeframeDirection(text,tf){
+    const match=(text||"").match(new RegExp(`(?:^|\\s)${tf}\\s+(LONG|SHORT|WAIT)(?:\\s|$)`,"i"));
+    return match?match[1].toUpperCase():null;
+  }
+
+  function inferBiasFromCard(card){
+    if(!card)return null;
+    const text=(card.textContent||"").replace(/\s+/g," ");
+    const high=["1M","1W","1D"].map(tf=>timeframeDirection(text,tf)).filter(Boolean);
+    const longs=high.filter(x=>x==="LONG").length;
+    const shorts=high.filter(x=>x==="SHORT").length;
+    if(longs>=2)return "LONG";
+    if(shorts>=2)return "SHORT";
+    const d4=timeframeDirection(text,"4H");
+    if(d4&&d4!=="WAIT")return d4;
+    const h1=timeframeDirection(text,"1H");
+    return h1&&h1!=="WAIT"?h1:null;
+  }
+
+  function assetKey(root){
+    if(!root)return "";
+    if(root.dataset?.symbol)return root.dataset.symbol.toUpperCase();
+    const text=(root.textContent||"").toUpperCase();
+    const aliases={"NASDAQ 100":"USATEC","DAX 40":"GER40","S&P 500":"US500","FTSE 100":"UK100","IBEX 35":"ESP35","CAC 40":"FRA40","FTSE MIB":"ITA40","CHINA A50":"CHINA50","BOVESPA":"BRA50","GOLD":"XAUUSD","SILVER":"XAGUSD","PETROLIO WTI":"WTI","EUR/USD":"EURUSD","USD/JPY":"USDJPY"};
+    for(const [name,symbol] of Object.entries(aliases))if(text.includes(name))return symbol;
+    return "";
+  }
+
+  function buildBiasMap(){
+    const map=new Map();
+    document.querySelectorAll("#marketGrid .market-card").forEach(card=>{
+      const key=assetKey(card),bias=inferBiasFromCard(card);
+      if(key&&bias)map.set(key,bias);
+    });
+    return map;
+  }
+
+  function biasForRoot(root,biasMap){
+    const direct=inferBiasFromCard(root);
+    if(direct)return direct;
+    const key=assetKey(root);
+    return key?biasMap.get(key)||null:null;
+  }
+
+  function forceYellowLabels(root,bias){
+    const suffix=bias?` ${bias}`:"";
     root.querySelectorAll(".traffic-status").forEach(el=>{
       el.classList.remove("traffic-red");
       el.classList.add("traffic-yellow");
       const icon=el.querySelector("b");
       const label=el.querySelector("span");
       if(icon)icon.textContent="!";
-      if(label)label.textContent="GIALLO · MONITORA";
+      if(label)label.textContent=`GIALLO · MONITORA${suffix}`;
     });
 
     root.querySelectorAll(".lead-traffic").forEach(el=>{
@@ -71,33 +113,40 @@
       const label=el.querySelector("div > span");
       if(icon)icon.textContent="!";
       if(color)color.textContent="GIALLO";
-      if(action)action.textContent="MONITORA";
-      if(label)label.textContent="SEMAFORO GIALLO · SETUP DA MONITORARE";
+      if(action)action.textContent=`MONITORA${suffix}`;
+      if(label)label.textContent=bias?`BIAS ${bias} · ATTENDI IL TIMING SUL RITRACCIAMENTO`:"SEMAFORO GIALLO · SETUP DA MONITORARE";
+    });
+
+    root.querySelectorAll(".badge.wait, .direction.wait, .direction-badge.wait").forEach(el=>{
+      if(bias)el.textContent=`WAIT · BIAS ${bias}`;
     });
   }
 
-  function yellowize(root){
-    replaceText(root,/ROSSO\s*[·\-–—:]\s*RIMANI FUORI/gi,"GIALLO · MONITORA");
-    replaceText(root,/ROSSO\s*[·\-–—:]\s*NESSUN INGRESSO/gi,"GIALLO · MONITORA");
-    replaceText(root,/SEMAFORO ROSSO\s*[·\-–—:]\s*NESSUN INGRESSO/gi,"SEMAFORO GIALLO · MONITORA");
+  function yellowize(root,bias){
+    const replacement=bias?`GIALLO · MONITORA ${bias}`:"GIALLO · MONITORA";
+    replaceText(root,/GIALLO\s*[·\-–—:]\s*MONITORA(?:\s+(?:LONG|SHORT))?/gi,replacement);
+    replaceText(root,/ROSSO\s*[·\-–—:]\s*RIMANI FUORI/gi,replacement);
+    replaceText(root,/ROSSO\s*[·\-–—:]\s*NESSUN INGRESSO/gi,replacement);
+    replaceText(root,/SEMAFORO ROSSO\s*[·\-–—:]\s*NESSUN INGRESSO/gi,bias?`BIAS ${bias} · ATTENDI IL TIMING`:"SEMAFORO GIALLO · MONITORA");
     replaceText(root,/SEMAFORO ROSSO/gi,"SEMAFORO GIALLO");
     setYellowVisual(root);
-    forceYellowLabels(root);
+    forceYellowLabels(root,bias);
   }
 
   function applySemaphoreTiers(){
+    const biasMap=buildBiasMap();
     document.querySelectorAll("#marketGrid .market-card").forEach(card=>{
       const yellow=shouldBeYellow(card);
       card.classList.toggle("near-ready",yellow);
-      if(yellow)yellowize(card);
+      if(yellow)yellowize(card,biasForRoot(card,biasMap));
     });
 
     document.querySelectorAll(".ranking-table-row").forEach(row=>{
-      if(shouldBeYellow(row))yellowize(row);
+      if(shouldBeYellow(row))yellowize(row,biasForRoot(row,biasMap));
     });
 
     const lead=document.querySelector(".lead-panel");
-    if(lead&&shouldBeYellow(lead))yellowize(lead);
+    if(lead&&shouldBeYellow(lead))yellowize(lead,biasForRoot(lead,biasMap));
   }
 
   function updateCoverage(){
