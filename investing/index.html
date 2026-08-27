@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="it">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Investment Coach AI</title><link rel="stylesheet" href="styles.css?v=602"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Investment Coach AI</title><link rel="stylesheet" href="styles.css?v=603"></head>
 <body>
 <nav class="module-nav"><a href="../">Market Compass</a><a href="../trading/">Trading Coach</a><a class="active" href="./">Investment Coach</a><a href="../etf/">ETF & PAC Coach</a><a href="../intelligence/">News & Catalyst Coach</a><a href="../calendar/">Calendario Economico</a></nav>
-<header class="hero"><div><p>MARKET COMPASS · INVESTMENT COACH v16.4</p><h1>Investment Coach AI</h1><span>Large cap globali · orizzonte operativo 2-4 mesi · selezione delle migliori 4-5 opportunità</span></div><div class="hero-actions"><div id="freshness" class="freshness">Caricamento dati…</div><button id="reportBtn" disabled>Scarica report</button></div></header>
+<header class="hero"><div><p>MARKET COMPASS · INVESTMENT COACH v16.5</p><h1>Investment Coach AI</h1><span>Large cap globali · orizzonte operativo 2-4 mesi · selezione delle migliori 4-5 opportunità</span></div><div class="hero-actions"><div id="freshness" class="freshness">Caricamento dati…</div><button id="reportBtn" disabled>Scarica report</button></div></header>
 <main>
 <section class="stats"><div><span>Azioni esaminate</span><strong id="screenedCount">0</strong></div><div><span>Candidate finali</span><strong id="candidateCount">0</strong></div><div><span>Semafori verdi</span><strong id="greenCount">0</strong></div><div><span>Semafori gialli</span><strong id="yellowCount">0</strong></div></section>
+<section id="confirmedSignalHistory" class="history-panel"><div class="history-box"><div class="history-head"><div><small>ACQUISTI CONFERMATI — STORICO</small><h3>Segnali verdi definitivi</h3></div><div class="history-summary"><span>Caricamento…</span></div></div><p class="history-exit">Qui restano salvati i titoli che il sistema ha realmente confermato come acquistabili, anche dopo l'uscita dalla Top 5.</p></div></section>
 <section class="method"><strong>METODO</strong><span>Prima qualità e trend di fondo, poi ritracciamento e conferma Daily. Il verde definitivo richiede persistenza per più giorni di Borsa; la composizione della lista non cambia a ogni aggiornamento prezzi.</span></section>
 <section id="changePanel" class="change-panel"></section><section id="historyPanel" class="history-panel"></section><section id="validationPanel" class="validation-panel"></section><section id="topArea" class="top-area"><div class="loading">Analizzo l’universo large cap…</div></section>
 <section class="section-heading"><div><h2>Migliori opportunità</h2><p>Il motore analizza oltre 200 titoli globali ma mostra soltanto i candidati con il miglior equilibrio fra qualità, prezzo e catalizzatori.</p></div><select id="statusFilter"><option value="ALL">Tutti</option><option value="GREEN">Verdi</option><option value="YELLOW">Gialli</option><option value="RED">Rossi</option></select></section>
@@ -14,7 +15,7 @@
 <section class="limitations"><h3>Cosa significa il punteggio</h3><p>Il punteggio sintetizza dati tecnici, fondamentali e notizie disponibili. Non rappresenta una probabilità garantita.</p></section>
 </main>
 <dialog id="detailDialog"><button type="button" class="close" id="closeDialog" aria-label="Chiudi">×</button><div id="detailContent"></div></dialog>
-<script src="app.js?v=1010"></script><script src="signal-history.js?v=1"></script><script src="tradingview.js?v=1"></script>
+<script src="app.js?v=1010"></script><script src="signal-history.js?v=2"></script><script src="tradingview.js?v=1"></script>
 <script>
 (function(){
   const dialog=document.getElementById('detailDialog');
