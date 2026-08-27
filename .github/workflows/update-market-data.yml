@@ -5,15 +5,9 @@ on:
   schedule:
     # Trading Coach veloce: aggiorna ogni 15 minuti.
     - cron: '*/15 * * * *'
-  push:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/update-market-data.yml'
-      - 'scripts/**'
 
-# Un solo aggiornamento dati alla volta: se parte il successivo mentre il
-# precedente e ancora attivo, annulla quello vecchio evitando conflitti di push.
+# Un solo aggiornamento dati alla volta. I push manuali al codice non avviano
+# più un secondo workflow mentre quello schedulato sta generando i JSON.
 concurrency:
   group: market-data-main
   cancel-in-progress: true
@@ -79,5 +73,18 @@ jobs:
             exit 0
           fi
           git commit -m "Aggiornamento automatico dati"
-          git pull --rebase origin main
+
+          # Se il branch remoto è avanzato durante il calcolo (per esempio per una
+          # modifica manuale al sito), non tentiamo un rebase dei JSON generati:
+          # è proprio quello che causava i conflitti. In quel caso annulliamo
+          # questo run e lasciamo che il successivo, partendo dall'ultimo main,
+          # rigeneri tutto correttamente.
+          git fetch origin main
+          LOCAL_BASE=$(git rev-parse HEAD^)
+          REMOTE_HEAD=$(git rev-parse origin/main)
+          if [ "$LOCAL_BASE" != "$REMOTE_HEAD" ]; then
+            echo "Il branch main è cambiato durante il run. Nessun merge dei JSON: aggiornamento rimandato al prossimo ciclo."
+            exit 0
+          fi
+
           git push origin HEAD:main
