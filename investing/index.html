@@ -26,6 +26,27 @@
   dialog.addEventListener('click',function(e){if(e.target===dialog)closeDetail(e);});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&dialog.open)closeDetail(e);});
 
+  // Compatibilità con il nuovo motore Investment Coach: app.js renderizza già
+  // classifica e schede, ma i quattro contatori storici della testata usano ID
+  // separati. Li sincronizziamo con gli stessi candidati e la stessa funzione phase().
+  function syncHeaderStats(){
+    try{
+      if(!Array.isArray(candidates)||!candidates.length)return false;
+      const greens=candidates.filter(i=>phase(i).status==='GREEN').length;
+      const yellows=candidates.filter(i=>phase(i).status==='YELLOW').length;
+      const screened=Number(payload?.screenedCount ?? payload?.screened ?? payload?.universeSize ?? payload?.totalAnalyzed ?? candidates.length);
+      document.getElementById('screenedCount').textContent=Number.isFinite(screened)?screened:candidates.length;
+      document.getElementById('candidateCount').textContent=candidates.length;
+      document.getElementById('greenCount').textContent=greens;
+      document.getElementById('yellowCount').textContent=yellows;
+      const fresh=document.getElementById('freshness');
+      if(fresh&&fresh.textContent.includes('Caricamento')) fresh.textContent='Dati caricati';
+      return true;
+    }catch(_){return false;}
+  }
+  let attempts=0;
+  const statsTimer=setInterval(()=>{attempts++;if(syncHeaderStats()||attempts>40)clearInterval(statsTimer);},150);
+
   if(!location.hash){
     let userMoved=false;
     const mark=()=>{userMoved=true;};
