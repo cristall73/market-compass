@@ -55,6 +55,10 @@ jobs:
         run: |
           python scripts/strict_investment_rotation.py
 
+      - name: Correzione contatori selezione
+        run: |
+          python scripts/fix_selection_counters.py
+
       - name: Conferma tecnica multi-timeframe Investing
         run: |
           python scripts/apply_investment_mtf_confirmation.py
@@ -62,10 +66,6 @@ jobs:
       - name: Archivio segnali definitivi Investing
         run: |
           python scripts/archive_investment_signals.py
-
-      - name: Correzione contatori selezione
-        run: |
-          python scripts/fix_selection_counters.py
 
       - name: Commit updated data
         run: |
