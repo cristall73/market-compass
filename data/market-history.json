@@ -1,6 +1,6 @@
 {
   "schemaVersion": 10,
-  "updatedAt": "2026-09-05T20:44:39.719587+00:00",
+  "updatedAt": "2026-09-05T22:22:34.968266+00:00",
   "snapshots": [
     {
       "date": "2026-08-16",
@@ -6463,20 +6463,20 @@
     },
     {
       "date": "2026-09-05",
-      "generatedAt": "2026-09-05T20:44:39.719587+00:00",
+      "generatedAt": "2026-09-05T22:22:34.968266+00:00",
       "top5": [
         {
-          "ticker": "CSCO",
+          "ticker": "GOOGL",
           "rank": 1,
-          "score": 7.992728569044078,
-          "price": 109.19999694824219,
+          "score": 7.980054341867192,
+          "price": 338.4599914550781,
           "status": "YELLOW"
         },
         {
-          "ticker": "GOOGL",
+          "ticker": "CSCO",
           "rank": 2,
-          "score": 7.984387675200526,
-          "price": 338.4599914550781,
+          "score": 7.979078569044078,
+          "price": 109.19999694824219,
           "status": "YELLOW"
         },
         {
@@ -6503,22 +6503,22 @@
       ],
       "universe": [
         {
-          "ticker": "CSCO",
-          "rank": 1,
-          "rawScore": 7.515671743242451,
-          "stableScore": 7.992728569044078,
-          "status": "YELLOW",
-          "inTop5": true,
-          "price": 109.19999694824219
-        },
-        {
           "ticker": "GOOGL",
-          "rank": 2,
+          "rank": 1,
           "rawScore": 7.551188782322421,
-          "stableScore": 7.984387675200526,
+          "stableScore": 7.980054341867192,
           "status": "YELLOW",
           "inTop5": true,
           "price": 338.4599914550781
+        },
+        {
+          "ticker": "CSCO",
+          "rank": 2,
+          "rawScore": 7.515671743242451,
+          "stableScore": 7.979078569044078,
+          "status": "YELLOW",
+          "inTop5": true,
+          "price": 109.19999694824219
         },
         {
           "ticker": "PLTR",
@@ -6575,28 +6575,28 @@
           "price": 198.9600067138672
         },
         {
-          "ticker": "AMD",
-          "rank": 9,
-          "rawScore": 7.326304687422213,
-          "stableScore": 7.193075083553019,
-          "status": "GREEN",
-          "inTop5": false,
-          "price": 477.57000732421875
-        },
-        {
           "ticker": "MDT",
-          "rank": 10,
-          "rawScore": 6.944313720616685,
-          "stableScore": 7.1698788695487545,
+          "rank": 9,
+          "rawScore": 7.105931425308847,
+          "stableScore": 7.2183640520618795,
           "status": "YELLOW",
           "inTop5": false,
           "price": 94.16999816894531
         },
         {
+          "ticker": "AMD",
+          "rank": 10,
+          "rawScore": 7.196304687422213,
+          "stableScore": 7.154075083553019,
+          "status": "GREEN",
+          "inTop5": false,
+          "price": 477.57000732421875
+        },
+        {
           "ticker": "SPGI",
           "rank": 11,
-          "rawScore": 7.388986196861184,
-          "stableScore": 7.081240334769591,
+          "rawScore": 7.389055668722657,
+          "stableScore": 7.081261176328033,
           "status": "YELLOW",
           "inTop5": false,
           "price": 443.510009765625
@@ -6649,8 +6649,8 @@
         {
           "ticker": "BKNG",
           "rank": 17,
-          "rawScore": 6.983757758511214,
-          "stableScore": 6.938498918926021,
+          "rawScore": 6.983756128187941,
+          "stableScore": 6.938498715135611,
           "status": "YELLOW",
           "inTop5": false,
           "price": 193.2899932861328
