@@ -51,6 +51,10 @@ jobs:
         run: |
           python scripts/postprocess_site.py
 
+      - name: Controllo qualita calendario economico
+        run: |
+          python scripts/sanitize_economic_calendar.py
+
       - name: Blocco rotazione Investment Coach
         run: |
           python scripts/strict_investment_rotation.py
