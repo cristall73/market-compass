@@ -133,12 +133,62 @@ old_selection_reason = '''            "La selezione combina qualità fondamental
             "notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5."
 '''
 new_selection_reason = '''            "La selezione combina qualità fondamentale, trend di medio periodo, SALUBRITÀ DEL TREND, "
-            "ritracciamento, notizie e persistenza storica. Le salite paraboliche/esplosive sono penalizzate: "
+            "ritracciamento, notizie e persistenza storica. Le salite paraboliche/esplosive sono escluse dalla Top 5: "
             "preferiamo trend rialzisti progressivi, con ritracciamenti ordinati."
 '''
 if old_selection_reason not in source:
     raise RuntimeError("Testo selezione Investing non riconosciuto")
 source = source.replace(old_selection_reason, new_selection_reason, 1)
+
+# Manteniamo integralmente la logica di persistenza/entrata/uscita della Top 5.
+# L'unica nuova rottura strutturale è un trend diventato esplosivo: in quel caso il titolo
+# non è più coerente con la strategia e può uscire senza aspettare il normale decadimento.
+old_structural = '''        structural_break = (
+            item["stableScore"] < STRUCTURAL_EXIT_SCORE or
+            item["technical"]["weekly"] == "Ribassista" or
+            item["qualityScore"] < 5.2 or
+            item["newsScore"] <= 2
+        )
+'''
+new_structural = '''        structural_break = (
+            item["stableScore"] < STRUCTURAL_EXIT_SCORE or
+            item["technical"]["weekly"] == "Ribassista" or
+            item["qualityScore"] < 5.2 or
+            item["newsScore"] <= 2 or
+            item.get("explosiveTrend", False)
+        )
+'''
+if old_structural not in source:
+    raise RuntimeError("Blocco uscita strutturale Investing non riconosciuto")
+source = source.replace(old_structural, new_structural, 1)
+
+# I titoli esplosivi non vengono neppure usati come challenger: non vogliamo osservarli
+# nella Top 5 in attesa di un ritracciamento potenzialmente molto più profondo.
+old_challengers = '''    challengers = [x for x in sorted_all if x["ticker"] not in {r["ticker"] for r in retained}]
+'''
+new_challengers = '''    challengers = [
+        x for x in sorted_all
+        if x["ticker"] not in {r["ticker"] for r in retained}
+        and not x.get("explosiveTrend", False)
+        and x.get("trendHealthScore", 10) >= 6.5
+    ]
+'''
+if old_challengers not in source:
+    raise RuntimeError("Blocco challenger Investing non riconosciuto")
+source = source.replace(old_challengers, new_challengers, 1)
+
+old_outsiders = '''    outsiders = [x for x in sorted_all if x["ticker"] not in {r["ticker"] for r in final_top}]
+'''
+new_outsiders = '''    outsiders = [
+        x for x in sorted_all
+        if x["ticker"] not in {r["ticker"] for r in final_top}
+        and not x.get("explosiveTrend", False)
+        and x.get("trendHealthScore", 10) >= 6.5
+    ]
+'''
+if old_outsiders not in source:
+    raise RuntimeError("Blocco outsider Investing non riconosciuto")
+source = source.replace(old_outsiders, new_outsiders, 1)
 
 compiled = compile(source, BASE_URL, "exec")
 exec(compiled, {"__name__": "__main__", "__file__": __file__})
