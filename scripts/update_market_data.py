@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 # Bootstrap del generatore Market Compass: recupera la versione completa e
-# stabile del pipeline e amplia solo l'universo Trading Coach prima di eseguirla.
-# In questo modo manteniamo invariata tutta la logica Investing/News già testata.
+# stabile del pipeline e applica solo modifiche mirate prima di eseguirla.
 from urllib.request import urlopen
 
 BASE_COMMIT = "99eed98156974094cc406d257910856876dd2974"
@@ -41,7 +40,105 @@ new_assets = '''TRADING_ASSETS = [
 
 if old_assets not in source:
     raise RuntimeError("Blocco TRADING_ASSETS della base non riconosciuto: aggiornamento interrotto per sicurezza")
-
 source = source.replace(old_assets, new_assets, 1)
+
+# Investment Coach: restiamo trend-following, ma vogliamo trend sani e progressivi.
+# Una salita parabolica/esplosiva non deve essere premiata come un normale trend forte:
+# aumenta il rischio che il successivo -15/-20% sia solo l'inizio del riassorbimento.
+old_preliminary = '''            preliminary = trend_score * 0.58 + entry_score * 0.42
+            if monthly_trend == "Ribassista" or weekly_trend == "Ribassista":
+                preliminary -= 2
+'''
+new_preliminary = '''            # Qualità del trend: premia salite progressive e penalizza accelerazioni paraboliche.
+            # Misuriamo l'estensione dalla EMA200 e il massimo balzo su 21 sedute negli ultimi 6 mesi.
+            # Le soglie sono volutamente conservative per un orizzonte di investimento 2-4 mesi.
+            rolling_21 = close.pct_change(21).tail(126) * 100
+            max_21d_surge = float(rolling_21.max()) if not rolling_21.empty else 0.0
+            extension_ema200 = (price / ema200 - 1) * 100 if ema200 else 0.0
+            return6m = (price / float(close.iloc[-126]) - 1) * 100 if len(close) >= 126 else return3m
+            explosive = bool(max_21d_surge > 25 or extension_ema200 > 45 or return6m > 55)
+
+            # 10/10 = salita regolare; il punteggio scende con eccessi di pendenza/estensione.
+            trend_health = 10.0
+            trend_health -= max(0.0, max_21d_surge - 15) * 0.18
+            trend_health -= max(0.0, extension_ema200 - 25) * 0.10
+            trend_health -= max(0.0, return6m - 35) * 0.08
+            trend_health = max(0.0, min(10.0, trend_health))
+
+            preliminary = trend_score * 0.46 + entry_score * 0.34 + trend_health * 0.20
+            if monthly_trend == "Ribassista" or weekly_trend == "Ribassista":
+                preliminary -= 2
+            if explosive:
+                preliminary -= 3.5
+'''
+if old_preliminary not in source:
+    raise RuntimeError("Blocco preliminary Investing non riconosciuto")
+source = source.replace(old_preliminary, new_preliminary, 1)
+
+old_screen_fields = '''                "rsiDaily": rsi_daily, "return3m": return3m, "volatility": volatility,
+                "ema200": ema200, "monthlyTrend": monthly_trend,
+'''
+new_screen_fields = '''                "rsiDaily": rsi_daily, "return3m": return3m, "return6m": return6m,
+                "volatility": volatility, "trendHealthScore": trend_health,
+                "max21dSurgePct": max_21d_surge, "extensionEma200Pct": extension_ema200,
+                "explosiveTrend": explosive,
+                "ema200": ema200, "monthlyTrend": monthly_trend,
+'''
+if old_screen_fields not in source:
+    raise RuntimeError("Campi screening Investing non riconosciuti")
+source = source.replace(old_screen_fields, new_screen_fields, 1)
+
+# Un trend esplosivo non può diventare GREEN anche se rientra nella percentuale di ritracciamento.
+old_green = '''        quality_score >= 6.5 and base["trendScore"] >= 6 and
+        base["requiredPullbackMin"] <= base["pullbackPct"] <= base["requiredPullbackMax"] and
+'''
+new_green = '''        quality_score >= 6.5 and base["trendScore"] >= 6 and
+        not base.get("explosiveTrend", False) and base.get("trendHealthScore", 10) >= 6.5 and
+        base["requiredPullbackMin"] <= base["pullbackPct"] <= base["requiredPullbackMax"] and
+'''
+if old_green not in source:
+    raise RuntimeError("Regola GREEN Investing non riconosciuta")
+source = source.replace(old_green, new_green, 1)
+
+old_conditions = '''    if quality_score < 6.5:
+        conditions.append("Conferma dei fondamentali.")
+'''
+new_conditions = '''    if quality_score < 6.5:
+        conditions.append("Conferma dei fondamentali.")
+    if base.get("explosiveTrend", False):
+        conditions.append("Attendere riassorbimento dell'accelerazione: salita recente troppo esplosiva per un ingresso trend-following sano.")
+    elif base.get("trendHealthScore", 10) < 6.5:
+        conditions.append("Attendere una struttura di salita più regolare e meno estesa.")
+'''
+if old_conditions not in source:
+    raise RuntimeError("Condizioni Investing non riconosciute")
+source = source.replace(old_conditions, new_conditions, 1)
+
+old_return_scores = '''        "qualityScore": quality_score, "trendScore": base["trendScore"],
+        "entryScore": base["entryScore"], "newsScore": news_score,
+'''
+new_return_scores = '''        "qualityScore": quality_score, "trendScore": base["trendScore"],
+        "trendHealthScore": base.get("trendHealthScore", 10),
+        "explosiveTrend": bool(base.get("explosiveTrend", False)),
+        "max21dSurgePct": base.get("max21dSurgePct"),
+        "extensionEma200Pct": base.get("extensionEma200Pct"),
+        "return6mPct": base.get("return6m"),
+        "entryScore": base["entryScore"], "newsScore": news_score,
+'''
+if old_return_scores not in source:
+    raise RuntimeError("Output punteggi Investing non riconosciuto")
+source = source.replace(old_return_scores, new_return_scores, 1)
+
+old_selection_reason = '''            "La selezione combina qualità fondamentale, trend di medio periodo, ritracciamento, "
+            "notizie e persistenza storica. Piccole variazioni giornaliere non bastano a cambiare la Top 5."
+'''
+new_selection_reason = '''            "La selezione combina qualità fondamentale, trend di medio periodo, SALUBRITÀ DEL TREND, "
+            "ritracciamento, notizie e persistenza storica. Le salite paraboliche/esplosive sono penalizzate: "
+            "preferiamo trend rialzisti progressivi, con ritracciamenti ordinati."
+'''
+if old_selection_reason not in source:
+    raise RuntimeError("Testo selezione Investing non riconosciuto")
+source = source.replace(old_selection_reason, new_selection_reason, 1)
+
 compiled = compile(source, BASE_URL, "exec")
 exec(compiled, {"__name__": "__main__", "__file__": __file__})
