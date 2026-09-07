@@ -17,6 +17,7 @@ CACHE=ROOT/'data'/'translation-cache.json'
 CAL=ROOT/'data'/'economic-calendar.json'
 REVIEW_TRADING_DAYS=5
 CONFIRM_TRADING_DAYS=5
+INVESTMENT_STRATEGY_VERSION=2  # v2: trend-following con filtro anti-esplosione/parabolico
 
 COUNTRIES={'United States':'Stati Uniti','USA':'Stati Uniti','US':'Stati Uniti','Japan':'Giappone','JP':'Giappone','Germany':'Germania','DE':'Germania','Italy':'Italia','IT':'Italia','United Kingdom':'Regno Unito','UK':'Regno Unito','GB':'Regno Unito','France':'Francia','FR':'Francia','Spain':'Spagna','ES':'Spagna','Switzerland':'Svizzera','CH':'Svizzera','Canada':'Canada','CA':'Canada','Australia':'Australia','AU':'Australia','China':'Cina','CN':'Cina'}
 
@@ -79,7 +80,6 @@ def align_precious_metals_to_spot(root):
                 if anchor and anchor>0:break
         if not anchor:continue
         ratio=spot/anchor
-        # Protezione da dati palesemente errati della fonte spot.
         if ratio<0.70 or ratio>1.30:continue
         for rows in tfs.values():
             if not isinstance(rows,list):continue
@@ -114,13 +114,25 @@ def apply_confirmation(inv,state,today):
 
 def stabilize(root):
     inv=root.get('investment') or {};fresh=inv.get('candidates') or [];state=load(STATE,{})
-    today=datetime.now(timezone.utc).date();review=True
-    if state.get('reviewDate') and state.get('candidates'):
+    today=datetime.now(timezone.utc).date()
+
+    # La normale rotazione resta invariata: revisione lenta ogni 5 sedute.
+    # Solo quando cambia davvero la metodologia dell'Investment Coach facciamo
+    # UNA revisione immediata, così la vecchia Top 5 non resta congelata con regole superate.
+    strategy_changed=state.get('strategyVersion')!=INVESTMENT_STRATEGY_VERSION
+    review=True if strategy_changed else True
+    if not strategy_changed and state.get('reviewDate') and state.get('candidates'):
         try:review=business_days(datetime.fromisoformat(state['reviewDate']).date(),today)>=REVIEW_TRADING_DAYS
         except Exception:review=True
+
     if review or not state.get('candidates'):
         state['reviewDate']=today.isoformat();state['candidates']=fresh
-        inv['selectionReview']={'reviewedToday':True,'reviewDate':today.isoformat(),'nextReviewAfterTradingDays':REVIEW_TRADING_DAYS}
+        state['strategyVersion']=INVESTMENT_STRATEGY_VERSION
+        inv['selectionReview']={
+            'reviewedToday':True,'reviewDate':today.isoformat(),
+            'nextReviewAfterTradingDays':REVIEW_TRADING_DAYS,
+            'reason':'Cambio metodologia: filtro trend sano' if strategy_changed else 'Revisione periodica'
+        }
     else:
         held=state['candidates'];refresh_prices(held);inv['candidates']=held
         inv['changes']={'date':today.isoformat(),'entered':[],'exited':[],'removedReasons':[],'unchangedCount':len(held),'frozenUntilNextReview':True}
