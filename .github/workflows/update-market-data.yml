@@ -3,13 +3,11 @@ name: Update Market Data
 on:
   workflow_dispatch:
   schedule:
-    # Trading Coach veloce: 4 tentativi/ora, ogni 15 minuti circa.
-    # Usiamo minuti sfalsati per evitare i picchi del scheduler GitHub
-    # (00/15/30/45), che possono ritardare molto i workflow programmati.
-    - cron: '7,22,37,52 * * * *'
+    # Controllo ogni 5 minuti. Il workflow completo parte solo se i dati
+    # hanno almeno 12 minuti, cosi recuperiamo rapidamente eventuali ritardi
+    # dello scheduler GitHub senza moltiplicare le chiamate a Yahoo Finance.
+    - cron: '*/5 * * * *'
 
-# Un solo aggiornamento dati alla volta. I push manuali al codice non avviano
-# più un secondo workflow mentre quello schedulato sta generando i JSON.
 concurrency:
   group: market-data-main
   cancel-in-progress: true
@@ -28,60 +26,109 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Verifica se serve davvero aggiornare
+        id: freshness
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "run_update=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          p = Path('data/market-data.json')
+          run_update = True
+          age_minutes = 9999
+
+          try:
+              data = json.loads(p.read_text(encoding='utf-8'))
+              ts = data.get('generatedAt')
+              if ts:
+                  generated = datetime.fromisoformat(ts.replace('Z', '+00:00'))
+                  if generated.tzinfo is None:
+                      generated = generated.replace(tzinfo=timezone.utc)
+                  age_minutes = (datetime.now(timezone.utc) - generated.astimezone(timezone.utc)).total_seconds() / 60
+                  run_update = age_minutes >= 12
+          except Exception as exc:
+              print(f'freshness_error={type(exc).__name__}')
+              run_update = True
+
+          print(f'age_minutes={age_minutes:.1f}')
+          print(f'run_update={str(run_update).lower()}')
+          PY
+
       - name: Python setup
+        if: steps.freshness.outputs.run_update == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           pip install yfinance pandas numpy requests deep-translator
 
       - name: Update market data
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           python scripts/update_market_data.py
 
       - name: Snapshot candidati Investing freschi
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           python scripts/investment_trend_health_guard.py snapshot
 
       - name: Controllo freschezza intraday
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           python scripts/refresh_trading_intraday.py
 
       - name: Update ETF e PAC
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           python scripts/update_etf_data.py
 
       - name: Stabilita selezione, italiano e calendario economico
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           python scripts/postprocess_site.py
 
       - name: Controllo qualita calendario economico
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           python scripts/sanitize_economic_calendar.py
 
       - name: Blocco rotazione Investment Coach
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           python scripts/strict_investment_rotation.py
 
       - name: Veto anti-esplosione Investment Coach
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           python scripts/investment_trend_health_guard.py enforce
 
       - name: Correzione contatori selezione
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           python scripts/fix_selection_counters.py
 
       - name: Conferma tecnica multi-timeframe Investing
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           python scripts/apply_investment_mtf_confirmation.py
 
       - name: Archivio segnali definitivi Investing
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           python scripts/archive_investment_signals.py
 
       - name: Commit updated data
+        if: steps.freshness.outputs.run_update == 'true'
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
@@ -92,16 +139,11 @@ jobs:
           fi
           git commit -m "Aggiornamento automatico dati"
 
-          # Se il branch remoto è avanzato durante il calcolo (per esempio per una
-          # modifica manuale al sito), non tentiamo un rebase dei JSON generati:
-          # è proprio quello che causava i conflitti. In quel caso annulliamo
-          # questo run e lasciamo che il successivo, partendo dall'ultimo main,
-          # rigeneri tutto correttamente.
           git fetch origin main
           LOCAL_BASE=$(git rev-parse HEAD^)
           REMOTE_HEAD=$(git rev-parse origin/main)
           if [ "$LOCAL_BASE" != "$REMOTE_HEAD" ]; then
-            echo "Il branch main è cambiato durante il run. Nessun merge dei JSON: aggiornamento rimandato al prossimo ciclo."
+            echo "Il branch main e cambiato durante il run. Aggiornamento rimandato al prossimo ciclo."
             exit 0
           fi
 
