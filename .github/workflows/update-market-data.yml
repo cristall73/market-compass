@@ -39,6 +39,10 @@ jobs:
         run: |
           python scripts/update_market_data.py
 
+      - name: Snapshot candidati Investing freschi
+        run: |
+          python scripts/investment_trend_health_guard.py snapshot
+
       - name: Controllo freschezza intraday
         run: |
           python scripts/refresh_trading_intraday.py
@@ -58,6 +62,10 @@ jobs:
       - name: Blocco rotazione Investment Coach
         run: |
           python scripts/strict_investment_rotation.py
+
+      - name: Veto anti-esplosione Investment Coach
+        run: |
+          python scripts/investment_trend_health_guard.py enforce
 
       - name: Correzione contatori selezione
         run: |
