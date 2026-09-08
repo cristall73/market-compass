@@ -3,8 +3,10 @@ name: Update Market Data
 on:
   workflow_dispatch:
   schedule:
-    # Trading Coach veloce: aggiorna ogni 15 minuti.
-    - cron: '*/15 * * * *'
+    # Trading Coach veloce: 4 tentativi/ora, ogni 15 minuti circa.
+    # Usiamo minuti sfalsati per evitare i picchi del scheduler GitHub
+    # (00/15/30/45), che possono ritardare molto i workflow programmati.
+    - cron: '7,22,37,52 * * * *'
 
 # Un solo aggiornamento dati alla volta. I push manuali al codice non avviano
 # più un secondo workflow mentre quello schedulato sta generando i JSON.
