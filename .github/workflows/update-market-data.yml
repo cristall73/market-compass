@@ -9,7 +9,7 @@ on:
     # Trading Coach veloce: aggiorna ogni 15 minuti.
     - cron: '*/15 * * * *'
 
-# Un solo aggiornamento dati alla volta.
+# Un solo aggiornamento dati intraday alla volta.
 concurrency:
   group: market-data-main
   cancel-in-progress: true
@@ -49,14 +49,6 @@ jobs:
         run: |
           python scripts/mark_update_status.py trading
 
-      - name: Update ETF e PAC
-        run: |
-          python scripts/update_etf_data.py
-
-      - name: Registra aggiornamento ETF
-        run: |
-          python scripts/mark_update_status.py etf
-
       - name: Stabilita selezione, italiano e calendario economico
         run: |
           python scripts/postprocess_site.py
@@ -89,7 +81,7 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add data/market-data.json data/market-history.json data/investment-selection-state.json data/translation-cache.json data/economic-calendar.json data/etf-data.json data/update-status.json
+          git add data/market-data.json data/market-history.json data/investment-selection-state.json data/translation-cache.json data/economic-calendar.json data/update-status.json
           if git diff --cached --quiet; then
             echo "Nessuna modifica dati da pubblicare"
             exit 0
