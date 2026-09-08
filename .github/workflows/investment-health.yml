@@ -1,22 +1,22 @@
-name: Investment Health Guard
+name: Update Investment Coach
 
 on:
   workflow_dispatch:
   schedule:
-    # Investing ha orizzonte di mesi: controllo ogni 4 ore, separato dal Trading Coach.
+    # Investment Coach: aggiornamento lento e indipendente, coerente con orizzonte 2-4 mesi.
     - cron: '41 */4 * * *'
 
 concurrency:
-  group: investment-health
+  group: investment-data
   cancel-in-progress: true
 
 permissions:
   contents: write
 
 jobs:
-  enforce:
+  update-investing:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
 
     steps:
       - name: Repository checkout
@@ -31,7 +31,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install yfinance pandas numpy requests
+          pip install yfinance pandas numpy requests deep-translator
+
+      - name: Aggiorna dataset completo Investing
+        run: |
+          python scripts/update_market_data.py
+
+      - name: Stabilita selezione e italiano
+        run: |
+          python scripts/postprocess_site.py
 
       - name: Snapshot candidati Investing
         run: |
@@ -57,22 +65,22 @@ jobs:
         run: |
           python scripts/mark_update_status.py investing
 
-      - name: Commit controlli Investing
+      - name: Commit dati Investing
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add data/market-data.json data/investment-selection-state.json data/market-history.json data/update-status.json
+          git add data/market-data.json data/market-history.json data/investment-selection-state.json data/translation-cache.json data/economic-calendar.json data/update-status.json
           if git diff --cached --quiet; then
             echo "Nessuna modifica Investing da pubblicare"
             exit 0
           fi
-          git commit -m "Controllo periodico Investment Coach"
+          git commit -m "Aggiornamento periodico Investment Coach"
 
           git fetch origin main
           LOCAL_BASE=$(git rev-parse HEAD^)
           REMOTE_HEAD=$(git rev-parse origin/main)
           if [ "$LOCAL_BASE" != "$REMOTE_HEAD" ]; then
-            echo "Main cambiato durante il controllo Investing. Nessun merge: si riprova al prossimo ciclo."
+            echo "Main cambiato durante il run Investing. Aggiornamento rimandato al prossimo ciclo."
             exit 0
           fi
 
