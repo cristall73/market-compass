@@ -1,0 +1,64 @@
+name: Update ETF Data
+
+on:
+  workflow_dispatch:
+  schedule:
+    # ETF & PAC: un aggiornamento al giorno, separato dal Trading Coach.
+    # 06:07 UTC = 08:07 in Italia durante l'ora legale.
+    - cron: '7 6 * * *'
+
+concurrency:
+  group: etf-data-daily
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  update-etf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Repository checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Python setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install yfinance pandas numpy requests
+
+      - name: Update ETF e PAC
+        run: |
+          python scripts/update_etf_data.py
+
+      - name: Registra aggiornamento ETF
+        run: |
+          python scripts/mark_update_status.py etf
+
+      - name: Commit ETF data
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add data/etf-data.json data/update-status.json
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica ETF da pubblicare"
+            exit 0
+          fi
+          git commit -m "Aggiornamento giornaliero ETF e PAC"
+
+          git fetch origin main
+          LOCAL_BASE=$(git rev-parse HEAD^)
+          REMOTE_HEAD=$(git rev-parse origin/main)
+          if [ "$LOCAL_BASE" != "$REMOTE_HEAD" ]; then
+            echo "Main cambiato durante il run ETF. Nessun merge: si riprova al prossimo ciclo."
+            exit 0
+          fi
+
+          git push origin HEAD:main
