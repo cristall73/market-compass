@@ -6,12 +6,13 @@ on:
     paths:
       - '.github/workflows/update-market-data.yml'
   schedule:
-    # Trading Coach: refresh intraday frequente e indipendente.
-    - cron: '*/15 * * * *'
+    # Trading Coach: aggiornamento intraday ogni ora (UTC).
+    - cron: '7 * * * *'
 
 concurrency:
-  group: trading-data-main
-  cancel-in-progress: true
+  # Un solo workflow alla volta può scrivere i dataset del sito.
+  group: market-data-writes-main
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -44,7 +45,7 @@ jobs:
         run: |
           python scripts/mark_update_status.py trading
 
-      - name: Commit Trading data
+      - name: Commit e pubblica Trading data
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
@@ -55,12 +56,17 @@ jobs:
           fi
           git commit -m "Aggiornamento intraday Trading Coach"
 
-          git fetch origin main
-          LOCAL_BASE=$(git rev-parse HEAD^)
-          REMOTE_HEAD=$(git rev-parse origin/main)
-          if [ "$LOCAL_BASE" != "$REMOTE_HEAD" ]; then
-            echo "Main cambiato durante il run Trading. Aggiornamento rimandato al prossimo ciclo."
-            exit 0
-          fi
+          # Se main è cambiato durante il calcolo, integra le modifiche e pubblica
+          # invece di terminare con un falso successo senza aggiornare il sito.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            if git rebase origin/main && git push origin HEAD:main; then
+              exit 0
+            fi
+            git rebase --abort || true
+            echo "Tentativo $attempt non riuscito; riprovo."
+            sleep 5
+          done
 
-          git push origin HEAD:main
+          echo "Impossibile pubblicare i dati Trading dopo 3 tentativi."
+          exit 1
