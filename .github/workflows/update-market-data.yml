@@ -1,4 +1,4 @@
-name: Update Market Data
+name: Update Trading Data
 
 on:
   workflow_dispatch:
@@ -6,21 +6,20 @@ on:
     paths:
       - '.github/workflows/update-market-data.yml'
   schedule:
-    # Trading Coach veloce: aggiorna ogni 15 minuti.
+    # Trading Coach: refresh intraday frequente e indipendente.
     - cron: '*/15 * * * *'
 
-# Un solo aggiornamento dati intraday alla volta.
 concurrency:
-  group: market-data-main
+  group: trading-data-main
   cancel-in-progress: true
 
 permissions:
   contents: write
 
 jobs:
-  update:
+  update-trading:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 15
 
     steps:
       - name: Repository checkout
@@ -35,13 +34,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install yfinance pandas numpy requests deep-translator
+          pip install yfinance pandas numpy requests
 
-      - name: Update market data
-        run: |
-          python scripts/update_market_data.py
-
-      - name: Controllo freschezza intraday
+      - name: Refresh Trading intraday
         run: |
           python scripts/refresh_trading_intraday.py
 
@@ -49,50 +44,22 @@ jobs:
         run: |
           python scripts/mark_update_status.py trading
 
-      - name: Stabilita selezione, italiano e calendario economico
-        run: |
-          python scripts/postprocess_site.py
-
-      - name: Controllo qualita calendario economico
-        run: |
-          python scripts/sanitize_economic_calendar.py
-
-      - name: Blocco rotazione Investment Coach
-        run: |
-          python scripts/strict_investment_rotation.py
-
-      - name: Correzione contatori selezione
-        run: |
-          python scripts/fix_selection_counters.py
-
-      - name: Conferma tecnica multi-timeframe Investing
-        run: |
-          python scripts/apply_investment_mtf_confirmation.py
-
-      - name: Archivio segnali definitivi Investing
-        run: |
-          python scripts/archive_investment_signals.py
-
-      - name: Registra aggiornamento Investing
-        run: |
-          python scripts/mark_update_status.py investing
-
-      - name: Commit updated data
+      - name: Commit Trading data
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add data/market-data.json data/market-history.json data/investment-selection-state.json data/translation-cache.json data/economic-calendar.json data/update-status.json
+          git add data/market-data.json data/update-status.json
           if git diff --cached --quiet; then
-            echo "Nessuna modifica dati da pubblicare"
+            echo "Nessuna modifica Trading da pubblicare"
             exit 0
           fi
-          git commit -m "Aggiornamento automatico dati"
+          git commit -m "Aggiornamento intraday Trading Coach"
 
           git fetch origin main
           LOCAL_BASE=$(git rev-parse HEAD^)
           REMOTE_HEAD=$(git rev-parse origin/main)
           if [ "$LOCAL_BASE" != "$REMOTE_HEAD" ]; then
-            echo "Il branch main e cambiato durante il run. Aggiornamento rimandato al prossimo ciclo."
+            echo "Main cambiato durante il run Trading. Aggiornamento rimandato al prossimo ciclo."
             exit 0
           fi
 
