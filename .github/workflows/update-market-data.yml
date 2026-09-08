@@ -45,9 +45,17 @@ jobs:
         run: |
           python scripts/refresh_trading_intraday.py
 
+      - name: Registra aggiornamento Trading
+        run: |
+          python scripts/mark_update_status.py trading
+
       - name: Update ETF e PAC
         run: |
           python scripts/update_etf_data.py
+
+      - name: Registra aggiornamento ETF
+        run: |
+          python scripts/mark_update_status.py etf
 
       - name: Stabilita selezione, italiano e calendario economico
         run: |
@@ -73,11 +81,15 @@ jobs:
         run: |
           python scripts/archive_investment_signals.py
 
+      - name: Registra aggiornamento Investing
+        run: |
+          python scripts/mark_update_status.py investing
+
       - name: Commit updated data
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add data/market-data.json data/market-history.json data/investment-selection-state.json data/translation-cache.json data/economic-calendar.json data/etf-data.json
+          git add data/market-data.json data/market-history.json data/investment-selection-state.json data/translation-cache.json data/economic-calendar.json data/etf-data.json data/update-status.json
           if git diff --cached --quiet; then
             echo "Nessuna modifica dati da pubblicare"
             exit 0
