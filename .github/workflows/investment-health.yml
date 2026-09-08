@@ -53,11 +53,15 @@ jobs:
         run: |
           python scripts/archive_investment_signals.py
 
+      - name: Registra aggiornamento Investing
+        run: |
+          python scripts/mark_update_status.py investing
+
       - name: Commit controlli Investing
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add data/market-data.json data/investment-selection-state.json data/market-history.json
+          git add data/market-data.json data/investment-selection-state.json data/market-history.json data/update-status.json
           if git diff --cached --quiet; then
             echo "Nessuna modifica Investing da pubblicare"
             exit 0
