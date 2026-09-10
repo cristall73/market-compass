@@ -16,6 +16,7 @@ EXIT_CONFIRM_DAYS = 5
 ENTRY_MARGIN = 0.40
 MAX_ROTATIONS_PER_DAY = 1
 MIN_CHALLENGER_SCORE = 7.15
+MIN_TREND_SCORE = 6.0
 EXIT_ARCHIVE_DAYS = 14
 
 
@@ -36,6 +37,23 @@ def score(item) -> float:
         return float(item.get("stableScore", item.get("finalScore", 0)) or 0)
     except Exception:
         return 0.0
+
+
+def trend_score(item) -> float:
+    try:
+        return float(item.get("trendScore", 0) or 0)
+    except Exception:
+        return 0.0
+
+
+def trend_eligible(item) -> bool:
+    """Veto trend-following: un nuovo candidato deve avere trend 2-4 mesi >= 6/10.
+
+    Qualita aziendale e profondita del ritracciamento non possono compensare
+    un trend deteriorato. Gli incumbent sotto soglia entrano invece nel normale
+    conteggio di uscita a 5 giorni, cosi non resettiamo la Top5.
+    """
+    return trend_score(item) >= MIN_TREND_SCORE
 
 
 def is_red(item) -> bool:
@@ -90,7 +108,6 @@ def main() -> int:
         return 0
 
     today = datetime.now(timezone.utc).date().isoformat()
-
     strict = state.get("strictSelection") or state.get("candidates") or proposed
     strict = list(strict)[:5]
 
@@ -106,20 +123,19 @@ def main() -> int:
     if last_count_date != today:
         for ticker in strict_tickers:
             incumbent = proposed_map.get(ticker)
-            weak = incumbent is None or is_red(incumbent) or score(incumbent) < 6.55
+            weak = incumbent is None or is_red(incumbent) or score(incumbent) < 6.55 or not trend_eligible(incumbent)
             incumbent_weak_days[ticker] = int(incumbent_weak_days.get(ticker, 0)) + 1 if weak else 0
 
         for ticker, candidate in proposed_map.items():
             if ticker in strict_map:
                 challenger_days.pop(ticker, None)
                 continue
-            eligible = (not is_red(candidate)) and score(candidate) >= MIN_CHALLENGER_SCORE
+            eligible = (not is_red(candidate)) and score(candidate) >= MIN_CHALLENGER_SCORE and trend_eligible(candidate)
             challenger_days[ticker] = int(challenger_days.get(ticker, 0)) + 1 if eligible else 0
 
         for ticker in list(challenger_days):
             if ticker not in proposed_map or ticker in strict_map:
                 challenger_days.pop(ticker, None)
-
         rotation["lastCountDate"] = today
 
     updated_strict = []
@@ -134,18 +150,15 @@ def main() -> int:
     strict = updated_strict
     strict_map = {x.get("ticker"): x for x in strict if x.get("ticker")}
 
-    eligible_out = [
-        x for x in strict
-        if int(incumbent_weak_days.get(x.get("ticker"), 0)) >= EXIT_CONFIRM_DAYS
-    ]
+    eligible_out = [x for x in strict if int(incumbent_weak_days.get(x.get("ticker"), 0)) >= EXIT_CONFIRM_DAYS]
     eligible_in = [
         x for t, x in proposed_map.items()
         if t not in strict_map
         and int(challenger_days.get(t, 0)) >= ENTRY_CONFIRM_DAYS
         and not is_red(x)
         and score(x) >= MIN_CHALLENGER_SCORE
+        and trend_eligible(x)
     ]
-
     eligible_out.sort(key=score)
     eligible_in.sort(key=score, reverse=True)
 
@@ -158,69 +171,43 @@ def main() -> int:
         gap = score(challenger) - score(incumbent)
         if gap < ENTRY_MARGIN:
             break
-
         out_ticker = incumbent.get("ticker")
         in_ticker = challenger.get("ticker")
         strict = [challenger if x.get("ticker") == out_ticker else x for x in strict]
         entered.append(in_ticker)
         exited.append(out_ticker)
-        reason = (
-            f"Uscita confermata dopo {EXIT_CONFIRM_DAYS} giorni consecutivi di deterioramento; "
-            f"{in_ticker} confermato per {ENTRY_CONFIRM_DAYS} giorni e superiore di {gap:.2f} punti"
-        )
+        reason = (f"Uscita confermata dopo {EXIT_CONFIRM_DAYS} giorni consecutivi di deterioramento; "
+                  f"{in_ticker} confermato per {ENTRY_CONFIRM_DAYS} giorni e superiore di {gap:.2f} punti")
         reasons.append({"ticker": out_ticker, "reason": reason})
-
-        archived = {
-            "ticker": out_ticker,
-            "name": incumbent.get("name") or out_ticker,
-            "sector": incumbent.get("sector"),
-            "currency": incumbent.get("currency"),
-            "exitDate": today,
-            "exitPrice": incumbent.get("currentPrice"),
-            "currentPrice": incumbent.get("currentPrice"),
-            "exitScore": score(incumbent),
-            "statusAtExit": incumbent.get("status"),
-            "rawStatusAtExit": incumbent.get("rawStatus"),
-            "replacementTicker": in_ticker,
-            "reason": reason,
-            "entryZoneLow": incumbent.get("entryZoneLow"),
-            "entryZoneHigh": incumbent.get("entryZoneHigh"),
-            "invalidation": incumbent.get("invalidation"),
-            "returnSinceExitPct": 0.0,
-        }
+        archived = {"ticker": out_ticker, "name": incumbent.get("name") or out_ticker, "sector": incumbent.get("sector"),
+                    "currency": incumbent.get("currency"), "exitDate": today, "exitPrice": incumbent.get("currentPrice"),
+                    "currentPrice": incumbent.get("currentPrice"), "exitScore": score(incumbent), "statusAtExit": incumbent.get("status"),
+                    "rawStatusAtExit": incumbent.get("rawStatus"), "replacementTicker": in_ticker, "reason": reason,
+                    "entryZoneLow": incumbent.get("entryZoneLow"), "entryZoneHigh": incumbent.get("entryZoneHigh"),
+                    "invalidation": incumbent.get("invalidation"), "returnSinceExitPct": 0.0}
         exit_archive = [x for x in exit_archive if x.get("ticker") != out_ticker]
         exit_archive.insert(0, archived)
-
         challenger_days.pop(in_ticker, None)
         incumbent_weak_days.pop(out_ticker, None)
         rotations += 1
 
     exit_archive = prune_and_refresh_exit_archive(exit_archive, today)
-
     strict.sort(key=score, reverse=True)
     for rank, item in enumerate(strict, 1):
         item["rank"] = rank
         item["isNewEntry"] = item.get("ticker") in entered
+        item["trendEligibility"] = {"minimum": MIN_TREND_SCORE, "score": trend_score(item), "ok": trend_eligible(item)}
 
     inv["candidates"] = strict[:5]
     inv["recentExitedCandidates"] = exit_archive
     inv["recentExitedRetentionDays"] = EXIT_ARCHIVE_DAYS
-    inv["changes"] = {
-        "date": today,
-        "entered": entered,
-        "exited": exited,
-        "removedReasons": reasons,
-        "unchangedCount": len(strict[:5]) - len(entered),
-        "strictRotation": True,
-    }
-    inv.setdefault("rules", {}).update({
-        "selectionEntryConfirmationDays": ENTRY_CONFIRM_DAYS,
-        "selectionExitConfirmationDays": EXIT_CONFIRM_DAYS,
-        "selectionEntryMargin": ENTRY_MARGIN,
-        "maxRotationsPerDay": MAX_ROTATIONS_PER_DAY,
-        "strictSelection": True,
-        "recentExitedRetentionDays": EXIT_ARCHIVE_DAYS,
-    })
+    inv["changes"] = {"date": today, "entered": entered, "exited": exited, "removedReasons": reasons,
+                      "unchangedCount": len(strict[:5]) - len(entered), "strictRotation": True}
+    inv.setdefault("rules", {}).update({"selectionEntryConfirmationDays": ENTRY_CONFIRM_DAYS,
+        "selectionExitConfirmationDays": EXIT_CONFIRM_DAYS, "selectionEntryMargin": ENTRY_MARGIN,
+        "maxRotationsPerDay": MAX_ROTATIONS_PER_DAY, "strictSelection": True,
+        "recentExitedRetentionDays": EXIT_ARCHIVE_DAYS, "minimumTrendScore": MIN_TREND_SCORE,
+        "trendFollowingHardGateForNewCandidates": True})
 
     state["strictSelection"] = strict[:5]
     state["candidates"] = strict[:5]
@@ -230,19 +217,11 @@ def main() -> int:
 
     cal = load(CAL, {})
     if cal:
-        cal["investmentCandidates"] = [
-            {"name": c.get("name"), "ticker": c.get("ticker"), "sector": c.get("sector")}
-            for c in strict[:5]
-        ]
+        cal["investmentCandidates"] = [{"name": c.get("name"), "ticker": c.get("ticker"), "sector": c.get("sector")} for c in strict[:5]]
         save(CAL, cal)
-
     save(STATE, state)
     save(DATA, root)
-    print(
-        f"Top5 Investing rigida: {', '.join(c.get('ticker','?') for c in strict[:5])}; "
-        f"entrate={entered or 'nessuna'} uscite={exited or 'nessuna'}; "
-        f"archivio uscite recenti={len(exit_archive)}"
-    )
+    print(f"Top5 Investing rigida: {', '.join(c.get('ticker','?') for c in strict[:5])}; entrate={entered or 'nessuna'} uscite={exited or 'nessuna'}; archivio uscite recenti={len(exit_archive)}")
     return 0
 
 
