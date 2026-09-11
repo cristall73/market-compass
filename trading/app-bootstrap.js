@@ -19,27 +19,24 @@
   const rankingBlock = /const ranking = \[\.\.\.analyses\][\s\S]*?\.slice\(0, 3\);/;
   const rankingReplacement = `const ranking = [...analyses]
     .sort((a, b) => {
-      // Prima viene la reale operatività: VERDE > GIALLO > ROSSO.
-      // Solo dentro lo stesso colore ordiniamo per qualità tecnica.
       const statusOrder = { GREEN: 3, YELLOW: 2, RED: 1 };
-      const statusDifference =
-        statusOrder[operationalStatus(b).code] -
-        statusOrder[operationalStatus(a).code];
+      const statusDifference = statusOrder[operationalStatus(b).code] - statusOrder[operationalStatus(a).code];
       if (statusDifference !== 0) return statusDifference;
-
       const finalDifference = finalSetupScore(b) - finalSetupScore(a);
       if (Math.abs(finalDifference) >= 0.05) return finalDifference;
-
       const trendDifference = tenScale(b.result.confidence) - tenScale(a.result.confidence);
       if (trendDifference !== 0) return trendDifference;
-
-      const confluenceDifference =
-        (b.structure?.confluenceScore || 0) - (a.structure?.confluenceScore || 0);
+      const confluenceDifference = (b.structure?.confluenceScore || 0) - (a.structure?.confluenceScore || 0);
       if (confluenceDifference !== 0) return confluenceDifference;
-
       return tenScale(b.plan.opportunityScore) - tenScale(a.plan.opportunityScore);
     })
     .slice(0, 3);`;
+
+  // Correzione timing: il vecchio piano metteva l'entry sul 50% del ritracciamento,
+  // quindi un LONG poteva proporre ordini sotto il prezzo mentre il mercato stava ancora scendendo.
+  // Ora il livello operativo è un trigger di CONFERMA: sopra il prezzo per LONG, sotto per SHORT.
+  const oldEntryBlock = `  // Zona d'ingresso: ritracciamento del 50% con tolleranza ATR.\n  const entry = midpoint;\n  const entryTolerance = atr * 0.30;\n  const entryLow = entry - entryTolerance;\n  const entryHigh = entry + entryTolerance;`;
+  const newEntryBlock = `  // Il ritracciamento serve a preparare il setup, NON a comprare mentre scende.\n  // Il bias viene dal 4H; l'ordine operativo scatta solo oltre un trigger 1H di ripartenza.\n  const biasDirection = result.operationalFilter?.trendDirection || result.direction;\n  const biasLong = biasDirection === "LONG";\n  const biasShort = biasDirection === "SHORT";\n  const ma10 = h1?.movingAverages?.ma10;\n  const nw = h1?.nadaraya;\n  const confirmationBuffer = atr * 0.12;\n  const longBase = Math.max(current, Number.isFinite(ma10) ? ma10 : current, Number.isFinite(nw) ? nw : current);\n  const shortBase = Math.min(current, Number.isFinite(ma10) ? ma10 : current, Number.isFinite(nw) ? nw : current);\n  const entry = biasLong ? longBase + confirmationBuffer : biasShort ? shortBase - confirmationBuffer : current;\n  const entryTolerance = atr * 0.08;\n  const entryLow = entry - entryTolerance;\n  const entryHigh = entry + entryTolerance;`;
 
   fetch(`app.js?bootstrap=${Date.now()}`, {cache:"no-store"})
     .then(r => { if(!r.ok) throw new Error(`HTTP ${r.status}`); return r.text(); })
@@ -48,6 +45,8 @@
       let patched = source.replace(originalBlock, expandedAssets);
       if(!rankingBlock.test(patched)) throw new Error("Blocco classifica Trading non trovato");
       patched = patched.replace(rankingBlock, rankingReplacement);
+      if(!patched.includes(oldEntryBlock)) throw new Error("Blocco entry Trading non trovato");
+      patched = patched.replace(oldEntryBlock, newEntryBlock);
       (0, eval)(patched);
     })
     .catch(error => {
