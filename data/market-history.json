@@ -1,6 +1,6 @@
 {
   "schemaVersion": 10,
-  "updatedAt": "2026-09-30T15:19:03.115167+00:00",
+  "updatedAt": "2026-09-30T21:00:35.428255+00:00",
   "snapshots": [
     {
       "date": "2026-08-16",
@@ -14539,314 +14539,332 @@
     },
     {
       "date": "2026-09-30",
-      "generatedAt": "2026-09-30T15:19:03.115167+00:00",
+      "generatedAt": "2026-09-30T21:00:35.428255+00:00",
       "top5": [
         {
-          "ticker": "RIO",
-          "rank": 1,
-          "score": 7.6661284772498615,
-          "price": 94.73999786376953,
-          "status": "YELLOW"
-        },
-        {
           "ticker": "COP",
-          "rank": 2,
-          "score": 7.59066445722754,
-          "price": 125.66999816894531,
+          "rank": 1,
+          "score": 7.622703879717905,
+          "price": 125.1500015258789,
           "status": "YELLOW"
         },
         {
-          "ticker": "MDT",
-          "rank": 3,
-          "score": 7.570622546618061,
-          "price": 87.01499938964844,
+          "ticker": "RIO",
+          "rank": 2,
+          "score": 7.60706861623173,
+          "price": 94.16999816894531,
           "status": "YELLOW"
         },
         {
           "ticker": "PH",
-          "rank": 4,
-          "score": 7.504081610800094,
-          "price": 969.0999755859375,
-          "status": "YELLOW"
+          "rank": 3,
+          "score": 7.5117690848138645,
+          "price": 955.4199829101562,
+          "status": "GREEN"
         },
         {
           "ticker": "RIO.L",
-          "rank": 5,
-          "score": 7.306872095106169,
-          "price": 7115.0,
+          "rank": 4,
+          "score": 7.292368703216459,
+          "price": 7099.0,
           "status": "YELLOW"
+        },
+        {
+          "ticker": "MDT",
+          "rank": 5,
+          "score": 7.19149822140021,
+          "price": 86.29000091552734,
+          "status": "RED"
         }
       ],
       "universe": [
         {
-          "ticker": "RIO",
-          "rank": 1,
-          "rawScore": 7.0136848457312295,
-          "stableScore": 7.6661284772498615,
-          "status": "YELLOW",
-          "inTop5": true,
-          "price": 94.73999786376953
-        },
-        {
           "ticker": "COP",
-          "rank": 2,
-          "rawScore": 7.730681112448732,
-          "stableScore": 7.59066445722754,
+          "rank": 1,
+          "rawScore": 7.851195373461822,
+          "stableScore": 7.622703879717905,
           "status": "YELLOW",
           "inTop5": true,
-          "price": 125.66999816894531
+          "price": 125.1500015258789
         },
         {
-          "ticker": "MDT",
-          "rank": 3,
-          "rawScore": 6.4101266122726015,
-          "stableScore": 7.570622546618061,
+          "ticker": "RIO",
+          "rank": 2,
+          "rawScore": 6.788206723997747,
+          "stableScore": 7.60706861623173,
           "status": "YELLOW",
           "inTop5": true,
-          "price": 87.01499938964844
+          "price": 94.16999816894531
         },
         {
           "ticker": "PH",
-          "rank": 4,
-          "rawScore": 7.348440458980433,
-          "stableScore": 7.504081610800094,
-          "status": "YELLOW",
+          "rank": 3,
+          "rawScore": 7.374085808595898,
+          "stableScore": 7.5117690848138645,
+          "status": "GREEN",
           "inTop5": true,
-          "price": 969.0999755859375
+          "price": 955.4199829101562
         },
         {
           "ticker": "RIO.L",
-          "rank": 5,
-          "rawScore": 6.546288270804232,
-          "stableScore": 7.306872095106169,
+          "rank": 4,
+          "rawScore": 6.459131728576973,
+          "stableScore": 7.292368703216459,
           "status": "YELLOW",
           "inTop5": true,
-          "price": 7115.0
+          "price": 7099.0
+        },
+        {
+          "ticker": "MDT",
+          "rank": 5,
+          "rawScore": 5.127255471071652,
+          "stableScore": 7.19149822140021,
+          "status": "RED",
+          "inTop5": true,
+          "price": 86.29000091552734
+        },
+        {
+          "ticker": "ITX.MC",
+          "rank": 6,
+          "rawScore": 7.363311453813143,
+          "stableScore": 7.07685232214896,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 53.91999816894531
         },
         {
           "ticker": "RIO.AX",
-          "rank": 6,
+          "rank": 7,
           "rawScore": 6.997075344132496,
-          "stableScore": 7.06871911314046,
+          "stableScore": 7.067695269155397,
           "status": "YELLOW",
           "inTop5": false,
           "price": 166.92999267578125
         },
         {
           "ticker": "ROST",
-          "rank": 7,
-          "rawScore": 7.083989363382237,
-          "stableScore": 7.0145803583045865,
-          "status": "YELLOW",
-          "inTop5": false,
-          "price": 233.9499969482422
-        },
-        {
-          "ticker": "ITX.MC",
           "rank": 8,
-          "rawScore": 7.279923743113025,
-          "stableScore": 7.011570827430264,
+          "rawScore": 7.186912325305862,
+          "stableScore": 7.047142524474422,
           "status": "YELLOW",
           "inTop5": false,
-          "price": 54.0
+          "price": 233.39999389648438
         },
         {
           "ticker": "BLK",
           "rank": 9,
-          "rawScore": 7.11928890500502,
-          "stableScore": 6.937139350427545,
+          "rawScore": 7.416031505644948,
+          "stableScore": 7.026672534193969,
           "status": "GREEN",
           "inTop5": false,
-          "price": 1071.4368896484375
+          "price": 1058.2900390625
         },
         {
           "ticker": "AIR.PA",
           "rank": 10,
-          "rawScore": 6.526279456144643,
-          "stableScore": 6.890327983288497,
+          "rawScore": 6.483120823710328,
+          "stableScore": 6.859087346920191,
           "status": "YELLOW",
           "inTop5": false,
-          "price": 190.82000732421875
+          "price": 190.6199951171875
         },
         {
           "ticker": "BP.L",
           "rank": 11,
-          "rawScore": 6.727007412684506,
-          "stableScore": 6.8654825748088655,
+          "rawScore": 6.721529737314764,
+          "stableScore": 6.857245216858689,
           "status": "YELLOW",
           "inTop5": false,
-          "price": 549.2999877929688
+          "price": 549.4000244140625
         },
         {
-          "ticker": "ECL",
+          "ticker": "CNR.TO",
           "rank": 12,
-          "rawScore": 7.001642654987549,
-          "stableScore": 6.809391026290028,
-          "status": "RED",
+          "rawScore": 6.441809023072266,
+          "stableScore": 6.654166532117598,
+          "status": "YELLOW",
           "inTop5": false,
-          "price": 276.7349853515625
+          "price": 169.39999389648438
         },
         {
           "ticker": "MAR",
           "rank": 13,
-          "rawScore": 6.574550858115912,
-          "stableScore": 6.640521956252446,
+          "rawScore": 6.6094973842455715,
+          "stableScore": 6.6514808908982985,
           "status": "YELLOW",
           "inTop5": false,
-          "price": 361.32000732421875
+          "price": 355.6700134277344
         },
         {
-          "ticker": "UNA.AS",
+          "ticker": "ECL",
           "rank": 14,
-          "rawScore": 6.28587212239178,
-          "stableScore": 6.528709693066714,
+          "rawScore": 6.312248768466688,
+          "stableScore": 6.603614733940242,
           "status": "RED",
           "inTop5": false,
-          "price": 54.029998779296875
+          "price": 274.5799865722656
         },
         {
-          "ticker": "UBSG.SW",
+          "ticker": "JPM",
           "rank": 15,
-          "rawScore": 6.600208394540014,
-          "stableScore": 6.523400528413343,
+          "rawScore": 7.061885220939355,
+          "stableScore": 6.554012301421531,
           "status": "YELLOW",
           "inTop5": false,
-          "price": 40.380001068115234
+          "price": 330.8299865722656
+        },
+        {
+          "ticker": "CNQ.TO",
+          "rank": 16,
+          "rawScore": 6.590876191306449,
+          "stableScore": 6.541732227891853,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 66.93000030517578
         },
         {
           "ticker": "BHP.AX",
-          "rank": 16,
+          "rank": 17,
           "rawScore": 6.449867603770873,
-          "stableScore": 6.505693778482835,
+          "stableScore": 6.524712762054745,
           "status": "YELLOW",
           "inTop5": false,
           "price": 60.81999969482422
         },
         {
-          "ticker": "JPM",
-          "rank": 17,
-          "rawScore": 6.719169423259091,
-          "stableScore": 6.42793196062536,
-          "status": "YELLOW",
+          "ticker": "UNA.AS",
+          "rank": 18,
+          "rawScore": 6.197609110568845,
+          "stableScore": 6.489099367651282,
+          "status": "RED",
           "inTop5": false,
-          "price": 333.489990234375
+          "price": 53.91999816894531
         },
         {
           "ticker": "C",
-          "rank": 18,
-          "rawScore": 6.730932145883058,
-          "stableScore": 6.413165794055894,
+          "rank": 19,
+          "rawScore": 6.894686452632619,
+          "stableScore": 6.473149325070086,
           "status": "YELLOW",
           "inTop5": false,
-          "price": 130.6199951171875
+          "price": 129.47999572753906
+        },
+        {
+          "ticker": "UBSG.SW",
+          "rank": 20,
+          "rawScore": 6.463115879033766,
+          "stableScore": 6.472343464005129,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 40.290000915527344
         },
         {
           "ticker": "ALV.DE",
-          "rank": 19,
-          "rawScore": 6.428147187651145,
-          "stableScore": 6.378957177703245,
+          "rank": 21,
+          "rawScore": 6.456817911589373,
+          "stableScore": 6.403955064867347,
           "status": "YELLOW",
           "inTop5": false,
-          "price": 416.5
-        },
-        {
-          "ticker": "PG",
-          "rank": 20,
-          "rawScore": 5.850990694417007,
-          "stableScore": 6.285801144679705,
-          "status": "RED",
-          "inTop5": false,
-          "price": 147.3350067138672
-        },
-        {
-          "ticker": "8001.T",
-          "rank": 21,
-          "rawScore": 6.705118083298998,
-          "stableScore": 6.282865245618019,
-          "status": "RED",
-          "inTop5": false,
-          "price": 2158.0
+          "price": 416.29998779296875
         },
         {
           "ticker": "HSBC",
           "rank": 22,
-          "rawScore": 6.2574087396467375,
-          "stableScore": 6.2574087396467375,
+          "rawScore": 6.64929472265928,
+          "stableScore": 6.3749745345505,
           "status": "YELLOW",
           "inTop5": false,
-          "price": 99.95999908447266
-        },
-        {
-          "ticker": "CB",
-          "rank": 23,
-          "rawScore": 6.523505488095641,
-          "stableScore": 6.117356051049228,
-          "status": "YELLOW",
-          "inTop5": false,
-          "price": 330.19000244140625
-        },
-        {
-          "ticker": "CVX",
-          "rank": 24,
-          "rawScore": 6.107186886598371,
-          "stableScore": 6.090487004856896,
-          "status": "YELLOW",
-          "inTop5": false,
-          "price": 205.36000061035156
-        },
-        {
-          "ticker": "ZURN.SW",
-          "rank": 25,
-          "rawScore": 6.214521647291433,
-          "stableScore": 6.084735772987768,
-          "status": "RED",
-          "inTop5": false,
-          "price": 567.4000244140625
+          "price": 99.30999755859375
         },
         {
           "ticker": "HLT",
-          "rank": 26,
-          "rawScore": 5.800636070454481,
-          "stableScore": 6.07422446427239,
+          "rank": 23,
+          "rawScore": 6.698390616782941,
+          "stableScore": 6.358375925101688,
           "status": "YELLOW",
           "inTop5": false,
-          "price": 321.8699951171875
+          "price": 318.1199951171875
         },
         {
           "ticker": "CP.TO",
-          "rank": 27,
-          "rawScore": 5.968365631980517,
-          "stableScore": 5.94727324203712,
+          "rank": 24,
+          "rawScore": 6.7921722655603585,
+          "stableScore": 6.210111239318637,
           "status": "YELLOW",
           "inTop5": false,
-          "price": 122.87999725341797
+          "price": 121.19999694824219
+        },
+        {
+          "ticker": "MA",
+          "rank": 25,
+          "rawScore": 7.055647073069481,
+          "stableScore": 6.197911501825282,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 551.469970703125
+        },
+        {
+          "ticker": "ZURN.SW",
+          "rank": 26,
+          "rawScore": 6.256224481646975,
+          "stableScore": 6.133719957828147,
+          "status": "RED",
+          "inTop5": false,
+          "price": 567.0
+        },
+        {
+          "ticker": "CVX",
+          "rank": 27,
+          "rawScore": 6.216912851240687,
+          "stableScore": 6.114513076641687,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 204.2100067138672
+        },
+        {
+          "ticker": "8001.T",
+          "rank": 28,
+          "rawScore": 5.608309394135536,
+          "stableScore": 6.017633144792177,
+          "status": "RED",
+          "inTop5": false,
+          "price": 2207.5
+        },
+        {
+          "ticker": "CB",
+          "rank": 29,
+          "rawScore": 5.765048098330061,
+          "stableScore": 5.904577513495489,
+          "status": "RED",
+          "inTop5": false,
+          "price": 325.25
         },
         {
           "ticker": "MQG.AX",
-          "rank": 28,
-          "rawScore": 5.687094131975117,
-          "stableScore": 5.870072996198629,
+          "rank": 30,
+          "rawScore": 5.772245913391568,
+          "stableScore": 5.897042162635163,
           "status": "RED",
           "inTop5": false,
           "price": 246.10000610351562
         },
         {
           "ticker": "DIS",
-          "rank": 29,
-          "rawScore": 4.918753888127999,
-          "stableScore": 5.596588737744181,
+          "rank": 31,
+          "rawScore": 5.821954952658064,
+          "stableScore": 5.836662979445623,
           "status": "RED",
           "inTop5": false,
-          "price": 106.0
+          "price": 104.9000015258789
         },
         {
           "ticker": "RY.TO",
-          "rank": 30,
-          "rawScore": 5.1181968807676,
-          "stableScore": 5.040402756614467,
+          "rank": 32,
+          "rawScore": 5.37723966470203,
+          "stableScore": 5.144046966512507,
           "status": "RED",
           "inTop5": false,
-          "price": 281.1499938964844
+          "price": 279.94000244140625
         }
       ],
       "changes": {
