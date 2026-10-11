@@ -2,6 +2,12 @@ const ASSETS = [
   { name: "Nasdaq 100", symbol: "USATEC", bias: 0.10, volatility: 1.35 },
   { name: "DAX 40", symbol: "GER40", bias: 0.04, volatility: 1.10 },
   { name: "S&P 500", symbol: "US500", bias: 0.07, volatility: 0.95 },
+  { name: "FTSE 100", symbol: "UK100", bias: 0.03, volatility: 0.95 },
+  { name: "IBEX 35", symbol: "ESP35", bias: 0.03, volatility: 1.05 },
+  { name: "CAC 40", symbol: "FRA40", bias: 0.03, volatility: 1.00 },
+  { name: "FTSE MIB", symbol: "ITA40", bias: 0.04, volatility: 1.10 },
+  { name: "China A50", symbol: "CHINA50", bias: 0.02, volatility: 1.25 },
+  { name: "Bovespa", symbol: "BRA50", bias: 0.03, volatility: 1.20 },
   { name: "Gold", symbol: "XAUUSD", bias: 0.05, volatility: 0.90 },
   { name: "Silver", symbol: "XAGUSD", bias: 0.02, volatility: 1.30 },
   { name: "Petrolio WTI", symbol: "WTI", bias: -0.02, volatility: 1.20 },
@@ -57,7 +63,7 @@ const MARKET_DATA_PROVIDER = {
   },
 
   getGeneratedAt() {
-    return this.payload?.generatedAt ? new Date(this.payload.generatedAt) : null;
+    return (this.payload?.freshnessCheckedAt || this.payload?.generatedAt) ? new Date(this.payload.freshnessCheckedAt || this.payload.generatedAt) : null;
   }
 };
 
@@ -283,9 +289,19 @@ function operationalPlan(result) {
   const isShort = result.direction === "SHORT";
   const directionSign = isShort ? -1 : 1;
 
-  // Zona d'ingresso: ritracciamento del 50% con tolleranza ATR.
-  const entry = midpoint;
-  const entryTolerance = atr * 0.30;
+  // Il ritracciamento serve a preparare il setup, NON a comprare mentre scende.
+  // Il bias viene dal 4H; il livello operativo è il recupero delle guide 1H + piccolo buffer ATR.
+  const biasDirection = result.operationalFilter?.trendDirection || result.direction;
+  const biasLong = biasDirection === "LONG";
+  const biasShort = biasDirection === "SHORT";
+  const ma10 = h1?.movingAverages?.ma10;
+  const nw = h1?.nadaraya;
+  const confirmationBuffer = atr * 0.12;
+  const fastGuides = [ma10, nw].filter(Number.isFinite);
+  const longBase = fastGuides.length ? Math.max(...fastGuides) : current;
+  const shortBase = fastGuides.length ? Math.min(...fastGuides) : current;
+  const entry = biasLong ? longBase + confirmationBuffer : biasShort ? shortBase - confirmationBuffer : current;
+  const entryTolerance = atr * 0.12;
   const entryLow = entry - entryTolerance;
   const entryHigh = entry + entryTolerance;
 
@@ -385,6 +401,37 @@ function operationalPlan(result) {
   };
 }
 
+function applyTechnicalRisk(plan, result, structure) {
+  const sign = result.direction === "LONG" ? 1 : result.direction === "SHORT" ? -1 : 0;
+  if (!sign) return;
+  const atr = result.details["1H"]?.atr || 0;
+  const levels = (structure.levels || []).filter(x => Number.isFinite(x.price)).map(x => x.price);
+  const behind = levels.filter(p => sign * (p - plan.entry) < 0).sort((a,b) => Math.abs(a-plan.entry)-Math.abs(b-plan.entry));
+  const ahead = levels.filter(p => sign * (p - plan.entry) > 0).sort((a,b) => Math.abs(a-plan.entry)-Math.abs(b-plan.entry));
+  if (!atr || !behind.length || !ahead.length) {
+    plan.actionCode = "NO_TRADE"; plan.action = "ATTENDI LIVELLI TECNICI";
+    plan.actionReason = "Supporto/resistenza insufficienti per validare stop e obiettivo.";
+    plan.rr = 0; return;
+  }
+  plan.stop = behind[0] - sign * atr * .25;
+  plan.target = plan.tp2 = ahead[0] - sign * atr * .15;
+  plan.riskPoints = Math.abs(plan.entry - plan.stop);
+  plan.rewardPoints = Math.max(0, sign * (plan.target - plan.entry));
+  plan.rr = plan.rewardPoints / plan.riskPoints;
+  plan.riskPercent = plan.riskPoints / plan.entry * 100;
+  plan.rewardPercent = plan.rewardPoints / plan.entry * 100;
+  plan.tp1 = plan.entry + sign * Math.min(plan.riskPoints, plan.rewardPoints);
+  plan.tp3 = ahead.length > 1 ? ahead[1] - sign * atr * .15 : plan.tp2;
+  const liveRisk = sign * (plan.current - plan.stop);
+  const liveReward = sign * (plan.target - plan.current);
+  const liveRR = liveRisk > 0 ? liveReward / liveRisk : 0;
+  if (plan.rr < 2 || (plan.actionCode === "READY" && liveRR < 2)) {
+    plan.actionCode = "NO_TRADE"; plan.action = "SPAZIO INSUFFICIENTE";
+    plan.actionReason = "Il primo ostacolo tecnico non consente R/R almeno 2: restare fuori senza forzare target e stop.";
+    plan.opportunityScore = 0;
+  }
+}
+
 function weightedReasons(result) {
   const reasons = [];
   const tfWeights = { "1M": 18, "1W": 22, "1D": 25, "4H": 20, "1H": 15 };
@@ -446,6 +493,19 @@ async function analyzeAll() {
       const result = window.TradingEngine.analyzeMarket(data);
       const plan = operationalPlan(result);
       const structure = analyzeStructure(data, result, plan);
+      applyTechnicalRisk(plan, result, structure);
+      const market = MARKET_DATA_PROVIDER.payload.assets.find(x => x.symbol === asset.symbol);
+      const latest = new Date(data["1H"]?.at(-1)?.time).getTime();
+      const quoteAge = (Date.now() - latest) / 3600000;
+      const pipelineAge = (Date.now() - new Date(MARKET_DATA_PROVIDER.payload.freshnessCheckedAt || MARKET_DATA_PROVIDER.payload.generatedAt)) / 3600000;
+      const weekday = new Date().getUTCDay() % 6 !== 0;
+      const maxAge = ["XAUUSD", "XAGUSD", "WTI", "EURUSD", "USDJPY"].includes(asset.symbol) ? 6 : 18;
+      if (market?.freshness?.stale || !Number.isFinite(quoteAge) || quoteAge > 96 || pipelineAge > 3 || (weekday && quoteAge > maxAge)) {
+        plan.actionCode = "NO_TRADE";
+        plan.action = "DATI VECCHI / INSUFFICIENTI";
+        plan.actionReason = "Analisi descrittiva: attendere quotazioni e aggiornamento validi prima di un ingresso.";
+        plan.opportunityScore = 0;
+      }
       plan.confluenceScore = structure.confluenceScore;
       analyses.push({ asset, result, plan, structure, data });
     } catch (error) {
@@ -1098,24 +1158,15 @@ function renderSummary() {
 
   const ranking = [...analyses]
     .sort((a, b) => {
-      // La classifica deve essere leggibile e coerente con il numero mostrato:
-      // 1) Setup finale, 2) semaforo, 3) trend, 4) confluenza, 5) ingresso.
+      const statusOrder = { GREEN: 3, YELLOW: 2, RED: 1 };
+      const statusDifference = statusOrder[operationalStatus(b).code] - statusOrder[operationalStatus(a).code];
+      if (statusDifference !== 0) return statusDifference;
       const finalDifference = finalSetupScore(b) - finalSetupScore(a);
       if (Math.abs(finalDifference) >= 0.05) return finalDifference;
-
-      const statusOrder = { GREEN: 3, YELLOW: 2, RED: 1 };
-      const statusDifference =
-        statusOrder[operationalStatus(b).code] -
-        statusOrder[operationalStatus(a).code];
-      if (statusDifference !== 0) return statusDifference;
-
       const trendDifference = tenScale(b.result.confidence) - tenScale(a.result.confidence);
       if (trendDifference !== 0) return trendDifference;
-
-      const confluenceDifference =
-        (b.structure?.confluenceScore || 0) - (a.structure?.confluenceScore || 0);
+      const confluenceDifference = (b.structure?.confluenceScore || 0) - (a.structure?.confluenceScore || 0);
       if (confluenceDifference !== 0) return confluenceDifference;
-
       return tenScale(b.plan.opportunityScore) - tenScale(a.plan.opportunityScore);
     })
     .slice(0, 3);
@@ -1666,8 +1717,8 @@ function openDetails(symbol) {
 
 
 const DATA_FRESHNESS = {
-  freshMinutes: 20,
-  staleMinutes: 45,
+  freshMinutes: 75,
+  staleMinutes: 120,
   browserRefreshMinutes: 5
 };
 

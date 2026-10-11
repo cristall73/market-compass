@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - '.github/workflows/update-market-data.yml'
+      - 'scripts/refresh_trading_intraday.py'
   schedule:
     # Trading Coach: aggiornamento intraday ogni ora (UTC).
     - cron: '7 * * * *'

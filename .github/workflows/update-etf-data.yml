@@ -2,14 +2,18 @@ name: Update ETF Data
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "scripts/**"
+      - ".github/workflows/update-etf-data.yml"
   schedule:
     # ETF & PAC: un aggiornamento al giorno, separato dal Trading Coach.
     # 06:07 UTC = 08:07 in Italia durante l'ora legale.
     - cron: '7 6 * * *'
 
 concurrency:
-  group: etf-data-daily
-  cancel-in-progress: true
+  group: market-data-writes-main
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -58,7 +62,7 @@ jobs:
           REMOTE_HEAD=$(git rev-parse origin/main)
           if [ "$LOCAL_BASE" != "$REMOTE_HEAD" ]; then
             echo "Main cambiato durante il run ETF. Nessun merge: si riprova al prossimo ciclo."
-            exit 0
+            exit 1
           fi
 
           git push origin HEAD:main

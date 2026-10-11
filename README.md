@@ -163,3 +163,14 @@ Aggiunge:
 Nessuna modifica alla logica Investment.
 Ogni candidata mostra ora chiaramente quali condizioni mancano per diventare VERDE:
 prezzo/ritracciamento, ingresso, trend, qualità, news/catalizzatori e memoria 3/3 giorni.
+
+
+## Correzioni integrità analisi — ottobre 2026
+
+- Trading: stop oltre supporto/resistenza con buffer ATR; obiettivo prima del primo ostacolo. R/R minimo 2, verificato anche sul prezzo corrente. Livelli insufficienti o dati vecchi impediscono il segnale operativo. Le quotazioni Yahoo di indici cash/futures sono riferimenti: confrontare i prezzi del CFD del broker prima dell’ordine.
+- Investment 2–4 mesi: conferma temporale e multi-timeframe non scavalcano qualità, trend sano, zona d’ingresso e R/R. Disponibilità Trade Republic da verificare, non presunta. Nessun cambio alle regole di persistenza della classifica.
+- ETF/PAC: mesi completati, conservazione delle posizioni quando mancano dati; prima selezione senza doppioni di ISIN o ruolo. Simulazione retrospettiva della composizione attuale, con serie rettificate, non performance storica del Coach né rendimento netto in euro.
+- Workflow serializzati; una pubblicazione saltata segnala errore. Il generatore Investment conserva il dataset Trading e interrompe su screening vuoto.
+- Generatore e frontend ora contengono direttamente il codice: eliminate riscritture dinamiche da sorgenti remote.
+
+Verifica: `python -m unittest discover -s tests -v`; controlli sintattici Python/JavaScript. Le correzioni migliorano coerenza e qualità dei segnali; non dimostrano un vantaggio statistico o risultati reali migliori. Per dimostrarlo serve validazione cronologica fuori campione, con costi, spread e confronto con benchmark.

@@ -15,8 +15,8 @@ if(typeof pick5==='function'){
   };
 }
 
-function ltFmt(v,d=1){return Number.isFinite(Number(v))?Number(v).toLocaleString('it-IT',{maximumFractionDigits:d}):'—'}
-function ltPrice(v,c){if(!Number.isFinite(Number(v)))return'—';if(c==='GBp')return `${ltFmt(v,2)} GBp`;if(c==='GBP')return `£${ltFmt(v,2)}`;if(c==='EUR')return `€${ltFmt(v,2)}`;if(c==='USD')return `$${ltFmt(v,2)}`;return `${ltFmt(v,2)} ${c||''}`.trim()}
+function ltFmt(v,d=1){return v !== null && v !== undefined && v !== "" && Number.isFinite(Number(v))?Number(v).toLocaleString('it-IT',{maximumFractionDigits:d}):'—'}
+function ltPrice(v,c){if(!v !== null && v !== undefined && v !== "" && Number.isFinite(Number(v)))return'—';if(c==='GBp')return `${ltFmt(v,2)} GBp`;if(c==='GBP')return `£${ltFmt(v,2)}`;if(c==='EUR')return `€${ltFmt(v,2)}`;if(c==='USD')return `$${ltFmt(v,2)}`;return `${ltFmt(v,2)} ${c||''}`.trim()}
 function regimeBadge(v){const s=(v||'YELLOW').toUpperCase();const label=s==='GREEN'?'OK':s==='RED'?'KO':'ATTESA';return `<span class="lt-badge ${s}">${label}</span>`}
 function safeLink(url){return /^https?:\/\//i.test(url||'')?url:'#'}
 

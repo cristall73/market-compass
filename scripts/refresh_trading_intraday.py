@@ -165,7 +165,7 @@ def main() -> None:
         # lasciamo una tolleranza maggiore perché fuori sessione è normale.
         weekday = now.weekday() < 5
         stale_limit = 6 if symbol in SYMBOLS_24H else 18
-        stale = bool(weekday and age_hours is not None and age_hours > stale_limit)
+        stale = bool(age_hours is None or age_hours > 96 or (weekday and age_hours > stale_limit))
 
         asset["freshness"] = {
             "checkedAt": now.isoformat(),
@@ -178,9 +178,9 @@ def main() -> None:
         # Sicurezza: se l'intraday resta vecchio, impediamo al frontend di
         # presentare un ingresso operativo basato su 1H/4H non aggiornati.
         if stale:
-            timeframes["1H"] = []
-            timeframes["4H"] = []
+            # Preserve history; the UI vetoes execution using freshness metadata.
             errors = asset.setdefault("errors", [])
+            errors[:] = [e for e in errors if not str(e).startswith("Dati intraday non freschi:")]
             errors.append(
                 f"Dati intraday non freschi: ultima 1H {latest_1h.isoformat() if latest_1h is not None else 'assente'}"
             )

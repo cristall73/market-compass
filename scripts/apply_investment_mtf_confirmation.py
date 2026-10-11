@@ -108,7 +108,17 @@ def main() -> int:
                 "trendHealth": {"ok": False, "label": "DATI NON DISPONIBILI"},
             }
 
-        final_ok = bool(temporal_ok and technical_ok)
+        # Technical confirmation is a veto, never a replacement for entry filters.
+        price = c.get("currentPrice")
+        low, high = c.get("entryZoneLow"), c.get("entryZoneHigh")
+        stop, target = c.get("invalidation"), c.get("target2")
+        valid = all(isinstance(v, (int, float)) and pd.notna(v) and float("-inf") < v < float("inf") for v in (price, low, high, stop, target))
+        zone_ok = bool(valid and low <= price <= high)
+        rr = (target - price) / (price - stop) if valid and stop < price < target else None
+        base_ok = c.get("rawStatus", c.get("status")) == "GREEN"
+        c["entryValidation"] = {"baseEligible": base_ok, "inZone": zone_ok, "riskReward": rr,
+                                "minimumRiskReward": 2.0, "brokerAvailability": "DA VERIFICARE SU TRADE REPUBLIC"}
+        final_ok = bool(temporal_ok and technical_ok and base_ok and zone_ok and rr is not None and rr >= 2)
         confirmation["temporalConfirmed"] = temporal_ok
         confirmation["technicalConfirmed"] = technical_ok
         confirmation["confirmed"] = final_ok
@@ -121,7 +131,7 @@ def main() -> int:
             if health.get("explosive"):
                 confirmation["label"] = "ATTENDERE — TREND TROPPO ESPLOSIVO"
             else:
-                confirmation["label"] = "CANDIDATO CONFERMATO 5/5 — ATTESA CONFERMA MULTI-TIMEFRAME"
+                confirmation["label"] = "CANDIDATO STABILE — ATTENDERE FILTRI TECNICI, ZONA E R/R ≥ 2"
             c["status"] = "YELLOW"
         else:
             confirmation["label"] = f"IN CONFERMA {confirmation.get('days', 0)}/{confirmation.get('requiredDays', 5)} GIORNI"

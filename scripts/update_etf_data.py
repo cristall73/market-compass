@@ -86,7 +86,8 @@ def monthly_series(c):
     # Ultima chiusura disponibile di ogni mese: il Daily non entra nella decisione ETF.
     p = c.groupby(c.index.to_period('M')).last()
     p.index = p.index.to_timestamp('M')
-    return p.dropna()
+    current_month = pd.Timestamp.now(tz=c.index.tz).to_period('M')
+    return p[p.index.to_period('M') < current_month].dropna()
 
 
 def regime(close, fast_span, slow_span):
@@ -128,6 +129,7 @@ def analyse(t):
     m = monthly_series(c)
     w = c.resample('W-FRI').last().dropna()
     monthly_regime, monthly_score = regime(m, 10, 20)
+    w = w[w.index.date < pd.Timestamp.now().date()]
     weekly_regime, weekly_score = regime(w, 10, 40)
     trend = monthly_score * .70 + weekly_score * .30
 
@@ -172,7 +174,7 @@ def initial_pick(items):
     chosen = []
 
     def add(x):
-        if x and x['ticker'] not in {c['ticker'] for c in chosen} and len(chosen) < PORTFOLIO_SIZE:
+        if x and x['isin'] not in {c['isin'] for c in chosen} and x['role'] not in {c['role'] for c in chosen} and len(chosen) < PORTFOLIO_SIZE:
             chosen.append(x)
 
     add(next((x for x in ranked if x['role'] == 'CORE GLOBALE' and x['status'] != 'RED'), None))
@@ -216,8 +218,11 @@ def build_portfolio(items, previous, now):
     holdings = []
     for h in old_holdings:
         t = h.get('ticker')
-        if t in by_ticker:
-            holdings.append(dict(h))
+        retained = dict(h)
+        retained['dataUnavailable'] = t not in by_ticker
+        if retained['dataUnavailable']:
+            retained['returnSinceEntryPct'] = None
+        holdings.append(retained)
 
     # Fuori dal cambio mese non tocchiamo la composizione: aggiorniamo solo prezzi e dati.
     if last_review == this_month:
@@ -226,7 +231,10 @@ def build_portfolio(items, previous, now):
     changed = []
     survivors = []
     for h in holdings:
-        x = by_ticker[h['ticker']]
+        x = by_ticker.get(h['ticker'])
+        if x is None:
+            survivors.append(h)
+            continue
         held_months = months_between(h.get('entryDate',''), now.date().isoformat())
         serious_break = x['monthlyRegime'] == 'RED' and x['weeklyRegime'] == 'RED'
         structural_break = x['score'] < 5.5 and x['monthlyRegime'] == 'RED'
@@ -289,6 +297,8 @@ def main():
             print(t[0], e)
 
     now = datetime.now(timezone.utc)
+    if not out:
+        raise RuntimeError('Nessun dato ETF valido: conservato il dataset precedente')
     portfolio = build_portfolio(out, previous, now)
     old_news = previous.get('portfolioNews') or {}
     portfolio_news = {}
@@ -313,7 +323,7 @@ def main():
     payload = {
         'generatedAt':now.isoformat(),'screenedCount':len(ETFS),'validCount':len(out),
         'strategy':{'decisionTimeframes':['1M','1W'],'dailyUsed':False,'reviewFrequency':'monthly','preferredHoldingMonths':MIN_HOLD_MONTHS,'rotationPolicy':'rare; uscita anticipata solo su deterioramento strutturale confermato 1M+1W'},
-        'sourceNotes':['Prezzi e storico mensile reale: Yahoo Finance/yfinance auto-adjusted','Prezzo mostrato con valuta e mercato della quotazione usata dal motore','Universo: ETF/ETC UCITS liquidi rappresentativi su LSE/Xetra','ETF Coach: decisione strategica su Mensile + Settimanale; il Daily non entra nella logica','Revisione composizione una volta al mese; nessuna rotazione automatica se la tesi resta valida'],
+        'sourceNotes':['Prezzi e storico mensile reale: Yahoo Finance/yfinance auto-adjusted','Prezzo mostrato con valuta e mercato della quotazione usata dal motore','Universo: ETF UCITS ed ETC su LSE/Xetra; gli ETC non sono fondi UCITS','ETF Coach: decisione strategica su Mensile + Settimanale; il Daily non entra nella logica','Revisione composizione una volta al mese; nessuna rotazione automatica se la tesi resta valida'],
         'portfolio':portfolio,'portfolioNews':portfolio_news,
         'etfs':sorted(out,key=lambda x:x['score'],reverse=True)
     }
