@@ -160,7 +160,7 @@ def analyse(t):
     return {
         'ticker':ticker,'name':name,'category':cat,'role':role_from_category(cat),'isin':isin,'tvSymbol':tv,
         'exchange':exchange,'quoteCurrency':currency,'ter':ter,'replication':repl,'distribution':dist,
-        'currentPrice':p,'return1y':r1,'return3y':r3,'return5y':r5,'return10y':r10,'drawdown':draw,
+        'currentPrice':p,'priceAsOf':c.index[-1].isoformat(),'return1y':r1,'return3y':r3,'return5y':r5,'return10y':r10,'drawdown':draw,
         'currentDrawdown':current,'volatility':vol,'monthlyRegime':monthly_regime,'weeklyRegime':weekly_regime,
         'monthlyTrendScore':monthly_score,'weeklyTrendScore':weekly_score,'trendScore':trend,'score':score,
         'status':status,'verdict':verdict,'pacAction':action,'monthlyHistory':monthly,
