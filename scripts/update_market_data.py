@@ -1103,7 +1103,14 @@ def main() -> int:
     # Investment update must not replace intraday bars refreshed by Trading.
     if OUTPUT.exists():
         previous = json.loads(OUTPUT.read_text(encoding="utf-8"))
+        fresh_assets = {a["symbol"]: a for a in combined["assets"]}
         combined["assets"] = previous.get("assets", combined["assets"])
+        for asset in combined["assets"]:
+            fresh = fresh_assets.get(asset.get("symbol"), {})
+            for tf in ("1D", "1W", "1M"):
+                candles = fresh.get("timeframes", {}).get(tf)
+                if candles:
+                    asset.setdefault("timeframes", {})[tf] = candles
         combined["generatedAt"] = previous.get("generatedAt", generated_at)
         if previous.get("freshnessCheckedAt"):
             combined["freshnessCheckedAt"] = previous["freshnessCheckedAt"]
