@@ -4,7 +4,12 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "scripts/**"
+      - "scripts/update_market_data.py"
+      - "scripts/apply_investment_mtf_confirmation.py"
+      - "scripts/fix_selection_counters.py"
+      - "scripts/postprocess_site.py"
+      - "scripts/investment_trend_health_guard.py"
+      - "scripts/archive_investment_signals.py"
       - ".github/workflows/investment-health.yml"
   schedule:
     # Investment Coach: aggiornamento lento e indipendente, coerente con orizzonte 2-4 mesi.

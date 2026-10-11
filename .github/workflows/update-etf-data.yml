@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "scripts/**"
+      - "scripts/update_etf_data.py"
       - ".github/workflows/update-etf-data.yml"
   schedule:
     # ETF & PAC: un aggiornamento al giorno, separato dal Trading Coach.
