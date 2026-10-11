@@ -585,6 +585,9 @@ def enrich_candidate(base: dict[str, Any], history: dict[str, Any]) -> dict[str,
     watch_high = high52 * (1 - base["requiredPullbackMin"] * 0.45 / 100)
     invalidation = min(entry_low - base["atr"] * 1.2, base["ema200"] - base["atr"] * 0.5)
     risk = max(0.01, entry_mid - invalidation)
+    # Do not manufacture a 2R target beyond the first estimated obstacle.
+    obstacles = [v for v in (base["resistance"], high52) if v > base["price"]]
+    technical_target = min(obstacles) - base["atr"] * 0.15 if obstacles else None
 
     risks = list(SECTOR_RISKS.get(sector, ["Rallentamento macroeconomico e compressione dei multipli."]))
     if sentiment < 0:
@@ -645,11 +648,13 @@ def enrich_candidate(base: dict[str, Any], history: dict[str, Any]) -> dict[str,
         "return6mPct": base.get("return6m"),
         "entryScore": base["entryScore"], "newsScore": news_score,
         "rawScore": raw_score, "finalScore": stable_score, "stableScore": stable_score,
-        "status": status, "watchZoneLow": watch_low, "watchZoneHigh": watch_high,
+        "status": status, "rawStatus": status, "watchZoneLow": watch_low, "watchZoneHigh": watch_high,
         "entryZoneLow": entry_low, "entryZoneHigh": entry_high,
         "invalidation": invalidation,
-        "target1": entry_mid + risk * 1.2, "target2": entry_mid + risk * 2,
-        "target3": entry_mid + risk * 3, "riskReward": "1 : 2.0",
+        "target1": min(entry_mid + risk, technical_target) if technical_target else None,
+        "target2": technical_target, "target3": high52,
+        "riskReward": ((technical_target - base["price"]) / (base["price"] - invalidation)) if technical_target and base["price"] > invalidation else None,
+        "technicalLevelMethod": "Supporto e resistenza stimati da quantili delle ultime 90 sedute; verificare sul grafico",
         "executiveSummary": (
             f"{name} mantiene qualità {quality_score:.1f}/10 e trend {base['trendScore']:.1f}/10. "
             f"Quota a -{base['pullbackPct']:.1f}% dal massimo. "
