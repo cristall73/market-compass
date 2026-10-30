@@ -1,6 +1,6 @@
 {
   "schemaVersion": 10,
-  "updatedAt": "2026-10-29T21:26:32.302194+00:00",
+  "updatedAt": "2026-10-30T06:27:17.306765+00:00",
   "snapshots": [
     {
       "date": "2026-08-16",
@@ -24656,6 +24656,328 @@
         "removedReasons": [],
         "unchangedCount": 4
       }
+    },
+    {
+      "date": "2026-10-30",
+      "generatedAt": "2026-10-30T06:27:17.306765+00:00",
+      "top5": [
+        {
+          "ticker": "TSM",
+          "rank": 1,
+          "score": 8.269098651834216,
+          "price": 431.80999755859375,
+          "status": "GREEN"
+        },
+        {
+          "ticker": "PH",
+          "rank": 2,
+          "score": 6.97415228889009,
+          "price": 928.4500122070312,
+          "status": "YELLOW"
+        },
+        {
+          "ticker": "COP",
+          "rank": 3,
+          "score": 6.706880056047599,
+          "price": 150.02999877929688,
+          "status": "RED"
+        },
+        {
+          "ticker": "MDT",
+          "rank": 4,
+          "score": 6.257564779486341,
+          "price": 97.11000061035156,
+          "status": "YELLOW"
+        }
+      ],
+      "universe": [
+        {
+          "ticker": "TSM",
+          "rank": 1,
+          "rawScore": 8.123484371007281,
+          "stableScore": 8.269098651834216,
+          "status": "GREEN",
+          "inTop5": true,
+          "price": 431.80999755859375
+        },
+        {
+          "ticker": "NVDA",
+          "rank": 2,
+          "rawScore": 7.061133193461759,
+          "stableScore": 7.0659030716843105,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 213.66000366210938
+        },
+        {
+          "ticker": "PH",
+          "rank": 3,
+          "rawScore": 6.73511330637416,
+          "stableScore": 6.97415228889009,
+          "status": "YELLOW",
+          "inTop5": true,
+          "price": 928.4500122070312
+        },
+        {
+          "ticker": "ROST",
+          "rank": 4,
+          "rawScore": 7.137878557678165,
+          "stableScore": 6.924220501972231,
+          "status": "GREEN",
+          "inTop5": false,
+          "price": 232.3000030517578
+        },
+        {
+          "ticker": "7741.T",
+          "rank": 5,
+          "rawScore": 6.66539608687218,
+          "stableScore": 6.813506623040763,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 26090.0
+        },
+        {
+          "ticker": "BHP.AX",
+          "rank": 6,
+          "rawScore": 7.16525024781061,
+          "stableScore": 6.781271480831982,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 57.560001373291016
+        },
+        {
+          "ticker": "COP",
+          "rank": 7,
+          "rawScore": 6.137758284848486,
+          "stableScore": 6.706880056047599,
+          "status": "RED",
+          "inTop5": true,
+          "price": 150.02999877929688
+        },
+        {
+          "ticker": "AIR.PA",
+          "rank": 8,
+          "rawScore": 6.169054002096233,
+          "stableScore": 6.689035364364557,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 191.9199981689453
+        },
+        {
+          "ticker": "BBVA.MC",
+          "rank": 9,
+          "rawScore": 6.675123640964217,
+          "stableScore": 6.641393720335683,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 22.450000762939453
+        },
+        {
+          "ticker": "RTX",
+          "rank": 10,
+          "rawScore": 6.027670520903027,
+          "stableScore": 6.637134991815602,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 199.39999389648438
+        },
+        {
+          "ticker": "INGA.AS",
+          "rank": 11,
+          "rawScore": 6.9273634613046005,
+          "stableScore": 6.598853657322447,
+          "status": "GREEN",
+          "inTop5": false,
+          "price": 29.44499969482422
+        },
+        {
+          "ticker": "SPGI",
+          "rank": 12,
+          "rawScore": 6.4266507686680345,
+          "stableScore": 6.587172356586519,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 460.6600036621094
+        },
+        {
+          "ticker": "WFC",
+          "rank": 13,
+          "rawScore": 6.586670541086892,
+          "stableScore": 6.578480414624561,
+          "status": "RED",
+          "inTop5": false,
+          "price": 84.80999755859375
+        },
+        {
+          "ticker": "COST",
+          "rank": 14,
+          "rawScore": 6.999776754216182,
+          "stableScore": 6.478417953493001,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 996.0800170898438
+        },
+        {
+          "ticker": "6758.T",
+          "rank": 15,
+          "rawScore": 6.605516697940542,
+          "stableScore": 6.436946762385545,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 3950.0
+        },
+        {
+          "ticker": "MDT",
+          "rank": 16,
+          "rawScore": 5.4774582691679585,
+          "stableScore": 6.257564779486341,
+          "status": "YELLOW",
+          "inTop5": true,
+          "price": 97.11000061035156
+        },
+        {
+          "ticker": "LIN",
+          "rank": 17,
+          "rawScore": 5.940094617918028,
+          "stableScore": 6.255710031710923,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 503.1499938964844
+        },
+        {
+          "ticker": "ATCO-A.ST",
+          "rank": 18,
+          "rawScore": 6.069010102997451,
+          "stableScore": 6.215563769483019,
+          "status": "RED",
+          "inTop5": false,
+          "price": 187.5500030517578
+        },
+        {
+          "ticker": "ERIC-B.ST",
+          "rank": 19,
+          "rawScore": 6.130916496085231,
+          "stableScore": 6.141508703224848,
+          "status": "RED",
+          "inTop5": false,
+          "price": 109.3499984741211
+        },
+        {
+          "ticker": "6501.T",
+          "rank": 20,
+          "rawScore": 5.757408212662479,
+          "stableScore": 6.104103082232377,
+          "status": "RED",
+          "inTop5": false,
+          "price": 5045.0
+        },
+        {
+          "ticker": "8306.T",
+          "rank": 21,
+          "rawScore": 5.781933060959983,
+          "stableScore": 6.081682737294985,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 3441.0
+        },
+        {
+          "ticker": "UNA.AS",
+          "rank": 22,
+          "rawScore": 5.2448079629630735,
+          "stableScore": 6.0787363291879855,
+          "status": "RED",
+          "inTop5": false,
+          "price": 57.349998474121094
+        },
+        {
+          "ticker": "XOM",
+          "rank": 23,
+          "rawScore": 5.74114147200238,
+          "stableScore": 6.031539863020008,
+          "status": "RED",
+          "inTop5": false,
+          "price": 183.2899932861328
+        },
+        {
+          "ticker": "UBSG.SW",
+          "rank": 24,
+          "rawScore": 5.587927155693207,
+          "stableScore": 6.029122772953299,
+          "status": "RED",
+          "inTop5": false,
+          "price": 39.709999084472656
+        },
+        {
+          "ticker": "KNEBV.HE",
+          "rank": 25,
+          "rawScore": 5.83336661481905,
+          "stableScore": 5.901915757127246,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 54.68000030517578
+        },
+        {
+          "ticker": "CP.TO",
+          "rank": 26,
+          "rawScore": 5.399856529651726,
+          "stableScore": 5.8553273210751495,
+          "status": "YELLOW",
+          "inTop5": false,
+          "price": 123.69999694824219
+        },
+        {
+          "ticker": "UL",
+          "rank": 27,
+          "rawScore": 5.503617733329396,
+          "stableScore": 5.828114195069033,
+          "status": "RED",
+          "inTop5": false,
+          "price": 64.18000030517578
+        },
+        {
+          "ticker": "WMT",
+          "rank": 28,
+          "rawScore": 5.423022304736319,
+          "stableScore": 5.6715024241902245,
+          "status": "RED",
+          "inTop5": false,
+          "price": 121.25
+        },
+        {
+          "ticker": "GILD",
+          "rank": 29,
+          "rawScore": 5.106068157575758,
+          "stableScore": 5.491308487689449,
+          "status": "RED",
+          "inTop5": false,
+          "price": 165.61000061035156
+        },
+        {
+          "ticker": "SEB-A.ST",
+          "rank": 30,
+          "rawScore": 5.12133981157917,
+          "stableScore": 5.2858424473989105,
+          "status": "RED",
+          "inTop5": false,
+          "price": 208.39999389648438
+        },
+        {
+          "ticker": "PFE",
+          "rank": 31,
+          "rawScore": 5.16996159219158,
+          "stableScore": 5.204463568592479,
+          "status": "RED",
+          "inTop5": false,
+          "price": 29.950000762939453
+        }
+      ],
+      "changes": {
+        "date": "2026-10-30",
+        "entered": [],
+        "exited": [],
+        "removedReasons": [],
+        "unchangedCount": 4
+      }
     }
   ],
   "validations": [
@@ -26168,6 +26490,36 @@
       "returnPct": 7.1202477207745085,
       "positive": true,
       "validatedAt": "2026-10-29"
+    },
+    {
+      "selectionDate": "2026-10-10",
+      "ticker": "PH",
+      "horizonDays": 20,
+      "startPrice": 962.5599975585938,
+      "endPrice": 928.4500122070312,
+      "returnPct": -3.543673686635429,
+      "positive": false,
+      "validatedAt": "2026-10-30"
+    },
+    {
+      "selectionDate": "2026-10-10",
+      "ticker": "COP",
+      "horizonDays": 20,
+      "startPrice": 134.10000610351562,
+      "endPrice": 150.02999877929688,
+      "returnPct": 11.879188628436331,
+      "positive": true,
+      "validatedAt": "2026-10-30"
+    },
+    {
+      "selectionDate": "2026-10-10",
+      "ticker": "MDT",
+      "horizonDays": 20,
+      "startPrice": 88.4800033569336,
+      "endPrice": 97.11000061035156,
+      "returnPct": 9.753613162291641,
+      "positive": true,
+      "validatedAt": "2026-10-30"
     }
   ]
 }
