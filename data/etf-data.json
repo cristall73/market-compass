@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T16:31:54.066749+00:00",
+  "generatedAt": "2026-11-28T15:25:35.892938+00:00",
   "screenedCount": 22,
   "validCount": 21,
   "strategy": {
@@ -29,12 +29,12 @@
         "entryCurrency": "GBp",
         "status": "ACTIVE",
         "reason": "Selezione iniziale ETF & PAC Coach",
-        "currentPrice": 8834.0,
+        "currentPrice": 8850.0,
         "currentStatus": "GREEN",
         "monthlyRegime": "GREEN",
         "weeklyRegime": "YELLOW",
         "heldMonths": 3,
-        "returnSinceEntryPct": -3.80050092562344,
+        "returnSinceEntryPct": -3.6262659261679153,
         "dataUnavailable": false
       },
       {
@@ -45,12 +45,12 @@
         "entryCurrency": "GBp",
         "status": "ACTIVE",
         "reason": "Selezione iniziale ETF & PAC Coach",
-        "currentPrice": 26605.0,
+        "currentPrice": 26592.5,
         "currentStatus": "GREEN",
         "monthlyRegime": "GREEN",
         "weeklyRegime": "YELLOW",
         "heldMonths": 3,
-        "returnSinceEntryPct": -3.40383044385949,
+        "returnSinceEntryPct": -3.4492148497776154,
         "dataUnavailable": false
       },
       {
@@ -61,12 +61,12 @@
         "entryCurrency": "GBp",
         "status": "ACTIVE",
         "reason": "Selezione iniziale ETF & PAC Coach",
-        "currentPrice": 5359.27685546875,
+        "currentPrice": 5368.0,
         "currentStatus": "YELLOW",
         "monthlyRegime": "YELLOW",
         "weeklyRegime": "RED",
         "heldMonths": 3,
-        "returnSinceEntryPct": -18.316158276653717,
+        "returnSinceEntryPct": -18.183203779911594,
         "dataUnavailable": false
       },
       {
@@ -77,12 +77,12 @@
         "entryCurrency": "GBP",
         "status": "ACTIVE",
         "reason": "Selezione iniziale ETF & PAC Coach",
-        "currentPrice": 133.25999450683594,
+        "currentPrice": 133.5399932861328,
         "currentStatus": "GREEN",
         "monthlyRegime": "GREEN",
         "weeklyRegime": "YELLOW",
         "heldMonths": 3,
-        "returnSinceEntryPct": -4.012106353637456,
+        "returnSinceEntryPct": -3.8104217209183666,
         "dataUnavailable": false
       },
       {
@@ -93,12 +93,12 @@
         "entryCurrency": "EUR",
         "status": "ACTIVE",
         "reason": "Selezione iniziale ETF & PAC Coach",
-        "currentPrice": 165.13999938964844,
+        "currentPrice": 165.4600067138672,
         "currentStatus": "GREEN",
         "monthlyRegime": "GREEN",
         "weeklyRegime": "YELLOW",
         "heldMonths": 3,
-        "returnSinceEntryPct": -1.196601655679952,
+        "returnSinceEntryPct": -1.0051410086850177,
         "dataUnavailable": false
       }
     ],
@@ -124,6 +124,521 @@
   },
   "etfs": [
     {
+      "ticker": "IUSA.L",
+      "name": "iShares Core S&P 500 UCITS ETF Dist",
+      "category": "USA",
+      "role": "CRESCITA USA",
+      "isin": "IE0031442068",
+      "tvSymbol": "LSE:IUSA",
+      "exchange": "London Stock Exchange",
+      "quoteCurrency": "GBp",
+      "ter": 0.07,
+      "replication": "Fisica",
+      "distribution": "Distribuzione",
+      "currentPrice": 7259.0,
+      "priceAsOf": "2026-11-27T00:00:00",
+      "return1y": 40.99186688539087,
+      "return3y": 26.57576042369294,
+      "return5y": 15.901379732954869,
+      "return10y": 15.179821307031084,
+      "drawdown": -25.888386882687353,
+      "currentDrawdown": 0.0,
+      "volatility": 34.44295188765004,
+      "monthlyRegime": "GREEN",
+      "weeklyRegime": "GREEN",
+      "monthlyTrendScore": 8.5,
+      "weeklyTrendScore": 8.5,
+      "trendScore": 8.5,
+      "score": 7.78969177967663,
+      "status": "GREEN",
+      "verdict": "ADATTO AL PAC",
+      "pacAction": "Vicino ai massimi: continua il PAC senza aumentare la rata per inseguire il prezzo.",
+      "monthlyHistory": [
+        {
+          "date": "2016-11-30",
+          "price": 1760.781006
+        },
+        {
+          "date": "2016-12-31",
+          "price": 1819.643677
+        },
+        {
+          "date": "2017-01-31",
+          "price": 1793.178101
+        },
+        {
+          "date": "2017-02-28",
+          "price": 1897.168823
+        },
+        {
+          "date": "2017-03-31",
+          "price": 1878.627075
+        },
+        {
+          "date": "2017-04-30",
+          "price": 1832.934692
+        },
+        {
+          "date": "2017-05-31",
+          "price": 1859.151733
+        },
+        {
+          "date": "2017-06-30",
+          "price": 1855.727417
+        },
+        {
+          "date": "2017-07-31",
+          "price": 1866.090088
+        },
+        {
+          "date": "2017-08-31",
+          "price": 1910.535889
+        },
+        {
+          "date": "2017-09-30",
+          "price": 1864.549561
+        },
+        {
+          "date": "2017-10-31",
+          "price": 1930.347412
+        },
+        {
+          "date": "2017-11-30",
+          "price": 1950.948486
+        },
+        {
+          "date": "2017-12-31",
+          "price": 1983.362793
+        },
+        {
+          "date": "2018-01-31",
+          "price": 1982.988037
+        },
+        {
+          "date": "2018-02-28",
+          "price": 1979.491577
+        },
+        {
+          "date": "2018-03-31",
+          "price": 1863.691284
+        },
+        {
+          "date": "2018-04-30",
+          "price": 1935.242432
+        },
+        {
+          "date": "2018-05-31",
+          "price": 2038.248901
+        },
+        {
+          "date": "2018-06-30",
+          "price": 2062.805664
+        },
+        {
+          "date": "2018-07-31",
+          "price": 2136.478271
+        },
+        {
+          "date": "2018-08-31",
+          "price": 2226.38208
+        },
+        {
+          "date": "2018-09-30",
+          "price": 2224.717529
+        },
+        {
+          "date": "2018-10-31",
+          "price": 2118.706543
+        },
+        {
+          "date": "2018-11-30",
+          "price": 2138.305908
+        },
+        {
+          "date": "2018-12-31",
+          "price": 1952.708984
+        },
+        {
+          "date": "2019-01-31",
+          "price": 2045.362671
+        },
+        {
+          "date": "2019-02-28",
+          "price": 2092.441895
+        },
+        {
+          "date": "2019-03-31",
+          "price": 2159.965332
+        },
+        {
+          "date": "2019-04-30",
+          "price": 2239.639404
+        },
+        {
+          "date": "2019-05-31",
+          "price": 2187.937988
+        },
+        {
+          "date": "2019-06-30",
+          "price": 2295.93042
+        },
+        {
+          "date": "2019-07-31",
+          "price": 2455.787598
+        },
+        {
+          "date": "2019-08-31",
+          "price": 2387.973145
+        },
+        {
+          "date": "2019-09-30",
+          "price": 2409.801025
+        },
+        {
+          "date": "2019-10-31",
+          "price": 2332.991943
+        },
+        {
+          "date": "2019-11-30",
+          "price": 2425.161865
+        },
+        {
+          "date": "2019-12-31",
+          "price": 2430.253662
+        },
+        {
+          "date": "2020-01-31",
+          "price": 2447.989014
+        },
+        {
+          "date": "2020-02-29",
+          "price": 2274.256592
+        },
+        {
+          "date": "2020-03-31",
+          "price": 2105.875977
+        },
+        {
+          "date": "2020-04-30",
+          "price": 2301.974854
+        },
+        {
+          "date": "2020-05-31",
+          "price": 2434.87207
+        },
+        {
+          "date": "2020-06-30",
+          "price": 2470.189697
+        },
+        {
+          "date": "2020-07-31",
+          "price": 2458.19873
+        },
+        {
+          "date": "2020-08-31",
+          "price": 2608.338623
+        },
+        {
+          "date": "2020-09-30",
+          "price": 2599.433838
+        },
+        {
+          "date": "2020-10-31",
+          "price": 2510.245605
+        },
+        {
+          "date": "2020-11-30",
+          "price": 2686.872803
+        },
+        {
+          "date": "2020-12-31",
+          "price": 2719.936279
+        },
+        {
+          "date": "2021-01-31",
+          "price": 2712.441406
+        },
+        {
+          "date": "2021-02-28",
+          "price": 2736.050293
+        },
+        {
+          "date": "2021-03-31",
+          "price": 2873.797852
+        },
+        {
+          "date": "2021-04-30",
+          "price": 3013.33374
+        },
+        {
+          "date": "2021-05-31",
+          "price": 2961.241699
+        },
+        {
+          "date": "2021-06-30",
+          "price": 3093.99707
+        },
+        {
+          "date": "2021-07-31",
+          "price": 3149.463623
+        },
+        {
+          "date": "2021-08-31",
+          "price": 3280.259521
+        },
+        {
+          "date": "2021-09-30",
+          "price": 3215.888184
+        },
+        {
+          "date": "2021-10-31",
+          "price": 3340.317383
+        },
+        {
+          "date": "2021-11-30",
+          "price": 3453.875488
+        },
+        {
+          "date": "2021-12-31",
+          "price": 3522.055664
+        },
+        {
+          "date": "2022-01-31",
+          "price": 3313.920654
+        },
+        {
+          "date": "2022-02-28",
+          "price": 3257.826416
+        },
+        {
+          "date": "2022-03-31",
+          "price": 3476.433838
+        },
+        {
+          "date": "2022-04-30",
+          "price": 3347.002197
+        },
+        {
+          "date": "2022-05-31",
+          "price": 3261.546875
+        },
+        {
+          "date": "2022-06-30",
+          "price": 3095.242676
+        },
+        {
+          "date": "2022-07-31",
+          "price": 3349.744385
+        },
+        {
+          "date": "2022-08-31",
+          "price": 3408.590332
+        },
+        {
+          "date": "2022-09-30",
+          "price": 3272.276123
+        },
+        {
+          "date": "2022-10-31",
+          "price": 3360.111572
+        },
+        {
+          "date": "2022-11-30",
+          "price": 3304.511719
+        },
+        {
+          "date": "2022-12-31",
+          "price": 3161.813477
+        },
+        {
+          "date": "2023-01-31",
+          "price": 3269.268799
+        },
+        {
+          "date": "2023-02-28",
+          "price": 3278.640137
+        },
+        {
+          "date": "2023-03-31",
+          "price": 3282.256104
+        },
+        {
+          "date": "2023-04-30",
+          "price": 3289.003418
+        },
+        {
+          "date": "2023-05-31",
+          "price": 3353.72876
+        },
+        {
+          "date": "2023-06-30",
+          "price": 3474.55127
+        },
+        {
+          "date": "2023-07-31",
+          "price": 3549.525146
+        },
+        {
+          "date": "2023-08-31",
+          "price": 3560.64624
+        },
+        {
+          "date": "2023-09-30",
+          "price": 3516.152588
+        },
+        {
+          "date": "2023-10-31",
+          "price": 3422.931152
+        },
+        {
+          "date": "2023-11-30",
+          "price": 3585.880127
+        },
+        {
+          "date": "2023-12-31",
+          "price": 3738.949707
+        },
+        {
+          "date": "2024-01-31",
+          "price": 3823.925781
+        },
+        {
+          "date": "2024-02-29",
+          "price": 4004.874756
+        },
+        {
+          "date": "2024-03-31",
+          "price": 4133.209961
+        },
+        {
+          "date": "2024-04-30",
+          "price": 4042.48291
+        },
+        {
+          "date": "2024-05-31",
+          "price": 4079.223877
+        },
+        {
+          "date": "2024-06-30",
+          "price": 4332.775879
+        },
+        {
+          "date": "2024-07-31",
+          "price": 4288.036133
+        },
+        {
+          "date": "2024-08-31",
+          "price": 4250.044922
+        },
+        {
+          "date": "2024-09-30",
+          "price": 4261.786133
+        },
+        {
+          "date": "2024-10-31",
+          "price": 4436.625488
+        },
+        {
+          "date": "2024-11-30",
+          "price": 4735.941895
+        },
+        {
+          "date": "2024-12-31",
+          "price": 4709.194824
+        },
+        {
+          "date": "2025-01-31",
+          "price": 4897.662109
+        },
+        {
+          "date": "2025-02-28",
+          "price": 4653.329102
+        },
+        {
+          "date": "2025-03-31",
+          "price": 4278.888184
+        },
+        {
+          "date": "2025-04-30",
+          "price": 4114.161133
+        },
+        {
+          "date": "2025-05-31",
+          "price": 4366.375488
+        },
+        {
+          "date": "2025-06-30",
+          "price": 4494.600586
+        },
+        {
+          "date": "2025-07-31",
+          "price": 4809.688965
+        },
+        {
+          "date": "2025-08-31",
+          "price": 4765.443848
+        },
+        {
+          "date": "2025-09-30",
+          "price": 4924.044434
+        },
+        {
+          "date": "2025-10-31",
+          "price": 5187.770508
+        },
+        {
+          "date": "2025-11-30",
+          "price": 5148.523926
+        },
+        {
+          "date": "2025-12-31",
+          "price": 5096.396484
+        },
+        {
+          "date": "2026-01-31",
+          "price": 5034.901367
+        },
+        {
+          "date": "2026-02-28",
+          "price": 5093.896973
+        },
+        {
+          "date": "2026-03-31",
+          "price": 4853.535645
+        },
+        {
+          "date": "2026-04-30",
+          "price": 5257.768066
+        },
+        {
+          "date": "2026-05-31",
+          "price": 5613.252441
+        },
+        {
+          "date": "2026-06-30",
+          "price": 5615.377441
+        },
+        {
+          "date": "2026-07-31",
+          "price": 5500.879883
+        },
+        {
+          "date": "2026-08-31",
+          "price": 5707.125488
+        },
+        {
+          "date": "2026-09-30",
+          "price": 5786.0
+        },
+        {
+          "date": "2026-10-31",
+          "price": 5648.5
+        }
+      ],
+      "historyStart": "2016-11-30",
+      "summary": "Costi 8.9/10 · diversificazione 7.3/10 · robustezza 6.9/10 · trend lungo 8.5/10."
+    },
+    {
       "ticker": "SWDA.L",
       "name": "iShares Core MSCI World UCITS ETF",
       "category": "Azionario globale",
@@ -135,21 +650,21 @@
       "ter": 0.2,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 10599.0,
+      "currentPrice": 10618.0,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 8.618569378971097,
-      "return3y": 15.73696141368024,
-      "return5y": 10.329944802642043,
-      "return10y": 11.78465605447887,
+      "return1y": 8.813281410125029,
+      "return3y": 15.806315090201739,
+      "return5y": 10.369542927169185,
+      "return10y": 11.804686897657435,
       "drawdown": -27.417524391794046,
-      "currentDrawdown": -17.439186631103787,
-      "volatility": 12.211657839934075,
+      "currentDrawdown": -17.29118630522314,
+      "volatility": 12.222581075895318,
       "monthlyRegime": "GREEN",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 8.5,
-      "weeklyTrendScore": 4.5,
-      "trendScore": 7.299999999999999,
-      "score": 7.612611254550025,
+      "weeklyTrendScore": 6.0,
+      "trendScore": 7.749999999999999,
+      "score": 7.68204150970383,
       "status": "GREEN",
       "verdict": "ADATTO AL PAC",
       "pacAction": "Ritracciamento ampio ma trend lungo ancora valido: non uscire per rumore di breve.",
@@ -636,7 +1151,7 @@
         }
       ],
       "historyStart": "2016-11-30",
-      "summary": "Costi 7.0/10 · diversificazione 9.7/10 · robustezza 6.1/10 · trend lungo 7.3/10."
+      "summary": "Costi 7.0/10 · diversificazione 9.7/10 · robustezza 6.1/10 · trend lungo 7.7/10."
     },
     {
       "ticker": "SSAC.L",
@@ -650,21 +1165,21 @@
       "ter": 0.2,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 8834.0,
+      "currentPrice": 8850.0,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 8.873551885629771,
-      "return3y": 15.85938845221515,
-      "return5y": 9.8140846769186,
-      "return10y": 11.16557573487591,
+      "return1y": 9.070741927532655,
+      "return3y": 15.929469760471694,
+      "return5y": 9.853883636053972,
+      "return10y": 11.185701741641484,
       "drawdown": -25.43458371454712,
-      "currentDrawdown": -6.290442346451686,
-      "volatility": 13.133091997836802,
+      "currentDrawdown": -6.120717089211835,
+      "volatility": 13.144961881069522,
       "monthlyRegime": "GREEN",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 8.5,
-      "weeklyTrendScore": 4.5,
-      "trendScore": 7.299999999999999,
-      "score": 7.595675573532785,
+      "weeklyTrendScore": 6.0,
+      "trendScore": 7.749999999999999,
+      "score": 7.6651115674748596,
       "status": "GREEN",
       "verdict": "ADATTO AL PAC",
       "pacAction": "Mantieni la rata ordinaria.",
@@ -1151,7 +1666,7 @@
         }
       ],
       "historyStart": "2016-11-30",
-      "summary": "Costi 7.0/10 · diversificazione 9.7/10 · robustezza 6.1/10 · trend lungo 7.3/10."
+      "summary": "Costi 7.0/10 · diversificazione 9.7/10 · robustezza 6.1/10 · trend lungo 7.7/10."
     },
     {
       "ticker": "VWRL.L",
@@ -1165,56 +1680,56 @@
       "ter": 0.22,
       "replication": "Fisica",
       "distribution": "Distribuzione",
-      "currentPrice": 133.25999450683594,
+      "currentPrice": 133.5399932861328,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 8.825731705083207,
-      "return3y": 15.804056687332334,
-      "return5y": 9.789220615770745,
-      "return10y": 11.179622510403075,
-      "drawdown": -24.98482052915254,
-      "currentDrawdown": -6.286921683029445,
-      "volatility": 12.99182949328853,
+      "return1y": 9.054390517101618,
+      "return3y": 15.885307601840237,
+      "return5y": 9.835377420947179,
+      "return10y": 11.2029695911398,
+      "drawdown": -24.984817642666556,
+      "currentDrawdown": -6.090016770718664,
+      "volatility": 13.006795644381386,
       "monthlyRegime": "GREEN",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 8.5,
-      "weeklyTrendScore": 4.5,
-      "trendScore": 7.299999999999999,
-      "score": 7.535033441093757,
+      "weeklyTrendScore": 6.0,
+      "trendScore": 7.749999999999999,
+      "score": 7.604773272383105,
       "status": "GREEN",
       "verdict": "ADATTO AL PAC",
       "pacAction": "Mantieni la rata ordinaria.",
       "monthlyHistory": [
         {
           "date": "2016-11-30",
-          "price": 46.074005
+          "price": 46.074013
         },
         {
           "date": "2016-12-31",
-          "price": 47.840416
+          "price": 47.840424
         },
         {
           "date": "2017-01-31",
-          "price": 47.82362
+          "price": 47.823635
         },
         {
           "date": "2017-02-28",
-          "price": 49.939972
+          "price": 49.939983
         },
         {
           "date": "2017-03-31",
-          "price": 50.265202
+          "price": 50.265205
         },
         {
           "date": "2017-04-30",
-          "price": 49.333126
+          "price": 49.333122
         },
         {
           "date": "2017-05-31",
-          "price": 50.43391
+          "price": 50.433914
         },
         {
           "date": "2017-06-30",
-          "price": 50.335411
+          "price": 50.335403
         },
         {
           "date": "2017-07-31",
@@ -1222,7 +1737,7 @@
         },
         {
           "date": "2017-08-31",
-          "price": 52.361748
+          "price": 52.36174
         },
         {
           "date": "2017-09-30",
@@ -1234,23 +1749,23 @@
         },
         {
           "date": "2017-11-30",
-          "price": 53.00301
+          "price": 53.003006
         },
         {
           "date": "2017-12-31",
-          "price": 54.162636
+          "price": 54.162624
         },
         {
           "date": "2018-01-31",
-          "price": 54.102669
+          "price": 54.102657
         },
         {
           "date": "2018-02-28",
-          "price": 53.768593
+          "price": 53.7686
         },
         {
           "date": "2018-03-31",
-          "price": 51.331047
+          "price": 51.331055
         },
         {
           "date": "2018-04-30",
@@ -1258,7 +1773,7 @@
         },
         {
           "date": "2018-05-31",
-          "price": 54.818199
+          "price": 54.818211
         },
         {
           "date": "2018-06-30",
@@ -1266,11 +1781,11 @@
         },
         {
           "date": "2018-07-31",
-          "price": 56.872345
+          "price": 56.872341
         },
         {
           "date": "2018-08-31",
-          "price": 57.639057
+          "price": 57.639069
         },
         {
           "date": "2018-09-30",
@@ -1278,11 +1793,11 @@
         },
         {
           "date": "2018-10-31",
-          "price": 54.637814
+          "price": 54.63781
         },
         {
           "date": "2018-11-30",
-          "price": 55.155853
+          "price": 55.155838
         },
         {
           "date": "2018-12-31",
@@ -1290,11 +1805,11 @@
         },
         {
           "date": "2019-01-31",
-          "price": 53.939682
+          "price": 53.939678
         },
         {
           "date": "2019-02-28",
-          "price": 54.766224
+          "price": 54.766228
         },
         {
           "date": "2019-03-31",
@@ -1302,23 +1817,23 @@
         },
         {
           "date": "2019-04-30",
-          "price": 58.270168
+          "price": 58.270153
         },
         {
           "date": "2019-05-31",
-          "price": 57.000271
+          "price": 57.000282
         },
         {
           "date": "2019-06-30",
-          "price": 59.994511
+          "price": 59.994526
         },
         {
           "date": "2019-07-31",
-          "price": 63.044941
+          "price": 63.044926
         },
         {
           "date": "2019-08-31",
-          "price": 61.114635
+          "price": 61.114639
         },
         {
           "date": "2019-09-30",
@@ -1326,15 +1841,15 @@
         },
         {
           "date": "2019-10-31",
-          "price": 60.508987
+          "price": 60.508995
         },
         {
           "date": "2019-11-30",
-          "price": 62.284081
+          "price": 62.284073
         },
         {
           "date": "2019-12-31",
-          "price": 62.989716
+          "price": 62.989727
         },
         {
           "date": "2020-01-31",
@@ -1342,7 +1857,7 @@
         },
         {
           "date": "2020-02-29",
-          "price": 58.539555
+          "price": 58.539551
         },
         {
           "date": "2020-03-31",
@@ -1354,19 +1869,19 @@
         },
         {
           "date": "2020-05-31",
-          "price": 60.779148
+          "price": 60.779156
         },
         {
           "date": "2020-06-30",
-          "price": 62.822426
+          "price": 62.822456
         },
         {
           "date": "2020-07-31",
-          "price": 62.146267
+          "price": 62.146255
         },
         {
           "date": "2020-08-31",
-          "price": 65.297287
+          "price": 65.297302
         },
         {
           "date": "2020-09-30",
@@ -1374,7 +1889,7 @@
         },
         {
           "date": "2020-10-31",
-          "price": 63.524223
+          "price": 63.524239
         },
         {
           "date": "2020-11-30",
@@ -1382,11 +1897,11 @@
         },
         {
           "date": "2020-12-31",
-          "price": 70.632774
+          "price": 70.632767
         },
         {
           "date": "2021-01-31",
-          "price": 70.401031
+          "price": 70.401039
         },
         {
           "date": "2021-02-28",
@@ -1394,47 +1909,47 @@
         },
         {
           "date": "2021-03-31",
-          "price": 73.531151
+          "price": 73.531128
         },
         {
           "date": "2021-04-30",
-          "price": 76.3386
+          "price": 76.338577
         },
         {
           "date": "2021-05-31",
-          "price": 75.68232
+          "price": 75.682312
         },
         {
           "date": "2021-06-30",
-          "price": 78.484932
+          "price": 78.48494
         },
         {
           "date": "2021-07-31",
-          "price": 78.640663
+          "price": 78.640671
         },
         {
           "date": "2021-08-31",
-          "price": 81.315453
+          "price": 81.31543
         },
         {
           "date": "2021-09-30",
-          "price": 79.929878
+          "price": 79.929863
         },
         {
           "date": "2021-10-31",
-          "price": 82.09063
+          "price": 82.090652
         },
         {
           "date": "2021-11-30",
-          "price": 83.129623
+          "price": 83.129654
         },
         {
           "date": "2021-12-31",
-          "price": 84.785667
+          "price": 84.785652
         },
         {
           "date": "2022-01-31",
-          "price": 80.650681
+          "price": 80.650673
         },
         {
           "date": "2022-02-28",
@@ -1442,15 +1957,15 @@
         },
         {
           "date": "2022-03-31",
-          "price": 83.0047
+          "price": 83.004707
         },
         {
           "date": "2022-04-30",
-          "price": 80.607231
+          "price": 80.607239
         },
         {
           "date": "2022-05-31",
-          "price": 79.033592
+          "price": 79.033585
         },
         {
           "date": "2022-06-30",
@@ -1458,63 +1973,63 @@
         },
         {
           "date": "2022-07-31",
-          "price": 79.846512
+          "price": 79.846504
         },
         {
           "date": "2022-08-31",
-          "price": 81.129982
+          "price": 81.129967
         },
         {
           "date": "2022-09-30",
-          "price": 77.581856
+          "price": 77.581833
         },
         {
           "date": "2022-10-31",
-          "price": 78.548119
+          "price": 78.548103
         },
         {
           "date": "2022-11-30",
-          "price": 79.978722
+          "price": 79.978729
         },
         {
           "date": "2022-12-31",
-          "price": 77.629135
+          "price": 77.629105
         },
         {
           "date": "2023-01-31",
-          "price": 81.01413
+          "price": 81.014137
         },
         {
           "date": "2023-02-28",
-          "price": 80.477417
+          "price": 80.477432
         },
         {
           "date": "2023-03-31",
-          "price": 80.859245
+          "price": 80.859238
         },
         {
           "date": "2023-04-30",
-          "price": 80.774155
+          "price": 80.774147
         },
         {
           "date": "2023-05-31",
-          "price": 80.934875
+          "price": 80.934898
         },
         {
           "date": "2023-06-30",
-          "price": 83.758224
+          "price": 83.75824
         },
         {
           "date": "2023-07-31",
-          "price": 85.756561
+          "price": 85.756577
         },
         {
           "date": "2023-08-31",
-          "price": 84.895378
+          "price": 84.895363
         },
         {
           "date": "2023-09-30",
-          "price": 84.60331
+          "price": 84.603317
         },
         {
           "date": "2023-10-31",
@@ -1522,15 +2037,15 @@
         },
         {
           "date": "2023-11-30",
-          "price": 85.902985
+          "price": 85.902992
         },
         {
           "date": "2023-12-31",
-          "price": 89.750656
+          "price": 89.750648
         },
         {
           "date": "2024-01-31",
-          "price": 90.738396
+          "price": 90.738419
         },
         {
           "date": "2024-02-29",
@@ -1538,15 +2053,15 @@
         },
         {
           "date": "2024-03-31",
-          "price": 97.634171
+          "price": 97.634163
         },
         {
           "date": "2024-04-30",
-          "price": 95.854645
+          "price": 95.854637
         },
         {
           "date": "2024-05-31",
-          "price": 96.739594
+          "price": 96.739586
         },
         {
           "date": "2024-06-30",
@@ -1554,31 +2069,31 @@
         },
         {
           "date": "2024-07-31",
-          "price": 100.541298
+          "price": 100.541275
         },
         {
           "date": "2024-08-31",
-          "price": 100.052582
+          "price": 100.052589
         },
         {
           "date": "2024-09-30",
-          "price": 100.556854
+          "price": 100.556847
         },
         {
           "date": "2024-10-31",
-          "price": 102.907349
+          "price": 102.907356
         },
         {
           "date": "2024-11-30",
-          "price": 108.006584
+          "price": 108.006577
         },
         {
           "date": "2024-12-31",
-          "price": 107.338882
+          "price": 107.33889
         },
         {
           "date": "2025-01-31",
-          "price": 112.157028
+          "price": 112.157036
         },
         {
           "date": "2025-02-28",
@@ -1586,15 +2101,15 @@
         },
         {
           "date": "2025-03-31",
-          "price": 101.711899
+          "price": 101.711906
         },
         {
           "date": "2025-04-30",
-          "price": 99.336281
+          "price": 99.336273
         },
         {
           "date": "2025-05-31",
-          "price": 104.630096
+          "price": 104.630104
         },
         {
           "date": "2025-06-30",
@@ -1606,11 +2121,11 @@
         },
         {
           "date": "2025-08-31",
-          "price": 113.334694
+          "price": 113.334702
         },
         {
           "date": "2025-09-30",
-          "price": 117.591225
+          "price": 117.591217
         },
         {
           "date": "2025-10-31",
@@ -1666,7 +2181,7 @@
         }
       ],
       "historyStart": "2016-11-30",
-      "summary": "Costi 6.7/10 · diversificazione 9.7/10 · robustezza 6.1/10 · trend lungo 7.3/10."
+      "summary": "Costi 6.7/10 · diversificazione 9.7/10 · robustezza 6.1/10 · trend lungo 7.7/10."
     },
     {
       "ticker": "VWCE.DE",
@@ -1680,21 +2195,21 @@
       "ter": 0.22,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 165.13999938964844,
+      "currentPrice": 165.4600067138672,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 14.01546780241616,
-      "return3y": 16.731101321350515,
-      "return5y": 9.986048891787735,
-      "return10y": 12.019724295095857,
+      "return1y": 14.236406308567616,
+      "return3y": 16.80692015914529,
+      "return5y": 10.029095787651187,
+      "return10y": 12.049305692116397,
       "drawdown": -33.43076429045703,
-      "currentDrawdown": -4.851347250165016,
-      "volatility": 13.238809246131256,
+      "currentDrawdown": -4.666968747791101,
+      "volatility": 13.254658154364657,
       "monthlyRegime": "GREEN",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 8.5,
-      "weeklyTrendScore": 4.5,
-      "trendScore": 7.299999999999999,
-      "score": 7.488186800172146,
+      "weeklyTrendScore": 6.0,
+      "trendScore": 7.749999999999999,
+      "score": 7.557767104473349,
       "status": "GREEN",
       "verdict": "ADATTO AL PAC",
       "pacAction": "Mantieni la rata ordinaria.",
@@ -2053,522 +2568,7 @@
         }
       ],
       "historyStart": "2019-07-31",
-      "summary": "Costi 6.7/10 · diversificazione 9.7/10 · robustezza 5.9/10 · trend lungo 7.3/10."
-    },
-    {
-      "ticker": "IUSA.L",
-      "name": "iShares Core S&P 500 UCITS ETF Dist",
-      "category": "USA",
-      "role": "CRESCITA USA",
-      "isin": "IE0031442068",
-      "tvSymbol": "LSE:IUSA",
-      "exchange": "London Stock Exchange",
-      "quoteCurrency": "GBp",
-      "ter": 0.07,
-      "replication": "Fisica",
-      "distribution": "Distribuzione",
-      "currentPrice": 5530.5,
-      "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 7.41912740850923,
-      "return3y": 15.579464507164008,
-      "return5y": 9.7582057044445,
-      "return10y": 12.08830887937491,
-      "drawdown": -25.888389137144074,
-      "currentDrawdown": -6.047736345876153,
-      "volatility": 12.829746179561639,
-      "monthlyRegime": "GREEN",
-      "weeklyRegime": "YELLOW",
-      "monthlyTrendScore": 8.5,
-      "weeklyTrendScore": 4.5,
-      "trendScore": 7.299999999999999,
-      "score": 7.400774907546833,
-      "status": "GREEN",
-      "verdict": "ADATTO AL PAC",
-      "pacAction": "Mantieni la rata ordinaria.",
-      "monthlyHistory": [
-        {
-          "date": "2016-11-30",
-          "price": 1760.780884
-        },
-        {
-          "date": "2016-12-31",
-          "price": 1819.643677
-        },
-        {
-          "date": "2017-01-31",
-          "price": 1793.178101
-        },
-        {
-          "date": "2017-02-28",
-          "price": 1897.168823
-        },
-        {
-          "date": "2017-03-31",
-          "price": 1878.627197
-        },
-        {
-          "date": "2017-04-30",
-          "price": 1832.934692
-        },
-        {
-          "date": "2017-05-31",
-          "price": 1859.151489
-        },
-        {
-          "date": "2017-06-30",
-          "price": 1855.727539
-        },
-        {
-          "date": "2017-07-31",
-          "price": 1866.089966
-        },
-        {
-          "date": "2017-08-31",
-          "price": 1910.535889
-        },
-        {
-          "date": "2017-09-30",
-          "price": 1864.549927
-        },
-        {
-          "date": "2017-10-31",
-          "price": 1930.346924
-        },
-        {
-          "date": "2017-11-30",
-          "price": 1950.947754
-        },
-        {
-          "date": "2017-12-31",
-          "price": 1983.362427
-        },
-        {
-          "date": "2018-01-31",
-          "price": 1982.988037
-        },
-        {
-          "date": "2018-02-28",
-          "price": 1979.491943
-        },
-        {
-          "date": "2018-03-31",
-          "price": 1863.692017
-        },
-        {
-          "date": "2018-04-30",
-          "price": 1935.242432
-        },
-        {
-          "date": "2018-05-31",
-          "price": 2038.248901
-        },
-        {
-          "date": "2018-06-30",
-          "price": 2062.805664
-        },
-        {
-          "date": "2018-07-31",
-          "price": 2136.478271
-        },
-        {
-          "date": "2018-08-31",
-          "price": 2226.382568
-        },
-        {
-          "date": "2018-09-30",
-          "price": 2224.717285
-        },
-        {
-          "date": "2018-10-31",
-          "price": 2118.706543
-        },
-        {
-          "date": "2018-11-30",
-          "price": 2138.306152
-        },
-        {
-          "date": "2018-12-31",
-          "price": 1952.709473
-        },
-        {
-          "date": "2019-01-31",
-          "price": 2045.362671
-        },
-        {
-          "date": "2019-02-28",
-          "price": 2092.441895
-        },
-        {
-          "date": "2019-03-31",
-          "price": 2159.964844
-        },
-        {
-          "date": "2019-04-30",
-          "price": 2239.639404
-        },
-        {
-          "date": "2019-05-31",
-          "price": 2187.937988
-        },
-        {
-          "date": "2019-06-30",
-          "price": 2295.930176
-        },
-        {
-          "date": "2019-07-31",
-          "price": 2455.787354
-        },
-        {
-          "date": "2019-08-31",
-          "price": 2387.972656
-        },
-        {
-          "date": "2019-09-30",
-          "price": 2409.801025
-        },
-        {
-          "date": "2019-10-31",
-          "price": 2332.992188
-        },
-        {
-          "date": "2019-11-30",
-          "price": 2425.162354
-        },
-        {
-          "date": "2019-12-31",
-          "price": 2430.253174
-        },
-        {
-          "date": "2020-01-31",
-          "price": 2447.989014
-        },
-        {
-          "date": "2020-02-29",
-          "price": 2274.256836
-        },
-        {
-          "date": "2020-03-31",
-          "price": 2105.875488
-        },
-        {
-          "date": "2020-04-30",
-          "price": 2301.974121
-        },
-        {
-          "date": "2020-05-31",
-          "price": 2434.87207
-        },
-        {
-          "date": "2020-06-30",
-          "price": 2470.189453
-        },
-        {
-          "date": "2020-07-31",
-          "price": 2458.198975
-        },
-        {
-          "date": "2020-08-31",
-          "price": 2608.338623
-        },
-        {
-          "date": "2020-09-30",
-          "price": 2599.433838
-        },
-        {
-          "date": "2020-10-31",
-          "price": 2510.24585
-        },
-        {
-          "date": "2020-11-30",
-          "price": 2686.872803
-        },
-        {
-          "date": "2020-12-31",
-          "price": 2719.936279
-        },
-        {
-          "date": "2021-01-31",
-          "price": 2712.441162
-        },
-        {
-          "date": "2021-02-28",
-          "price": 2736.050049
-        },
-        {
-          "date": "2021-03-31",
-          "price": 2873.797852
-        },
-        {
-          "date": "2021-04-30",
-          "price": 3013.333984
-        },
-        {
-          "date": "2021-05-31",
-          "price": 2961.241943
-        },
-        {
-          "date": "2021-06-30",
-          "price": 3093.99707
-        },
-        {
-          "date": "2021-07-31",
-          "price": 3149.463623
-        },
-        {
-          "date": "2021-08-31",
-          "price": 3280.259521
-        },
-        {
-          "date": "2021-09-30",
-          "price": 3215.888916
-        },
-        {
-          "date": "2021-10-31",
-          "price": 3340.317139
-        },
-        {
-          "date": "2021-11-30",
-          "price": 3453.875977
-        },
-        {
-          "date": "2021-12-31",
-          "price": 3522.055664
-        },
-        {
-          "date": "2022-01-31",
-          "price": 3313.92041
-        },
-        {
-          "date": "2022-02-28",
-          "price": 3257.826416
-        },
-        {
-          "date": "2022-03-31",
-          "price": 3476.433838
-        },
-        {
-          "date": "2022-04-30",
-          "price": 3347.001953
-        },
-        {
-          "date": "2022-05-31",
-          "price": 3261.546387
-        },
-        {
-          "date": "2022-06-30",
-          "price": 3095.242676
-        },
-        {
-          "date": "2022-07-31",
-          "price": 3349.744385
-        },
-        {
-          "date": "2022-08-31",
-          "price": 3408.590576
-        },
-        {
-          "date": "2022-09-30",
-          "price": 3272.276123
-        },
-        {
-          "date": "2022-10-31",
-          "price": 3360.111572
-        },
-        {
-          "date": "2022-11-30",
-          "price": 3304.511719
-        },
-        {
-          "date": "2022-12-31",
-          "price": 3161.813477
-        },
-        {
-          "date": "2023-01-31",
-          "price": 3269.269043
-        },
-        {
-          "date": "2023-02-28",
-          "price": 3278.640381
-        },
-        {
-          "date": "2023-03-31",
-          "price": 3282.256104
-        },
-        {
-          "date": "2023-04-30",
-          "price": 3289.003418
-        },
-        {
-          "date": "2023-05-31",
-          "price": 3353.72876
-        },
-        {
-          "date": "2023-06-30",
-          "price": 3474.550781
-        },
-        {
-          "date": "2023-07-31",
-          "price": 3549.525146
-        },
-        {
-          "date": "2023-08-31",
-          "price": 3560.64624
-        },
-        {
-          "date": "2023-09-30",
-          "price": 3516.152588
-        },
-        {
-          "date": "2023-10-31",
-          "price": 3422.931152
-        },
-        {
-          "date": "2023-11-30",
-          "price": 3585.880371
-        },
-        {
-          "date": "2023-12-31",
-          "price": 3738.949707
-        },
-        {
-          "date": "2024-01-31",
-          "price": 3823.925781
-        },
-        {
-          "date": "2024-02-29",
-          "price": 4004.874756
-        },
-        {
-          "date": "2024-03-31",
-          "price": 4133.209473
-        },
-        {
-          "date": "2024-04-30",
-          "price": 4042.48291
-        },
-        {
-          "date": "2024-05-31",
-          "price": 4079.223877
-        },
-        {
-          "date": "2024-06-30",
-          "price": 4332.775879
-        },
-        {
-          "date": "2024-07-31",
-          "price": 4288.036133
-        },
-        {
-          "date": "2024-08-31",
-          "price": 4250.044922
-        },
-        {
-          "date": "2024-09-30",
-          "price": 4261.786133
-        },
-        {
-          "date": "2024-10-31",
-          "price": 4436.625977
-        },
-        {
-          "date": "2024-11-30",
-          "price": 4735.941406
-        },
-        {
-          "date": "2024-12-31",
-          "price": 4709.194824
-        },
-        {
-          "date": "2025-01-31",
-          "price": 4897.662109
-        },
-        {
-          "date": "2025-02-28",
-          "price": 4653.329102
-        },
-        {
-          "date": "2025-03-31",
-          "price": 4278.888184
-        },
-        {
-          "date": "2025-04-30",
-          "price": 4114.161133
-        },
-        {
-          "date": "2025-05-31",
-          "price": 4366.375488
-        },
-        {
-          "date": "2025-06-30",
-          "price": 4494.600586
-        },
-        {
-          "date": "2025-07-31",
-          "price": 4809.688965
-        },
-        {
-          "date": "2025-08-31",
-          "price": 4765.443848
-        },
-        {
-          "date": "2025-09-30",
-          "price": 4924.044434
-        },
-        {
-          "date": "2025-10-31",
-          "price": 5187.770508
-        },
-        {
-          "date": "2025-11-30",
-          "price": 5148.524414
-        },
-        {
-          "date": "2025-12-31",
-          "price": 5096.396484
-        },
-        {
-          "date": "2026-01-31",
-          "price": 5034.901367
-        },
-        {
-          "date": "2026-02-28",
-          "price": 5093.896973
-        },
-        {
-          "date": "2026-03-31",
-          "price": 4853.535645
-        },
-        {
-          "date": "2026-04-30",
-          "price": 5257.768066
-        },
-        {
-          "date": "2026-05-31",
-          "price": 5613.252441
-        },
-        {
-          "date": "2026-06-30",
-          "price": 5615.377441
-        },
-        {
-          "date": "2026-07-31",
-          "price": 5500.879883
-        },
-        {
-          "date": "2026-08-31",
-          "price": 5707.125488
-        },
-        {
-          "date": "2026-09-30",
-          "price": 5786.0
-        },
-        {
-          "date": "2026-10-31",
-          "price": 5648.5
-        }
-      ],
-      "historyStart": "2016-11-30",
-      "summary": "Costi 8.9/10 · diversificazione 7.3/10 · robustezza 6.0/10 · trend lungo 7.3/10."
+      "summary": "Costi 6.7/10 · diversificazione 9.7/10 · robustezza 5.9/10 · trend lungo 7.7/10."
     },
     {
       "ticker": "VUAA.L",
@@ -2582,21 +2582,21 @@
       "ter": 0.07,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 140.60830688476562,
+      "currentPrice": 141.05999755859375,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 7.269076076144465,
-      "return3y": 17.86866219280554,
-      "return5y": 10.891600728812879,
-      "return10y": 14.697560638266793,
+      "return1y": 7.613667674800606,
+      "return3y": 17.995174396182833,
+      "return5y": 10.962881972058236,
+      "return10y": 14.746359124722975,
       "drawdown": -34.053006779465214,
-      "currentDrawdown": -7.323816402936623,
-      "volatility": 13.638308061515902,
+      "currentDrawdown": -7.02610306903606,
+      "volatility": 13.650333204663317,
       "monthlyRegime": "GREEN",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 8.5,
       "weeklyTrendScore": 4.5,
       "trendScore": 7.299999999999999,
-      "score": 7.400054787731529,
+      "score": 7.403564190152218,
       "status": "GREEN",
       "verdict": "ADATTO AL PAC",
       "pacAction": "Mantieni la rata ordinaria.",
@@ -2977,21 +2977,21 @@
       "ter": 0.07,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 784.4099731445312,
+      "currentPrice": 786.4199829101562,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 7.149584779687901,
-      "return3y": 18.13903349107211,
-      "return5y": 10.641718404760049,
-      "return10y": 14.172390870416418,
+      "return1y": 7.424150018738174,
+      "return3y": 18.240109577894682,
+      "return5y": 10.698432996935669,
+      "return10y": 14.201625278728546,
       "drawdown": -33.904982784260376,
-      "currentDrawdown": -7.272471725072016,
-      "volatility": 13.69888639772344,
+      "currentDrawdown": -7.0348622558454865,
+      "volatility": 13.70821604743823,
       "monthlyRegime": "GREEN",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 8.5,
       "weeklyTrendScore": 4.5,
       "trendScore": 7.299999999999999,
-      "score": 7.388259157528933,
+      "score": 7.3910524796390105,
       "status": "GREEN",
       "verdict": "ADATTO AL PAC",
       "pacAction": "Mantieni la rata ordinaria.",
@@ -3481,6 +3481,521 @@
       "summary": "Costi 8.9/10 · diversificazione 7.3/10 · robustezza 6.0/10 · trend lungo 7.3/10."
     },
     {
+      "ticker": "EXSA.DE",
+      "name": "iShares STOXX Europe 600 UCITS ETF",
+      "category": "Europa",
+      "role": "DIVERSIFICAZIONE EUROPA",
+      "isin": "DE0002635307",
+      "tvSymbol": "XETR:EXSA",
+      "exchange": "Xetra",
+      "quoteCurrency": "EUR",
+      "ter": 0.2,
+      "replication": "Fisica",
+      "distribution": "Distribuzione",
+      "currentPrice": 63.95000076293945,
+      "priceAsOf": "2026-11-27T00:00:00",
+      "return1y": 15.082759301964854,
+      "return3y": 14.57124425632177,
+      "return5y": 9.48117627022702,
+      "return10y": 9.576367161024457,
+      "drawdown": -35.699623119598364,
+      "currentDrawdown": -2.885342073209518,
+      "volatility": 13.535430628553687,
+      "monthlyRegime": "GREEN",
+      "weeklyRegime": "GREEN",
+      "monthlyTrendScore": 8.5,
+      "weeklyTrendScore": 8.5,
+      "trendScore": 8.5,
+      "score": 7.314668187259802,
+      "status": "GREEN",
+      "verdict": "ADATTO AL PAC",
+      "pacAction": "Vicino ai massimi: continua il PAC senza aumentare la rata per inseguire il prezzo.",
+      "monthlyHistory": [
+        {
+          "date": "2016-11-30",
+          "price": 25.808186
+        },
+        {
+          "date": "2016-12-31",
+          "price": 27.346569
+        },
+        {
+          "date": "2017-01-31",
+          "price": 27.180061
+        },
+        {
+          "date": "2017-02-28",
+          "price": 27.982365
+        },
+        {
+          "date": "2017-03-31",
+          "price": 29.019989
+        },
+        {
+          "date": "2017-04-30",
+          "price": 29.550949
+        },
+        {
+          "date": "2017-05-31",
+          "price": 30.049471
+        },
+        {
+          "date": "2017-06-30",
+          "price": 29.286293
+        },
+        {
+          "date": "2017-07-31",
+          "price": 29.224176
+        },
+        {
+          "date": "2017-08-31",
+          "price": 29.014544
+        },
+        {
+          "date": "2017-09-30",
+          "price": 30.091501
+        },
+        {
+          "date": "2017-10-31",
+          "price": 30.532644
+        },
+        {
+          "date": "2017-11-30",
+          "price": 30.012728
+        },
+        {
+          "date": "2017-12-31",
+          "price": 30.263336
+        },
+        {
+          "date": "2018-01-31",
+          "price": 30.773741
+        },
+        {
+          "date": "2018-02-28",
+          "price": 29.550705
+        },
+        {
+          "date": "2018-03-31",
+          "price": 29.004511
+        },
+        {
+          "date": "2018-04-30",
+          "price": 30.275032
+        },
+        {
+          "date": "2018-05-31",
+          "price": 30.358147
+        },
+        {
+          "date": "2018-06-30",
+          "price": 30.193623
+        },
+        {
+          "date": "2018-07-31",
+          "price": 31.174328
+        },
+        {
+          "date": "2018-08-31",
+          "price": 30.477833
+        },
+        {
+          "date": "2018-09-30",
+          "price": 30.580469
+        },
+        {
+          "date": "2018-10-31",
+          "price": 28.862007
+        },
+        {
+          "date": "2018-11-30",
+          "price": 28.59515
+        },
+        {
+          "date": "2018-12-31",
+          "price": 26.938377
+        },
+        {
+          "date": "2019-01-31",
+          "price": 28.733727
+        },
+        {
+          "date": "2019-02-28",
+          "price": 29.891365
+        },
+        {
+          "date": "2019-03-31",
+          "price": 30.566652
+        },
+        {
+          "date": "2019-04-30",
+          "price": 31.736177
+        },
+        {
+          "date": "2019-05-31",
+          "price": 30.212124
+        },
+        {
+          "date": "2019-06-30",
+          "price": 31.58753
+        },
+        {
+          "date": "2019-07-31",
+          "price": 31.63703
+        },
+        {
+          "date": "2019-08-31",
+          "price": 31.249245
+        },
+        {
+          "date": "2019-09-30",
+          "price": 32.346756
+        },
+        {
+          "date": "2019-10-31",
+          "price": 32.709499
+        },
+        {
+          "date": "2019-11-30",
+          "price": 33.626785
+        },
+        {
+          "date": "2019-12-31",
+          "price": 34.592781
+        },
+        {
+          "date": "2020-01-31",
+          "price": 33.985443
+        },
+        {
+          "date": "2020-02-29",
+          "price": 31.212667
+        },
+        {
+          "date": "2020-03-31",
+          "price": 26.645529
+        },
+        {
+          "date": "2020-04-30",
+          "price": 28.334511
+        },
+        {
+          "date": "2020-05-31",
+          "price": 29.29664
+        },
+        {
+          "date": "2020-06-30",
+          "price": 30.165493
+        },
+        {
+          "date": "2020-07-31",
+          "price": 29.898575
+        },
+        {
+          "date": "2020-08-31",
+          "price": 30.834898
+        },
+        {
+          "date": "2020-09-30",
+          "price": 30.37472
+        },
+        {
+          "date": "2020-10-31",
+          "price": 28.853214
+        },
+        {
+          "date": "2020-11-30",
+          "price": 32.82531
+        },
+        {
+          "date": "2020-12-31",
+          "price": 33.968891
+        },
+        {
+          "date": "2021-01-31",
+          "price": 33.391552
+        },
+        {
+          "date": "2021-02-28",
+          "price": 34.276814
+        },
+        {
+          "date": "2021-03-31",
+          "price": 36.496044
+        },
+        {
+          "date": "2021-04-30",
+          "price": 37.258793
+        },
+        {
+          "date": "2021-05-31",
+          "price": 38.360058
+        },
+        {
+          "date": "2021-06-30",
+          "price": 38.946609
+        },
+        {
+          "date": "2021-07-31",
+          "price": 39.630028
+        },
+        {
+          "date": "2021-08-31",
+          "price": 40.57299
+        },
+        {
+          "date": "2021-09-30",
+          "price": 39.167858
+        },
+        {
+          "date": "2021-10-31",
+          "price": 40.968575
+        },
+        {
+          "date": "2021-11-30",
+          "price": 39.955124
+        },
+        {
+          "date": "2021-12-31",
+          "price": 42.316025
+        },
+        {
+          "date": "2022-01-31",
+          "price": 40.617252
+        },
+        {
+          "date": "2022-02-28",
+          "price": 39.181171
+        },
+        {
+          "date": "2022-03-31",
+          "price": 39.677143
+        },
+        {
+          "date": "2022-04-30",
+          "price": 39.352459
+        },
+        {
+          "date": "2022-05-31",
+          "price": 39.058487
+        },
+        {
+          "date": "2022-06-30",
+          "price": 35.894894
+        },
+        {
+          "date": "2022-07-31",
+          "price": 38.732552
+        },
+        {
+          "date": "2022-08-31",
+          "price": 36.703117
+        },
+        {
+          "date": "2022-09-30",
+          "price": 34.331882
+        },
+        {
+          "date": "2022-10-31",
+          "price": 36.511261
+        },
+        {
+          "date": "2022-11-30",
+          "price": 39.076286
+        },
+        {
+          "date": "2022-12-31",
+          "price": 37.942661
+        },
+        {
+          "date": "2023-01-31",
+          "price": 40.35601
+        },
+        {
+          "date": "2023-02-28",
+          "price": 41.067406
+        },
+        {
+          "date": "2023-03-31",
+          "price": 40.907761
+        },
+        {
+          "date": "2023-04-30",
+          "price": 42.000675
+        },
+        {
+          "date": "2023-05-31",
+          "price": 40.88517
+        },
+        {
+          "date": "2023-06-30",
+          "price": 41.916996
+        },
+        {
+          "date": "2023-07-31",
+          "price": 42.821388
+        },
+        {
+          "date": "2023-08-31",
+          "price": 41.716022
+        },
+        {
+          "date": "2023-09-30",
+          "price": 41.007732
+        },
+        {
+          "date": "2023-10-31",
+          "price": 39.568863
+        },
+        {
+          "date": "2023-11-30",
+          "price": 42.179111
+        },
+        {
+          "date": "2023-12-31",
+          "price": 43.807518
+        },
+        {
+          "date": "2024-01-31",
+          "price": 44.45549
+        },
+        {
+          "date": "2024-02-29",
+          "price": 45.265457
+        },
+        {
+          "date": "2024-03-31",
+          "price": 47.174622
+        },
+        {
+          "date": "2024-04-30",
+          "price": 46.747704
+        },
+        {
+          "date": "2024-05-31",
+          "price": 48.344013
+        },
+        {
+          "date": "2024-06-30",
+          "price": 47.77264
+        },
+        {
+          "date": "2024-07-31",
+          "price": 48.41124
+        },
+        {
+          "date": "2024-08-31",
+          "price": 49.200092
+        },
+        {
+          "date": "2024-09-30",
+          "price": 49.010532
+        },
+        {
+          "date": "2024-10-31",
+          "price": 47.427715
+        },
+        {
+          "date": "2024-11-30",
+          "price": 47.920563
+        },
+        {
+          "date": "2024-12-31",
+          "price": 47.533154
+        },
+        {
+          "date": "2025-01-31",
+          "price": 50.810474
+        },
+        {
+          "date": "2025-02-28",
+          "price": 52.579952
+        },
+        {
+          "date": "2025-03-31",
+          "price": 50.500782
+        },
+        {
+          "date": "2025-04-30",
+          "price": 50.252758
+        },
+        {
+          "date": "2025-05-31",
+          "price": 52.780663
+        },
+        {
+          "date": "2025-06-30",
+          "price": 52.027218
+        },
+        {
+          "date": "2025-07-31",
+          "price": 52.605938
+        },
+        {
+          "date": "2025-08-31",
+          "price": 53.088203
+        },
+        {
+          "date": "2025-09-30",
+          "price": 53.844669
+        },
+        {
+          "date": "2025-10-31",
+          "price": 55.295986
+        },
+        {
+          "date": "2025-11-30",
+          "price": 55.753777
+        },
+        {
+          "date": "2025-12-31",
+          "price": 57.272217
+        },
+        {
+          "date": "2026-01-31",
+          "price": 59.168262
+        },
+        {
+          "date": "2026-02-28",
+          "price": 61.445465
+        },
+        {
+          "date": "2026-03-31",
+          "price": 56.744949
+        },
+        {
+          "date": "2026-04-30",
+          "price": 59.811451
+        },
+        {
+          "date": "2026-05-31",
+          "price": 61.633717
+        },
+        {
+          "date": "2026-06-30",
+          "price": 63.341331
+        },
+        {
+          "date": "2026-07-31",
+          "price": 64.12394
+        },
+        {
+          "date": "2026-08-31",
+          "price": 64.361694
+        },
+        {
+          "date": "2026-09-30",
+          "price": 62.869999
+        },
+        {
+          "date": "2026-10-31",
+          "price": 64.080002
+        }
+      ],
+      "historyStart": "2016-11-30",
+      "summary": "Costi 7.0/10 · diversificazione 8.2/10 · robustezza 5.7/10 · trend lungo 8.5/10."
+    },
+    {
       "ticker": "MEUD.L",
       "name": "Amundi STOXX Europe 600 UCITS ETF",
       "category": "Europa",
@@ -3492,21 +4007,21 @@
       "ter": 0.07,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 26605.0,
+      "currentPrice": 26592.5,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 9.46307344167867,
-      "return3y": 13.191399322453146,
+      "return1y": 9.411643694713012,
+      "return3y": 13.172390068131445,
       "return5y": null,
       "return10y": null,
       "drawdown": -13.949458069979881,
-      "currentDrawdown": -4.418897072031614,
-      "volatility": 13.117456734664614,
+      "currentDrawdown": -4.463804562601037,
+      "volatility": 13.114666684578205,
       "monthlyRegime": "GREEN",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 8.5,
-      "weeklyTrendScore": 4.5,
-      "trendScore": 7.299999999999999,
-      "score": 7.215102446200221,
+      "weeklyTrendScore": 6.0,
+      "trendScore": 7.749999999999999,
+      "score": 7.282615128246068,
       "status": "GREEN",
       "verdict": "ADATTO AL PAC",
       "pacAction": "Mantieni la rata ordinaria.",
@@ -3645,522 +4160,7 @@
         }
       ],
       "historyStart": "2024-02-29",
-      "summary": "Costi 8.9/10 · diversificazione 8.2/10 · robustezza 4.4/10 · trend lungo 7.3/10."
-    },
-    {
-      "ticker": "EXSA.DE",
-      "name": "iShares STOXX Europe 600 UCITS ETF",
-      "category": "Europa",
-      "role": "DIVERSIFICAZIONE EUROPA",
-      "isin": "DE0002635307",
-      "tvSymbol": "XETR:EXSA",
-      "exchange": "Xetra",
-      "quoteCurrency": "EUR",
-      "ter": 0.2,
-      "replication": "Fisica",
-      "distribution": "Distribuzione",
-      "currentPrice": 63.939998626708984,
-      "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 15.064759717561671,
-      "return3y": 14.565224761837104,
-      "return5y": 9.477717095170535,
-      "return10y": 9.574656578883989,
-      "drawdown": -35.69964514971492,
-      "currentDrawdown": -2.90053134650069,
-      "volatility": 13.534269281254726,
-      "monthlyRegime": "GREEN",
-      "weeklyRegime": "YELLOW",
-      "monthlyTrendScore": 8.5,
-      "weeklyTrendScore": 6.0,
-      "trendScore": 7.749999999999999,
-      "score": 7.202000362423359,
-      "status": "GREEN",
-      "verdict": "ADATTO AL PAC",
-      "pacAction": "Mantieni la rata ordinaria.",
-      "monthlyHistory": [
-        {
-          "date": "2016-11-30",
-          "price": 25.808184
-        },
-        {
-          "date": "2016-12-31",
-          "price": 27.346575
-        },
-        {
-          "date": "2017-01-31",
-          "price": 27.180054
-        },
-        {
-          "date": "2017-02-28",
-          "price": 27.982368
-        },
-        {
-          "date": "2017-03-31",
-          "price": 29.019985
-        },
-        {
-          "date": "2017-04-30",
-          "price": 29.550941
-        },
-        {
-          "date": "2017-05-31",
-          "price": 30.049473
-        },
-        {
-          "date": "2017-06-30",
-          "price": 29.286291
-        },
-        {
-          "date": "2017-07-31",
-          "price": 29.224182
-        },
-        {
-          "date": "2017-08-31",
-          "price": 29.014553
-        },
-        {
-          "date": "2017-09-30",
-          "price": 30.091509
-        },
-        {
-          "date": "2017-10-31",
-          "price": 30.532635
-        },
-        {
-          "date": "2017-11-30",
-          "price": 30.012728
-        },
-        {
-          "date": "2017-12-31",
-          "price": 30.263336
-        },
-        {
-          "date": "2018-01-31",
-          "price": 30.77375
-        },
-        {
-          "date": "2018-02-28",
-          "price": 29.550716
-        },
-        {
-          "date": "2018-03-31",
-          "price": 29.004505
-        },
-        {
-          "date": "2018-04-30",
-          "price": 30.275034
-        },
-        {
-          "date": "2018-05-31",
-          "price": 30.358143
-        },
-        {
-          "date": "2018-06-30",
-          "price": 30.193624
-        },
-        {
-          "date": "2018-07-31",
-          "price": 31.174318
-        },
-        {
-          "date": "2018-08-31",
-          "price": 30.477825
-        },
-        {
-          "date": "2018-09-30",
-          "price": 30.580479
-        },
-        {
-          "date": "2018-10-31",
-          "price": 28.862005
-        },
-        {
-          "date": "2018-11-30",
-          "price": 28.595148
-        },
-        {
-          "date": "2018-12-31",
-          "price": 26.938377
-        },
-        {
-          "date": "2019-01-31",
-          "price": 28.733732
-        },
-        {
-          "date": "2019-02-28",
-          "price": 29.891367
-        },
-        {
-          "date": "2019-03-31",
-          "price": 30.566658
-        },
-        {
-          "date": "2019-04-30",
-          "price": 31.736174
-        },
-        {
-          "date": "2019-05-31",
-          "price": 30.212122
-        },
-        {
-          "date": "2019-06-30",
-          "price": 31.587521
-        },
-        {
-          "date": "2019-07-31",
-          "price": 31.637037
-        },
-        {
-          "date": "2019-08-31",
-          "price": 31.24925
-        },
-        {
-          "date": "2019-09-30",
-          "price": 32.346752
-        },
-        {
-          "date": "2019-10-31",
-          "price": 32.709503
-        },
-        {
-          "date": "2019-11-30",
-          "price": 33.626789
-        },
-        {
-          "date": "2019-12-31",
-          "price": 34.592781
-        },
-        {
-          "date": "2020-01-31",
-          "price": 33.985443
-        },
-        {
-          "date": "2020-02-29",
-          "price": 31.212669
-        },
-        {
-          "date": "2020-03-31",
-          "price": 26.645529
-        },
-        {
-          "date": "2020-04-30",
-          "price": 28.334503
-        },
-        {
-          "date": "2020-05-31",
-          "price": 29.29664
-        },
-        {
-          "date": "2020-06-30",
-          "price": 30.165485
-        },
-        {
-          "date": "2020-07-31",
-          "price": 29.898579
-        },
-        {
-          "date": "2020-08-31",
-          "price": 30.834896
-        },
-        {
-          "date": "2020-09-30",
-          "price": 30.374714
-        },
-        {
-          "date": "2020-10-31",
-          "price": 28.853207
-        },
-        {
-          "date": "2020-11-30",
-          "price": 32.825325
-        },
-        {
-          "date": "2020-12-31",
-          "price": 33.968891
-        },
-        {
-          "date": "2021-01-31",
-          "price": 33.391556
-        },
-        {
-          "date": "2021-02-28",
-          "price": 34.27681
-        },
-        {
-          "date": "2021-03-31",
-          "price": 36.496059
-        },
-        {
-          "date": "2021-04-30",
-          "price": 37.258793
-        },
-        {
-          "date": "2021-05-31",
-          "price": 38.360062
-        },
-        {
-          "date": "2021-06-30",
-          "price": 38.946613
-        },
-        {
-          "date": "2021-07-31",
-          "price": 39.630032
-        },
-        {
-          "date": "2021-08-31",
-          "price": 40.572987
-        },
-        {
-          "date": "2021-09-30",
-          "price": 39.167847
-        },
-        {
-          "date": "2021-10-31",
-          "price": 40.968571
-        },
-        {
-          "date": "2021-11-30",
-          "price": 39.95512
-        },
-        {
-          "date": "2021-12-31",
-          "price": 42.316017
-        },
-        {
-          "date": "2022-01-31",
-          "price": 40.617252
-        },
-        {
-          "date": "2022-02-28",
-          "price": 39.181179
-        },
-        {
-          "date": "2022-03-31",
-          "price": 39.677139
-        },
-        {
-          "date": "2022-04-30",
-          "price": 39.352455
-        },
-        {
-          "date": "2022-05-31",
-          "price": 39.058483
-        },
-        {
-          "date": "2022-06-30",
-          "price": 35.894886
-        },
-        {
-          "date": "2022-07-31",
-          "price": 38.732552
-        },
-        {
-          "date": "2022-08-31",
-          "price": 36.703114
-        },
-        {
-          "date": "2022-09-30",
-          "price": 34.331882
-        },
-        {
-          "date": "2022-10-31",
-          "price": 36.511257
-        },
-        {
-          "date": "2022-11-30",
-          "price": 39.076283
-        },
-        {
-          "date": "2022-12-31",
-          "price": 37.942665
-        },
-        {
-          "date": "2023-01-31",
-          "price": 40.356007
-        },
-        {
-          "date": "2023-02-28",
-          "price": 41.06741
-        },
-        {
-          "date": "2023-03-31",
-          "price": 40.907757
-        },
-        {
-          "date": "2023-04-30",
-          "price": 42.000675
-        },
-        {
-          "date": "2023-05-31",
-          "price": 40.885174
-        },
-        {
-          "date": "2023-06-30",
-          "price": 41.917
-        },
-        {
-          "date": "2023-07-31",
-          "price": 42.821392
-        },
-        {
-          "date": "2023-08-31",
-          "price": 41.71603
-        },
-        {
-          "date": "2023-09-30",
-          "price": 41.007732
-        },
-        {
-          "date": "2023-10-31",
-          "price": 39.568871
-        },
-        {
-          "date": "2023-11-30",
-          "price": 42.179111
-        },
-        {
-          "date": "2023-12-31",
-          "price": 43.807518
-        },
-        {
-          "date": "2024-01-31",
-          "price": 44.455486
-        },
-        {
-          "date": "2024-02-29",
-          "price": 45.265453
-        },
-        {
-          "date": "2024-03-31",
-          "price": 47.174625
-        },
-        {
-          "date": "2024-04-30",
-          "price": 46.747704
-        },
-        {
-          "date": "2024-05-31",
-          "price": 48.344009
-        },
-        {
-          "date": "2024-06-30",
-          "price": 47.77264
-        },
-        {
-          "date": "2024-07-31",
-          "price": 48.411236
-        },
-        {
-          "date": "2024-08-31",
-          "price": 49.2001
-        },
-        {
-          "date": "2024-09-30",
-          "price": 49.010532
-        },
-        {
-          "date": "2024-10-31",
-          "price": 47.427715
-        },
-        {
-          "date": "2024-11-30",
-          "price": 47.920563
-        },
-        {
-          "date": "2024-12-31",
-          "price": 47.533154
-        },
-        {
-          "date": "2025-01-31",
-          "price": 50.810478
-        },
-        {
-          "date": "2025-02-28",
-          "price": 52.579948
-        },
-        {
-          "date": "2025-03-31",
-          "price": 50.500782
-        },
-        {
-          "date": "2025-04-30",
-          "price": 50.252758
-        },
-        {
-          "date": "2025-05-31",
-          "price": 52.780663
-        },
-        {
-          "date": "2025-06-30",
-          "price": 52.027218
-        },
-        {
-          "date": "2025-07-31",
-          "price": 52.605938
-        },
-        {
-          "date": "2025-08-31",
-          "price": 53.088207
-        },
-        {
-          "date": "2025-09-30",
-          "price": 53.844669
-        },
-        {
-          "date": "2025-10-31",
-          "price": 55.295982
-        },
-        {
-          "date": "2025-11-30",
-          "price": 55.75378
-        },
-        {
-          "date": "2025-12-31",
-          "price": 57.272217
-        },
-        {
-          "date": "2026-01-31",
-          "price": 59.168262
-        },
-        {
-          "date": "2026-02-28",
-          "price": 61.445469
-        },
-        {
-          "date": "2026-03-31",
-          "price": 56.744949
-        },
-        {
-          "date": "2026-04-30",
-          "price": 59.811451
-        },
-        {
-          "date": "2026-05-31",
-          "price": 61.633717
-        },
-        {
-          "date": "2026-06-30",
-          "price": 63.341331
-        },
-        {
-          "date": "2026-07-31",
-          "price": 64.12394
-        },
-        {
-          "date": "2026-08-31",
-          "price": 64.361694
-        },
-        {
-          "date": "2026-09-30",
-          "price": 62.869999
-        },
-        {
-          "date": "2026-10-31",
-          "price": 64.080002
-        }
-      ],
-      "historyStart": "2016-11-30",
-      "summary": "Costi 7.0/10 · diversificazione 8.2/10 · robustezza 5.7/10 · trend lungo 7.7/10."
+      "summary": "Costi 8.9/10 · diversificazione 8.2/10 · robustezza 4.4/10 · trend lungo 7.7/10."
     },
     {
       "ticker": "EUNA.DE",
@@ -4174,21 +4174,21 @@
       "ter": 0.1,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 4.895299911499023,
+      "currentPrice": 4.894700050354004,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": -0.7944128931273164,
-      "return3y": 1.9268754027334856,
-      "return5y": -1.4996667710657885,
-      "return10y": -0.22718948003068729,
+      "return1y": -0.8065693652843042,
+      "return3y": 1.9226784073814285,
+      "return5y": -1.5021120299482438,
+      "return10y": -0.22854562396783518,
       "drawdown": -17.79129595717893,
-      "currentDrawdown": -9.201690873062029,
-      "volatility": 3.6994246321497704,
+      "currentDrawdown": -9.212817132670914,
+      "volatility": 3.6997163319595745,
       "monthlyRegime": "YELLOW",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 4.5,
-      "weeklyTrendScore": 4.5,
-      "trendScore": 4.5,
-      "score": 6.843153095218655,
+      "weeklyTrendScore": 6.0,
+      "trendScore": 4.949999999999999,
+      "score": 6.910529506366306,
       "status": "YELLOW",
       "verdict": "MANTENERE / OSSERVARE",
       "pacAction": "Mantieni la rata ordinaria.",
@@ -4627,522 +4627,522 @@
         }
       ],
       "historyStart": "2017-11-30",
-      "summary": "Costi 8.5/10 · diversificazione 9.0/10 · robustezza 4.2/10 · trend lungo 4.5/10."
+      "summary": "Costi 8.5/10 · diversificazione 9.0/10 · robustezza 4.2/10 · trend lungo 4.9/10."
     },
     {
-      "ticker": "IUIT.L",
-      "name": "iShares S&P 500 Information Technology Sector UCITS ETF",
-      "category": "Tecnologia",
-      "role": "CRESCITA / TECNOLOGIA",
-      "isin": "IE00B3WJKG14",
-      "tvSymbol": "LSE:IUIT",
+      "ticker": "MVOL.L",
+      "name": "iShares Edge MSCI World Minimum Volatility UCITS ETF",
+      "category": "Fattoriale difensivo",
+      "role": "DIVERSIFICAZIONE",
+      "isin": "IE00B8FHGS14",
+      "tvSymbol": "LSE:MVOL",
       "exchange": "London Stock Exchange",
       "quoteCurrency": "USD",
-      "ter": 0.15,
+      "ter": 0.3,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 44.27000045776367,
+      "currentPrice": 79.9000015258789,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 5.858442804442854,
-      "return3y": 24.05631794845682,
-      "return5y": 15.53637017791749,
-      "return10y": 23.06668224764723,
-      "drawdown": -33.4614501248811,
-      "currentDrawdown": -20.349048220023057,
-      "volatility": 26.32875910970711,
+      "return1y": 8.855585646967956,
+      "return3y": 11.028618987266704,
+      "return5y": 6.26026274415159,
+      "return10y": 8.114738297157608,
+      "drawdown": -28.816027787115715,
+      "currentDrawdown": -1.394541861583587,
+      "volatility": 8.502472978945368,
       "monthlyRegime": "GREEN",
-      "weeklyRegime": "YELLOW",
+      "weeklyRegime": "GREEN",
       "monthlyTrendScore": 8.5,
-      "weeklyTrendScore": 4.5,
-      "trendScore": 7.299999999999999,
-      "score": 6.801501211881839,
+      "weeklyTrendScore": 8.5,
+      "trendScore": 8.5,
+      "score": 6.856786402579434,
       "status": "YELLOW",
       "verdict": "MANTENERE / OSSERVARE",
-      "pacAction": "Ritracciamento ampio ma trend lungo ancora valido: non uscire per rumore di breve.",
+      "pacAction": "Vicino ai massimi: continua il PAC senza aumentare la rata per inseguire il prezzo.",
       "monthlyHistory": [
         {
           "date": "2016-11-30",
-          "price": 5.52
+          "price": 36.529999
         },
         {
           "date": "2016-12-31",
-          "price": 5.64
+          "price": 37.259998
         },
         {
           "date": "2017-01-31",
-          "price": 5.8
+          "price": 37.669998
         },
         {
           "date": "2017-02-28",
-          "price": 6.12
+          "price": 39.09
         },
         {
           "date": "2017-03-31",
-          "price": 6.28
+          "price": 39.27
         },
         {
           "date": "2017-04-30",
-          "price": 6.42
+          "price": 39.599998
         },
         {
           "date": "2017-05-31",
-          "price": 6.71
+          "price": 40.759998
         },
         {
           "date": "2017-06-30",
-          "price": 6.53
+          "price": 40.5
         },
         {
           "date": "2017-07-31",
-          "price": 6.81
+          "price": 41.27
         },
         {
           "date": "2017-08-31",
-          "price": 7.02
+          "price": 41.560001
         },
         {
           "date": "2017-09-30",
-          "price": 7.06
+          "price": 41.669998
         },
         {
           "date": "2017-10-31",
-          "price": 7.62
+          "price": 42.349998
         },
         {
           "date": "2017-11-30",
-          "price": 7.69
+          "price": 43.389999
         },
         {
           "date": "2017-12-31",
-          "price": 7.78
+          "price": 43.740002
         },
         {
           "date": "2018-01-31",
-          "price": 8.28
+          "price": 44.93
         },
         {
           "date": "2018-02-28",
-          "price": 8.39
+          "price": 43.389999
         },
         {
           "date": "2018-03-31",
-          "price": 7.93
+          "price": 42.959999
         },
         {
           "date": "2018-04-30",
-          "price": 8.07
+          "price": 43.299999
         },
         {
           "date": "2018-05-31",
-          "price": 8.6
+          "price": 43.169998
         },
         {
           "date": "2018-06-30",
-          "price": 8.58
+          "price": 43.549999
         },
         {
           "date": "2018-07-31",
-          "price": 8.72
+          "price": 44.779999
         },
         {
           "date": "2018-08-31",
-          "price": 9.3
+          "price": 45.41
         },
         {
           "date": "2018-09-30",
-          "price": 9.26
+          "price": 45.950001
         },
         {
           "date": "2018-10-31",
-          "price": 8.53
+          "price": 43.950001
         },
         {
           "date": "2018-11-30",
-          "price": 8.29
+          "price": 44.93
         },
         {
           "date": "2018-12-31",
-          "price": 7.67
+          "price": 42.689999
         },
         {
           "date": "2019-01-31",
-          "price": 8.18625
+          "price": 44.740002
         },
         {
           "date": "2019-02-28",
-          "price": 8.7425
+          "price": 46.275002
         },
         {
           "date": "2019-03-31",
-          "price": 9.1325
+          "price": 47.080002
         },
         {
           "date": "2019-04-30",
-          "price": 9.715
+          "price": 47.549999
         },
         {
           "date": "2019-05-31",
-          "price": 8.975
+          "price": 47.200001
         },
         {
           "date": "2019-06-30",
-          "price": 9.6975
+          "price": 49.330002
         },
         {
           "date": "2019-07-31",
-          "price": 10.2225
+          "price": 49.955002
         },
         {
           "date": "2019-08-31",
-          "price": 9.855
+          "price": 50.48
         },
         {
           "date": "2019-09-30",
-          "price": 10.035
+          "price": 51.07
         },
         {
           "date": "2019-10-31",
-          "price": 10.395
+          "price": 51.279999
         },
         {
           "date": "2019-11-30",
-          "price": 10.99
+          "price": 51.880001
         },
         {
           "date": "2019-12-31",
-          "price": 11.415
+          "price": 52.32
         },
         {
           "date": "2020-01-31",
-          "price": 12.035
+          "price": 53.599998
         },
         {
           "date": "2020-02-29",
-          "price": 10.895
+          "price": 48.799999
         },
         {
           "date": "2020-03-31",
-          "price": 10.4
+          "price": 44.970001
         },
         {
           "date": "2020-04-30",
-          "price": 11.49
+          "price": 47.599998
         },
         {
           "date": "2020-05-31",
-          "price": 12.115
+          "price": 48.66
         },
         {
           "date": "2020-06-30",
-          "price": 13.04
+          "price": 48.619999
         },
         {
           "date": "2020-07-31",
-          "price": 13.63
+          "price": 50.27
         },
         {
           "date": "2020-08-31",
-          "price": 15.37
-        },
-        {
-          "date": "2020-09-30",
-          "price": 14.69
-        },
-        {
-          "date": "2020-10-31",
-          "price": 13.8925
-        },
-        {
-          "date": "2020-11-30",
-          "price": 15.245
-        },
-        {
-          "date": "2020-12-31",
-          "price": 16.34
-        },
-        {
-          "date": "2021-01-31",
-          "price": 16.295
-        },
-        {
-          "date": "2021-02-28",
-          "price": 16.514999
-        },
-        {
-          "date": "2021-03-31",
-          "price": 16.690001
-        },
-        {
-          "date": "2021-04-30",
-          "price": 17.615
-        },
-        {
-          "date": "2021-05-31",
-          "price": 17.434999
-        },
-        {
-          "date": "2021-06-30",
-          "price": 18.575001
-        },
-        {
-          "date": "2021-07-31",
-          "price": 19.219999
-        },
-        {
-          "date": "2021-08-31",
-          "price": 19.99
-        },
-        {
-          "date": "2021-09-30",
-          "price": 18.975
-        },
-        {
-          "date": "2021-10-31",
-          "price": 20.190001
-        },
-        {
-          "date": "2021-11-30",
-          "price": 21.09
-        },
-        {
-          "date": "2021-12-31",
-          "price": 21.91
-        },
-        {
-          "date": "2022-01-31",
-          "price": 20.075001
-        },
-        {
-          "date": "2022-02-28",
-          "price": 19.379999
-        },
-        {
-          "date": "2022-03-31",
-          "price": 20.27
-        },
-        {
-          "date": "2022-04-30",
-          "price": 18.205
-        },
-        {
-          "date": "2022-05-31",
-          "price": 17.52
-        },
-        {
-          "date": "2022-06-30",
-          "price": 15.925
-        },
-        {
-          "date": "2022-07-31",
-          "price": 17.84
-        },
-        {
-          "date": "2022-08-31",
-          "price": 17.045
-        },
-        {
-          "date": "2022-09-30",
-          "price": 15.325
-        },
-        {
-          "date": "2022-10-31",
-          "price": 16.1525
-        },
-        {
-          "date": "2022-11-30",
-          "price": 16.309999
-        },
-        {
-          "date": "2022-12-31",
-          "price": 15.5225
-        },
-        {
-          "date": "2023-01-31",
-          "price": 16.99
-        },
-        {
-          "date": "2023-02-28",
-          "price": 17.2225
-        },
-        {
-          "date": "2023-03-31",
-          "price": 18.855
-        },
-        {
-          "date": "2023-04-30",
-          "price": 18.879999
-        },
-        {
-          "date": "2023-05-31",
-          "price": 20.93
-        },
-        {
-          "date": "2023-06-30",
-          "price": 22.254999
-        },
-        {
-          "date": "2023-07-31",
-          "price": 22.924999
-        },
-        {
-          "date": "2023-08-31",
-          "price": 22.690001
-        },
-        {
-          "date": "2023-09-30",
-          "price": 21.190001
-        },
-        {
-          "date": "2023-10-31",
-          "price": 20.84
-        },
-        {
-          "date": "2023-11-30",
-          "price": 23.6
-        },
-        {
-          "date": "2023-12-31",
-          "price": 24.75
-        },
-        {
-          "date": "2024-01-31",
-          "price": 25.74
-        },
-        {
-          "date": "2024-02-29",
-          "price": 27.110001
-        },
-        {
-          "date": "2024-03-31",
-          "price": 27.870001
-        },
-        {
-          "date": "2024-04-30",
-          "price": 26.76
-        },
-        {
-          "date": "2024-05-31",
-          "price": 28.559999
-        },
-        {
-          "date": "2024-06-30",
-          "price": 32.110001
-        },
-        {
-          "date": "2024-07-31",
-          "price": 30.99
-        },
-        {
-          "date": "2024-08-31",
-          "price": 31.16
-        },
-        {
-          "date": "2024-09-30",
-          "price": 32.0
-        },
-        {
-          "date": "2024-10-31",
-          "price": 31.98
-        },
-        {
-          "date": "2024-11-30",
-          "price": 33.349998
-        },
-        {
-          "date": "2024-12-31",
-          "price": 34.279999
-        },
-        {
-          "date": "2025-01-31",
-          "price": 33.560001
-        },
-        {
-          "date": "2025-02-28",
-          "price": 31.98
-        },
-        {
-          "date": "2025-03-31",
-          "price": 29.049999
-        },
-        {
-          "date": "2025-04-30",
-          "price": 29.59
-        },
-        {
-          "date": "2025-05-31",
-          "price": 33.099998
-        },
-        {
-          "date": "2025-06-30",
-          "price": 36.279999
-        },
-        {
-          "date": "2025-07-31",
-          "price": 38.549999
-        },
-        {
-          "date": "2025-08-31",
-          "price": 38.310001
-        },
-        {
-          "date": "2025-09-30",
-          "price": 41.009998
-        },
-        {
-          "date": "2025-10-31",
-          "price": 43.830002
-        },
-        {
-          "date": "2025-11-30",
-          "price": 41.77
-        },
-        {
-          "date": "2025-12-31",
-          "price": 42.139999
-        },
-        {
-          "date": "2026-01-31",
-          "price": 41.380001
-        },
-        {
-          "date": "2026-02-28",
-          "price": 39.75
-        },
-        {
-          "date": "2026-03-31",
-          "price": 37.07
-        },
-        {
-          "date": "2026-04-30",
-          "price": 44.450001
-        },
-        {
-          "date": "2026-05-31",
           "price": 51.77
         },
         {
+          "date": "2020-09-30",
+          "price": 51.080002
+        },
+        {
+          "date": "2020-10-31",
+          "price": 49.41
+        },
+        {
+          "date": "2020-11-30",
+          "price": 52.5
+        },
+        {
+          "date": "2020-12-31",
+          "price": 53.66
+        },
+        {
+          "date": "2021-01-31",
+          "price": 53.0
+        },
+        {
+          "date": "2021-02-28",
+          "price": 52.209999
+        },
+        {
+          "date": "2021-03-31",
+          "price": 54.669998
+        },
+        {
+          "date": "2021-04-30",
+          "price": 56.09
+        },
+        {
+          "date": "2021-05-31",
+          "price": 57.389999
+        },
+        {
+          "date": "2021-06-30",
+          "price": 57.669998
+        },
+        {
+          "date": "2021-07-31",
+          "price": 59.360001
+        },
+        {
+          "date": "2021-08-31",
+          "price": 60.389999
+        },
+        {
+          "date": "2021-09-30",
+          "price": 57.77
+        },
+        {
+          "date": "2021-10-31",
+          "price": 59.400002
+        },
+        {
+          "date": "2021-11-30",
+          "price": 58.529999
+        },
+        {
+          "date": "2021-12-31",
+          "price": 61.52
+        },
+        {
+          "date": "2022-01-31",
+          "price": 57.779999
+        },
+        {
+          "date": "2022-02-28",
+          "price": 57.209999
+        },
+        {
+          "date": "2022-03-31",
+          "price": 60.040001
+        },
+        {
+          "date": "2022-04-30",
+          "price": 57.580002
+        },
+        {
+          "date": "2022-05-31",
+          "price": 56.220001
+        },
+        {
+          "date": "2022-06-30",
+          "price": 53.889999
+        },
+        {
+          "date": "2022-07-31",
+          "price": 55.669998
+        },
+        {
+          "date": "2022-08-31",
+          "price": 54.389999
+        },
+        {
+          "date": "2022-09-30",
+          "price": 51.080002
+        },
+        {
+          "date": "2022-10-31",
+          "price": 53.360001
+        },
+        {
+          "date": "2022-11-30",
+          "price": 55.82
+        },
+        {
+          "date": "2022-12-31",
+          "price": 55.599998
+        },
+        {
+          "date": "2023-01-31",
+          "price": 56.200001
+        },
+        {
+          "date": "2023-02-28",
+          "price": 54.599998
+        },
+        {
+          "date": "2023-03-31",
+          "price": 56.540001
+        },
+        {
+          "date": "2023-04-30",
+          "price": 58.119999
+        },
+        {
+          "date": "2023-05-31",
+          "price": 55.689999
+        },
+        {
+          "date": "2023-06-30",
+          "price": 57.400002
+        },
+        {
+          "date": "2023-07-31",
+          "price": 58.25
+        },
+        {
+          "date": "2023-08-31",
+          "price": 57.5
+        },
+        {
+          "date": "2023-09-30",
+          "price": 55.98
+        },
+        {
+          "date": "2023-10-31",
+          "price": 55.009998
+        },
+        {
+          "date": "2023-11-30",
+          "price": 58.07
+        },
+        {
+          "date": "2023-12-31",
+          "price": 59.650002
+        },
+        {
+          "date": "2024-01-31",
+          "price": 61.27
+        },
+        {
+          "date": "2024-02-29",
+          "price": 61.59
+        },
+        {
+          "date": "2024-03-31",
+          "price": 63.110001
+        },
+        {
+          "date": "2024-04-30",
+          "price": 60.919998
+        },
+        {
+          "date": "2024-05-31",
+          "price": 61.759998
+        },
+        {
+          "date": "2024-06-30",
+          "price": 62.77
+        },
+        {
+          "date": "2024-07-31",
+          "price": 65.650002
+        },
+        {
+          "date": "2024-08-31",
+          "price": 68.419998
+        },
+        {
+          "date": "2024-09-30",
+          "price": 68.779999
+        },
+        {
+          "date": "2024-10-31",
+          "price": 67.43
+        },
+        {
+          "date": "2024-11-30",
+          "price": 69.669998
+        },
+        {
+          "date": "2024-12-31",
+          "price": 66.260002
+        },
+        {
+          "date": "2025-01-31",
+          "price": 68.949997
+        },
+        {
+          "date": "2025-02-28",
+          "price": 70.480003
+        },
+        {
+          "date": "2025-03-31",
+          "price": 71.260002
+        },
+        {
+          "date": "2025-04-30",
+          "price": 71.629997
+        },
+        {
+          "date": "2025-05-31",
+          "price": 72.650002
+        },
+        {
+          "date": "2025-06-30",
+          "price": 72.919998
+        },
+        {
+          "date": "2025-07-31",
+          "price": 71.910004
+        },
+        {
+          "date": "2025-08-31",
+          "price": 73.199997
+        },
+        {
+          "date": "2025-09-30",
+          "price": 73.25
+        },
+        {
+          "date": "2025-10-31",
+          "price": 71.75
+        },
+        {
+          "date": "2025-11-30",
+          "price": 73.669998
+        },
+        {
+          "date": "2025-12-31",
+          "price": 73.559998
+        },
+        {
+          "date": "2026-01-31",
+          "price": 73.629997
+        },
+        {
+          "date": "2026-02-28",
+          "price": 77.019997
+        },
+        {
+          "date": "2026-03-31",
+          "price": 73.089996
+        },
+        {
+          "date": "2026-04-30",
+          "price": 73.660004
+        },
+        {
+          "date": "2026-05-31",
+          "price": 74.160004
+        },
+        {
           "date": "2026-06-30",
-          "price": 49.799999
+          "price": 73.949997
         },
         {
           "date": "2026-07-31",
-          "price": 47.77
+          "price": 76.209999
         },
         {
           "date": "2026-08-31",
-          "price": 51.889999
+          "price": 78.639999
         },
         {
           "date": "2026-09-30",
-          "price": 54.040001
+          "price": 75.830002
         },
         {
           "date": "2026-10-31",
-          "price": 50.040001
+          "price": 80.120003
         }
       ],
       "historyStart": "2016-11-30",
-      "summary": "Costi 7.8/10 · diversificazione 5.2/10 · robustezza 6.7/10 · trend lungo 7.3/10."
+      "summary": "Costi 5.5/10 · diversificazione 8.0/10 · robustezza 5.3/10 · trend lungo 8.5/10."
     },
     {
       "ticker": "IWQU.L",
@@ -5156,21 +5156,21 @@
       "ter": 0.3,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 87.22000122070312,
+      "currentPrice": 87.41000366210938,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 10.755557105654766,
-      "return3y": 15.752225780115992,
-      "return5y": 8.813765380343973,
-      "return10y": 12.2935488910493,
+      "return1y": 10.99683004712302,
+      "return3y": 15.83673822625058,
+      "return5y": 8.861243214815673,
+      "return10y": 12.317997319851015,
       "drawdown": -33.05223508293816,
-      "currentDrawdown": -4.646332068746128,
-      "volatility": 12.592230628138616,
+      "currentDrawdown": -4.4386110248294415,
+      "volatility": 12.596155796266299,
       "monthlyRegime": "GREEN",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 8.5,
-      "weeklyTrendScore": 4.5,
-      "trendScore": 7.299999999999999,
-      "score": 6.758001942051783,
+      "weeklyTrendScore": 6.0,
+      "trendScore": 7.749999999999999,
+      "score": 6.827857992102061,
       "status": "YELLOW",
       "verdict": "MANTENERE / OSSERVARE",
       "pacAction": "Mantieni la rata ordinaria.",
@@ -5657,522 +5657,522 @@
         }
       ],
       "historyStart": "2016-11-30",
-      "summary": "Costi 5.5/10 · diversificazione 8.0/10 · robustezza 5.7/10 · trend lungo 7.3/10."
+      "summary": "Costi 5.5/10 · diversificazione 8.0/10 · robustezza 5.7/10 · trend lungo 7.7/10."
     },
     {
-      "ticker": "MVOL.L",
-      "name": "iShares Edge MSCI World Minimum Volatility UCITS ETF",
-      "category": "Fattoriale difensivo",
-      "role": "DIVERSIFICAZIONE",
-      "isin": "IE00B8FHGS14",
-      "tvSymbol": "LSE:MVOL",
+      "ticker": "IUIT.L",
+      "name": "iShares S&P 500 Information Technology Sector UCITS ETF",
+      "category": "Tecnologia",
+      "role": "CRESCITA / TECNOLOGIA",
+      "isin": "IE00B3WJKG14",
+      "tvSymbol": "LSE:IUIT",
       "exchange": "London Stock Exchange",
       "quoteCurrency": "USD",
-      "ter": 0.3,
+      "ter": 0.15,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 79.83000183105469,
+      "currentPrice": 44.45000076293945,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 8.760218217309902,
-      "return3y": 10.995984776127067,
-      "return5y": 6.241594036549025,
-      "return10y": 8.105258830087081,
-      "drawdown": -28.816027787115715,
-      "currentDrawdown": -1.4809292438848987,
-      "volatility": 8.503918036011607,
+      "return1y": 6.28885960618677,
+      "return3y": 24.225268295183476,
+      "return5y": 15.630390018963848,
+      "return10y": 23.11664994421667,
+      "drawdown": -33.4614501248811,
+      "currentDrawdown": -20.025190178918773,
+      "volatility": 26.339495453514814,
       "monthlyRegime": "GREEN",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 8.5,
-      "weeklyTrendScore": 6.0,
-      "trendScore": 7.749999999999999,
-      "score": 6.743346398758096,
+      "weeklyTrendScore": 4.5,
+      "trendScore": 7.299999999999999,
+      "score": 6.806153402371395,
       "status": "YELLOW",
       "verdict": "MANTENERE / OSSERVARE",
-      "pacAction": "Mantieni la rata ordinaria.",
+      "pacAction": "Ritracciamento ampio ma trend lungo ancora valido: non uscire per rumore di breve.",
       "monthlyHistory": [
         {
           "date": "2016-11-30",
-          "price": 36.529999
+          "price": 5.52
         },
         {
           "date": "2016-12-31",
-          "price": 37.259998
+          "price": 5.64
         },
         {
           "date": "2017-01-31",
-          "price": 37.669998
+          "price": 5.8
         },
         {
           "date": "2017-02-28",
-          "price": 39.09
+          "price": 6.12
         },
         {
           "date": "2017-03-31",
-          "price": 39.27
+          "price": 6.28
         },
         {
           "date": "2017-04-30",
-          "price": 39.599998
+          "price": 6.42
         },
         {
           "date": "2017-05-31",
-          "price": 40.759998
+          "price": 6.71
         },
         {
           "date": "2017-06-30",
-          "price": 40.5
+          "price": 6.53
         },
         {
           "date": "2017-07-31",
-          "price": 41.27
+          "price": 6.81
         },
         {
           "date": "2017-08-31",
-          "price": 41.560001
+          "price": 7.02
         },
         {
           "date": "2017-09-30",
-          "price": 41.669998
+          "price": 7.06
         },
         {
           "date": "2017-10-31",
-          "price": 42.349998
+          "price": 7.62
         },
         {
           "date": "2017-11-30",
-          "price": 43.389999
+          "price": 7.69
         },
         {
           "date": "2017-12-31",
-          "price": 43.740002
+          "price": 7.78
         },
         {
           "date": "2018-01-31",
-          "price": 44.93
+          "price": 8.28
         },
         {
           "date": "2018-02-28",
-          "price": 43.389999
+          "price": 8.39
         },
         {
           "date": "2018-03-31",
-          "price": 42.959999
+          "price": 7.93
         },
         {
           "date": "2018-04-30",
-          "price": 43.299999
+          "price": 8.07
         },
         {
           "date": "2018-05-31",
-          "price": 43.169998
+          "price": 8.6
         },
         {
           "date": "2018-06-30",
-          "price": 43.549999
+          "price": 8.58
         },
         {
           "date": "2018-07-31",
-          "price": 44.779999
+          "price": 8.72
         },
         {
           "date": "2018-08-31",
-          "price": 45.41
+          "price": 9.3
         },
         {
           "date": "2018-09-30",
-          "price": 45.950001
+          "price": 9.26
         },
         {
           "date": "2018-10-31",
-          "price": 43.950001
+          "price": 8.53
         },
         {
           "date": "2018-11-30",
-          "price": 44.93
+          "price": 8.29
         },
         {
           "date": "2018-12-31",
-          "price": 42.689999
+          "price": 7.67
         },
         {
           "date": "2019-01-31",
-          "price": 44.740002
+          "price": 8.18625
         },
         {
           "date": "2019-02-28",
-          "price": 46.275002
+          "price": 8.7425
         },
         {
           "date": "2019-03-31",
-          "price": 47.080002
+          "price": 9.1325
         },
         {
           "date": "2019-04-30",
-          "price": 47.549999
+          "price": 9.715
         },
         {
           "date": "2019-05-31",
-          "price": 47.200001
+          "price": 8.975
         },
         {
           "date": "2019-06-30",
-          "price": 49.330002
+          "price": 9.6975
         },
         {
           "date": "2019-07-31",
-          "price": 49.955002
+          "price": 10.2225
         },
         {
           "date": "2019-08-31",
-          "price": 50.48
+          "price": 9.855
         },
         {
           "date": "2019-09-30",
-          "price": 51.07
+          "price": 10.035
         },
         {
           "date": "2019-10-31",
-          "price": 51.279999
+          "price": 10.395
         },
         {
           "date": "2019-11-30",
-          "price": 51.880001
+          "price": 10.99
         },
         {
           "date": "2019-12-31",
-          "price": 52.32
+          "price": 11.415
         },
         {
           "date": "2020-01-31",
-          "price": 53.599998
+          "price": 12.035
         },
         {
           "date": "2020-02-29",
-          "price": 48.799999
+          "price": 10.895
         },
         {
           "date": "2020-03-31",
-          "price": 44.970001
+          "price": 10.4
         },
         {
           "date": "2020-04-30",
-          "price": 47.599998
+          "price": 11.49
         },
         {
           "date": "2020-05-31",
-          "price": 48.66
+          "price": 12.115
         },
         {
           "date": "2020-06-30",
-          "price": 48.619999
+          "price": 13.04
         },
         {
           "date": "2020-07-31",
-          "price": 50.27
+          "price": 13.63
         },
         {
           "date": "2020-08-31",
-          "price": 51.77
+          "price": 15.37
         },
         {
           "date": "2020-09-30",
-          "price": 51.080002
+          "price": 14.69
         },
         {
           "date": "2020-10-31",
-          "price": 49.41
+          "price": 13.8925
         },
         {
           "date": "2020-11-30",
-          "price": 52.5
+          "price": 15.245
         },
         {
           "date": "2020-12-31",
-          "price": 53.66
+          "price": 16.34
         },
         {
           "date": "2021-01-31",
-          "price": 53.0
+          "price": 16.295
         },
         {
           "date": "2021-02-28",
-          "price": 52.209999
+          "price": 16.514999
         },
         {
           "date": "2021-03-31",
-          "price": 54.669998
+          "price": 16.690001
         },
         {
           "date": "2021-04-30",
-          "price": 56.09
+          "price": 17.615
         },
         {
           "date": "2021-05-31",
-          "price": 57.389999
+          "price": 17.434999
         },
         {
           "date": "2021-06-30",
-          "price": 57.669998
+          "price": 18.575001
         },
         {
           "date": "2021-07-31",
-          "price": 59.360001
+          "price": 19.219999
         },
         {
           "date": "2021-08-31",
-          "price": 60.389999
+          "price": 19.99
         },
         {
           "date": "2021-09-30",
-          "price": 57.77
+          "price": 18.975
         },
         {
           "date": "2021-10-31",
-          "price": 59.400002
+          "price": 20.190001
         },
         {
           "date": "2021-11-30",
-          "price": 58.529999
+          "price": 21.09
         },
         {
           "date": "2021-12-31",
-          "price": 61.52
+          "price": 21.91
         },
         {
           "date": "2022-01-31",
-          "price": 57.779999
+          "price": 20.075001
         },
         {
           "date": "2022-02-28",
-          "price": 57.209999
+          "price": 19.379999
         },
         {
           "date": "2022-03-31",
-          "price": 60.040001
+          "price": 20.27
         },
         {
           "date": "2022-04-30",
-          "price": 57.580002
+          "price": 18.205
         },
         {
           "date": "2022-05-31",
-          "price": 56.220001
+          "price": 17.52
         },
         {
           "date": "2022-06-30",
-          "price": 53.889999
+          "price": 15.925
         },
         {
           "date": "2022-07-31",
-          "price": 55.669998
+          "price": 17.84
         },
         {
           "date": "2022-08-31",
-          "price": 54.389999
+          "price": 17.045
         },
         {
           "date": "2022-09-30",
-          "price": 51.080002
+          "price": 15.325
         },
         {
           "date": "2022-10-31",
-          "price": 53.360001
+          "price": 16.1525
         },
         {
           "date": "2022-11-30",
-          "price": 55.82
+          "price": 16.309999
         },
         {
           "date": "2022-12-31",
-          "price": 55.599998
+          "price": 15.5225
         },
         {
           "date": "2023-01-31",
-          "price": 56.200001
+          "price": 16.99
         },
         {
           "date": "2023-02-28",
-          "price": 54.599998
+          "price": 17.2225
         },
         {
           "date": "2023-03-31",
-          "price": 56.540001
+          "price": 18.855
         },
         {
           "date": "2023-04-30",
-          "price": 58.119999
+          "price": 18.879999
         },
         {
           "date": "2023-05-31",
-          "price": 55.689999
+          "price": 20.93
         },
         {
           "date": "2023-06-30",
-          "price": 57.400002
+          "price": 22.254999
         },
         {
           "date": "2023-07-31",
-          "price": 58.25
+          "price": 22.924999
         },
         {
           "date": "2023-08-31",
-          "price": 57.5
+          "price": 22.690001
         },
         {
           "date": "2023-09-30",
-          "price": 55.98
+          "price": 21.190001
         },
         {
           "date": "2023-10-31",
-          "price": 55.009998
+          "price": 20.84
         },
         {
           "date": "2023-11-30",
-          "price": 58.07
+          "price": 23.6
         },
         {
           "date": "2023-12-31",
-          "price": 59.650002
+          "price": 24.75
         },
         {
           "date": "2024-01-31",
-          "price": 61.27
+          "price": 25.74
         },
         {
           "date": "2024-02-29",
-          "price": 61.59
+          "price": 27.110001
         },
         {
           "date": "2024-03-31",
-          "price": 63.110001
+          "price": 27.870001
         },
         {
           "date": "2024-04-30",
-          "price": 60.919998
+          "price": 26.76
         },
         {
           "date": "2024-05-31",
-          "price": 61.759998
+          "price": 28.559999
         },
         {
           "date": "2024-06-30",
-          "price": 62.77
+          "price": 32.110001
         },
         {
           "date": "2024-07-31",
-          "price": 65.650002
+          "price": 30.99
         },
         {
           "date": "2024-08-31",
-          "price": 68.419998
+          "price": 31.16
         },
         {
           "date": "2024-09-30",
-          "price": 68.779999
+          "price": 32.0
         },
         {
           "date": "2024-10-31",
-          "price": 67.43
+          "price": 31.98
         },
         {
           "date": "2024-11-30",
-          "price": 69.669998
+          "price": 33.349998
         },
         {
           "date": "2024-12-31",
-          "price": 66.260002
+          "price": 34.279999
         },
         {
           "date": "2025-01-31",
-          "price": 68.949997
+          "price": 33.560001
         },
         {
           "date": "2025-02-28",
-          "price": 70.480003
+          "price": 31.98
         },
         {
           "date": "2025-03-31",
-          "price": 71.260002
+          "price": 29.049999
         },
         {
           "date": "2025-04-30",
-          "price": 71.629997
+          "price": 29.59
         },
         {
           "date": "2025-05-31",
-          "price": 72.650002
+          "price": 33.099998
         },
         {
           "date": "2025-06-30",
-          "price": 72.919998
+          "price": 36.279999
         },
         {
           "date": "2025-07-31",
-          "price": 71.910004
+          "price": 38.549999
         },
         {
           "date": "2025-08-31",
-          "price": 73.199997
+          "price": 38.310001
         },
         {
           "date": "2025-09-30",
-          "price": 73.25
+          "price": 41.009998
         },
         {
           "date": "2025-10-31",
-          "price": 71.75
+          "price": 43.830002
         },
         {
           "date": "2025-11-30",
-          "price": 73.669998
+          "price": 41.77
         },
         {
           "date": "2025-12-31",
-          "price": 73.559998
+          "price": 42.139999
         },
         {
           "date": "2026-01-31",
-          "price": 73.629997
+          "price": 41.380001
         },
         {
           "date": "2026-02-28",
-          "price": 77.019997
+          "price": 39.75
         },
         {
           "date": "2026-03-31",
-          "price": 73.089996
+          "price": 37.07
         },
         {
           "date": "2026-04-30",
-          "price": 73.660004
+          "price": 44.450001
         },
         {
           "date": "2026-05-31",
-          "price": 74.160004
+          "price": 51.77
         },
         {
           "date": "2026-06-30",
-          "price": 73.949997
+          "price": 49.799999
         },
         {
           "date": "2026-07-31",
-          "price": 76.209999
+          "price": 47.77
         },
         {
           "date": "2026-08-31",
-          "price": 78.639999
+          "price": 51.889999
         },
         {
           "date": "2026-09-30",
-          "price": 75.830002
+          "price": 54.040001
         },
         {
           "date": "2026-10-31",
-          "price": 80.120003
+          "price": 50.040001
         }
       ],
       "historyStart": "2016-11-30",
-      "summary": "Costi 5.5/10 · diversificazione 8.0/10 · robustezza 5.3/10 · trend lungo 7.7/10."
+      "summary": "Costi 7.8/10 · diversificazione 5.2/10 · robustezza 6.8/10 · trend lungo 7.3/10."
     },
     {
       "ticker": "SGLN.L",
@@ -6186,21 +6186,21 @@
       "ter": 0.12,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 5359.27685546875,
+      "currentPrice": 5368.0,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": -13.699245483595012,
-      "return3y": 19.869665540798632,
-      "return5y": 15.470829000770925,
-      "return10y": 10.988322897336268,
+      "return1y": -13.55877616747182,
+      "return3y": 19.93506945841994,
+      "return5y": 15.508481915795812,
+      "return10y": 11.006382354070121,
       "drawdown": -33.38101430429129,
-      "currentDrawdown": -30.308493426934334,
-      "volatility": 26.829294301116736,
+      "currentDrawdown": -30.19505851755526,
+      "volatility": 26.838980018710828,
       "monthlyRegime": "YELLOW",
       "weeklyRegime": "RED",
       "monthlyTrendScore": 4.5,
       "weeklyTrendScore": 2.5,
       "trendScore": 3.9,
-      "score": 6.705978176093755,
+      "score": 6.707816795855935,
       "status": "YELLOW",
       "verdict": "MANTENERE / OSSERVARE",
       "pacAction": "Ritracciamento ampio ma trend lungo ancora valido: non uscire per rumore di breve.",
@@ -6701,21 +6701,21 @@
       "ter": 0.18,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 47.41999816894531,
+      "currentPrice": 47.540000915527344,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 7.47959953978079,
-      "return3y": 16.042724204995153,
-      "return5y": 5.897828808612604,
-      "return10y": 8.015540202530014,
+      "return1y": 7.751591265726443,
+      "return3y": 16.141135525855255,
+      "return5y": 5.951497331840394,
+      "return10y": 8.04285514255012,
       "drawdown": -38.734940707311495,
-      "currentDrawdown": -18.241382467335665,
-      "volatility": 26.002303262517536,
+      "currentDrawdown": -18.034481180125272,
+      "volatility": 26.021987499534628,
       "monthlyRegime": "YELLOW",
       "weeklyRegime": "RED",
       "monthlyTrendScore": 6.0,
       "weeklyTrendScore": 2.5,
       "trendScore": 4.949999999999999,
-      "score": 6.33936401664142,
+      "score": 6.3419579689981855,
       "status": "YELLOW",
       "verdict": "MANTENERE / OSSERVARE",
       "pacAction": "Ritracciamento ampio ma trend lungo ancora valido: non uscire per rumore di breve.",
@@ -7216,32 +7216,32 @@
       "ter": 0.22,
       "replication": "Fisica",
       "distribution": "Distribuzione",
-      "currentPrice": 56.54499816894531,
+      "currentPrice": 56.79499816894531,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 2.8606608801756916,
-      "return3y": 12.428275538621092,
-      "return5y": 5.527871195340062,
-      "return10y": 6.466985246918977,
-      "drawdown": -25.913305903206428,
-      "currentDrawdown": -10.488146494069772,
-      "volatility": 18.060727215190596,
+      "return1y": 3.315434353564317,
+      "return3y": 12.594139977973473,
+      "return5y": 5.621134740995526,
+      "return10y": 6.51398631950757,
+      "drawdown": -25.913282550732784,
+      "currentDrawdown": -10.092391536051704,
+      "volatility": 18.099700112710384,
       "monthlyRegime": "YELLOW",
       "weeklyRegime": "RED",
       "monthlyTrendScore": 6.0,
       "weeklyTrendScore": 2.5,
       "trendScore": 4.949999999999999,
-      "score": 6.31531706947351,
+      "score": 6.319803250856797,
       "status": "YELLOW",
       "verdict": "MANTENERE / OSSERVARE",
       "pacAction": "Mantieni la rata ordinaria.",
       "monthlyHistory": [
         {
           "date": "2016-11-30",
-          "price": 30.130514
+          "price": 30.130526
         },
         {
           "date": "2016-12-31",
-          "price": 30.680811
+          "price": 30.680801
         },
         {
           "date": "2017-01-31",
@@ -7249,15 +7249,15 @@
         },
         {
           "date": "2017-02-28",
-          "price": 32.776604
+          "price": 32.7766
         },
         {
           "date": "2017-03-31",
-          "price": 33.405579
+          "price": 33.405563
         },
         {
           "date": "2017-04-30",
-          "price": 32.828251
+          "price": 32.828262
         },
         {
           "date": "2017-05-31",
@@ -7265,23 +7265,23 @@
         },
         {
           "date": "2017-06-30",
-          "price": 33.296188
+          "price": 33.296196
         },
         {
           "date": "2017-07-31",
-          "price": 34.675785
+          "price": 34.675793
         },
         {
           "date": "2017-08-31",
-          "price": 36.513943
+          "price": 36.513939
         },
         {
           "date": "2017-09-30",
-          "price": 34.808266
+          "price": 34.808258
         },
         {
           "date": "2017-10-31",
-          "price": 35.89653
+          "price": 35.896523
         },
         {
           "date": "2017-11-30",
@@ -7293,39 +7293,39 @@
         },
         {
           "date": "2018-01-31",
-          "price": 38.06596
+          "price": 38.065964
         },
         {
           "date": "2018-02-28",
-          "price": 37.512711
+          "price": 37.512714
         },
         {
           "date": "2018-03-31",
-          "price": 36.101879
+          "price": 36.101894
         },
         {
           "date": "2018-04-30",
-          "price": 36.27076
+          "price": 36.270775
         },
         {
           "date": "2018-05-31",
-          "price": 36.053631
+          "price": 36.053642
         },
         {
           "date": "2018-06-30",
-          "price": 35.020111
+          "price": 35.020126
         },
         {
           "date": "2018-07-31",
-          "price": 36.553642
+          "price": 36.553631
         },
         {
           "date": "2018-08-31",
-          "price": 35.371323
+          "price": 35.371326
         },
         {
           "date": "2018-09-30",
-          "price": 35.230263
+          "price": 35.23027
         },
         {
           "date": "2018-10-31",
@@ -7333,19 +7333,19 @@
         },
         {
           "date": "2018-11-30",
-          "price": 34.670868
+          "price": 34.67086
         },
         {
           "date": "2018-12-31",
-          "price": 33.997616
+          "price": 33.997608
         },
         {
           "date": "2019-01-31",
-          "price": 35.769192
+          "price": 35.769196
         },
         {
           "date": "2019-02-28",
-          "price": 35.205414
+          "price": 35.205421
         },
         {
           "date": "2019-03-31",
@@ -7365,75 +7365,75 @@
         },
         {
           "date": "2019-07-31",
-          "price": 38.908081
+          "price": 38.908085
         },
         {
           "date": "2019-08-31",
-          "price": 37.137638
+          "price": 37.137657
         },
         {
           "date": "2019-09-30",
-          "price": 37.651844
+          "price": 37.651852
         },
         {
           "date": "2019-10-31",
-          "price": 37.041466
+          "price": 37.04147
         },
         {
           "date": "2019-11-30",
-          "price": 37.346657
+          "price": 37.346653
         },
         {
           "date": "2019-12-31",
-          "price": 39.143784
+          "price": 39.143776
         },
         {
           "date": "2020-01-31",
-          "price": 36.818371
+          "price": 36.818356
         },
         {
           "date": "2020-02-29",
-          "price": 35.733727
+          "price": 35.73373
         },
         {
           "date": "2020-03-31",
-          "price": 31.664404
+          "price": 31.664398
         },
         {
           "date": "2020-04-30",
-          "price": 33.645679
+          "price": 33.645676
         },
         {
           "date": "2020-05-31",
-          "price": 34.639488
+          "price": 34.639496
         },
         {
           "date": "2020-06-30",
-          "price": 37.225471
+          "price": 37.225464
         },
         {
           "date": "2020-07-31",
-          "price": 37.943008
+          "price": 37.943031
         },
         {
           "date": "2020-08-31",
-          "price": 39.152428
+          "price": 39.152424
         },
         {
           "date": "2020-09-30",
-          "price": 39.093136
+          "price": 39.093124
         },
         {
           "date": "2020-10-31",
-          "price": 39.652962
+          "price": 39.652958
         },
         {
           "date": "2020-11-30",
-          "price": 41.760906
+          "price": 41.760918
         },
         {
           "date": "2020-12-31",
-          "price": 43.523712
+          "price": 43.523708
         },
         {
           "date": "2021-01-31",
@@ -7441,15 +7441,15 @@
         },
         {
           "date": "2021-02-28",
-          "price": 44.28096
+          "price": 44.280964
         },
         {
           "date": "2021-03-31",
-          "price": 44.240582
+          "price": 44.240585
         },
         {
           "date": "2021-04-30",
-          "price": 44.828327
+          "price": 44.828323
         },
         {
           "date": "2021-05-31",
@@ -7457,7 +7457,7 @@
         },
         {
           "date": "2021-06-30",
-          "price": 46.039677
+          "price": 46.039684
         },
         {
           "date": "2021-07-31",
@@ -7465,7 +7465,7 @@
         },
         {
           "date": "2021-08-31",
-          "price": 44.483948
+          "price": 44.48394
         },
         {
           "date": "2021-09-30",
@@ -7473,19 +7473,19 @@
         },
         {
           "date": "2021-10-31",
-          "price": 43.680058
+          "price": 43.680061
         },
         {
           "date": "2021-11-30",
-          "price": 43.379639
+          "price": 43.379642
         },
         {
           "date": "2021-12-31",
-          "price": 43.568237
+          "price": 43.568245
         },
         {
           "date": "2022-01-31",
-          "price": 43.704998
+          "price": 43.704994
         },
         {
           "date": "2022-02-28",
@@ -7493,11 +7493,11 @@
         },
         {
           "date": "2022-03-31",
-          "price": 41.963654
+          "price": 41.963661
         },
         {
           "date": "2022-04-30",
-          "price": 41.751385
+          "price": 41.751392
         },
         {
           "date": "2022-05-31",
@@ -7509,7 +7509,7 @@
         },
         {
           "date": "2022-07-31",
-          "price": 40.634464
+          "price": 40.634453
         },
         {
           "date": "2022-08-31",
@@ -7521,7 +7521,7 @@
         },
         {
           "date": "2022-10-31",
-          "price": 37.393478
+          "price": 37.393475
         },
         {
           "date": "2022-11-30",
@@ -7529,15 +7529,15 @@
         },
         {
           "date": "2022-12-31",
-          "price": 40.349907
+          "price": 40.349903
         },
         {
           "date": "2023-01-31",
-          "price": 42.357388
+          "price": 42.357391
         },
         {
           "date": "2023-02-28",
-          "price": 40.158718
+          "price": 40.158714
         },
         {
           "date": "2023-03-31",
@@ -7549,27 +7549,27 @@
         },
         {
           "date": "2023-05-31",
-          "price": 38.713127
+          "price": 38.713131
         },
         {
           "date": "2023-06-30",
-          "price": 39.632301
+          "price": 39.632305
         },
         {
           "date": "2023-07-31",
-          "price": 41.521305
+          "price": 41.521301
         },
         {
           "date": "2023-08-31",
-          "price": 39.701332
+          "price": 39.701328
         },
         {
           "date": "2023-09-30",
-          "price": 40.208881
+          "price": 40.208889
         },
         {
           "date": "2023-10-31",
-          "price": 38.729671
+          "price": 38.729668
         },
         {
           "date": "2023-11-30",
@@ -7577,23 +7577,23 @@
         },
         {
           "date": "2023-12-31",
-          "price": 40.896782
+          "price": 40.896786
         },
         {
           "date": "2024-01-31",
-          "price": 39.931568
+          "price": 39.931564
         },
         {
           "date": "2024-02-29",
-          "price": 41.228653
+          "price": 41.228657
         },
         {
           "date": "2024-03-31",
-          "price": 42.217152
+          "price": 42.217148
         },
         {
           "date": "2024-04-30",
-          "price": 43.163849
+          "price": 43.163845
         },
         {
           "date": "2024-05-31",
@@ -7601,11 +7601,11 @@
         },
         {
           "date": "2024-06-30",
-          "price": 44.692101
+          "price": 44.692097
         },
         {
           "date": "2024-07-31",
-          "price": 44.309349
+          "price": 44.309345
         },
         {
           "date": "2024-08-31",
@@ -7617,7 +7617,7 @@
         },
         {
           "date": "2024-10-31",
-          "price": 46.32233
+          "price": 46.322334
         },
         {
           "date": "2024-11-30",
@@ -7625,31 +7625,31 @@
         },
         {
           "date": "2024-12-31",
-          "price": 46.828049
+          "price": 46.828056
         },
         {
           "date": "2025-01-31",
-          "price": 47.848339
+          "price": 47.848343
         },
         {
           "date": "2025-02-28",
-          "price": 46.978939
+          "price": 46.978935
         },
         {
           "date": "2025-03-31",
-          "price": 46.416306
+          "price": 46.416309
         },
         {
           "date": "2025-04-30",
-          "price": 44.866291
+          "price": 44.866287
         },
         {
           "date": "2025-05-31",
-          "price": 46.375385
+          "price": 46.375389
         },
         {
           "date": "2025-06-30",
-          "price": 47.907528
+          "price": 47.90752
         },
         {
           "date": "2025-07-31",
@@ -7657,7 +7657,7 @@
         },
         {
           "date": "2025-08-31",
-          "price": 50.811592
+          "price": 50.811596
         },
         {
           "date": "2025-09-30",
@@ -7731,21 +7731,21 @@
       "ter": 0.3,
       "replication": "Fisica",
       "distribution": "Distribuzione",
-      "currentPrice": 49432.0,
+      "currentPrice": 49602.0,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 5.574663799971158,
-      "return3y": 17.290674720538778,
-      "return5y": 10.509956052196534,
-      "return10y": 17.820648865890565,
+      "return1y": 5.937742227831544,
+      "return3y": 17.425315841973177,
+      "return5y": 10.58595561830671,
+      "return10y": 17.861121039725923,
       "drawdown": -28.1649510815313,
-      "currentDrawdown": -14.272831327390655,
-      "volatility": 20.681141551975017,
+      "currentDrawdown": -13.978009781138356,
+      "volatility": 20.702052514477902,
       "monthlyRegime": "GREEN",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 8.5,
       "weeklyTrendScore": 4.5,
       "trendScore": 7.299999999999999,
-      "score": 6.213196882937665,
+      "score": 6.2169018114136145,
       "status": "YELLOW",
       "verdict": "MANTENERE / OSSERVARE",
       "pacAction": "Mantieni la rata ordinaria.",
@@ -7760,7 +7760,7 @@
         },
         {
           "date": "2017-01-31",
-          "price": 9921.958008
+          "price": 9921.958984
         },
         {
           "date": "2017-02-28",
@@ -7768,7 +7768,7 @@
         },
         {
           "date": "2017-03-31",
-          "price": 10638.311523
+          "price": 10638.3125
         },
         {
           "date": "2017-04-30",
@@ -7780,7 +7780,7 @@
         },
         {
           "date": "2017-06-30",
-          "price": 10647.542969
+          "price": 10647.543945
         },
         {
           "date": "2017-07-31",
@@ -7788,7 +7788,7 @@
         },
         {
           "date": "2017-08-31",
-          "price": 11357.245117
+          "price": 11357.244141
         },
         {
           "date": "2017-09-30",
@@ -7804,7 +7804,7 @@
         },
         {
           "date": "2017-12-31",
-          "price": 11686.477539
+          "price": 11686.476562
         },
         {
           "date": "2018-01-31",
@@ -7816,7 +7816,7 @@
         },
         {
           "date": "2018-03-31",
-          "price": 11398.745117
+          "price": 11398.746094
         },
         {
           "date": "2018-04-30",
@@ -7824,7 +7824,7 @@
         },
         {
           "date": "2018-05-31",
-          "price": 12882.197266
+          "price": 12882.194336
         },
         {
           "date": "2018-06-30",
@@ -7836,11 +7836,11 @@
         },
         {
           "date": "2018-08-31",
-          "price": 14437.851562
+          "price": 14437.852539
         },
         {
           "date": "2018-09-30",
-          "price": 14325.071289
+          "price": 14325.070312
         },
         {
           "date": "2018-10-31",
@@ -7856,11 +7856,11 @@
         },
         {
           "date": "2019-01-31",
-          "price": 12850.292969
+          "price": 12850.293945
         },
         {
           "date": "2019-02-28",
-          "price": 13090.709961
+          "price": 13090.711914
         },
         {
           "date": "2019-03-31",
@@ -7888,15 +7888,15 @@
         },
         {
           "date": "2019-09-30",
-          "price": 15392.182617
+          "price": 15392.181641
         },
         {
           "date": "2019-10-31",
-          "price": 15265.722656
+          "price": 15265.72168
         },
         {
           "date": "2019-11-30",
-          "price": 15956.527344
+          "price": 15956.52832
         },
         {
           "date": "2019-12-31",
@@ -7904,7 +7904,7 @@
         },
         {
           "date": "2020-01-31",
-          "price": 16733.548828
+          "price": 16733.550781
         },
         {
           "date": "2020-02-29",
@@ -7912,11 +7912,11 @@
         },
         {
           "date": "2020-03-31",
-          "price": 15677.577148
+          "price": 15677.576172
         },
         {
           "date": "2020-04-30",
-          "price": 17449.632812
+          "price": 17449.634766
         },
         {
           "date": "2020-05-31",
@@ -7928,7 +7928,7 @@
         },
         {
           "date": "2020-07-31",
-          "price": 20156.214844
+          "price": 20156.216797
         },
         {
           "date": "2020-08-31",
@@ -7964,7 +7964,7 @@
         },
         {
           "date": "2021-04-30",
-          "price": 24603.84375
+          "price": 24603.841797
         },
         {
           "date": "2021-05-31",
@@ -7984,11 +7984,11 @@
         },
         {
           "date": "2021-09-30",
-          "price": 26824.789062
+          "price": 26824.787109
         },
         {
           "date": "2021-10-31",
-          "price": 28133.535156
+          "price": 28133.537109
         },
         {
           "date": "2021-11-30",
@@ -8020,7 +8020,7 @@
         },
         {
           "date": "2022-06-30",
-          "price": 23225.175781
+          "price": 23225.173828
         },
         {
           "date": "2022-07-31",
@@ -8068,7 +8068,7 @@
         },
         {
           "date": "2023-06-30",
-          "price": 29137.654297
+          "price": 29137.65625
         },
         {
           "date": "2023-07-31",
@@ -8084,7 +8084,7 @@
         },
         {
           "date": "2023-10-31",
-          "price": 28900.984375
+          "price": 28900.982422
         },
         {
           "date": "2023-11-30",
@@ -8246,21 +8246,21 @@
       "ter": 0.33,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 1521.800048828125,
+      "currentPrice": 1527.199951171875,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 10.115777773380973,
-      "return3y": 18.51035382285664,
-      "return5y": 10.100898628065181,
-      "return10y": 18.975662150434893,
+      "return1y": 10.50650876786361,
+      "return3y": 18.64981977123503,
+      "return5y": 10.178721116896948,
+      "return10y": 19.017829121172845,
       "drawdown": -35.20576382080007,
-      "currentDrawdown": -15.483723788627046,
-      "volatility": 21.662991724627524,
+      "currentDrawdown": -15.183829174777962,
+      "volatility": 21.68232097611593,
       "monthlyRegime": "GREEN",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 8.5,
       "weeklyTrendScore": 4.5,
       "trendScore": 7.299999999999999,
-      "score": 6.047459919958301,
+      "score": 6.051263184165851,
       "status": "YELLOW",
       "verdict": "MANTENERE / OSSERVARE",
       "pacAction": "Ritracciamento ampio ma trend lungo ancora valido: non uscire per rumore di breve.",
@@ -8761,21 +8761,21 @@
       "ter": 0.39,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 335.3999938964844,
+      "currentPrice": 335.864990234375,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": -14.929238170549187,
-      "return3y": 21.08827666167492,
-      "return5y": 14.781031618562057,
-      "return10y": 11.328855698591301,
+      "return1y": -14.811296627817761,
+      "return3y": 21.144556255462522,
+      "return5y": 14.812914523959853,
+      "return10y": 11.34428697456633,
       "drawdown": -35.092017898829795,
-      "currentDrawdown": -32.01718747873679,
-      "volatility": 28.818414512574343,
+      "currentDrawdown": -31.922936556145398,
+      "volatility": 28.825709482918104,
       "monthlyRegime": "YELLOW",
       "weeklyRegime": "RED",
       "monthlyTrendScore": 4.5,
       "weeklyTrendScore": 2.5,
       "trendScore": 3.9,
-      "score": 5.800690248881038,
+      "score": 5.802251235194819,
       "status": "YELLOW",
       "verdict": "MANTENERE / OSSERVARE",
       "pacAction": "Ritracciamento ampio ma trend lungo ancora valido: non uscire per rumore di breve.",
@@ -9276,21 +9276,21 @@
       "ter": 0.4,
       "replication": "Fisica",
       "distribution": "Accumulo",
-      "currentPrice": 18.19499969482422,
+      "currentPrice": 18.264999389648438,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": 13.117816166917983,
-      "return3y": 14.982151023881563,
-      "return5y": 4.969560934900352,
-      "return10y": 13.605547760843129,
+      "return1y": 13.553002357831678,
+      "return3y": 15.130328599178267,
+      "return5y": 5.050392765756073,
+      "return10y": 13.649196466676749,
       "drawdown": -44.53283777567773,
-      "currentDrawdown": -20.8396814806701,
-      "volatility": 29.83428656826866,
+      "currentDrawdown": -20.535136373141615,
+      "volatility": 29.85087435823371,
       "monthlyRegime": "GREEN",
       "weeklyRegime": "YELLOW",
       "monthlyTrendScore": 8.5,
       "weeklyTrendScore": 4.5,
       "trendScore": 7.299999999999999,
-      "score": 5.2218884573602695,
+      "score": 5.2258546498577605,
       "status": "YELLOW",
       "verdict": "MANTENERE / OSSERVARE",
       "pacAction": "Ritracciamento ampio ma trend lungo ancora valido: non uscire per rumore di breve.",
@@ -9791,60 +9791,60 @@
       "ter": 0.65,
       "replication": "Fisica",
       "distribution": "Distribuzione",
-      "currentPrice": 642.0,
+      "currentPrice": 642.25,
       "priceAsOf": "2026-11-27T00:00:00",
-      "return1y": -12.319814718845235,
-      "return3y": 0.4162938352674006,
-      "return5y": -8.534581351150116,
-      "return10y": 5.566728017275335,
+      "return1y": -12.28567134451457,
+      "return3y": 0.4293505261926178,
+      "return5y": -8.527461909403044,
+      "return10y": 5.570843290864702,
       "drawdown": -66.84555514759323,
-      "currentDrawdown": -54.92475666247047,
-      "volatility": 28.18295381684257,
+      "currentDrawdown": -54.90720399761941,
+      "volatility": 28.187630810638836,
       "monthlyRegime": "YELLOW",
       "weeklyRegime": "RED",
       "monthlyTrendScore": 4.5,
       "weeklyTrendScore": 2.5,
       "trendScore": 3.9,
-      "score": 3.1098932077824886,
+      "score": 3.110227920807132,
       "status": "YELLOW",
       "verdict": "MANTENERE / OSSERVARE",
       "pacAction": "Ritracciamento ampio ma trend lungo ancora valido: non uscire per rumore di breve.",
       "monthlyHistory": [
         {
           "date": "2016-11-30",
-          "price": 369.915375
+          "price": 369.915253
         },
         {
           "date": "2016-12-31",
-          "price": 375.507996
+          "price": 375.507965
         },
         {
           "date": "2017-01-31",
-          "price": 380.751129
+          "price": 380.75116
         },
         {
           "date": "2017-02-28",
-          "price": 407.06665
+          "price": 407.06662
         },
         {
           "date": "2017-03-31",
-          "price": 396.830078
+          "price": 396.830109
         },
         {
           "date": "2017-04-30",
-          "price": 381.999451
+          "price": 381.999573
         },
         {
           "date": "2017-05-31",
-          "price": 385.84494
+          "price": 385.844818
         },
         {
           "date": "2017-06-30",
-          "price": 384.446594
+          "price": 384.446533
         },
         {
           "date": "2017-07-31",
-          "price": 397.630981
+          "price": 397.631012
         },
         {
           "date": "2017-08-31",
@@ -9856,23 +9856,23 @@
         },
         {
           "date": "2017-10-31",
-          "price": 409.017609
+          "price": 409.017487
         },
         {
           "date": "2017-11-30",
-          "price": 378.612335
+          "price": 378.612244
         },
         {
           "date": "2017-12-31",
-          "price": 399.590729
+          "price": 399.59082
         },
         {
           "date": "2018-01-31",
-          "price": 391.549011
+          "price": 391.548981
         },
         {
           "date": "2018-02-28",
-          "price": 394.246216
+          "price": 394.246246
         },
         {
           "date": "2018-03-31",
@@ -9880,7 +9880,7 @@
         },
         {
           "date": "2018-04-30",
-          "price": 417.222717
+          "price": 417.222656
         },
         {
           "date": "2018-05-31",
@@ -9888,19 +9888,19 @@
         },
         {
           "date": "2018-06-30",
-          "price": 386.293915
+          "price": 386.293945
         },
         {
           "date": "2018-07-31",
-          "price": 404.87677
+          "price": 404.876831
         },
         {
           "date": "2018-08-31",
-          "price": 388.691711
+          "price": 388.691681
         },
         {
           "date": "2018-09-30",
-          "price": 383.796204
+          "price": 383.796234
         },
         {
           "date": "2018-10-31",
@@ -9908,7 +9908,7 @@
         },
         {
           "date": "2018-11-30",
-          "price": 400.345367
+          "price": 400.345398
         },
         {
           "date": "2018-12-31",
@@ -9916,7 +9916,7 @@
         },
         {
           "date": "2019-01-31",
-          "price": 416.133423
+          "price": 416.133453
         },
         {
           "date": "2019-02-28",
@@ -9924,31 +9924,31 @@
         },
         {
           "date": "2019-03-31",
-          "price": 433.71994
+          "price": 433.720032
         },
         {
           "date": "2019-04-30",
-          "price": 449.108368
+          "price": 449.108307
         },
         {
           "date": "2019-05-31",
-          "price": 455.184692
+          "price": 455.184631
         },
         {
           "date": "2019-06-30",
-          "price": 484.164581
+          "price": 484.164551
         },
         {
           "date": "2019-07-31",
-          "price": 511.020996
+          "price": 511.021027
         },
         {
           "date": "2019-08-31",
-          "price": 515.268127
+          "price": 515.268188
         },
         {
           "date": "2019-09-30",
-          "price": 512.769897
+          "price": 512.769958
         },
         {
           "date": "2019-10-31",
@@ -9956,15 +9956,15 @@
         },
         {
           "date": "2019-11-30",
-          "price": 487.26474
+          "price": 487.264801
         },
         {
           "date": "2019-12-31",
-          "price": 511.57547
+          "price": 511.5755
         },
         {
           "date": "2020-01-31",
-          "price": 533.187988
+          "price": 533.187927
         },
         {
           "date": "2020-02-29",
@@ -9972,11 +9972,11 @@
         },
         {
           "date": "2020-03-31",
-          "price": 450.686188
+          "price": 450.686157
         },
         {
           "date": "2020-04-30",
-          "price": 494.960205
+          "price": 494.960236
         },
         {
           "date": "2020-05-31",
@@ -10008,7 +10008,7 @@
         },
         {
           "date": "2020-12-31",
-          "price": 1190.9021
+          "price": 1190.901978
         },
         {
           "date": "2021-01-31",
@@ -10016,7 +10016,7 @@
         },
         {
           "date": "2021-02-28",
-          "price": 1065.964966
+          "price": 1065.964844
         },
         {
           "date": "2021-03-31",
@@ -10024,19 +10024,19 @@
         },
         {
           "date": "2021-04-30",
-          "price": 960.2677
+          "price": 960.267761
         },
         {
           "date": "2021-05-31",
-          "price": 921.320496
+          "price": 921.320557
         },
         {
           "date": "2021-06-30",
-          "price": 969.798035
+          "price": 969.798096
         },
         {
           "date": "2021-07-31",
-          "price": 934.314453
+          "price": 934.314514
         },
         {
           "date": "2021-08-31",
@@ -10044,7 +10044,7 @@
         },
         {
           "date": "2021-09-30",
-          "price": 914.823547
+          "price": 914.823669
         },
         {
           "date": "2021-10-31",
@@ -10060,19 +10060,19 @@
         },
         {
           "date": "2022-01-31",
-          "price": 788.159851
+          "price": 788.15979
         },
         {
           "date": "2022-02-28",
-          "price": 888.616516
+          "price": 888.616577
         },
         {
           "date": "2022-03-31",
-          "price": 942.343201
+          "price": 942.343262
         },
         {
           "date": "2022-04-30",
-          "price": 879.370361
+          "price": 879.370483
         },
         {
           "date": "2022-05-31",
@@ -10088,7 +10088,7 @@
         },
         {
           "date": "2022-08-31",
-          "price": 1090.56311
+          "price": 1090.562988
         },
         {
           "date": "2022-09-30",
@@ -10104,15 +10104,15 @@
         },
         {
           "date": "2022-12-31",
-          "price": 943.394104
+          "price": 943.394043
         },
         {
           "date": "2023-01-31",
-          "price": 953.640137
+          "price": 953.640198
         },
         {
           "date": "2023-02-28",
-          "price": 911.655945
+          "price": 911.656067
         },
         {
           "date": "2023-03-31",
@@ -10124,7 +10124,7 @@
         },
         {
           "date": "2023-05-31",
-          "price": 836.704773
+          "price": 836.704712
         },
         {
           "date": "2023-06-30",
@@ -10136,7 +10136,7 @@
         },
         {
           "date": "2023-08-31",
-          "price": 728.74292
+          "price": 728.742859
         },
         {
           "date": "2023-09-30",
@@ -10164,7 +10164,7 @@
         },
         {
           "date": "2024-03-31",
-          "price": 635.810425
+          "price": 635.810486
         },
         {
           "date": "2024-04-30",
@@ -10172,7 +10172,7 @@
         },
         {
           "date": "2024-05-31",
-          "price": 668.070984
+          "price": 668.071045
         },
         {
           "date": "2024-06-30",
@@ -10196,7 +10196,7 @@
         },
         {
           "date": "2024-11-30",
-          "price": 556.898438
+          "price": 556.898376
         },
         {
           "date": "2024-12-31",
@@ -10216,7 +10216,7 @@
         },
         {
           "date": "2025-04-30",
-          "price": 678.036316
+          "price": 678.036255
         },
         {
           "date": "2025-05-31",
